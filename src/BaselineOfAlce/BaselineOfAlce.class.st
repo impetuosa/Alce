@@ -9,7 +9,9 @@ BaselineOfAlce >> baseline: spec [
 	<baseline>
 	spec
 		baseline: 'PostgreSQLParser'
-		with: [ spec repository: 'github://impetuosa/PostgreSQLParser/src' ].
+		with: [ spec
+				repository: 'github://impetuosa/PostgreSQLParser/src';
+				loads: #dev].
 	spec
 		baseline: 'Jindao'
 		with: [ spec repository: 'github://impetuosa/Jindao' ].
