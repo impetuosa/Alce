@@ -30,7 +30,7 @@ AlceImporter >> import: aProjectPath into: aModel [
 { #category : #accessing }
 AlceImporter >> initialize [
 	super initialize.
-	provider := AlceImportingVisitorProvider
+	provider := AlceImportingVisitorProvider new 
 ]
 
 { #category : #accessing }
