@@ -17,5 +17,9 @@ BaselineOfAlce >> baseline: spec [
 		with: [ spec repository: 'github://impetuosa/Jindao' ].
 	spec
 		package: 'Alce'
-		with: [ spec requires: #(Jindao PostgreSQLParser) ]
+		with: [ spec requires: #(Jindao PostgreSQLParser) ].
+		
+	spec
+		package: 'Alce-Famix'
+		with: [ spec requires: #(Alce) ]
 ]
