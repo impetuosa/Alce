@@ -10,3 +10,11 @@ AlcixModel class >> annotation [
 	<package: #'Alce-Famix'>
 	<generated>
 ]
+
+{ #category : #'instance creation' }
+AlcixModel >> instantiate: aClass [
+	| element |
+	element := aClass new.
+	self add: element.
+	^ element
+]
