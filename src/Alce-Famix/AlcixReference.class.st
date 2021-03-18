@@ -3,6 +3,7 @@ Class {
 	#superclass : #AlcixContainer,
 	#instVars : [
 		'#name => FMProperty',
+		'#path => FMProperty',
 		'#accessModule => FMOne type: #AlcixAccessModule opposite: #references'
 	],
 	#category : #'Alce-Famix-Entities'
@@ -52,4 +53,18 @@ AlcixReference >> name [
 AlcixReference >> name: anObject [
 	<generated>
 	name := anObject
+]
+
+{ #category : #accessing }
+AlcixReference >> path [
+
+	<FMProperty: #path type: #String>
+	<generated>
+	^ path
+]
+
+{ #category : #accessing }
+AlcixReference >> path: anObject [
+	<generated>
+	path := anObject
 ]

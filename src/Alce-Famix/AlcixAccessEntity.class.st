@@ -2,7 +2,7 @@ Class {
 	#name : #AlcixAccessEntity,
 	#superclass : #AlcixEntity,
 	#instVars : [
-		'#accessAnchor => FMOne type: #AlcixAccessAnchor opposite: #accessEntity',
+		'#anchor => FMProperty',
 		'#container => FMOne type: #AlcixContainer opposite: #accessEntities'
 	],
 	#category : #'Alce-Famix-Entities'
@@ -18,25 +18,17 @@ AlcixAccessEntity class >> annotation [
 ]
 
 { #category : #accessing }
-AlcixAccessEntity >> accessAnchor [
-	"Relation named: #accessAnchor type: #AlcixAccessAnchor opposite: #accessEntity"
+AlcixAccessEntity >> anchor [
 
+	<FMProperty: #anchor type: #Object>
 	<generated>
-	^ accessAnchor
+	^ anchor
 ]
 
 { #category : #accessing }
-AlcixAccessEntity >> accessAnchor: anObject [
-
+AlcixAccessEntity >> anchor: anObject [
 	<generated>
-	accessAnchor := anObject
-]
-
-{ #category : #navigation }
-AlcixAccessEntity >> accessAnchorGroup [
-	<generated>
-	<navigation: 'AccessAnchor'>
-	^ MooseSpecializedGroup with: self accessAnchor
+	anchor := anObject
 ]
 
 { #category : #accessing }

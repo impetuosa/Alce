@@ -1,6 +1,9 @@
 Class {
 	#name : #AlcixLibrary,
 	#superclass : #AlcixReference,
+	#instVars : [
+		'#isBuiltIn => FMProperty'
+	],
 	#category : #'Alce-Famix-Entities'
 }
 
@@ -11,4 +14,18 @@ AlcixLibrary class >> annotation [
 	<package: #'Alce-Famix'>
 	<generated>
 	^self
+]
+
+{ #category : #accessing }
+AlcixLibrary >> isBuiltIn [
+
+	<FMProperty: #isBuiltIn type: #Boolean>
+	<generated>
+	^ isBuiltIn
+]
+
+{ #category : #accessing }
+AlcixLibrary >> isBuiltIn: anObject [
+	<generated>
+	isBuiltIn := anObject
 ]

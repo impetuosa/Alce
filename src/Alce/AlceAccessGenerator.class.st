@@ -35,7 +35,6 @@ Class {
 		'datasource',
 		'accessModule',
 		'argument',
-		'accessAnchor',
 		'accessEntity',
 		'typedEntity',
 		'databaseTypedEntity',
@@ -43,7 +42,6 @@ Class {
 		'library',
 		'containerSimple',
 		'containerType',
-		'accessAnchorToText',
 		'propertyAccessor'
 	],
 	#category : #'Alce-Generator'
@@ -66,8 +64,6 @@ AlceAccessGenerator >> defineClasses [
 	super defineClasses.
 	
 	access := builder newClassNamed: #Access.
-	accessAnchor := builder newClassNamed: #AccessAnchor.
-	accessAnchorToText := builder newClassNamed: #AccessAnchorToText.
 	accessEntity := builder newClassNamed: #AccessEntity. 
 	accessModule := builder newClassNamed: #AccessModule.
 	attribute := builder newClassNamed: #Attribute.
@@ -115,7 +111,6 @@ AlceAccessGenerator >> defineClasses [
 AlceAccessGenerator >> defineHierarchy [
 	super defineHierarchy.
 	access --|> accessEntity.
-	accessAnchorToText --|> accessAnchor. 
 	accessModule --|> reference.
 	attribute --|> typedEntity.
 	argument --|> codeSegment.
@@ -159,23 +154,21 @@ AlceAccessGenerator >> defineHierarchy [
 { #category : #definition }
 AlceAccessGenerator >> defineProperties [
 	access property: #isWriting type: #Boolean.
-	codeSegment property: #from type: #Number.
-	codeSegment property: #to type: #Number.
+	accessEntity property: #anchor type: #Object.
 	containerType property: #name type: #String.
 	enumValue property: #name type: #String.
 	enumValue property: #Value type: #Object.
 	propertyAccessor property: #kind type: #String.
 	typedEntity property: #name type: #String.
 	reference property: #name type: #String.
-	
+	reference property: #path type: #String.
+	library property: #isBuiltIn type: #Boolean
 ]
 
 { #category : #definition }
 AlceAccessGenerator >> defineRelations [
 	access *- attribute.
-	accessEntity <>- accessAnchor.
 	(accessModule property: #references) <>-* reference.
-	accessAnchorToText <>- codeSegment.
 	argument *- parameter.
 	invocable <>-* parameter.
 	invocable <>-* access.
