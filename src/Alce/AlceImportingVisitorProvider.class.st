@@ -45,6 +45,11 @@ AlceImportingVisitorProvider >> guiVisitorInstance [
 ]
 
 { #category : #configuration }
+AlceImportingVisitorProvider >> importGUIControlElements [
+	guiVisitor := AlceGUIControlImporter
+]
+
+{ #category : #configuration }
 AlceImportingVisitorProvider >> importGUIElements [
 	guiVisitor := AlceGUIImporter
 ]

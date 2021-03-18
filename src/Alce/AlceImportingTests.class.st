@@ -39,6 +39,20 @@ AlceImportingTests >> setUp [
 	
 ]
 
+{ #category : #'gui control import' }
+AlceImportingTests >> testGuiImporterImportsGraphicalControlsAnchorsElements [
+	| model |
+	importer provider
+		importProjectElements;
+		importGUIElements;
+		importGUIControlElements.
+	model := importer import: self class norwind.
+	self
+		assertModel: model
+		allAnchorsOfClass: AlcixAttribute
+		satisfy: [ :e :a | a endsWith: '/controls/' , e name ]
+]
+
 { #category : #'gui element import' }
 AlceImportingTests >> testGuiImporterImportsMainGraphicalAnchorsElements [
 	| model |
@@ -54,6 +68,17 @@ AlceImportingTests >> testGuiImporterImportsMainGraphicalAnchorsElements [
 		assertModel: model
 		allAnchorsOfClass: AlcixReport
 		satisfy: [ :e :a | a fullName = ('/reports/' , e name) ]
+]
+
+{ #category : #'gui control import' }
+AlceImportingTests >> testGuiImporterImportsMainGraphicalControlElements [
+	| model |
+	importer provider
+		importProjectElements;
+		importGUIElements;
+		importGUIControlElements.
+	model := importer import: self class norwind.
+	self assertModel: model loads: 340 of: AlcixAttribute
 ]
 
 { #category : #'gui element import' }
