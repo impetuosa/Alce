@@ -1,6 +1,6 @@
 Class {
 	#name : #AlcixDatabaseType,
-	#superclass : #AlcixEntity,
+	#superclass : #AlcixAccessEntity,
 	#traits : 'AlcixTType',
 	#classTraits : 'AlcixTType classTrait',
 	#instVars : [
@@ -12,7 +12,7 @@ Class {
 { #category : #meta }
 AlcixDatabaseType class >> annotation [
 
-	<FMClass: #DatabaseType super: #AlcixEntity>
+	<FMClass: #DatabaseType super: #AlcixAccessEntity>
 	<package: #'Alce-Famix'>
 	<generated>
 	^self

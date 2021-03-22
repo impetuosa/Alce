@@ -50,7 +50,7 @@ AlceImportingTests >> testGuiImporterImportsGraphicalControlsAnchorsElements [
 	self
 		assertModel: model
 		allAnchorsOfClass: AlcixAttribute
-		satisfy: [ :e :a | a endsWith: '/controls/' , e name ]
+		satisfy: [ :e :a | a fullName endsWith: '/controls/' , e name ]
 ]
 
 { #category : #'gui element import' }
@@ -78,7 +78,8 @@ AlceImportingTests >> testGuiImporterImportsMainGraphicalControlElements [
 		importGUIElements;
 		importGUIControlElements.
 	model := importer import: self class norwind.
-	self assertModel: model loads: 340 of: AlcixAttribute
+	self assertModel: model loads: 1086 of: AlcixAttribute.
+
 ]
 
 { #category : #'gui element import' }

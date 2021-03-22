@@ -1,6 +1,6 @@
 Class {
 	#name : #AlcixEnum,
-	#superclass : #AlcixEntity,
+	#superclass : #AlcixAccessEntity,
 	#traits : 'AlcixTType',
 	#classTraits : 'AlcixTType classTrait',
 	#instVars : [
@@ -12,7 +12,7 @@ Class {
 { #category : #meta }
 AlcixEnum class >> annotation [
 
-	<FMClass: #Enum super: #AlcixEntity>
+	<FMClass: #Enum super: #AlcixAccessEntity>
 	<package: #'Alce-Famix'>
 	<generated>
 	^self

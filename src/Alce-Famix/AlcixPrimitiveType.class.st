@@ -1,6 +1,6 @@
 Class {
 	#name : #AlcixPrimitiveType,
-	#superclass : #AlcixEntity,
+	#superclass : #AlcixAccessEntity,
 	#traits : 'AlcixTType',
 	#classTraits : 'AlcixTType classTrait',
 	#category : #'Alce-Famix-Entities'
@@ -9,7 +9,7 @@ Class {
 { #category : #meta }
 AlcixPrimitiveType class >> annotation [
 
-	<FMClass: #PrimitiveType super: #AlcixEntity>
+	<FMClass: #PrimitiveType super: #AlcixAccessEntity>
 	<package: #'Alce-Famix'>
 	<generated>
 	^self

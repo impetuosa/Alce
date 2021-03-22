@@ -1,9 +1,9 @@
 Class {
 	#name : #AlcixTypedEntity,
-	#superclass : #AlcixEntity,
+	#superclass : #AlcixAccessEntity,
 	#instVars : [
-		'#name => FMProperty',
 		'#containerType => FMOne type: #AlcixContainerType opposite: #typedEntities',
+		'#name => FMProperty',
 		'#type => FMOne type: #AlcixTType opposite: #typedEntity'
 	],
 	#category : #'Alce-Famix-Entities'
@@ -12,7 +12,7 @@ Class {
 { #category : #meta }
 AlcixTypedEntity class >> annotation [
 
-	<FMClass: #TypedEntity super: #AlcixEntity>
+	<FMClass: #TypedEntity super: #AlcixAccessEntity>
 	<package: #'Alce-Famix'>
 	<generated>
 	^self

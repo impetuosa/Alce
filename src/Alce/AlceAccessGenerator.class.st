@@ -121,9 +121,11 @@ AlceAccessGenerator >> defineHierarchy [
 	containerType --|> accessEntity.
 	containerSimple --|> accessEntity.
 	databaseType --|> type.
+	databaseType --|> accessEntity.
 	databaseTypedEntity --|> typedEntity.
 	datasource --|> containerType.
 	enum --|> type.
+	enum --|> accessEntity.
 	enumValue --|> accessEntity.
 	event --|> invocable.
 	field --|> typedEntity.
@@ -140,12 +142,14 @@ AlceAccessGenerator >> defineHierarchy [
 	library --|> reference.
 	parameter --|> typedEntity.
 	primitiveType --|> type.
+	primitiveType --|> accessEntity.
 	property --|> typedEntity.
 	propertyAccessor --|> invocable.
 	raiseEvent --|> invocation.
 	reference --|> containerSimple.
 	report --|> guiClass.
 	subProcedure --|> invocable.
+	typedEntity --|> accessEntity.
 	externalSubProcedure --|> subProcedure.
 	table --|> datasource.
 	query --|> datasource

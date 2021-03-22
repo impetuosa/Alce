@@ -13,7 +13,7 @@ AlceGUIImporter >> visitForm: anObject [
 	self state push: frm.
 	super visitForm: anObject.
 	anObject ensureUnload.
-	self state pop.
+	self state pop
 ]
 
 { #category : #'entry-point' }
