@@ -39,6 +39,19 @@ AlceImportingTests >> setUp [
 	
 ]
 
+{ #category : #'code elements import' }
+AlceImportingTests >> testCodeImporterImportsModulesClassesFormsAndReports [
+	| model |
+	importer provider
+		importProjectElements;
+		importGUIElements;
+		importGUIControlElements;
+		importCodeElements.
+	model := importer import: self class norwind.
+	self assertModel: model loads: 7 of: AlcixModule.
+	self assertModel: model loads: 2 of: AlcixClass
+]
+
 { #category : #'gui control import' }
 AlceImportingTests >> testGuiImporterImportsGraphicalControlsAnchorsElements [
 	| model |
@@ -114,4 +127,20 @@ AlceImportingTests >> testProjectImporterImportsReferences [
 		assertModel: model
 		allAnchorsOfClass: AlcixLibrary
 		satisfy: [ :e :a | a fullName = ('/references/' , e name) ]
+]
+
+{ #category : #'code elements import' }
+AlceImportingTests >> testSyntacticCodeImporterImportsModulesClassesFormsAndReports [
+	| model |
+	importer provider
+		importProjectElements;
+		importGUIElements;
+		importGUIControlElements;
+		importCodeElements;
+		importSyntacticElements.
+	model := importer import: self class norwind.
+	self assertModel: model loads: 10 of: AlcixClass.
+	self assertModel: model loads: 10 of: AlcixModule.
+	self assertModel: model loads: 10 of: AlcixFunction.
+	self assertModel: model loads: 10 of: AlcixSubProcedure
 ]

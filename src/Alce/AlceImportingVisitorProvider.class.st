@@ -7,7 +7,8 @@ Class {
 		'guiVisitor',
 		'controlVisitor',
 		'syntaxVisitor',
-		'projectVisitor'
+		'projectVisitor',
+		'filter'
 	],
 	#category : #'Alce-Importer-Jindao'
 }
@@ -40,8 +41,18 @@ AlceImportingVisitorProvider >> databaseVisitorInstance [
 ]
 
 { #category : #'instantiate parts' }
+AlceImportingVisitorProvider >> filtering: aBlock [
+	filter := aBlock
+]
+
+{ #category : #'instantiate parts' }
 AlceImportingVisitorProvider >> guiVisitorInstance [
 	^ self instantiate: guiVisitor
+]
+
+{ #category : #configuration }
+AlceImportingVisitorProvider >> importCodeElements [
+	codeVisitor := AlceCodeImporter
 ]
 
 { #category : #configuration }
@@ -57,6 +68,11 @@ AlceImportingVisitorProvider >> importGUIElements [
 { #category : #configuration }
 AlceImportingVisitorProvider >> importProjectElements [
 	projectVisitor := AlceProjectImporter
+]
+
+{ #category : #configuration }
+AlceImportingVisitorProvider >> importSyntacticElements [
+	syntaxVisitor := AlceASTCodeImporter
 ]
 
 { #category : #'instantiate parts' }
