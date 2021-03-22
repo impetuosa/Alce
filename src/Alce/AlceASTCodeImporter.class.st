@@ -66,8 +66,14 @@ AlceASTCodeImporter >> visitEquals: anEquals [
 
 { #category : #generated }
 AlceASTCodeImporter >> visitEvent: anEvent [
-	^ self visitProgram: anEvent.
-
+	| fn |
+	fn := self instantiate: AlcixEvent.
+	fn name: anEvent name.
+	fn anchor: self state top anchor / #events / anEvent name.
+	self state top addInvocable: fn.
+	self state push: fn.
+	super visitEvent: anEvent.
+	self state pop
 ]
 
 { #category : #generated }
@@ -96,8 +102,15 @@ AlceASTCodeImporter >> visitExternalSub: aDefinition [
 
 { #category : #generated }
 AlceASTCodeImporter >> visitFunctionDefinition: aDefinition [
-	^ self visitProgram: aDefinition.
-
+	| fn |
+	fn := self instantiate: AlcixFunction.
+	fn name: aDefinition name.
+	fn anchor: self state top anchor / #functions / aDefinition name.
+	self state top addInvocable: fn.
+	
+	self state push: fn.
+	super visitFunctionDefinition: aDefinition.
+	self state pop
 ]
 
 { #category : #generated }
@@ -138,8 +151,14 @@ AlceASTCodeImporter >> visitModuleConstant: aModuleConstant [
 
 { #category : #generated }
 AlceASTCodeImporter >> visitModuleProperty: aModuleProperty [
-	^ self visitProgram: aModuleProperty.
-
+	| fn |
+	fn := self instantiate: AlcixProperty.
+	fn name: aModuleProperty name.
+	fn anchor: self state top anchor / #properties / aModuleProperty name.
+	self state top addTypedEntity: fn.
+	self state push: fn.
+	super visitSubDefinition: aModuleProperty.
+	self state pop
 ]
 
 { #category : #generated }
@@ -162,8 +181,14 @@ AlceASTCodeImporter >> visitRaiseEvent: aRaiseEvent [
 
 { #category : #generated }
 AlceASTCodeImporter >> visitSubDefinition: aDefinition [
-	^ self visitProgram: aDefinition.
-
+	| fn |
+	fn := self instantiate: AlcixSubProcedure.
+	fn name: aDefinition name.
+	fn anchor: self state top anchor / #subprocedures / aDefinition name.
+	self state top addInvocable: fn.
+	self state push: fn.
+	super visitSubDefinition: aDefinition.
+	self state pop
 ]
 
 { #category : #generated }

@@ -23,7 +23,7 @@ AlceImportingTests >> assertModel: model allAnchorsOfClass: aClass satisfy: aBlo
 { #category : #helpers }
 AlceImportingTests >> assertModel: model loads: anAmount of: aClass [
 	self
-		assert: (model select: [ :element | element isKindOf: aClass ]) size
+		assert: (model select: [ :element | element species =  aClass ]) size
 		equals: anAmount
 ]
 
@@ -139,8 +139,8 @@ AlceImportingTests >> testSyntacticCodeImporterImportsModulesClassesFormsAndRepo
 		importCodeElements;
 		importSyntacticElements.
 	model := importer import: self class norwind.
-	self assertModel: model loads: 10 of: AlcixClass.
-	self assertModel: model loads: 10 of: AlcixModule.
-	self assertModel: model loads: 10 of: AlcixFunction.
-	self assertModel: model loads: 10 of: AlcixSubProcedure
+	self assertModel: model loads: 2 of: AlcixClass.
+	self assertModel: model loads: 7 of: AlcixModule.
+	self assertModel: model loads: 7 of: AlcixFunction .
+	self assertModel: model loads: 7 of: AlcixSubProcedure .
 ]
