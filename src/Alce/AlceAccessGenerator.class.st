@@ -20,7 +20,6 @@ Class {
 		'module',
 		'parameter',
 		'primitiveType',
-		'property',
 		'raiseEvent',
 		'reference',
 		'report',
@@ -42,7 +41,7 @@ Class {
 		'library',
 		'containerSimple',
 		'containerType',
-		'propertyAccessor'
+		'attributeAccessor'
 	],
 	#category : #'Alce-Generator'
 }
@@ -60,13 +59,12 @@ AlceAccessGenerator class >> prefix [
 
 { #category : #definition }
 AlceAccessGenerator >> defineClasses [
-	
 	super defineClasses.
-	
 	access := builder newClassNamed: #Access.
-	accessEntity := builder newClassNamed: #AccessEntity. 
+	accessEntity := builder newClassNamed: #AccessEntity.
 	accessModule := builder newClassNamed: #AccessModule.
 	attribute := builder newClassNamed: #Attribute.
+	attributeAccessor := builder newClassNamed: #AttributeAccessor.
 	argument := builder newClassNamed: #Argument.
 	invocable := builder newClassNamed: #Invocable.
 	class := builder newClassNamed: #Class.
@@ -93,8 +91,6 @@ AlceAccessGenerator >> defineClasses [
 	library := builder newClassNamed: #Library.
 	parameter := builder newClassNamed: #Parameter.
 	primitiveType := builder newClassNamed: #PrimitiveType.
-	property := builder newClassNamed: #Property.
-	propertyAccessor := builder newClassNamed: #PropertyAccessor.
 	raiseEvent := builder newClassNamed: #RaiseEvent.
 	reference := builder newClassNamed: #Reference.
 	report := builder newClassNamed: #Report.
@@ -102,9 +98,7 @@ AlceAccessGenerator >> defineClasses [
 	externalSubProcedure := builder newClassNamed: #ExternalSubProcedure.
 	table := builder newClassNamed: #Table.
 	typedEntity := builder newClassNamed: #TypedEntity.
-	query := builder newClassNamed: #Query.
-	
-
+	query := builder newClassNamed: #Query
 ]
 
 { #category : #definition }
@@ -143,8 +137,7 @@ AlceAccessGenerator >> defineHierarchy [
 	parameter --|> typedEntity.
 	primitiveType --|> type.
 	primitiveType --|> accessEntity.
-	property --|> typedEntity.
-	propertyAccessor --|> invocable.
+	attributeAccessor --|> invocable.
 	raiseEvent --|> invocation.
 	reference --|> containerSimple.
 	report --|> guiClass.
@@ -162,11 +155,13 @@ AlceAccessGenerator >> defineProperties [
 	containerType property: #name type: #String.
 	enumValue property: #name type: #String.
 	enumValue property: #Value type: #Object.
-	propertyAccessor property: #kind type: #String.
+	attribute property: #isConstant type: #Boolean.
+	attributeAccessor property: #kind type: #String.
 	typedEntity property: #name type: #String.
 	reference property: #name type: #String.
 	reference property: #path type: #String.
-	library property: #isBuiltIn type: #Boolean
+	library property: #isBuiltIn type: #Boolean.
+	invocable property: #selector type: #String
 ]
 
 { #category : #definition }
@@ -184,8 +179,7 @@ AlceAccessGenerator >> defineRelations [
 	invocation <>- invocable.
 	function <>- type.
 	module <>-* invocable.
-	property <>-* propertyAccessor .
-	(property property: #attribute) - attribute.
+	attribute <>-* attributeAccessor .
 	query <>-* table.
 	typedEntity <>- type.
 ]

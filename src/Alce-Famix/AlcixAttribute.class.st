@@ -2,8 +2,9 @@ Class {
 	#name : #AlcixAttribute,
 	#superclass : #AlcixTypedEntity,
 	#instVars : [
+		'#isConstant => FMProperty',
 		'#accesses => FMMany type: #AlcixAccess opposite: #attribute',
-		'#property => FMOne type: #AlcixProperty opposite: #attribute'
+		'#attributeAccessors => FMMany type: #AlcixAttributeAccessor opposite: #attribute'
 	],
 	#category : #'Alce-Famix-Entities'
 }
@@ -39,18 +40,45 @@ AlcixAttribute >> addAccess: anObject [
 	^ self accesses add: anObject
 ]
 
-{ #category : #accessing }
-AlcixAttribute >> property [
-	"Relation named: #property type: #AlcixProperty opposite: #attribute"
-
+{ #category : #adding }
+AlcixAttribute >> addAttributeAccessor: anObject [
 	<generated>
-	<derived>
-	^ property
+	^ self attributeAccessors add: anObject
 ]
 
 { #category : #accessing }
-AlcixAttribute >> property: anObject [
+AlcixAttribute >> attributeAccessors [
+	"Relation named: #attributeAccessors type: #AlcixAttributeAccessor opposite: #attribute"
 
 	<generated>
-	property := anObject
+	<derived>
+	^ attributeAccessors
+]
+
+{ #category : #accessing }
+AlcixAttribute >> attributeAccessors: anObject [
+
+	<generated>
+	attributeAccessors value: anObject
+]
+
+{ #category : #navigation }
+AlcixAttribute >> attributeAccessorsGroup [
+	<generated>
+	<navigation: 'AttributeAccessors'>
+	^ MooseSpecializedGroup withAll: self attributeAccessors asSet
+]
+
+{ #category : #accessing }
+AlcixAttribute >> isConstant [
+
+	<FMProperty: #isConstant type: #Boolean>
+	<generated>
+	^ isConstant
+]
+
+{ #category : #accessing }
+AlcixAttribute >> isConstant: anObject [
+	<generated>
+	isConstant := anObject
 ]

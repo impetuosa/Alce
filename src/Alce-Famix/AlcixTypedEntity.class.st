@@ -2,8 +2,8 @@ Class {
 	#name : #AlcixTypedEntity,
 	#superclass : #AlcixAccessEntity,
 	#instVars : [
-		'#containerType => FMOne type: #AlcixContainerType opposite: #typedEntities',
 		'#name => FMProperty',
+		'#containerType => FMOne type: #AlcixContainerType opposite: #typedEntities',
 		'#type => FMOne type: #AlcixTType opposite: #typedEntity'
 	],
 	#category : #'Alce-Famix-Entities'

@@ -141,6 +141,12 @@ AlceImportingTests >> testSyntacticCodeImporterImportsModulesClassesFormsAndRepo
 	model := importer import: self class norwind.
 	self assertModel: model loads: 2 of: AlcixClass.
 	self assertModel: model loads: 7 of: AlcixModule.
-	self assertModel: model loads: 7 of: AlcixFunction .
-	self assertModel: model loads: 7 of: AlcixSubProcedure .
+	self assertModel: model loads: 81 of: AlcixFunction.
+	self assertModel: model loads: 51 of: AlcixSubProcedure.
+	self assertModel: model loads: 1089 of: AlcixAttribute.
+	self assertModel: model loads: 2 of: AlcixAttributeAccessor .
+
+
+
+
 ]

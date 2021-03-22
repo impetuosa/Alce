@@ -16,10 +16,20 @@ AlceASTCodeImporter >> visitComparisonOperation: aComparisonOperation [
 
 ]
 
-{ #category : #generated }
+{ #category : #implemented }
 AlceASTCodeImporter >> visitConstant: aConstant [
-	^ self visitProgram: aConstant.
-
+	| fn |
+	fn := self instantiate: AlcixAttribute.
+	fn name: aConstant constant token value.
+	fn isConstant: true.
+	fn
+		anchor:
+			self state top anchor / #constants
+				/ aConstant constant token value.
+	self state top addTypedEntity: fn.
+	self state push: fn.
+	super visitSubDefinition: aConstant.
+	self state pop
 ]
 
 { #category : #generated }
@@ -64,11 +74,11 @@ AlceASTCodeImporter >> visitEquals: anEquals [
 
 ]
 
-{ #category : #generated }
+{ #category : #implemented }
 AlceASTCodeImporter >> visitEvent: anEvent [
 	| fn |
 	fn := self instantiate: AlcixEvent.
-	fn name: anEvent name.
+	fn selector: anEvent name.
 	fn anchor: self state top anchor / #events / anEvent name.
 	self state top addInvocable: fn.
 	self state push: fn.
@@ -100,12 +110,12 @@ AlceASTCodeImporter >> visitExternalSub: aDefinition [
 
 ]
 
-{ #category : #generated }
+{ #category : #implemented }
 AlceASTCodeImporter >> visitFunctionDefinition: aDefinition [
 	| fn |
 	fn := self instantiate: AlcixFunction.
-	fn name: aDefinition name.
-	fn anchor: self state top anchor / #functions / aDefinition name.
+	fn selector: aDefinition selector token value.
+	fn anchor: self state top anchor / #functions / aDefinition selector token value.
 	self state top addInvocable: fn.
 	
 	self state push: fn.
@@ -149,22 +159,42 @@ AlceASTCodeImporter >> visitModuleConstant: aModuleConstant [
 
 ]
 
-{ #category : #generated }
+{ #category : #implemented }
 AlceASTCodeImporter >> visitModuleProperty: aModuleProperty [
 	| fn |
-	fn := self instantiate: AlcixProperty.
-	fn name: aModuleProperty name.
-	fn anchor: self state top anchor / #properties / aModuleProperty name.
+	fn := self instantiate: AlcixAttribute.
+	fn name: aModuleProperty variable name token value.
+	fn isConstant: false.
+	fn
+		anchor:
+			self state top anchor / #attributes
+				/ aModuleProperty variable name token value.
 	self state top addTypedEntity: fn.
 	self state push: fn.
 	super visitSubDefinition: aModuleProperty.
 	self state pop
 ]
 
-{ #category : #generated }
+{ #category : #implemented }
 AlceASTCodeImporter >> visitModulePropertyGet: aModulePropertyGet [
-	^ self visitProgram: aModulePropertyGet.
+	| acc statement |
+	acc := self instantiate: AlcixAttributeAccessor.
+	acc kind: aModulePropertyGet getToken value asSymbol.
+	acc selector: aModulePropertyGet selector token value.
+	 
+	self assert: acc kind = #Get.
 
+	"Obtain property name from the body of the accessor "
+	statement := (aModulePropertyGet block statements
+		select: [ :s | 
+			{VBExplicitAssignementNode.
+			VBEqualsNode} includes: s class ])
+		detect:
+			[ :s | s left token value = aModulePropertyGet selector token value ].
+	acc
+		attribute:
+			(self state top typedEntities
+				detect: [ :p | p name = statement right token value ])
 ]
 
 { #category : #generated }
@@ -179,12 +209,12 @@ AlceASTCodeImporter >> visitRaiseEvent: aRaiseEvent [
 
 ]
 
-{ #category : #generated }
+{ #category : #implemented }
 AlceASTCodeImporter >> visitSubDefinition: aDefinition [
 	| fn |
 	fn := self instantiate: AlcixSubProcedure.
-	fn name: aDefinition name.
-	fn anchor: self state top anchor / #subprocedures / aDefinition name.
+	fn selector: aDefinition selector token value.
+	fn anchor: self state top anchor / #subprocedures / aDefinition selector token value.
 	self state top addInvocable: fn.
 	self state push: fn.
 	super visitSubDefinition: aDefinition.

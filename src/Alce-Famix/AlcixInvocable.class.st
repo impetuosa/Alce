@@ -2,6 +2,7 @@ Class {
 	#name : #AlcixInvocable,
 	#superclass : #AlcixAccessEntity,
 	#instVars : [
+		'#selector => FMProperty',
 		'#parameters => FMMany type: #AlcixParameter opposite: #invocable',
 		'#accesses => FMMany type: #AlcixAccess opposite: #invocable',
 		'#invocation => FMOne type: #AlcixInvocation opposite: #invocable',
@@ -122,4 +123,18 @@ AlcixInvocable >> parametersGroup [
 	<generated>
 	<navigation: 'Parameters'>
 	^ MooseSpecializedGroup withAll: self parameters asSet
+]
+
+{ #category : #accessing }
+AlcixInvocable >> selector [
+
+	<FMProperty: #selector type: #String>
+	<generated>
+	^ selector
+]
+
+{ #category : #accessing }
+AlcixInvocable >> selector: anObject [
+	<generated>
+	selector := anObject
 ]
