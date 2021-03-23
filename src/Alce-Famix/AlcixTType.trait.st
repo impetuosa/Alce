@@ -2,8 +2,8 @@ Trait {
 	#name : #AlcixTType,
 	#instVars : [
 		'#container => FMOne type: #AlcixContainer opposite: #types',
-		'#function => FMOne type: #AlcixFunction opposite: #type',
-		'#typedEntity => FMOne type: #AlcixTypedEntity opposite: #type'
+		'#name => FMProperty',
+		'#tTyped => FMOne type: #AlcixTTyped opposite: #type'
 	],
 	#category : #'Alce-Famix-Traits'
 }
@@ -41,49 +41,39 @@ AlcixTType >> containerGroup [
 ]
 
 { #category : #accessing }
-AlcixTType >> function [
-	"Relation named: #function type: #AlcixFunction opposite: #type"
+AlcixTType >> name [
+
+	<FMProperty: #name type: #String>
+	<generated>
+	^ name
+]
+
+{ #category : #accessing }
+AlcixTType >> name: anObject [
+	<generated>
+	name := anObject
+]
+
+{ #category : #accessing }
+AlcixTType >> tTyped [
+	"Relation named: #tTyped type: #AlcixTTyped opposite: #type"
 
 	<generated>
 	<container>
 	<derived>
-	^ function
+	^ tTyped
 ]
 
 { #category : #accessing }
-AlcixTType >> function: anObject [
+AlcixTType >> tTyped: anObject [
 
 	<generated>
-	function := anObject
+	tTyped := anObject
 ]
 
 { #category : #navigation }
-AlcixTType >> functionGroup [
+AlcixTType >> tTypedGroup [
 	<generated>
-	<navigation: 'Function'>
-	^ MooseSpecializedGroup with: self function
-]
-
-{ #category : #accessing }
-AlcixTType >> typedEntity [
-	"Relation named: #typedEntity type: #AlcixTypedEntity opposite: #type"
-
-	<generated>
-	<container>
-	<derived>
-	^ typedEntity
-]
-
-{ #category : #accessing }
-AlcixTType >> typedEntity: anObject [
-
-	<generated>
-	typedEntity := anObject
-]
-
-{ #category : #navigation }
-AlcixTType >> typedEntityGroup [
-	<generated>
-	<navigation: 'TypedEntity'>
-	^ MooseSpecializedGroup with: self typedEntity
+	<navigation: 'TTyped'>
+	^ MooseSpecializedGroup with: self tTyped
 ]

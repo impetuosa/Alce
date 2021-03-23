@@ -1,10 +1,9 @@
 Class {
 	#name : #AlcixTypedEntity,
-	#superclass : #AlcixAccessEntity,
+	#superclass : #AlcixTTyped,
 	#instVars : [
 		'#module => FMOne type: #AlcixModule opposite: #members',
-		'#name => FMProperty',
-		'#type => FMOne type: #AlcixTType opposite: #typedEntity'
+		'#name => FMProperty'
 	],
 	#category : #'Alce-Famix-Entities'
 }
@@ -12,7 +11,7 @@ Class {
 { #category : #meta }
 AlcixTypedEntity class >> annotation [
 
-	<FMClass: #TypedEntity super: #AlcixAccessEntity>
+	<FMClass: #TypedEntity super: #AlcixTTyped>
 	<package: #'Alce-Famix'>
 	<generated>
 	^self
@@ -53,26 +52,4 @@ AlcixTypedEntity >> name [
 AlcixTypedEntity >> name: anObject [
 	<generated>
 	name := anObject
-]
-
-{ #category : #accessing }
-AlcixTypedEntity >> type [
-	"Relation named: #type type: #AlcixTType opposite: #typedEntity"
-
-	<generated>
-	^ type
-]
-
-{ #category : #accessing }
-AlcixTypedEntity >> type: anObject [
-
-	<generated>
-	type := anObject
-]
-
-{ #category : #navigation }
-AlcixTypedEntity >> typeGroup [
-	<generated>
-	<navigation: 'Type'>
-	^ MooseSpecializedGroup with: self type
 ]

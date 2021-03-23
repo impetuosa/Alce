@@ -26,7 +26,6 @@ Class {
 		'subProcedure',
 		'externalSubProcedure',
 		'table',
-		'type',
 		'query',
 		'invocable',
 		'databaseType',
@@ -40,7 +39,9 @@ Class {
 		'codeSegment',
 		'library',
 		'containerType',
-		'attributeAccessor'
+		'attributeAccessor',
+		'typed',
+		'type'
 	],
 	#category : #'Alce-Generator'
 }
@@ -96,6 +97,7 @@ AlceAccessGenerator >> defineClasses [
 	externalSubProcedure := builder newClassNamed: #ExternalSubProcedure.
 	table := builder newClassNamed: #Table.
 	typedEntity := builder newClassNamed: #TypedEntity.
+	typed := builder newClassNamed: #TTyped.
 	query := builder newClassNamed: #Query
 ]
 
@@ -121,7 +123,8 @@ AlceAccessGenerator >> defineHierarchy [
 	event --|> invocable.
 	field --|> typedEntity.
 	form --|> guiClass.
-	function --|> invocable.	"Also typed"
+	function --|> invocable.
+	function --|> typed.
 	globalVariable --|> typedEntity.
 	guiClass --|> class.
 	implicitVariable --|> typedEntity.
@@ -140,6 +143,7 @@ AlceAccessGenerator >> defineHierarchy [
 	report --|> guiClass.
 	subProcedure --|> invocable.
 	typedEntity --|> accessEntity.
+	typedEntity --|> typed.
 	externalSubProcedure --|> subProcedure.
 	table --|> datasource.
 	query --|> datasource
@@ -157,6 +161,8 @@ AlceAccessGenerator >> defineProperties [
 	typedEntity property: #name type: #String.
 	reference property: #name type: #String.
 	reference property: #path type: #String.
+	type property: #name type: #String.
+	typed property: #typeName type: #String.
 	library property: #isBuiltIn type: #Boolean.
 	invocable property: #selector type: #String
 ]
@@ -174,11 +180,10 @@ AlceAccessGenerator >> defineRelations [
 	datasource <>-* field.
 	enum <>-* enumValue.
 	invocation <>- invocable.
-	function <>- type.
 	module <>-* invocable.
 	attribute <>-* attributeAccessor.
 	query <>-* table.
-	typedEntity <>- type
+	typed <>- type
 ]
 
 { #category : #definition }

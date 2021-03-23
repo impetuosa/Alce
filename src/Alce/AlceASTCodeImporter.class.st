@@ -24,7 +24,7 @@ AlceASTCodeImporter >> visitConstant: aConstant [
 	fn isConstant: true.
 	fn
 		anchor:
-			self state top anchor / #constants
+			self state top anchor / #attributes
 				/ aConstant constant token value.
 	self state top addMember: fn.
 	self state push: fn.
@@ -44,10 +44,23 @@ AlceASTCodeImporter >> visitDefType: aDefType [
 
 ]
 
-{ #category : #generated }
+{ #category : #implemented }
 AlceASTCodeImporter >> visitDefineEnum: aDefineEnum [
-	^ self visitProgram: aDefineEnum.
-
+	| en |
+	en := self instantiate: AlcixEnum.
+	en name: aDefineEnum name token value.
+	en
+		anchor:
+			self state top anchor / #src / #types / aDefineEnum name token value.
+	self state top addType: en.
+	aDefineEnum fields
+		doWithIndex: [ :d : i | 
+			en
+				addEnumValue:
+					((self instantiate: AlcixEnumValue)
+						name: d name token value;
+						Value: i;
+						yourself) ]
 ]
 
 { #category : #generated }
