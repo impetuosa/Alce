@@ -193,7 +193,7 @@ AlceASTCodeImporter >> visitModulePropertyGet: aModulePropertyGet [
 			[ :s | s left token value = aModulePropertyGet selector token value ].
 	acc
 		attribute:
-			(self state top typedEntities
+			(self state top members
 				detect: [ :p | p name = statement right token value ])
 ]
 
