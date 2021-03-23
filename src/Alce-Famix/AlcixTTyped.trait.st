@@ -1,17 +1,16 @@
-Class {
+Trait {
 	#name : #AlcixTTyped,
-	#superclass : #AlcixEntity,
 	#instVars : [
-		'#type => FMOne type: #AlcixTType opposite: #tTyped',
-		'#typeName => FMProperty'
+		'#typeName => FMProperty',
+		'#type => FMOne type: #AlcixTType opposite: #typed'
 	],
-	#category : #'Alce-Famix-Entities'
+	#category : #'Alce-Famix-Traits'
 }
 
 { #category : #meta }
-AlcixTTyped class >> annotation [
+AlcixTTyped classSide >> annotation [
 
-	<FMClass: #TTyped super: #AlcixEntity>
+	<FMClass: #TTyped super: #Object>
 	<package: #'Alce-Famix'>
 	<generated>
 	^self
@@ -19,7 +18,7 @@ AlcixTTyped class >> annotation [
 
 { #category : #accessing }
 AlcixTTyped >> type [
-	"Relation named: #type type: #AlcixTType opposite: #tTyped"
+	"Relation named: #type type: #AlcixTType opposite: #typed"
 
 	<generated>
 	^ type

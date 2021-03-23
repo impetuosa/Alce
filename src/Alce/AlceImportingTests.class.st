@@ -143,8 +143,9 @@ AlceImportingTests >> testSyntacticCodeImporterImportsModulesClassesFormsAndRepo
 	self assertModel: model loads: 7 of: AlcixModule.
 	self assertModel: model loads: 81 of: AlcixFunction.
 	self assertModel: model loads: 51 of: AlcixSubProcedure.
-	self assertModel: model loads: 1089 of: AlcixAttribute.
+	self assertModel: model loads: 1097 of: AlcixAttribute.
 	self assertModel: model loads: 2 of: AlcixAttributeAccessor.
 	self assertModel: model loads: 8 of: AlcixEnum.
-	self assertModel: model loads: 90 of: AlcixEnumValue
+	self assertModel: model loads: 90 of: AlcixEnumValue.
+	self assertModel: model loads: 1 of: AlcixUserType
 ]

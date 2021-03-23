@@ -1,13 +1,15 @@
 Class {
 	#name : #AlcixFunction,
-	#superclass : #AlcixTTyped,
+	#superclass : #AlcixInvocable,
+	#traits : 'AlcixTTyped',
+	#classTraits : 'AlcixTTyped classTrait',
 	#category : #'Alce-Famix-Entities'
 }
 
 { #category : #meta }
 AlcixFunction class >> annotation [
 
-	<FMClass: #Function super: #AlcixTTyped>
+	<FMClass: #Function super: #AlcixInvocable>
 	<package: #'Alce-Famix'>
 	<generated>
 	^self

@@ -41,7 +41,8 @@ Class {
 		'containerType',
 		'attributeAccessor',
 		'typed',
-		'type'
+		'type',
+		'userType'
 	],
 	#category : #'Alce-Generator'
 }
@@ -97,8 +98,12 @@ AlceAccessGenerator >> defineClasses [
 	externalSubProcedure := builder newClassNamed: #ExternalSubProcedure.
 	table := builder newClassNamed: #Table.
 	typedEntity := builder newClassNamed: #TypedEntity.
-	typed := builder newClassNamed: #TTyped.
-	query := builder newClassNamed: #Query
+	query := builder newClassNamed: #Query.
+	userType := builder newClassNamed: #UserType.
+	
+
+
+
 ]
 
 { #category : #definition }
@@ -111,8 +116,9 @@ AlceAccessGenerator >> defineHierarchy [
 	invocable --|> accessEntity.
 	class --|> module.
 	codeSegment --|> accessEntity.
-	containerType --|> type.
-	containerType --|> accessEntity.
+	userType --|> type.
+	userType --|> accessEntity.
+	containerType --|> userType.
 	databaseType --|> type.
 	databaseType --|> accessEntity.
 	databaseTypedEntity --|> typedEntity.
@@ -174,7 +180,7 @@ AlceAccessGenerator >> defineRelations [
 	argument *- parameter.
 	invocable <>-* parameter.
 	invocable <>-* access.
-	(module property: #members) <>-* typedEntity.
+	(userType property: #members) <>-* typedEntity.
 	containerType <>-* type.
 	databaseTypedEntity - databaseType.
 	datasource <>-* field.
@@ -189,5 +195,6 @@ AlceAccessGenerator >> defineRelations [
 { #category : #definition }
 AlceAccessGenerator >> defineTraits [
 	super defineClasses.
-	type := builder newTraitNamed: #TType
+	type := builder newTraitNamed: #TType.
+	typed := builder newTraitNamed: #TTyped.
 ]

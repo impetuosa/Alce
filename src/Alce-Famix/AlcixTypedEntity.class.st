@@ -1,9 +1,11 @@
 Class {
 	#name : #AlcixTypedEntity,
-	#superclass : #AlcixTTyped,
+	#superclass : #AlcixAccessEntity,
+	#traits : 'AlcixTTyped',
+	#classTraits : 'AlcixTTyped classTrait',
 	#instVars : [
-		'#module => FMOne type: #AlcixModule opposite: #members',
-		'#name => FMProperty'
+		'#name => FMProperty',
+		'#userType => FMOne type: #AlcixUserType opposite: #members'
 	],
 	#category : #'Alce-Famix-Entities'
 }
@@ -11,33 +13,10 @@ Class {
 { #category : #meta }
 AlcixTypedEntity class >> annotation [
 
-	<FMClass: #TypedEntity super: #AlcixTTyped>
+	<FMClass: #TypedEntity super: #AlcixAccessEntity>
 	<package: #'Alce-Famix'>
 	<generated>
 	^self
-]
-
-{ #category : #accessing }
-AlcixTypedEntity >> module [
-	"Relation named: #module type: #AlcixModule opposite: #members"
-
-	<generated>
-	<container>
-	^ module
-]
-
-{ #category : #accessing }
-AlcixTypedEntity >> module: anObject [
-
-	<generated>
-	module := anObject
-]
-
-{ #category : #navigation }
-AlcixTypedEntity >> moduleGroup [
-	<generated>
-	<navigation: 'Module'>
-	^ MooseSpecializedGroup with: self module
 ]
 
 { #category : #accessing }
@@ -52,4 +31,27 @@ AlcixTypedEntity >> name [
 AlcixTypedEntity >> name: anObject [
 	<generated>
 	name := anObject
+]
+
+{ #category : #accessing }
+AlcixTypedEntity >> userType [
+	"Relation named: #userType type: #AlcixUserType opposite: #members"
+
+	<generated>
+	<container>
+	^ userType
+]
+
+{ #category : #accessing }
+AlcixTypedEntity >> userType: anObject [
+
+	<generated>
+	userType := anObject
+]
+
+{ #category : #navigation }
+AlcixTypedEntity >> userTypeGroup [
+	<generated>
+	<navigation: 'UserType'>
+	^ MooseSpecializedGroup with: self userType
 ]
