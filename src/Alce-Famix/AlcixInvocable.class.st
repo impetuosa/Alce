@@ -2,11 +2,12 @@ Class {
 	#name : #AlcixInvocable,
 	#superclass : #AlcixAccessEntity,
 	#instVars : [
-		'#selector => FMProperty',
-		'#parameters => FMMany type: #AlcixParameter opposite: #invocable',
 		'#accesses => FMMany type: #AlcixAccess opposite: #invocable',
 		'#invocation => FMOne type: #AlcixInvocation opposite: #invocable',
-		'#module => FMOne type: #AlcixModule opposite: #invocables'
+		'#localVariables => FMMany type: #AlcixLocalVariable opposite: #invocable',
+		'#module => FMOne type: #AlcixModule opposite: #invocables',
+		'#parameters => FMMany type: #AlcixParameter opposite: #invocable',
+		'#selector => FMProperty'
 	],
 	#category : #'Alce-Famix-Entities'
 }
@@ -50,6 +51,12 @@ AlcixInvocable >> addAccess: anObject [
 ]
 
 { #category : #adding }
+AlcixInvocable >> addLocalVariable: anObject [
+	<generated>
+	^ self localVariables add: anObject
+]
+
+{ #category : #adding }
 AlcixInvocable >> addParameter: anObject [
 	<generated>
 	^ self parameters add: anObject
@@ -77,6 +84,29 @@ AlcixInvocable >> invocationGroup [
 	<generated>
 	<navigation: 'Invocation'>
 	^ MooseSpecializedGroup with: self invocation
+]
+
+{ #category : #accessing }
+AlcixInvocable >> localVariables [
+	"Relation named: #localVariables type: #AlcixLocalVariable opposite: #invocable"
+
+	<generated>
+	<derived>
+	^ localVariables
+]
+
+{ #category : #accessing }
+AlcixInvocable >> localVariables: anObject [
+
+	<generated>
+	localVariables value: anObject
+]
+
+{ #category : #navigation }
+AlcixInvocable >> localVariablesGroup [
+	<generated>
+	<navigation: 'LocalVariables'>
+	^ MooseSpecializedGroup withAll: self localVariables asSet
 ]
 
 { #category : #accessing }

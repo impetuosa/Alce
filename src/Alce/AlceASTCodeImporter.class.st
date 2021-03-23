@@ -7,6 +7,22 @@ Class {
 	#category : #'Alce-Importer-Jindao'
 }
 
+{ #category : #implementing }
+AlceASTCodeImporter >> ensureInContextOf: aClass [
+	(self state top isKindOf: AlcixInvocable)
+		ifFalse: [ self error: 'Unexpected context' ]
+]
+
+{ #category : #implementing }
+AlceASTCodeImporter >> instantiateVariable: aClass from: aVariable [
+	| var |
+	var := self instantiate: aClass.
+	var name: (self nodeToString: aVariable name).
+	var typeName: (self nodeToString: aVariable type type).
+	var anchor: self state top anchor / #variables / var name.
+	^ var
+]
+
 { #category : #helper }
 AlceASTCodeImporter >> nodeToString: aNode [
 	^ self stringConverter toString: aNode
@@ -96,14 +112,22 @@ AlceASTCodeImporter >> visitDefineType: aDefineType [
 
 { #category : #implementing }
 AlceASTCodeImporter >> visitDimMultipleVariables: aDimMultipleVariables [
-	^ self visitProgram: aDimMultipleVariables.
-
+	| var |
+	self ensureInContextOf: AlcixInvocable.
+	aDimMultipleVariables variables
+		do: [ :v | 
+			var := self instantiateVariable: AlcixLocalVariable from: v.
+			self state top addLocalVariable: var ]
 ]
 
 { #category : #implementing }
 AlceASTCodeImporter >> visitDimVariable: aDimVariable [
-	^ self visitProgram: aDimVariable.
-
+	| var |
+	self ensureInContextOf: AlcixInvocable.
+	var := self
+		instantiateVariable: AlcixLocalVariable
+		from: aDimVariable variable.
+	self state top addLocalVariable: var
 ]
 
 { #category : #generated }
@@ -201,12 +225,10 @@ AlceASTCodeImporter >> visitModuleProperty: aModuleProperty [
 	| fn |
 	fn := self instantiate: AlcixAttribute.
 	fn name: (self nodeToString: aModuleProperty variable name).
+	fn typeName: (self nodeToString: aModuleProperty variable type type).
 	fn isConstant: false.
 	fn anchor: self state top anchor / #attributes / fn name.
-	self state top addMember: fn.
-	self state push: fn.
-	super visitSubDefinition: aModuleProperty.
-	self state pop
+	self state top addMember: fn
 ]
 
 { #category : #properties }

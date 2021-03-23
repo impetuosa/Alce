@@ -1,6 +1,9 @@
 Class {
 	#name : #AlcixLocalVariable,
 	#superclass : #AlcixTypedEntity,
+	#instVars : [
+		'#invocable => FMOne type: #AlcixInvocable opposite: #localVariables'
+	],
 	#category : #'Alce-Famix-Entities'
 }
 
@@ -11,4 +14,27 @@ AlcixLocalVariable class >> annotation [
 	<package: #'Alce-Famix'>
 	<generated>
 	^self
+]
+
+{ #category : #accessing }
+AlcixLocalVariable >> invocable [
+	"Relation named: #invocable type: #AlcixInvocable opposite: #localVariables"
+
+	<generated>
+	<container>
+	^ invocable
+]
+
+{ #category : #accessing }
+AlcixLocalVariable >> invocable: anObject [
+
+	<generated>
+	invocable := anObject
+]
+
+{ #category : #navigation }
+AlcixLocalVariable >> invocableGroup [
+	<generated>
+	<navigation: 'Invocable'>
+	^ MooseSpecializedGroup with: self invocable
 ]

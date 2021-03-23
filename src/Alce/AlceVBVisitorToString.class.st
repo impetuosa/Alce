@@ -27,3 +27,10 @@ AlceVBVisitorToString >> visitSimpleIdentifier: aVBSimpleIdentifierNode [
 AlceVBVisitorToString >> visitSmaccToken: aSmaCCCaseInsensitiveToken [ 
 	^ aSmaCCCaseInsensitiveToken value 
 ]
+
+{ #category : #'as yet unclassified' }
+AlceVBVisitorToString >> visitSquareBracketIdentifier: aVBSquareBracketIdentifierNode [
+	| str |
+	str := aVBSquareBracketIdentifierNode token value.
+	^ str copyFrom: 2 to: str size - 1
+]

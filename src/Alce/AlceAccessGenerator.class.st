@@ -180,6 +180,7 @@ AlceAccessGenerator >> defineRelations [
 	argument *- parameter.
 	invocable <>-* parameter.
 	invocable <>-* access.
+	invocable <>-* localVariable.
 	(userType property: #members) <>-* typedEntity.
 	containerType <>-* type.
 	databaseTypedEntity - databaseType.
@@ -187,6 +188,7 @@ AlceAccessGenerator >> defineRelations [
 	enum <>-* enumValue.
 	invocation <>- invocable.
 	module <>-* invocable.
+	module <>-* globalVariable.
 	attribute <>-* attributeAccessor.
 	query <>-* table.
 	typed <>- type
