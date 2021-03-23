@@ -1,6 +1,7 @@
 Trait {
 	#name : #AlcixTType,
 	#instVars : [
+		'#container => FMOne type: #AlcixContainer opposite: #types',
 		'#function => FMOne type: #AlcixFunction opposite: #type',
 		'#typedEntity => FMOne type: #AlcixTypedEntity opposite: #type'
 	],
@@ -14,6 +15,29 @@ AlcixTType classSide >> annotation [
 	<package: #'Alce-Famix'>
 	<generated>
 	^self
+]
+
+{ #category : #accessing }
+AlcixTType >> container [
+	"Relation named: #container type: #AlcixContainer opposite: #types"
+
+	<generated>
+	<container>
+	^ container
+]
+
+{ #category : #accessing }
+AlcixTType >> container: anObject [
+
+	<generated>
+	container := anObject
+]
+
+{ #category : #navigation }
+AlcixTType >> containerGroup [
+	<generated>
+	<navigation: 'Container'>
+	^ MooseSpecializedGroup with: self container
 ]
 
 { #category : #accessing }

@@ -26,7 +26,7 @@ AlceASTCodeImporter >> visitConstant: aConstant [
 		anchor:
 			self state top anchor / #constants
 				/ aConstant constant token value.
-	self state top addTypedEntity: fn.
+	self state top addMember: fn.
 	self state push: fn.
 	super visitSubDefinition: aConstant.
 	self state pop
@@ -169,7 +169,7 @@ AlceASTCodeImporter >> visitModuleProperty: aModuleProperty [
 		anchor:
 			self state top anchor / #attributes
 				/ aModuleProperty variable name token value.
-	self state top addTypedEntity: fn.
+	self state top addMember: fn.
 	self state push: fn.
 	super visitSubDefinition: aModuleProperty.
 	self state pop

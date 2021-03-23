@@ -39,7 +39,6 @@ Class {
 		'databaseTypedEntity',
 		'codeSegment',
 		'library',
-		'containerSimple',
 		'containerType',
 		'attributeAccessor'
 	],
@@ -69,8 +68,7 @@ AlceAccessGenerator >> defineClasses [
 	invocable := builder newClassNamed: #Invocable.
 	class := builder newClassNamed: #Class.
 	codeSegment := builder newClassNamed: #CodeSegment.
-	containerType := builder newClassNamed: #ContainerType.
-	containerSimple := builder newClassNamed: #Container.
+	containerType := builder newClassNamed: #Container.
 	databaseType := builder newClassNamed: #DatabaseType.
 	databaseTypedEntity := builder newClassNamed: #DatabaseTypedEntity.
 	datasource := builder newClassNamed: #DataSource.
@@ -113,7 +111,6 @@ AlceAccessGenerator >> defineHierarchy [
 	codeSegment --|> accessEntity.
 	containerType --|> type.
 	containerType --|> accessEntity.
-	containerSimple --|> accessEntity.
 	databaseType --|> type.
 	databaseType --|> accessEntity.
 	databaseTypedEntity --|> typedEntity.
@@ -139,7 +136,7 @@ AlceAccessGenerator >> defineHierarchy [
 	primitiveType --|> accessEntity.
 	attributeAccessor --|> invocable.
 	raiseEvent --|> invocation.
-	reference --|> containerSimple.
+	reference --|> containerType.
 	report --|> guiClass.
 	subProcedure --|> invocable.
 	typedEntity --|> accessEntity.
@@ -171,17 +168,17 @@ AlceAccessGenerator >> defineRelations [
 	argument *- parameter.
 	invocable <>-* parameter.
 	invocable <>-* access.
-	containerSimple <>-* accessEntity.
-	containerType <>-* typedEntity.
+	(module property: #members) <>-* typedEntity.
+	containerType <>-* type.
 	databaseTypedEntity - databaseType.
 	datasource <>-* field.
 	enum <>-* enumValue.
 	invocation <>- invocable.
 	function <>- type.
 	module <>-* invocable.
-	attribute <>-* attributeAccessor .
+	attribute <>-* attributeAccessor.
 	query <>-* table.
-	typedEntity <>- type.
+	typedEntity <>- type
 ]
 
 { #category : #definition }

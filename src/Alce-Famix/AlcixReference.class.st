@@ -2,9 +2,8 @@ Class {
 	#name : #AlcixReference,
 	#superclass : #AlcixContainer,
 	#instVars : [
-		'#name => FMProperty',
-		'#path => FMProperty',
-		'#accessModule => FMOne type: #AlcixAccessModule opposite: #references'
+		'#accessModule => FMOne type: #AlcixAccessModule opposite: #references',
+		'#path => FMProperty'
 	],
 	#category : #'Alce-Famix-Entities'
 }

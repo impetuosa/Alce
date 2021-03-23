@@ -1,6 +1,6 @@
 Class {
 	#name : #AlcixDataSource,
-	#superclass : #AlcixContainerType,
+	#superclass : #AlcixContainer,
 	#instVars : [
 		'#fields => FMMany type: #AlcixField opposite: #dataSource'
 	],
@@ -10,7 +10,7 @@ Class {
 { #category : #meta }
 AlcixDataSource class >> annotation [
 
-	<FMClass: #DataSource super: #AlcixContainerType>
+	<FMClass: #DataSource super: #AlcixContainer>
 	<package: #'Alce-Famix'>
 	<generated>
 	^self

@@ -10,5 +10,5 @@ AlceGUIControlImporter >> visitFormControl: anObject [
 	attribute := self instantiate: AlcixAttribute.
 	attribute name: anObject name.
 	attribute anchor: self state top anchor / #controls / anObject name.
-	self state top addTypedEntity: attribute
+	self state top addMember: attribute
 ]

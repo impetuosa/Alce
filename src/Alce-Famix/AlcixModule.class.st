@@ -1,8 +1,9 @@
 Class {
 	#name : #AlcixModule,
-	#superclass : #AlcixContainerType,
+	#superclass : #AlcixContainer,
 	#instVars : [
-		'#invocables => FMMany type: #AlcixInvocable opposite: #module'
+		'#invocables => FMMany type: #AlcixInvocable opposite: #module',
+		'#members => FMMany type: #AlcixTypedEntity opposite: #module'
 	],
 	#category : #'Alce-Famix-Entities'
 }
@@ -10,7 +11,7 @@ Class {
 { #category : #meta }
 AlcixModule class >> annotation [
 
-	<FMClass: #Module super: #AlcixContainerType>
+	<FMClass: #Module super: #AlcixContainer>
 	<package: #'Alce-Famix'>
 	<generated>
 	^self
@@ -20,6 +21,12 @@ AlcixModule class >> annotation [
 AlcixModule >> addInvocable: anObject [
 	<generated>
 	^ self invocables add: anObject
+]
+
+{ #category : #adding }
+AlcixModule >> addMember: anObject [
+	<generated>
+	^ self members add: anObject
 ]
 
 { #category : #accessing }
@@ -43,4 +50,27 @@ AlcixModule >> invocablesGroup [
 	<generated>
 	<navigation: 'Invocables'>
 	^ MooseSpecializedGroup withAll: self invocables asSet
+]
+
+{ #category : #accessing }
+AlcixModule >> members [
+	"Relation named: #members type: #AlcixTypedEntity opposite: #module"
+
+	<generated>
+	<derived>
+	^ members
+]
+
+{ #category : #accessing }
+AlcixModule >> members: anObject [
+
+	<generated>
+	members value: anObject
+]
+
+{ #category : #navigation }
+AlcixModule >> membersGroup [
+	<generated>
+	<navigation: 'Members'>
+	^ MooseSpecializedGroup withAll: self members asSet
 ]

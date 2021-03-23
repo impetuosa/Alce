@@ -2,8 +2,8 @@ Class {
 	#name : #AlcixTypedEntity,
 	#superclass : #AlcixAccessEntity,
 	#instVars : [
+		'#module => FMOne type: #AlcixModule opposite: #members',
 		'#name => FMProperty',
-		'#containerType => FMOne type: #AlcixContainerType opposite: #typedEntities',
 		'#type => FMOne type: #AlcixTType opposite: #typedEntity'
 	],
 	#category : #'Alce-Famix-Entities'
@@ -19,26 +19,26 @@ AlcixTypedEntity class >> annotation [
 ]
 
 { #category : #accessing }
-AlcixTypedEntity >> containerType [
-	"Relation named: #containerType type: #AlcixContainerType opposite: #typedEntities"
+AlcixTypedEntity >> module [
+	"Relation named: #module type: #AlcixModule opposite: #members"
 
 	<generated>
 	<container>
-	^ containerType
+	^ module
 ]
 
 { #category : #accessing }
-AlcixTypedEntity >> containerType: anObject [
+AlcixTypedEntity >> module: anObject [
 
 	<generated>
-	containerType := anObject
+	module := anObject
 ]
 
 { #category : #navigation }
-AlcixTypedEntity >> containerTypeGroup [
+AlcixTypedEntity >> moduleGroup [
 	<generated>
-	<navigation: 'ContainerType'>
-	^ MooseSpecializedGroup with: self containerType
+	<navigation: 'Module'>
+	^ MooseSpecializedGroup with: self module
 ]
 
 { #category : #accessing }

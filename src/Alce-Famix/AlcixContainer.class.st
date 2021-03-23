@@ -1,8 +1,11 @@
 Class {
 	#name : #AlcixContainer,
 	#superclass : #AlcixAccessEntity,
+	#traits : 'AlcixTType',
+	#classTraits : 'AlcixTType classTrait',
 	#instVars : [
-		'#accessEntities => FMMany type: #AlcixAccessEntity opposite: #container'
+		'#name => FMProperty',
+		'#types => FMMany type: #AlcixTType opposite: #container'
 	],
 	#category : #'Alce-Famix-Entities'
 }
@@ -16,31 +19,45 @@ AlcixContainer class >> annotation [
 	^self
 ]
 
+{ #category : #adding }
+AlcixContainer >> addType: anObject [
+	<generated>
+	^ self types add: anObject
+]
+
 { #category : #accessing }
-AlcixContainer >> accessEntities [
-	"Relation named: #accessEntities type: #AlcixAccessEntity opposite: #container"
+AlcixContainer >> name [
+
+	<FMProperty: #name type: #String>
+	<generated>
+	^ name
+]
+
+{ #category : #accessing }
+AlcixContainer >> name: anObject [
+	<generated>
+	name := anObject
+]
+
+{ #category : #accessing }
+AlcixContainer >> types [
+	"Relation named: #types type: #AlcixTType opposite: #container"
 
 	<generated>
 	<derived>
-	^ accessEntities
+	^ types
 ]
 
 { #category : #accessing }
-AlcixContainer >> accessEntities: anObject [
+AlcixContainer >> types: anObject [
 
 	<generated>
-	accessEntities value: anObject
+	types value: anObject
 ]
 
 { #category : #navigation }
-AlcixContainer >> accessEntitiesGroup [
+AlcixContainer >> typesGroup [
 	<generated>
-	<navigation: 'AccessEntities'>
-	^ MooseSpecializedGroup withAll: self accessEntities asSet
-]
-
-{ #category : #adding }
-AlcixContainer >> addAccessEntity: anObject [
-	<generated>
-	^ self accessEntities add: anObject
+	<navigation: 'Types'>
+	^ MooseSpecializedGroup withAll: self types asSet
 ]

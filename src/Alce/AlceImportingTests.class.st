@@ -100,7 +100,7 @@ AlceImportingTests >> testGuiImporterImportsMainGraphicalElements [
 	| model |
 	importer provider importProjectElements; importGUIElements.
 	model := importer import: self class norwind.
-	self assertModel: model loads: 34 of: AlcixForm.
+	self assertModel: model loads: 35 of: AlcixForm.
 	self assertModel: model loads: 15 of: AlcixReport.
 
 ]
@@ -122,7 +122,7 @@ AlceImportingTests >> testProjectImporterImportsReferences [
 	| model |
 	importer provider importProjectElements.
 	model := importer import: self class norwind.
-	self assertModel: model loads: 4 of: AlcixLibrary.
+	self assertModel: model loads: 6 of: AlcixLibrary.
 	self
 		assertModel: model
 		allAnchorsOfClass: AlcixLibrary
