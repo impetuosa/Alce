@@ -7,12 +7,12 @@ Class {
 	#category : #'Alce-Importer-Jindao'
 }
 
-{ #category : #implemented }
+{ #category : #helper }
 AlceASTCodeImporter >> nodeToString: aNode [
 	^ self stringConverter toString: aNode
 ]
 
-{ #category : #implemented }
+{ #category : #helper }
 AlceASTCodeImporter >> stringConverter [
 	^ stringConverter
 		ifNil: [ stringConverter := AlceVBVisitorToString new ]
@@ -30,7 +30,7 @@ AlceASTCodeImporter >> visitComparisonOperation: aComparisonOperation [
 
 ]
 
-{ #category : #implemented }
+{ #category : #'type definition' }
 AlceASTCodeImporter >> visitConstant: aConstant [
 	| fn |
 	fn := self instantiate: AlcixAttribute.
@@ -52,13 +52,13 @@ AlceASTCodeImporter >> visitConstantList: aConstantList [
 
 ]
 
-{ #category : #implemented }
+{ #category : #'type definition' }
 AlceASTCodeImporter >> visitDefType: aDefType [
 	^ self error: ' Def type is a really really really crappy thing '
 
 ]
 
-{ #category : #implemented }
+{ #category : #'type definition' }
 AlceASTCodeImporter >> visitDefineEnum: aDefineEnum [
 	| en |
 	en := self instantiate: AlcixEnum.
@@ -75,7 +75,7 @@ AlceASTCodeImporter >> visitDefineEnum: aDefineEnum [
 						yourself) ]
 ]
 
-{ #category : #implementing }
+{ #category : #'type definition' }
 AlceASTCodeImporter >> visitDefineType: aDefineType [
 	| en |
 	en := self instantiate: AlcixUserType.
@@ -94,13 +94,13 @@ AlceASTCodeImporter >> visitDefineType: aDefineType [
 						yourself) ]
 ]
 
-{ #category : #generated }
+{ #category : #implementing }
 AlceASTCodeImporter >> visitDimMultipleVariables: aDimMultipleVariables [
 	^ self visitProgram: aDimMultipleVariables.
 
 ]
 
-{ #category : #generated }
+{ #category : #implementing }
 AlceASTCodeImporter >> visitDimVariable: aDimVariable [
 	^ self visitProgram: aDimVariable.
 
@@ -112,7 +112,7 @@ AlceASTCodeImporter >> visitEquals: anEquals [
 
 ]
 
-{ #category : #implemented }
+{ #category : #'functions - subs - events' }
 AlceASTCodeImporter >> visitEvent: anEvent [
 	| fn |
 	fn := self instantiate: AlcixEvent.
@@ -148,7 +148,7 @@ AlceASTCodeImporter >> visitExternalSub: aDefinition [
 
 ]
 
-{ #category : #implemented }
+{ #category : #'functions - subs - events' }
 AlceASTCodeImporter >> visitFunctionDefinition: aDefinition [
 	| fn |
 	fn := self instantiate: AlcixFunction.
@@ -196,7 +196,7 @@ AlceASTCodeImporter >> visitModuleConstant: aModuleConstant [
 
 ]
 
-{ #category : #implemented }
+{ #category : #properties }
 AlceASTCodeImporter >> visitModuleProperty: aModuleProperty [
 	| fn |
 	fn := self instantiate: AlcixAttribute.
@@ -209,7 +209,7 @@ AlceASTCodeImporter >> visitModuleProperty: aModuleProperty [
 	self state pop
 ]
 
-{ #category : #implemented }
+{ #category : #properties }
 AlceASTCodeImporter >> visitModulePropertyGet: aModulePropertyGet [
 	| acc statement |
 	acc := self instantiate: AlcixAttributeAccessor.
@@ -241,7 +241,12 @@ AlceASTCodeImporter >> visitRaiseEvent: aRaiseEvent [
 
 ]
 
-{ #category : #implemented }
+{ #category : #implementing }
+AlceASTCodeImporter >> visitReDimVariable: aReDimVariable [
+	self halt
+]
+
+{ #category : #'functions - subs - events' }
 AlceASTCodeImporter >> visitSubDefinition: aDefinition [
 	| fn |
 	fn := self instantiate: AlcixSubProcedure.
