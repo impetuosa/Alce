@@ -7,13 +7,13 @@ Class {
 	#category : #'Alce-Importer-Jindao'
 }
 
-{ #category : #implementing }
+{ #category : #helper }
 AlceASTCodeImporter >> ensureInContextOf: aClass [
 	(self state top isKindOf: AlcixInvocable)
 		ifFalse: [ self error: 'Unexpected context' ]
 ]
 
-{ #category : #implementing }
+{ #category : #'properties - variables' }
 AlceASTCodeImporter >> instantiateVariable: aClass from: aVariable [
 	| var |
 	var := self instantiate: aClass.
@@ -110,7 +110,7 @@ AlceASTCodeImporter >> visitDefineType: aDefineType [
 						yourself) ]
 ]
 
-{ #category : #implementing }
+{ #category : #'properties - variables' }
 AlceASTCodeImporter >> visitDimMultipleVariables: aDimMultipleVariables [
 	| var |
 	self ensureInContextOf: AlcixInvocable.
@@ -120,7 +120,7 @@ AlceASTCodeImporter >> visitDimMultipleVariables: aDimMultipleVariables [
 			self state top addLocalVariable: var ]
 ]
 
-{ #category : #implementing }
+{ #category : #'properties - variables' }
 AlceASTCodeImporter >> visitDimVariable: aDimVariable [
 	| var |
 	self ensureInContextOf: AlcixInvocable.
@@ -220,7 +220,7 @@ AlceASTCodeImporter >> visitModuleConstant: aModuleConstant [
 
 ]
 
-{ #category : #properties }
+{ #category : #'properties - variables' }
 AlceASTCodeImporter >> visitModuleProperty: aModuleProperty [
 	| fn |
 	fn := self instantiate: AlcixAttribute.
@@ -231,7 +231,7 @@ AlceASTCodeImporter >> visitModuleProperty: aModuleProperty [
 	self state top addMember: fn
 ]
 
-{ #category : #properties }
+{ #category : #'properties - variables' }
 AlceASTCodeImporter >> visitModulePropertyGet: aModulePropertyGet [
 	| acc statement |
 	acc := self instantiate: AlcixAttributeAccessor.
@@ -263,7 +263,7 @@ AlceASTCodeImporter >> visitRaiseEvent: aRaiseEvent [
 
 ]
 
-{ #category : #implementing }
+{ #category : #'properties - variables' }
 AlceASTCodeImporter >> visitReDimVariable: aReDimVariable [
 	self halt
 ]
