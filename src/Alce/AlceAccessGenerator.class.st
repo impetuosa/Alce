@@ -158,6 +158,7 @@ AlceAccessGenerator >> defineHierarchy [
 { #category : #definition }
 AlceAccessGenerator >> defineProperties [
 	access property: #isWriting type: #Boolean.
+	access property: #attributeName type: #String.
 	accessEntity property: #anchor type: #Object.
 	containerType property: #name type: #String.
 	enumValue property: #name type: #String.

@@ -2,9 +2,10 @@ Class {
 	#name : #AlcixAccess,
 	#superclass : #AlcixAccessEntity,
 	#instVars : [
-		'#isWriting => FMProperty',
 		'#attribute => FMOne type: #AlcixAttribute opposite: #accesses',
-		'#invocable => FMOne type: #AlcixInvocable opposite: #accesses'
+		'#attributeName => FMProperty',
+		'#invocable => FMOne type: #AlcixInvocable opposite: #accesses',
+		'#isWriting => FMProperty'
 	],
 	#category : #'Alce-Famix-Entities'
 }
@@ -31,6 +32,20 @@ AlcixAccess >> attribute: anObject [
 
 	<generated>
 	attribute := anObject
+]
+
+{ #category : #accessing }
+AlcixAccess >> attributeName [
+
+	<FMProperty: #attributeName type: #String>
+	<generated>
+	^ attributeName
+]
+
+{ #category : #accessing }
+AlcixAccess >> attributeName: anObject [
+	<generated>
+	attributeName := anObject
 ]
 
 { #category : #accessing }

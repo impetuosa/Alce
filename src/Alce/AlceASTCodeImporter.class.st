@@ -34,10 +34,21 @@ AlceASTCodeImporter >> stringConverter [
 		ifNil: [ stringConverter := AlceVBVisitorToString new ]
 ]
 
-{ #category : #generated }
+{ #category : #implementing }
 AlceASTCodeImporter >> visitAssignementOrEquals: anAssignementOrEquals [
-	^ self visitProgram: anAssignementOrEquals.
-
+	| access |
+	"
+	Ensure that is an assignment: 
+	
+"
+	self halt.
+	anAssignementOrEquals isAssignment
+		ifTrue: [ access := self instantiate: AlcixAccess.
+			access isWriting: true.
+			access
+				attributeName: (self nodeToString: anAssignementOrEquals left).
+			self state top addAccess: access ].
+	super visitAssignementOrEquals: anAssignementOrEquals
 ]
 
 { #category : #generated }
@@ -148,10 +159,14 @@ AlceASTCodeImporter >> visitEvent: anEvent [
 	self state pop
 ]
 
-{ #category : #generated }
+{ #category : #implementing }
 AlceASTCodeImporter >> visitExplicitAssignement: anExplicitAssignement [
-	^ self visitProgram: anExplicitAssignement.
-
+	| access |
+	access := self instantiate: AlcixAccess.
+	access isWriting: true.
+	access attributeName: (self nodeToString: anExplicitAssignement left).
+	self state top addAccess: access.
+	super visitExplicitAssignement: anExplicitAssignement.
 ]
 
 { #category : #generated }
