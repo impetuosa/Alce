@@ -140,11 +140,14 @@ AlceImportingTests >> testSyntacticCodeImporterImportsModulesClassesFormsAndRepo
 		importSyntacticElements.
 	model := importer import: self class norwind.
 	self assertModel: model loads: 321 of: AlcixInvocation.
+	self assertModel: model loads: 321 of: AlcixRaiseEvent.
 	self assertModel: model loads: 321 of: AlcixAccess.
 	self assertModel: model loads: 2 of: AlcixClass.
 	self assertModel: model loads: 7 of: AlcixModule.
 	self assertModel: model loads: 81 of: AlcixFunction.
+	self assertModel: model loads: 81 of: AlcixExternalFunction.
 	self assertModel: model loads: 51 of: AlcixSubProcedure.
+	self assertModel: model loads: 51 of: AlcixExternalSubProcedure.
 	self assertModel: model loads: 1096 of: AlcixAttribute.
 	self assertModel: model loads: 2 of: AlcixAttributeAccessor.
 	self assertModel: model loads: 8 of: AlcixEnum.
