@@ -34,23 +34,6 @@ AlceASTCodeImporter >> stringConverter [
 		ifNil: [ stringConverter := AlceVBVisitorToString new ]
 ]
 
-{ #category : #implementing }
-AlceASTCodeImporter >> visitAssignementOrEquals: anAssignementOrEquals [
-	| access |
-	"
-	Ensure that is an assignment: 
-	
-"
-	self halt.
-	anAssignementOrEquals isAssignment
-		ifTrue: [ access := self instantiate: AlcixAccess.
-			access isWriting: true.
-			access
-				attributeName: (self nodeToString: anAssignementOrEquals left).
-			self state top addAccess: access ].
-	super visitAssignementOrEquals: anAssignementOrEquals
-]
-
 { #category : #generated }
 AlceASTCodeImporter >> visitComparisonOperation: aComparisonOperation [
 	^ self visitProgram: aComparisonOperation.
@@ -141,10 +124,19 @@ AlceASTCodeImporter >> visitDimVariable: aDimVariable [
 	self state top addLocalVariable: var
 ]
 
-{ #category : #generated }
-AlceASTCodeImporter >> visitEquals: anEquals [
-	^ self visitProgram: anEquals.
-
+{ #category : #assignments }
+AlceASTCodeImporter >> visitEquals: anAssignementOrEquals [
+	| access |
+	"
+	Ensure that is an assignment: 
+"
+	anAssignementOrEquals isAssignment
+		ifTrue: [ access := self instantiate: AlcixAccess.
+			access isWriting: true.
+			access
+				attributeName: (self nodeToString: anAssignementOrEquals left).
+			self state top addAccess: access ].
+	super visitAssignementOrEquals: anAssignementOrEquals
 ]
 
 { #category : #'functions - subs - events' }
@@ -159,7 +151,7 @@ AlceASTCodeImporter >> visitEvent: anEvent [
 	self state pop
 ]
 
-{ #category : #implementing }
+{ #category : #assignments }
 AlceASTCodeImporter >> visitExplicitAssignement: anExplicitAssignement [
 	| access |
 	access := self instantiate: AlcixAccess.
@@ -169,22 +161,46 @@ AlceASTCodeImporter >> visitExplicitAssignement: anExplicitAssignement [
 	super visitExplicitAssignement: anExplicitAssignement.
 ]
 
-{ #category : #generated }
+{ #category : #implementing }
 AlceASTCodeImporter >> visitExplicitCall: anExplicitCall [
-	^ self visitProgram: anExplicitCall.
-
+	| call arguments |
+	call := self instantiate: AlcixInvocation .
+	call selector: (self nodeToString: anExplicitCall selector).
+	call anchor: self state top anchor / #invocation / call selector.
+	self halt. 
+	arguments := anExplicitCall arguments collect: [ :a | self nodeToString: a  ]..
+	
+	call arguments: arguments. 
+	self state top addInvocation: call.
+	self state push: call.
+	super visitExplicitCall: anExplicitCall.
+	self state pop
 ]
 
-{ #category : #generated }
+{ #category : #'functions - subs - events' }
 AlceASTCodeImporter >> visitExternalFunction: aDefinition [
-	^ self visitProgram: aDefinition.
-
+	| fn |
+	fn := self instantiate: AlcixExternalFunction.
+	fn selector: (self nodeToString: aDefinition selector).
+	fn anchor: self state top anchor / #functions / fn selector.
+	self halt. 
+	self state top addInvocable: fn.
+	self state push: fn.
+	super visitExternalFunction: aDefinition.
+	self state pop
 ]
 
-{ #category : #generated }
+{ #category : #'functions - subs - events' }
 AlceASTCodeImporter >> visitExternalSub: aDefinition [
-	^ self visitProgram: aDefinition.
-
+	| fn |
+	fn := self instantiate: AlcixExternalSubProcedure.
+	fn selector: (self nodeToString: aDefinition selector).
+	fn anchor: self state top anchor / #subprocedures / fn selector.
+	self halt.
+	self state top addInvocable: fn.
+	self state push: fn.
+	super visitExternalSub: aDefinition.
+	self state pop
 ]
 
 { #category : #'functions - subs - events' }
@@ -211,9 +227,20 @@ AlceASTCodeImporter >> visitImplements: anImplements [
 
 ]
 
-{ #category : #generated }
+{ #category : #implementing }
 AlceASTCodeImporter >> visitImplicitParenthesesLessCall: anImplicitParenthesesLessCall [
-	^ self visitProgram: anImplicitParenthesesLessCall.
+	| call arguments |
+	call := self instantiate: AlcixInvocation .
+	call selector: (self nodeToString: anImplicitParenthesesLessCall selector).
+	call anchor: self state top anchor / #invocation / call selector.
+	self halt. 
+	arguments := anImplicitParenthesesLessCall arguments collect: [ :a | self nodeToString: a  ]..
+	
+	call arguments: arguments. 
+	self state top addInvocation: call.
+	self state push: call.
+	super visitImplicitParenthesesLessCall: anImplicitParenthesesLessCall.
+	self state pop
 
 ]
 
@@ -266,16 +293,28 @@ AlceASTCodeImporter >> visitModulePropertyGet: aModulePropertyGet [
 				detect: [ :p | p name = (self nodeToString: statement right) ])
 ]
 
+{ #category : #implementing }
+AlceASTCodeImporter >> visitProcedureCallOrArrayAccess: aProcedureCallOrArrayAccess [
+	^ self visitProgram: aProcedureCallOrArrayAccess
+]
+
 { #category : #generated }
 AlceASTCodeImporter >> visitRaiseError: aRaiseError [
 	^ self visitProgram: aRaiseError.
 
 ]
 
-{ #category : #generated }
+{ #category : #implementing }
 AlceASTCodeImporter >> visitRaiseEvent: aRaiseEvent [
-	^ self visitProgram: aRaiseEvent.
-
+	| call |
+	call := self instantiate: AlcixRaiseEvent.
+	call selector: (self nodeToString: aRaiseEvent selector).
+	call anchor: self state top anchor / #invocation / call selector.
+	self halt.
+	self state top addInvocation: call.
+	self state push: call.
+	super visitRaiseEvent: aRaiseEvent.
+	self state pop
 ]
 
 { #category : #'properties - variables' }
