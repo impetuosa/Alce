@@ -1,6 +1,6 @@
 Class {
 	#name : #AlceImportingSyntacticTests,
-	#superclass : #TestCase,
+	#superclass : #ParametrizedTestCase,
 	#instVars : [
 		'importer',
 		'model'
