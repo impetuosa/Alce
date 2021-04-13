@@ -159,7 +159,9 @@ AlceAccessGenerator >> defineHierarchy [
 AlceAccessGenerator >> defineProperties [
 	access property: #isWriting type: #Boolean.
 	access property: #attributeName type: #String.
+	access property: #memberSelectors type:#OrderedCollection. 
 	accessEntity property: #anchor type: #Object.
+	argument property: #value type: #Object.
 	containerType property: #name type: #String.
 	enumValue property: #name type: #String.
 	enumValue property: #Value type: #Object.
@@ -171,14 +173,16 @@ AlceAccessGenerator >> defineProperties [
 	type property: #name type: #String.
 	typed property: #typeName type: #String.
 	library property: #isBuiltIn type: #Boolean.
-	invocable property: #selector type: #String
+	invocable property: #selector type: #String.
+	invocation property: #selector type: #String.
+
+	
 ]
 
 { #category : #definition }
 AlceAccessGenerator >> defineRelations [
 	access *- attribute.
 	(accessModule property: #references) <>-* reference.
-	argument *- parameter.
 	invocable <>-* parameter.
 	invocable <>-* access.
 	invocable <>-* localVariable.
@@ -187,7 +191,9 @@ AlceAccessGenerator >> defineRelations [
 	databaseTypedEntity - databaseType.
 	datasource <>-* field.
 	enum <>-* enumValue.
-	invocation <>- invocable.
+	(invocable property: #outgoingInvocations)  <>-* invocation.
+	(invocable property: #incomingInvocations)  <>-* invocation.
+	invocation <>-* argument.
 	module <>-* invocable.
 	module <>-* globalVariable.
 	attribute <>-* attributeAccessor.

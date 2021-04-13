@@ -1,5 +1,5 @@
 Class {
-	#name : #AlceImportingTests,
+	#name : #AlceImportingCountingTests,
 	#superclass : #TestCase,
 	#instVars : [
 		'importer'
@@ -8,12 +8,12 @@ Class {
 }
 
 { #category : #'building suites' }
-AlceImportingTests class >> norwind [
+AlceImportingCountingTests class >> norwind [
 	^ 'c:\Northwind.accdb' asFileReference
 ]
 
 { #category : #helpers }
-AlceImportingTests >> assertModel: model allAnchorsOfClass: aClass satisfy: aBlock [
+AlceImportingCountingTests >> assertModel: model allAnchorsOfClass: aClass satisfy: aBlock [
 	self
 		assert:
 			((model select: [ :element | element isKindOf: aClass ])
@@ -21,26 +21,26 @@ AlceImportingTests >> assertModel: model allAnchorsOfClass: aClass satisfy: aBlo
 ]
 
 { #category : #helpers }
-AlceImportingTests >> assertModel: model loads: anAmount of: aClass [
+AlceImportingCountingTests >> assertModel: model loads: anAmount of: aClass [
 	self
 		assert: (model select: [ :element | element species =  aClass ]) size
 		equals: anAmount
 ]
 
 { #category : #helpers }
-AlceImportingTests >> runCaseManaged [
+AlceImportingCountingTests >> runCaseManaged [
 	self runCase
 ]
 
 { #category : #'project level import' }
-AlceImportingTests >> setUp [
+AlceImportingCountingTests >> setUp [
 	super setUp.
 	importer := AlceImporter new.
 	
 ]
 
 { #category : #'code elements import' }
-AlceImportingTests >> testCodeImporterImportsModulesClassesFormsAndReports [
+AlceImportingCountingTests >> testCodeImporterImportsModulesClassesFormsAndReports [
 	| model |
 	importer provider
 		importProjectElements;
@@ -53,7 +53,7 @@ AlceImportingTests >> testCodeImporterImportsModulesClassesFormsAndReports [
 ]
 
 { #category : #'gui control import' }
-AlceImportingTests >> testGuiImporterImportsGraphicalControlsAnchorsElements [
+AlceImportingCountingTests >> testGuiImporterImportsGraphicalControlsAnchorsElements [
 	| model |
 	importer provider
 		importProjectElements;
@@ -67,7 +67,7 @@ AlceImportingTests >> testGuiImporterImportsGraphicalControlsAnchorsElements [
 ]
 
 { #category : #'gui element import' }
-AlceImportingTests >> testGuiImporterImportsMainGraphicalAnchorsElements [
+AlceImportingCountingTests >> testGuiImporterImportsMainGraphicalAnchorsElements [
 	| model |
 	importer provider
 		importProjectElements;
@@ -84,7 +84,7 @@ AlceImportingTests >> testGuiImporterImportsMainGraphicalAnchorsElements [
 ]
 
 { #category : #'gui control import' }
-AlceImportingTests >> testGuiImporterImportsMainGraphicalControlElements [
+AlceImportingCountingTests >> testGuiImporterImportsMainGraphicalControlElements [
 	| model |
 	importer provider
 		importProjectElements;
@@ -96,7 +96,7 @@ AlceImportingTests >> testGuiImporterImportsMainGraphicalControlElements [
 ]
 
 { #category : #'gui element import' }
-AlceImportingTests >> testGuiImporterImportsMainGraphicalElements [
+AlceImportingCountingTests >> testGuiImporterImportsMainGraphicalElements [
 	| model |
 	importer provider importProjectElements; importGUIElements.
 	model := importer import: self class norwind.
@@ -106,7 +106,7 @@ AlceImportingTests >> testGuiImporterImportsMainGraphicalElements [
 ]
 
 { #category : #'project level import' }
-AlceImportingTests >> testProjectImporterImportsOnlyOne [
+AlceImportingCountingTests >> testProjectImporterImportsOnlyOne [
 	| model |
 	importer provider importProjectElements.
 	model := importer import: self class norwind.
@@ -118,7 +118,7 @@ AlceImportingTests >> testProjectImporterImportsOnlyOne [
 ]
 
 { #category : #'project level import' }
-AlceImportingTests >> testProjectImporterImportsReferences [
+AlceImportingCountingTests >> testProjectImporterImportsReferences [
 	| model |
 	importer provider importProjectElements.
 	model := importer import: self class norwind.
@@ -130,7 +130,7 @@ AlceImportingTests >> testProjectImporterImportsReferences [
 ]
 
 { #category : #'code elements import' }
-AlceImportingTests >> testSyntacticCodeImporterImportsModulesClassesFormsAndReports [
+AlceImportingCountingTests >> testSyntacticCodeImporterImportsModulesClassesFormsAndReports [
 	| model |
 	importer provider
 		importProjectElements;
@@ -139,15 +139,15 @@ AlceImportingTests >> testSyntacticCodeImporterImportsModulesClassesFormsAndRepo
 		importCodeElements;
 		importSyntacticElements.
 	model := importer import: self class norwind.
-	self assertModel: model loads: 321 of: AlcixInvocation.
-	self assertModel: model loads: 321 of: AlcixRaiseEvent.
-	self assertModel: model loads: 321 of: AlcixAccess.
+	self assertModel: model loads: 396 of: AlcixInvocation.
+	self assertModel: model loads: 0 of: AlcixRaiseEvent.
+	self assertModel: model loads: 796 of: AlcixAccess.
 	self assertModel: model loads: 2 of: AlcixClass.
 	self assertModel: model loads: 7 of: AlcixModule.
 	self assertModel: model loads: 81 of: AlcixFunction.
-	self assertModel: model loads: 81 of: AlcixExternalFunction.
+	self assertModel: model loads: 0 of: AlcixExternalFunction.
 	self assertModel: model loads: 51 of: AlcixSubProcedure.
-	self assertModel: model loads: 51 of: AlcixExternalSubProcedure.
+	self assertModel: model loads: 0 of: AlcixExternalSubProcedure.
 	self assertModel: model loads: 1096 of: AlcixAttribute.
 	self assertModel: model loads: 2 of: AlcixAttributeAccessor.
 	self assertModel: model loads: 8 of: AlcixEnum.

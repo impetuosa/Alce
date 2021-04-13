@@ -2,7 +2,6 @@ Class {
 	#name : #AlcixParameter,
 	#superclass : #AlcixTypedEntity,
 	#instVars : [
-		'#arguments => FMMany type: #AlcixArgument opposite: #parameter',
 		'#invocable => FMOne type: #AlcixInvocable opposite: #parameters'
 	],
 	#category : #'Alce-Famix-Entities'
@@ -15,28 +14,6 @@ AlcixParameter class >> annotation [
 	<package: #'Alce-Famix'>
 	<generated>
 	^self
-]
-
-{ #category : #adding }
-AlcixParameter >> addArgument: anObject [
-	<generated>
-	^ self arguments add: anObject
-]
-
-{ #category : #accessing }
-AlcixParameter >> arguments [
-	"Relation named: #arguments type: #AlcixArgument opposite: #parameter"
-
-	<generated>
-	<derived>
-	^ arguments
-]
-
-{ #category : #accessing }
-AlcixParameter >> arguments: anObject [
-
-	<generated>
-	arguments value: anObject
 ]
 
 { #category : #accessing }

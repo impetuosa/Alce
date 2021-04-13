@@ -2,10 +2,11 @@ Class {
 	#name : #AlcixAccess,
 	#superclass : #AlcixAccessEntity,
 	#instVars : [
-		'#attribute => FMOne type: #AlcixAttribute opposite: #accesses',
+		'#isWriting => FMProperty',
 		'#attributeName => FMProperty',
-		'#invocable => FMOne type: #AlcixInvocable opposite: #accesses',
-		'#isWriting => FMProperty'
+		'#memberSelectors => FMProperty',
+		'#attribute => FMOne type: #AlcixAttribute opposite: #accesses',
+		'#invocable => FMOne type: #AlcixInvocable opposite: #accesses'
 	],
 	#category : #'Alce-Famix-Entities'
 }
@@ -83,4 +84,9 @@ AlcixAccess >> isWriting [
 AlcixAccess >> isWriting: anObject [
 	<generated>
 	isWriting := anObject
+]
+
+{ #category : #'as yet unclassified' }
+AlcixAccess >> memberSelectors: aCollection [ 
+	memberSelectors := aCollection
 ]

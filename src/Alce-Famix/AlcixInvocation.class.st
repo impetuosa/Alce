@@ -2,7 +2,9 @@ Class {
 	#name : #AlcixInvocation,
 	#superclass : #AlcixAccessEntity,
 	#instVars : [
-		'#invocable => FMOne type: #AlcixInvocable opposite: #invocation'
+		'#selector => FMProperty',
+		'#invocable => FMOne type: #AlcixInvocable opposite: #outgoingInvocations',
+		'#arguments => FMMany type: #AlcixArgument opposite: #invocation'
 	],
 	#category : #'Alce-Famix-Entities'
 }
@@ -16,11 +18,41 @@ AlcixInvocation class >> annotation [
 	^self
 ]
 
+{ #category : #adding }
+AlcixInvocation >> addArgument: anObject [
+	<generated>
+	^ self arguments add: anObject
+]
+
 { #category : #accessing }
-AlcixInvocation >> invocable [
-	"Relation named: #invocable type: #AlcixInvocable opposite: #invocation"
+AlcixInvocation >> arguments [
+	"Relation named: #arguments type: #AlcixArgument opposite: #invocation"
 
 	<generated>
+	<derived>
+	^ arguments
+]
+
+{ #category : #accessing }
+AlcixInvocation >> arguments: anObject [
+
+	<generated>
+	arguments value: anObject
+]
+
+{ #category : #navigation }
+AlcixInvocation >> argumentsGroup [
+	<generated>
+	<navigation: 'Arguments'>
+	^ MooseSpecializedGroup withAll: self arguments asSet
+]
+
+{ #category : #accessing }
+AlcixInvocation >> invocable [
+	"Relation named: #invocable type: #AlcixInvocable opposite: #outgoingInvocations"
+
+	<generated>
+	<container>
 	^ invocable
 ]
 
@@ -36,4 +68,18 @@ AlcixInvocation >> invocableGroup [
 	<generated>
 	<navigation: 'Invocable'>
 	^ MooseSpecializedGroup with: self invocable
+]
+
+{ #category : #accessing }
+AlcixInvocation >> selector [
+
+	<FMProperty: #selector type: #String>
+	<generated>
+	^ selector
+]
+
+{ #category : #accessing }
+AlcixInvocation >> selector: anObject [
+	<generated>
+	selector := anObject
 ]

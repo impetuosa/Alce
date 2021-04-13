@@ -2,8 +2,8 @@ Class {
 	#name : #AlcixModule,
 	#superclass : #AlcixContainer,
 	#instVars : [
-		'#globalVariables => FMMany type: #AlcixGlobalVariable opposite: #module',
-		'#invocables => FMMany type: #AlcixInvocable opposite: #module'
+		'#invocables => FMMany type: #AlcixInvocable opposite: #module',
+		'#globalVariables => FMMany type: #AlcixGlobalVariable opposite: #module'
 	],
 	#category : #'Alce-Famix-Entities'
 }

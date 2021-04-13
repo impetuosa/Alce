@@ -2,7 +2,8 @@ Class {
 	#name : #AlcixArgument,
 	#superclass : #AlcixCodeSegment,
 	#instVars : [
-		'#parameter => FMOne type: #AlcixParameter opposite: #arguments'
+		'#value => FMProperty',
+		'#invocation => FMOne type: #AlcixInvocation opposite: #arguments'
 	],
 	#category : #'Alce-Famix-Entities'
 }
@@ -17,16 +18,38 @@ AlcixArgument class >> annotation [
 ]
 
 { #category : #accessing }
-AlcixArgument >> parameter [
-	"Relation named: #parameter type: #AlcixParameter opposite: #arguments"
+AlcixArgument >> invocation [
+	"Relation named: #invocation type: #AlcixInvocation opposite: #arguments"
 
 	<generated>
-	^ parameter
+	<container>
+	^ invocation
 ]
 
 { #category : #accessing }
-AlcixArgument >> parameter: anObject [
+AlcixArgument >> invocation: anObject [
 
 	<generated>
-	parameter := anObject
+	invocation := anObject
+]
+
+{ #category : #navigation }
+AlcixArgument >> invocationGroup [
+	<generated>
+	<navigation: 'Invocation'>
+	^ MooseSpecializedGroup with: self invocation
+]
+
+{ #category : #accessing }
+AlcixArgument >> value [
+
+	<FMProperty: #value type: #Object>
+	<generated>
+	^ value
+]
+
+{ #category : #accessing }
+AlcixArgument >> value: anObject [
+	<generated>
+	value := anObject
 ]

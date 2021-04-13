@@ -104,6 +104,21 @@ AlceASTCodeImporter >> visitDefineType: aDefineType [
 						yourself) ]
 ]
 
+{ #category : #'member access' }
+AlceASTCodeImporter >> visitDictionaryAccess: aDictionaryAccess [
+	| access |
+	access := self instantiate: AlcixAccess.
+	access isWriting: false.
+	aDictionaryAccess receiver
+		ifNil: [ access
+				attributeName: (self nodeToString: aDictionaryAccess enclosingWith with) ]
+		ifNotNil: [ access
+				attributeName: (self nodeToString: aDictionaryAccess receiver) ].
+	access
+		memberSelectors: {(self nodeToString: aDictionaryAccess member)}.
+	self state top addAccess: access
+]
+
 { #category : #'properties - variables' }
 AlceASTCodeImporter >> visitDimMultipleVariables: aDimMultipleVariables [
 	| var |
@@ -161,20 +176,20 @@ AlceASTCodeImporter >> visitExplicitAssignement: anExplicitAssignement [
 	super visitExplicitAssignement: anExplicitAssignement.
 ]
 
-{ #category : #implementing }
+{ #category : #invocations }
 AlceASTCodeImporter >> visitExplicitCall: anExplicitCall [
-	| call arguments |
-	call := self instantiate: AlcixInvocation .
+	| call |
+	call := self instantiate: AlcixInvocation.
 	call selector: (self nodeToString: anExplicitCall selector).
 	call anchor: self state top anchor / #invocation / call selector.
-	self halt. 
-	arguments := anExplicitCall arguments collect: [ :a | self nodeToString: a  ]..
-	
-	call arguments: arguments. 
-	self state top addInvocation: call.
-	self state push: call.
+	anExplicitCall arguments arguments
+		do: [ :a | 
+			| arg |
+			arg := self instantiate: AlcixArgument.
+			arg value: (self nodeToString: a).
+			call addArgument: arg ].
+	self state top addOutgoingInvocation: call.
 	super visitExplicitCall: anExplicitCall.
-	self state pop
 ]
 
 { #category : #'functions - subs - events' }
@@ -183,7 +198,7 @@ AlceASTCodeImporter >> visitExternalFunction: aDefinition [
 	fn := self instantiate: AlcixExternalFunction.
 	fn selector: (self nodeToString: aDefinition selector).
 	fn anchor: self state top anchor / #functions / fn selector.
-	self halt. 
+	self shouldBeImplemented.
 	self state top addInvocable: fn.
 	self state push: fn.
 	super visitExternalFunction: aDefinition.
@@ -196,7 +211,7 @@ AlceASTCodeImporter >> visitExternalSub: aDefinition [
 	fn := self instantiate: AlcixExternalSubProcedure.
 	fn selector: (self nodeToString: aDefinition selector).
 	fn anchor: self state top anchor / #subprocedures / fn selector.
-	self halt.
+	self shouldBeImplemented.
 	self state top addInvocable: fn.
 	self state push: fn.
 	super visitExternalSub: aDefinition.
@@ -227,21 +242,36 @@ AlceASTCodeImporter >> visitImplements: anImplements [
 
 ]
 
-{ #category : #implementing }
+{ #category : #invocations }
 AlceASTCodeImporter >> visitImplicitParenthesesLessCall: anImplicitParenthesesLessCall [
-	| call arguments |
-	call := self instantiate: AlcixInvocation .
-	call selector: (self nodeToString: anImplicitParenthesesLessCall selector).
+	| call |
+	call := self instantiate: AlcixInvocation.
+	call
+		selector: (self nodeToString: anImplicitParenthesesLessCall selector).
 	call anchor: self state top anchor / #invocation / call selector.
-	self halt. 
-	arguments := anImplicitParenthesesLessCall arguments collect: [ :a | self nodeToString: a  ]..
-	
-	call arguments: arguments. 
-	self state top addInvocation: call.
-	self state push: call.
+	anImplicitParenthesesLessCall arguments arguments
+		do: [ :a | 
+			| arg |
+			arg := self instantiate: AlcixArgument.
+			arg value: (self nodeToString: a).
+			call addArgument: arg ].
+	self state top addOutgoingInvocation: call.
 	super visitImplicitParenthesesLessCall: anImplicitParenthesesLessCall.
-	self state pop
 
+]
+
+{ #category : #'member access' }
+AlceASTCodeImporter >> visitMemberAccess: aMemberAccess [
+	| access |
+	access := self instantiate: AlcixAccess.
+	access isWriting: false.
+	aMemberAccess receiver
+		ifNil: [ access
+				attributeName: (self nodeToString: aMemberAccess enclosingWith with) ]
+		ifNotNil: [ access attributeName: (self nodeToString: aMemberAccess receiver) ].
+	access
+		memberSelectors: ('.' split: (self nodeToString: aMemberAccess member)).
+	self state top addAccess: access
 ]
 
 { #category : #generated }
@@ -293,9 +323,22 @@ AlceASTCodeImporter >> visitModulePropertyGet: aModulePropertyGet [
 				detect: [ :p | p name = (self nodeToString: statement right) ])
 ]
 
-{ #category : #implementing }
+{ #category : #invocations }
 AlceASTCodeImporter >> visitProcedureCallOrArrayAccess: aProcedureCallOrArrayAccess [
-	^ self visitProgram: aProcedureCallOrArrayAccess
+	| call |
+	call := self instantiate: AlcixInvocation.
+	call selector: (self nodeToString: aProcedureCallOrArrayAccess selector).
+	call anchor: self state top anchor / #invocation / call selector.
+	aProcedureCallOrArrayAccess arguments arguments
+		do: [ :a | 
+			| arg |
+			arg := self instantiate: AlcixArgument.
+			arg value: (self nodeToString: a).
+			call addArgument: arg ].
+	self state top addOutgoingInvocation: call.
+	super visitProcedureCallOrArrayAccess: aProcedureCallOrArrayAccess.
+
+	
 ]
 
 { #category : #generated }
@@ -304,22 +347,21 @@ AlceASTCodeImporter >> visitRaiseError: aRaiseError [
 
 ]
 
-{ #category : #implementing }
+{ #category : #invocations }
 AlceASTCodeImporter >> visitRaiseEvent: aRaiseEvent [
 	| call |
 	call := self instantiate: AlcixRaiseEvent.
 	call selector: (self nodeToString: aRaiseEvent selector).
 	call anchor: self state top anchor / #invocation / call selector.
-	self halt.
-	self state top addInvocation: call.
-	self state push: call.
+
+	self state top addOutgoingInvocation: call.
 	super visitRaiseEvent: aRaiseEvent.
-	self state pop
+
 ]
 
 { #category : #'properties - variables' }
 AlceASTCodeImporter >> visitReDimVariable: aReDimVariable [
-	self halt
+	self shouldBeImplemented 
 ]
 
 { #category : #'functions - subs - events' }
