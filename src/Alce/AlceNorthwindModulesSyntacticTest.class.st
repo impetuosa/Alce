@@ -670,3 +670,33 @@ AlceNorthwindModulesSyntacticTest >> testDefinesHasVariables [
 AlceNorthwindModulesSyntacticTest >> testFunctionReturnsType [
 	self assert: self functionOrSub typeName isString
 ]
+
+{ #category : #'as yet unclassified' }
+AlceNorthwindModulesSyntacticTest >> testIfInvocationExpressionContainsAPointIsMessageSend [
+	| isMessageSend |
+	self functionOrSub outgoingInvocations
+		do: [ :inv | 
+			isMessageSend := inv invocationExpression includes: $..
+			self assert: inv isVBMessageSend equals: isMessageSend ]
+]
+
+{ #category : #'as yet unclassified' }
+AlceNorthwindModulesSyntacticTest >> testMessageSendMustReturnReceiverIfNotError [
+	self functionOrSub outgoingInvocations
+		do: [ :inv | 
+			inv isVBMessageSend
+				ifTrue: [ self assert: inv receiver isNotEmpty ]
+				ifFalse: [ self should: [ inv receiver ] raise: Error ] ]
+]
+
+{ #category : #'as yet unclassified' }
+AlceNorthwindModulesSyntacticTest >> testSelectorIsCalculatedFromInvocationExpression [
+	self functionOrSub outgoingInvocations
+		do: [ :inv | 
+			inv isVBMessageSend
+				ifTrue: [ self
+						assert: inv receiver , '.' , inv selector
+						equals: inv invocationExpression ]
+				ifFalse:
+					[ self assert: inv selector equals: inv invocationExpression ] ]
+]

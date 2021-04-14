@@ -71,11 +71,27 @@ AlcixInvocation >> invocableGroup [
 ]
 
 { #category : #accessing }
-AlcixInvocation >> selector [
+AlcixInvocation >> invocationExpression [
+	^ selector
+]
 
+{ #category : #navigation }
+AlcixInvocation >> isVBMessageSend [
+	^ selector includes: $.
+]
+
+{ #category : #navigation }
+AlcixInvocation >> receiver [
+	self isVBMessageSend
+		ifFalse: [ self error: 'This is not a message send ' ].
+	^ $. join: ($. split: selector) allButLast
+]
+
+{ #category : #accessing }
+AlcixInvocation >> selector [
 	<FMProperty: #selector type: #String>
 	<generated>
-	^ selector
+	^ ($. split: selector) last
 ]
 
 { #category : #accessing }

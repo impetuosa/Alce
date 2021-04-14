@@ -238,7 +238,6 @@ AlceASTCodeImporter >> visitFunctionDefinition: aDefinition [
 	fn selector: (self nodeToString: aDefinition selector).
 	fn anchor: self state top anchor / #functions / fn selector.
 	fn typeName: (self typeName: aDefinition type).
-
 	self state top addInvocable: fn.
 	self state push: fn.
 	super visitFunctionDefinition: aDefinition.
