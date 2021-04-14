@@ -17,7 +17,8 @@ AlceNorthwindModulesSyntacticTest class >> setupModuleCustomerOrdersCaseCreateIn
 			(#assignments -> 4).
 			(#outgoingInvocations -> 1).
 			(#localVariables -> 1).
-			(#return -> #Boolean)})}
+			(#return -> #Boolean).
+			(#parameters -> #(Long Currency Long))})}
 ]
 
 { #category : #'customer purchase' }
@@ -29,7 +30,8 @@ AlceNorthwindModulesSyntacticTest class >> setupModuleCustomerOrdersCaseDelete [
 			(#assignments -> 0).
 			(#outgoingInvocations -> 2).
 			(#localVariables -> 1).
-			(#return -> #Boolean)})}
+			(#return -> #Boolean).
+			(#parameters -> #(Long))})}
 ]
 
 { #category : #'customer purchase' }
@@ -41,7 +43,8 @@ AlceNorthwindModulesSyntacticTest class >> setupModuleCustomerOrdersCaseIsInvoic
 			(#assignments -> 0).
 			(#outgoingInvocations -> 1).
 			(#localVariables -> 0).
-			(#return -> #Boolean)})}
+			(#return -> #Boolean).
+			(#parameters -> #(Long)) })}
 ]
 
 { #category : #'customer purchase' }
@@ -53,7 +56,8 @@ AlceNorthwindModulesSyntacticTest class >> setupModuleCustomerOrdersCasePrintInv
 			(#assignments -> 0).
 			(#outgoingInvocations -> 1).
 			(#localVariables -> 0).
-			(#return -> #Boolean)})}
+			(#return -> #Boolean).
+			(#parameters -> #(Long))})}
 ]
 
 { #category : #'customer purchase' }
@@ -65,7 +69,8 @@ AlceNorthwindModulesSyntacticTest class >> setupModuleCustomerOrdersCaseSetStatu
 			(#assignments -> 1).
 			(#outgoingInvocations -> 2).
 			(#localVariables -> 1).
-			(#return -> #Boolean)})}
+			(#return -> #Boolean).
+			(#parameters -> #(Long CustomerOrderStatusEnum))})}
 ]
 
 { #category : #'domain function' }
@@ -77,7 +82,8 @@ AlceNorthwindModulesSyntacticTest class >> setupModuleDomainFunctionDomainDAvgWr
 			(#assignments -> 0).
 			(#outgoingInvocations -> 1).
 			(#localVariables -> 0).
-			(#return -> #Long)})}
+			(#return -> #Long).
+			(#parameters -> #(String String String))})}
 ]
 
 { #category : #'domain function' }
@@ -89,7 +95,8 @@ AlceNorthwindModulesSyntacticTest class >> setupModuleDomainFunctionDomainDCount
 			(#assignments -> 0).
 			(#outgoingInvocations -> 1).
 			(#localVariables -> 0).
-			(#return -> #Long)})}
+			(#return -> #Long).
+			(#parameters -> #(String String String))})}
 ]
 
 { #category : #'domain function' }
@@ -101,7 +108,8 @@ AlceNorthwindModulesSyntacticTest class >> setupModuleDomainFunctionDomainDLooku
 			(#assignments -> 0).
 			(#outgoingInvocations -> 2).
 			(#localVariables -> 0).
-			(#return -> #Variant)})}
+			(#return -> #Variant).
+			(#parameters -> #(String String String Undefined))})}
 ]
 
 { #category : #'domain function' }
@@ -113,7 +121,8 @@ AlceNorthwindModulesSyntacticTest class >> setupModuleDomainFunctionDomainDLooku
 			(#assignments -> 0).
 			(#outgoingInvocations -> 2).
 			(#localVariables -> 0).
-			(#return -> #String)})}
+			(#return -> #String).
+			(#parameters -> #(String String String String))})}
 ]
 
 { #category : #'domain function' }
@@ -125,7 +134,8 @@ AlceNorthwindModulesSyntacticTest class >> setupModuleDomainFunctionDomainDLooku
 			(#assignments -> 0).
 			(#outgoingInvocations -> 1).
 			(#localVariables -> 0).
-			(#return -> #Variant)})}
+			(#return -> #Variant).
+			(#parameters -> #(String String String))})}
 ]
 
 { #category : #'domain function' }
@@ -137,7 +147,8 @@ AlceNorthwindModulesSyntacticTest class >> setupModuleDomainFunctionDomainDMaxWr
 			(#assignments -> 0).
 			(#outgoingInvocations -> 1).
 			(#localVariables -> 0).
-			(#return -> #Long)})}
+			(#return -> #Long).
+			(#parameters -> #(String String String))})}
 ]
 
 { #category : #'domain function' }
@@ -149,7 +160,8 @@ AlceNorthwindModulesSyntacticTest class >> setupModuleDomainFunctionDomainDMinWr
 			(#assignments -> 0).
 			(#outgoingInvocations -> 1).
 			(#localVariables -> 0).
-			(#return -> #Long)})}
+			(#return -> #Long).
+			(#parameters -> #(String String String))})}
 ]
 
 { #category : #'domain function' }
@@ -161,7 +173,8 @@ AlceNorthwindModulesSyntacticTest class >> setupModuleDomainFunctionDomainDSumWr
 			(#assignments -> 0).
 			(#outgoingInvocations -> 1).
 			(#localVariables -> 0).
-			(#return -> #Long)})}
+			(#return -> #Long).
+			(#parameters -> #(String String String))})}
 ]
 
 { #category : #'domain function' }
@@ -173,7 +186,8 @@ AlceNorthwindModulesSyntacticTest class >> setupModuleDomainFunctionDomainFuncti
 			(#assignments -> 0).
 			(#outgoingInvocations -> 9).
 			(#localVariables -> 0).
-			(#return -> #Variant)})}
+			(#return -> #Variant).
+			(#parameters -> #(DomainFunctionWrapperEnum String String String))})}
 ]
 
 { #category : #'module inventory' }
@@ -185,7 +199,8 @@ AlceNorthwindModulesSyntacticTest class >> setupModuleInventoryAddHold [
 			(#assignments -> 9).
 			(#outgoingInvocations -> 2).
 			(#localVariables -> 3).
-			(#return -> #Boolean)})}
+			(#return -> #Boolean).
+			(#parameters -> #(Long InventoryTransaction))})}
 ]
 
 { #category : #'module inventory' }
@@ -197,7 +212,8 @@ AlceNorthwindModulesSyntacticTest class >> setupModuleInventoryAddPurchase [
 			(#assignments -> 5).
 			(#outgoingInvocations -> 1).
 			(#localVariables -> 1).
-			(#return -> #Boolean)})}
+			(#return -> #Boolean).
+			(#parameters -> #(Long Long Long Long))})}
 ]
 
 { #category : #'module inventory' }
@@ -209,7 +225,8 @@ AlceNorthwindModulesSyntacticTest class >> setupModuleInventoryDeleteTransaction
 			(#assignments -> 0).
 			(#outgoingInvocations -> 1).
 			(#localVariables -> 1).
-			(#return -> #Boolean)})}
+			(#return -> #Boolean).
+			(#parameters -> #(Long))})}
 ]
 
 { #category : #'module inventory' }
@@ -221,7 +238,8 @@ AlceNorthwindModulesSyntacticTest class >> setupModuleInventoryEditTransaction [
 			(#assignments -> 9).
 			(#outgoingInvocations -> 7).
 			(#localVariables -> 1).
-			(#return -> #Boolean)})}
+			(#return -> #Boolean).
+			(#parameters -> #(InventoryTransaction Undefined Undefined))})}
 ]
 
 { #category : #'module inventory' }
@@ -233,7 +251,8 @@ AlceNorthwindModulesSyntacticTest class >> setupModuleInventoryFillBackOrder [
 			(#assignments -> 2).
 			(#outgoingInvocations -> 4).
 			(#localVariables -> 0).
-			(#return -> #Boolean)})}
+			(#return -> #Boolean).
+			(#parameters -> #(Long InventoryTransaction))})}
 ]
 
 { #category : #'module inventory' }
@@ -245,7 +264,8 @@ AlceNorthwindModulesSyntacticTest class >> setupModuleInventoryFillBackOrders [
 			(#assignments -> 5).
 			(#outgoingInvocations -> 7).
 			(#localVariables -> 2).
-			(#return -> #Boolean)})}
+			(#return -> #Boolean).
+			(#parameters -> #(Undefined))})}
 ]
 
 { #category : #'module inventory' }
@@ -257,7 +277,8 @@ AlceNorthwindModulesSyntacticTest class >> setupModuleInventoryFindProductSuppli
 			(#assignments -> 0).
 			(#outgoingInvocations -> 1).
 			(#localVariables -> 0).
-			(#return -> #Long)})}
+			(#return -> #Long).
+			(#parameters -> #(Long))})}
 ]
 
 { #category : #'module inventory' }
@@ -269,7 +290,8 @@ AlceNorthwindModulesSyntacticTest class >> setupModuleInventoryGetInventoryQuant
 			(#assignments -> 0).
 			(#outgoingInvocations -> 1).
 			(#localVariables -> 0).
-			(#return -> #Long)})}
+			(#return -> #Long).
+			(#parameters -> #(String Long))})}
 ]
 
 { #category : #'module inventory' }
@@ -281,7 +303,8 @@ AlceNorthwindModulesSyntacticTest class >> setupModuleInventoryGetQtyAvailable [
 			(#assignments -> 0).
 			(#outgoingInvocations -> 1).
 			(#localVariables -> 0).
-			(#return -> #Long)})}
+			(#return -> #Long).
+			(#parameters -> #(Long))})}
 ]
 
 { #category : #'module inventory' }
@@ -293,7 +316,8 @@ AlceNorthwindModulesSyntacticTest class >> setupModuleInventoryGetQtyOnBackOrder
 			(#assignments -> 0).
 			(#outgoingInvocations -> 1).
 			(#localVariables -> 0).
-			(#return -> #Long)})}
+			(#return -> #Long).
+			(#parameters -> #(Long))})}
 ]
 
 { #category : #'module inventory' }
@@ -305,7 +329,8 @@ AlceNorthwindModulesSyntacticTest class >> setupModuleInventoryGetQtyOnHand [
 			(#assignments -> 0).
 			(#outgoingInvocations -> 1).
 			(#localVariables -> 0).
-			(#return -> #Long)})}
+			(#return -> #Long).
+			(#parameters -> #(Long))})}
 ]
 
 { #category : #'module inventory' }
@@ -317,7 +342,8 @@ AlceNorthwindModulesSyntacticTest class >> setupModuleInventoryGetQtyToReorder [
 			(#assignments -> 0).
 			(#outgoingInvocations -> 1).
 			(#localVariables -> 0).
-			(#return -> #Long)})}
+			(#return -> #Long).
+			(#parameters -> #(Long))})}
 ]
 
 { #category : #'module inventory' }
@@ -329,7 +355,8 @@ AlceNorthwindModulesSyntacticTest class >> setupModuleInventoryGetRestockingPurc
 			(#assignments -> 0).
 			(#outgoingInvocations -> 1).
 			(#localVariables -> 0).
-			(#return -> #Long)})}
+			(#return -> #Long).
+			(#parameters -> #(Undefined))})}
 ]
 
 { #category : #'module inventory' }
@@ -341,7 +368,8 @@ AlceNorthwindModulesSyntacticTest class >> setupModuleInventoryGetTransaction [
 			(#assignments -> 4).
 			(#outgoingInvocations -> 2).
 			(#localVariables -> 1).
-			(#return -> #Boolean)})}
+			(#return -> #Boolean).
+			(#parameters -> #(InventoryTransaction))})}
 ]
 
 { #category : #'module inventory' }
@@ -353,7 +381,8 @@ AlceNorthwindModulesSyntacticTest class >> setupModuleInventoryHoldToSold [
 			(#assignments -> 2).
 			(#outgoingInvocations -> 2).
 			(#localVariables -> 1).
-			(#return -> #Boolean)})}
+			(#return -> #Boolean).
+			(#parameters -> #(Long))})}
 ]
 
 { #category : #'module inventory' }
@@ -365,7 +394,8 @@ AlceNorthwindModulesSyntacticTest class >> setupModuleInventoryModifyHold [
 			(#assignments -> 4).
 			(#outgoingInvocations -> 3).
 			(#localVariables -> 2).
-			(#return -> #Boolean)})}
+			(#return -> #Boolean).
+			(#parameters -> #(InventoryTransaction))})}
 ]
 
 { #category : #'module inventory' }
@@ -377,7 +407,8 @@ AlceNorthwindModulesSyntacticTest class >> setupModuleInventoryRemoveHold [
 			(#assignments -> 0).
 			(#outgoingInvocations -> 1).
 			(#localVariables -> 0).
-			(#return -> #Boolean)})}
+			(#return -> #Boolean).
+			(#parameters -> #(Long))})}
 ]
 
 { #category : #'module inventory' }
@@ -389,7 +420,8 @@ AlceNorthwindModulesSyntacticTest class >> setupModuleInventoryRemovePurchase [
 			(#assignments -> 0).
 			(#outgoingInvocations -> 1).
 			(#localVariables -> 0).
-			(#return -> #Undefined)})}
+			(#return -> #Undefined).
+			(#parameters -> #(Long))})}
 ]
 
 { #category : #'module inventory' }
@@ -401,7 +433,8 @@ AlceNorthwindModulesSyntacticTest class >> setupModuleInventoryRequestHold [
 			(#assignments -> 1).
 			(#outgoingInvocations -> 2).
 			(#localVariables -> 0).
-			(#return -> #Boolean)})}
+			(#return -> #Boolean).
+			(#parameters -> #(Long InventoryTransaction))})}
 ]
 
 { #category : #'module inventory' }
@@ -413,7 +446,8 @@ AlceNorthwindModulesSyntacticTest class >> setupModuleInventoryRestockProduct [
 			(#assignments -> 3).
 			(#outgoingInvocations -> 7).
 			(#localVariables -> 4).
-			(#return -> #Boolean)})}
+			(#return -> #Boolean).
+			(#parameters -> #(Long))})}
 ]
 
 { #category : #'building suites' }
@@ -425,7 +459,8 @@ AlceNorthwindModulesSyntacticTest class >> setupModulePrivileges [
 			(#assignments -> 4).
 			(#outgoingInvocations -> 1).
 			(#localVariables -> 1).
-			(#return -> #Boolean)})}
+			(#return -> #Boolean).
+			(#parameters -> 0)})}
 ]
 
 { #category : #'building suites' }
@@ -437,7 +472,8 @@ AlceNorthwindModulesSyntacticTest class >> setupModulePurchaseOrders [
 			(#assignments -> 4).
 			(#outgoingInvocations -> 1).
 			(#localVariables -> 1).
-			(#return -> #Boolean)})}
+			(#return -> #Boolean).
+			(#parameters -> 0)})}
 ]
 
 { #category : #'building suites' }
@@ -449,7 +485,8 @@ AlceNorthwindModulesSyntacticTest class >> setupModuleReflective [
 			(#assignments -> 4).
 			(#outgoingInvocations -> 1).
 			(#localVariables -> 1).
-			(#return -> #Boolean)})}
+			(#return -> #Boolean).
+			(#parameters -> 0)})}
 ]
 
 { #category : #'building suites' }
@@ -534,21 +571,21 @@ AlceNorthwindModulesSyntacticTest >> setup: aSymbol [
 AlceNorthwindModulesSyntacticTest >> testAllLocalVariablesHaveName [
 	self
 		assert: self functionOrSub localVariables
-		allSatisfy: [ :a | a name isString ]
+		allSatisfy: [ :a | a name isString and: [ a name isNotEmpty ] ]
 ]
 
 { #category : #'as yet unclassified' }
 AlceNorthwindModulesSyntacticTest >> testAllLocalVariablesHaveTypeName [
 	self
 		assert: self functionOrSub localVariables
-		allSatisfy: [ :a | a typeName isString ]
+		allSatisfy: [ :a | a typeName isString and: [ a typeName isNotEmpty ] ]
 ]
 
 { #category : #'as yet unclassified' }
 AlceNorthwindModulesSyntacticTest >> testAllTheAccessesHaveAttributeName [
 	self
 		assert: self functionOrSub accesses
-		allSatisfy: [ :a | a attributeName isString ]
+		allSatisfy: [ :a | a attributeName isString and: [ a attributeName isNotEmpty ] ]
 ]
 
 { #category : #'as yet unclassified' }
@@ -559,7 +596,42 @@ AlceNorthwindModulesSyntacticTest >> testAllTheInvocationsHaveSelector [
 ]
 
 { #category : #'as yet unclassified' }
-AlceNorthwindModulesSyntacticTest >> testDefinesCreateInvoiceReturnsBoolean [
+AlceNorthwindModulesSyntacticTest >> testDefinedFunctionHasExpectedAmountParameters [
+	self
+		assert: self functionOrSub parameters size
+		equals: (fixture at: #parameters) size
+]
+
+{ #category : #'as yet unclassified' }
+AlceNorthwindModulesSyntacticTest >> testDefinedFunctionHasNoneIncomingInvocationBeforeBindingPhase [
+	self assert: self functionOrSub incomingInvocations isEmpty
+]
+
+{ #category : #'as yet unclassified' }
+AlceNorthwindModulesSyntacticTest >> testDefinedFunctionHasParameters [
+	| comparison |
+	comparison := self functionOrSub parameters asOrderedCollection
+		with: (fixture at: #parameters)
+		collect: [ :p :pt | p typeName = pt ].
+	self assert: (comparison allSatisfy: #yourself)
+]
+
+{ #category : #'as yet unclassified' }
+AlceNorthwindModulesSyntacticTest >> testDefinedFunctionParametersHaveName [
+	self
+		assert: self functionOrSub parameters
+		allSatisfy: [ :p | p name isString and: [ p name isNotEmpty ] ]
+]
+
+{ #category : #'as yet unclassified' }
+AlceNorthwindModulesSyntacticTest >> testDefinedFunctionParametersHaveTypeName [
+	self
+		assert: self functionOrSub parameters
+		allSatisfy: [ :p | p typeName isString and: [ p typeName isNotEmpty ] ]
+]
+
+{ #category : #'as yet unclassified' }
+AlceNorthwindModulesSyntacticTest >> testDefinedFunctionReturnsBoolean [
 	self
 		assert: self functionOrSub typeName
 		equals: (fixture at: #return)

@@ -37,6 +37,13 @@ AlceASTCodeImporter >> stringConverter [
 		ifNil: [ stringConverter := AlceVBVisitorToString new ]
 ]
 
+{ #category : #'functions - subs - events' }
+AlceASTCodeImporter >> typeName: aTypeOrNil [
+	^ aTypeOrNil
+		ifNil: [ #Undefined ]
+		ifNotNil: [ self nodeToString: aTypeOrNil ]
+]
+
 { #category : #generated }
 AlceASTCodeImporter >> visitComparisonOperation: aComparisonOperation [
 	^ self visitProgram: aComparisonOperation.
@@ -230,9 +237,8 @@ AlceASTCodeImporter >> visitFunctionDefinition: aDefinition [
 	fn := self instantiate: AlcixFunction.
 	fn selector: (self nodeToString: aDefinition selector).
 	fn anchor: self state top anchor / #functions / fn selector.
-	aDefinition type
-		ifNil: [ fn typeName: 'Undefined' ]
-		ifNotNil: [ fn typeName: (self nodeToString: aDefinition type) ].
+	fn typeName: (self typeName: aDefinition type).
+
 	self state top addInvocable: fn.
 	self state push: fn.
 	super visitFunctionDefinition: aDefinition.
@@ -330,6 +336,15 @@ AlceASTCodeImporter >> visitModulePropertyGet: aModulePropertyGet [
 		attribute:
 			(self state top members
 				detect: [ :p | p name = (self nodeToString: statement right) ])
+]
+
+{ #category : #'functions - subs - events' }
+AlceASTCodeImporter >> visitParameter: aParameter [
+	| param |
+	param := self instantiate: AlcixParameter.
+	param name: (self nodeToString: aParameter name).
+	param typeName: (self typeName: aParameter type).
+	self state top addParameter: param
 ]
 
 { #category : #invocations }
