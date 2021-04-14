@@ -342,7 +342,7 @@ AlceASTCodeImporter >> visitParameter: aParameter [
 	| param |
 	param := self instantiate: AlcixParameter.
 	param name: (self nodeToString: aParameter name).
-	param typeName: (self typeName: aParameter type).
+	param typeName: (self typeName: aParameter).
 	self state top addParameter: param
 ]
 

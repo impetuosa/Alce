@@ -49,6 +49,14 @@ AlceVBVisitorToString >> visitMemberAccess: aVBMemberAccessNode [
 ]
 
 { #category : #'as yet unclassified' }
+AlceVBVisitorToString >> visitParameter: aVBParameterNode [
+	aVBParameterNode type ifNil: [ ^ 'Undefined' ].
+	aVBParameterNode paramarrayToken
+		ifNil: [ ^ aVBParameterNode type acceptVisitor: self ].
+	^ 'ParamArray' , (aVBParameterNode type acceptVisitor: self)
+]
+
+{ #category : #'as yet unclassified' }
 AlceVBVisitorToString >> visitProcedureCallOrArrayAccess: aVBProcedureCallOrArrayAccessNode [
 	^ (aVBProcedureCallOrArrayAccessNode selector acceptVisitor: self)
 		, ' ('
@@ -71,6 +79,12 @@ AlceVBVisitorToString >> visitSquareBracketIdentifier: aVBSquareBracketIdentifie
 	| str |
 	str := aVBSquareBracketIdentifierNode token value.
 	^ str copyFrom: 2 to: str size - 1
+]
+
+{ #category : #'as yet unclassified' }
+AlceVBVisitorToString >> visitTypeSize: aVBTypeSizeNode [ 
+	self assert: aVBTypeSizeNode sizes isEmpty.
+	^ '()'
 ]
 
 { #category : #'as yet unclassified' }
