@@ -99,7 +99,7 @@ AlceNorthwindModulesSyntacticTest class >> setupModuleDomainFunctionDomainDLooku
 		->
 			{(#functionOrSub -> #DLookupNumberWrapper).
 			(#assignments -> 0).
-			(#outgoingInvocations -> 1).
+			(#outgoingInvocations -> 2).
 			(#localVariables -> 0).
 			(#return -> #Variant)})}
 ]
@@ -111,7 +111,7 @@ AlceNorthwindModulesSyntacticTest class >> setupModuleDomainFunctionDomainDLooku
 		->
 			{(#functionOrSub -> #DLookupStringWrapper).
 			(#assignments -> 0).
-			(#outgoingInvocations -> 1).
+			(#outgoingInvocations -> 2).
 			(#localVariables -> 0).
 			(#return -> #String)})}
 ]
@@ -182,7 +182,7 @@ AlceNorthwindModulesSyntacticTest class >> setupModuleInventoryAddHold [
 	(#fixture
 		->
 			{(#functionOrSub -> #AddHold).
-			(#assignments -> 10).
+			(#assignments -> 9).
 			(#outgoingInvocations -> 2).
 			(#localVariables -> 3).
 			(#return -> #Boolean)})}
@@ -194,7 +194,7 @@ AlceNorthwindModulesSyntacticTest class >> setupModuleInventoryAddPurchase [
 	(#fixture
 		->
 			{(#functionOrSub -> #AddPurchase).
-			(#assignments -> 6).
+			(#assignments -> 5).
 			(#outgoingInvocations -> 1).
 			(#localVariables -> 1).
 			(#return -> #Boolean)})}
@@ -218,8 +218,8 @@ AlceNorthwindModulesSyntacticTest class >> setupModuleInventoryEditTransaction [
 	(#fixture
 		->
 			{(#functionOrSub -> #EditTransaction).
-			(#assignments -> 6).
-			(#outgoingInvocations -> 4).
+			(#assignments -> 9).
+			(#outgoingInvocations -> 7).
 			(#localVariables -> 1).
 			(#return -> #Boolean)})}
 ]
@@ -231,7 +231,7 @@ AlceNorthwindModulesSyntacticTest class >> setupModuleInventoryFillBackOrder [
 		->
 			{(#functionOrSub -> #FillBackOrder).
 			(#assignments -> 2).
-			(#outgoingInvocations -> 3).
+			(#outgoingInvocations -> 4).
 			(#localVariables -> 0).
 			(#return -> #Boolean)})}
 ]
@@ -243,8 +243,8 @@ AlceNorthwindModulesSyntacticTest class >> setupModuleInventoryFillBackOrders [
 		->
 			{(#functionOrSub -> #FillBackOrders).
 			(#assignments -> 5).
-			(#outgoingInvocations -> 6).
-			(#localVariables -> 1).
+			(#outgoingInvocations -> 7).
+			(#localVariables -> 2).
 			(#return -> #Boolean)})}
 ]
 
@@ -339,7 +339,7 @@ AlceNorthwindModulesSyntacticTest class >> setupModuleInventoryGetTransaction [
 		->
 			{(#functionOrSub -> #GetTransaction).
 			(#assignments -> 4).
-			(#outgoingInvocations -> 1).
+			(#outgoingInvocations -> 2).
 			(#localVariables -> 1).
 			(#return -> #Boolean)})}
 ]
@@ -362,8 +362,8 @@ AlceNorthwindModulesSyntacticTest class >> setupModuleInventoryModifyHold [
 	(#fixture
 		->
 			{(#functionOrSub -> #ModifyHold).
-			(#assignments -> 6).
-			(#outgoingInvocations -> 2).
+			(#assignments -> 4).
+			(#outgoingInvocations -> 3).
 			(#localVariables -> 2).
 			(#return -> #Boolean)})}
 ]
@@ -389,7 +389,7 @@ AlceNorthwindModulesSyntacticTest class >> setupModuleInventoryRemovePurchase [
 			(#assignments -> 0).
 			(#outgoingInvocations -> 1).
 			(#localVariables -> 0).
-			(#return -> #Boolean)})}
+			(#return -> #Undefined)})}
 ]
 
 { #category : #'module inventory' }
@@ -398,8 +398,8 @@ AlceNorthwindModulesSyntacticTest class >> setupModuleInventoryRequestHold [
 	(#fixture
 		->
 			{(#functionOrSub -> #RequestHold).
-			(#assignments -> 0).
-			(#outgoingInvocations -> 1).
+			(#assignments -> 1).
+			(#outgoingInvocations -> 2).
 			(#localVariables -> 0).
 			(#return -> #Boolean)})}
 ]
@@ -410,8 +410,8 @@ AlceNorthwindModulesSyntacticTest class >> setupModuleInventoryRestockProduct [
 	(#fixture
 		->
 			{(#functionOrSub -> #RestockProduct).
-			(#assignments -> 2).
-			(#outgoingInvocations -> 6).
+			(#assignments -> 3).
+			(#outgoingInvocations -> 7).
 			(#localVariables -> 4).
 			(#return -> #Boolean)})}
 ]
@@ -455,14 +455,13 @@ AlceNorthwindModulesSyntacticTest class >> setupModuleReflective [
 { #category : #'building suites' }
 AlceNorthwindModulesSyntacticTest class >> testParameters [
 	^ super testParameters
-	" Customer Order "
 		addCase: self setupModuleCustomerOrdersCaseCreateInvoice;
 		addCase: self setupModuleCustomerOrdersCaseDelete;
 		addCase: self setupModuleCustomerOrdersCasePrintInvoice;
 		addCase: self setupModuleCustomerOrdersCaseIsInvoiced;
 		addCase: self setupModuleCustomerOrdersCaseSetStatus;
-	" Domain Function "
-		addCase: self setupModuleDomainFunctionDomainDAvgWrapper;
+		" Domain Function "
+			addCase: self setupModuleDomainFunctionDomainDAvgWrapper;
 		addCase: self setupModuleDomainFunctionDomainDCountWrapper;
 		addCase: self setupModuleDomainFunctionDomainDLookupNumberWrapper;
 		addCase: self setupModuleDomainFunctionDomainDLookupStringWrapper;
@@ -471,8 +470,8 @@ AlceNorthwindModulesSyntacticTest class >> testParameters [
 		addCase: self setupModuleDomainFunctionDomainDMinWrapper;
 		addCase: self setupModuleDomainFunctionDomainDSumWrapper;
 		addCase: self setupModuleDomainFunctionDomainDAvgWrapper;
-	" Inventory  "		
-		addCase: self setupModuleInventoryEditTransaction;
+		" Inventory  "
+			addCase: self setupModuleInventoryEditTransaction;
 		addCase: self setupModuleInventoryDeleteTransaction;
 		addCase: self setupModuleInventoryRestockProduct;
 		addCase: self setupModuleInventoryRequestHold;
@@ -489,10 +488,11 @@ AlceNorthwindModulesSyntacticTest class >> testParameters [
 		addCase: self setupModuleInventoryRemovePurchase;
 		addCase: self setupModuleInventoryGetQtyAvailable;
 		addCase: self setupModuleInventoryGetTransaction;
+		addCase: self setupModuleInventoryFillBackOrder;
 		addCase: self setupModuleInventoryFillBackOrders;
-		addCase: self setupModuleInventoryFindProductSupplier;
-		addCase: self setupModuleInventoryFillBackOrder
-	
+		addCase: self setupModuleInventoryFindProductSupplier
+	" Customer Order "
+
 
 
 	"

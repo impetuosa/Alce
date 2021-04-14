@@ -21,6 +21,11 @@ AlceVBVisitorToString >> visitArgumentList: aVBArgumentListNode [
 ]
 
 { #category : #'as yet unclassified' }
+AlceVBVisitorToString >> visitBaseType: aVBBaseTypeNode [
+	^ aVBBaseTypeNode variantToken acceptVisitor: self
+]
+
+{ #category : #'as yet unclassified' }
 AlceVBVisitorToString >> visitComplexType: aVBComplexTypeNode [
 	| str |
 	str := aVBComplexTypeNode base acceptVisitor: self.
@@ -66,4 +71,10 @@ AlceVBVisitorToString >> visitSquareBracketIdentifier: aVBSquareBracketIdentifie
 	| str |
 	str := aVBSquareBracketIdentifierNode token value.
 	^ str copyFrom: 2 to: str size - 1
+]
+
+{ #category : #'as yet unclassified' }
+AlceVBVisitorToString >> visitTypedThing: aVBTypedThingNode [
+	self assert: aVBTypedThingNode sizes size = 0.
+	^ aVBTypedThingNode type acceptVisitor: self
 ]

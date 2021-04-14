@@ -25,7 +25,10 @@ AlceASTCodeImporter >> instantiateVariable: aClass from: aVariable [
 
 { #category : #helper }
 AlceASTCodeImporter >> nodeToString: aNode [
-	^ self stringConverter toString: aNode
+	| str |
+	str := self stringConverter toString: aNode.
+	
+	^ str
 ]
 
 { #category : #helper }
@@ -145,15 +148,13 @@ AlceASTCodeImporter >> visitEquals: anAssignementOrEquals [
 	"
 	Ensure that is an assignment: 
 "
-self halt.  
 	anAssignementOrEquals isReturn
-		ifTrue: [ ^ self ].
-	anAssignementOrEquals isAssignment
-		ifTrue: [ access := self instantiate: AlcixAccess.
-			access isWriting: true.
-			access
-				attributeName: (self nodeToString: anAssignementOrEquals left).
-			self state top addAccess: access ].
+		ifFalse: [ anAssignementOrEquals isAssignment
+				ifTrue: [ access := self instantiate: AlcixAccess.
+					access isWriting: true.
+					access
+						attributeName: (self nodeToString: anAssignementOrEquals left).
+					self state top addAccess: access ] ].
 	super visitEquals: anAssignementOrEquals
 ]
 
@@ -172,13 +173,12 @@ AlceASTCodeImporter >> visitEvent: anEvent [
 { #category : #assignments }
 AlceASTCodeImporter >> visitExplicitAssignement: anExplicitAssignement [
 	| access |
-
 	anExplicitAssignement isReturn
-		ifTrue: [ ^ self ].
-	access := self instantiate: AlcixAccess.
-	access isWriting: true.
-	access attributeName: (self nodeToString: anExplicitAssignement left).
-	self state top addAccess: access.
+		ifFalse: [ access := self instantiate: AlcixAccess.
+			access isWriting: true.
+			access
+				attributeName: (self nodeToString: anExplicitAssignement left).
+			self state top addAccess: access ].
 	super visitExplicitAssignement: anExplicitAssignement
 ]
 
@@ -230,7 +230,9 @@ AlceASTCodeImporter >> visitFunctionDefinition: aDefinition [
 	fn := self instantiate: AlcixFunction.
 	fn selector: (self nodeToString: aDefinition selector).
 	fn anchor: self state top anchor / #functions / fn selector.
-	fn typeName: (self nodeToString: aDefinition type type).
+	aDefinition type
+		ifNil: [ fn typeName: 'Undefined' ]
+		ifNotNil: [ fn typeName: (self nodeToString: aDefinition type) ].
 	self state top addInvocable: fn.
 	self state push: fn.
 	super visitFunctionDefinition: aDefinition.
