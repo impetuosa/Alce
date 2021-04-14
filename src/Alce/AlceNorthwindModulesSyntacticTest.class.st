@@ -503,6 +503,12 @@ String cr join:( self class selectors select: [: s | s beginsWith:'setupModuleIn
 ]
 
 { #category : #'as yet unclassified' }
+AlceNorthwindModulesSyntacticTest >> assert: aCollection allSatisfy: aBlock [
+	aCollection ifEmpty: [ ^ self skip ].
+	 self assert: (aCollection allSatisfy: aBlock )
+]
+
+{ #category : #'as yet unclassified' }
 AlceNorthwindModulesSyntacticTest >> fixture: anAssocArray [
 	fixture := anAssocArray asDictionary .
 ]
@@ -522,6 +528,34 @@ AlceNorthwindModulesSyntacticTest >> setUp [
 { #category : #'as yet unclassified' }
 AlceNorthwindModulesSyntacticTest >> setup: aSymbol [
 	setup := aSymbol
+]
+
+{ #category : #'as yet unclassified' }
+AlceNorthwindModulesSyntacticTest >> testAllLocalVariablesHaveName [
+	self
+		assert: self functionOrSub localVariables
+		allSatisfy: [ :a | a name isString ]
+]
+
+{ #category : #'as yet unclassified' }
+AlceNorthwindModulesSyntacticTest >> testAllLocalVariablesHaveTypeName [
+	self
+		assert: self functionOrSub localVariables
+		allSatisfy: [ :a | a typeName isString ]
+]
+
+{ #category : #'as yet unclassified' }
+AlceNorthwindModulesSyntacticTest >> testAllTheAccessesHaveAttributeName [
+	self
+		assert: self functionOrSub accesses
+		allSatisfy: [ :a | a attributeName isString ]
+]
+
+{ #category : #'as yet unclassified' }
+AlceNorthwindModulesSyntacticTest >> testAllTheInvocationsHaveSelector [
+	self
+		assert: self functionOrSub outgoingInvocations
+		allSatisfy: [ :a | a selector isString ]
 ]
 
 { #category : #'as yet unclassified' }
@@ -558,4 +592,9 @@ AlceNorthwindModulesSyntacticTest >> testDefinesHasVariables [
 	self
 		assert: self functionOrSub localVariables size
 		equals: (fixture at: #localVariables)
+]
+
+{ #category : #'as yet unclassified' }
+AlceNorthwindModulesSyntacticTest >> testFunctionReturnsType [
+	self assert: self functionOrSub typeName isString
 ]
