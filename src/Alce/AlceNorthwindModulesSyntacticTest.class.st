@@ -536,12 +536,6 @@ String cr join:( self class selectors select: [: s | s beginsWith:'setupModuleIn
 ]
 
 { #category : #'as yet unclassified' }
-AlceNorthwindModulesSyntacticTest >> assert: aCollection allSatisfy: aBlock [
-	aCollection ifEmpty: [ ^ self skip ].
-	 self assert: (aCollection allSatisfy: aBlock )
-]
-
-{ #category : #'as yet unclassified' }
 AlceNorthwindModulesSyntacticTest >> testAllLocalVariablesHaveName [
 	self
 		assert: self functionOrSub localVariables

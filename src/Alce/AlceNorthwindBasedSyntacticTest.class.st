@@ -1985,6 +1985,12 @@ End Sub
 '
 ]
 
+{ #category : #'as yet unclassified' }
+AlceNorthwindBasedSyntacticTest >> assert: aCollection allSatisfy: aBlock [
+	aCollection ifEmpty: [ ^ self skip ].
+	 self assert: (aCollection allSatisfy: aBlock )
+]
+
 { #category : #convenience }
 AlceNorthwindBasedSyntacticTest >> classModule [
 	^ model detect: [ :m | m class = AlcixClass ]
