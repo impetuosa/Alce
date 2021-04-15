@@ -761,6 +761,7 @@ AlceNorthwindFormSyntacticTest >> assert: actual equals: expected [
 	 Else it does nothing and execution continues.
 	"
 
+	"
 	actual = expected
 		ifFalse: [ (self class class methods
 				detect: [ :m | 
@@ -768,7 +769,8 @@ AlceNorthwindFormSyntacticTest >> assert: actual equals: expected [
 					sc := m sourceCode.
 					(sc includesSubstring: setup)
 						and: [ sc includesSubstring: '#' , (fixture at: #functionOrSub) ] ])
-				browse ].
+				browse ]."
+
 	^ self
 		assert: actual = expected
 		description: [ self comparingStringBetween: actual and: expected ]
