@@ -1,6 +1,11 @@
 Class {
 	#name : #AlceNorthwindBasedSyntacticTest,
 	#superclass : #AlceImportingSyntacticTests,
+	#instVars : [
+		'object',
+		'fixture',
+		'setup'
+	],
 	#category : #'Alce-Tests'
 }
 
@@ -1985,9 +1990,20 @@ AlceNorthwindBasedSyntacticTest >> classModule [
 	^ model detect: [ :m | m class = AlcixClass ]
 ]
 
+{ #category : #'as yet unclassified' }
+AlceNorthwindBasedSyntacticTest >> fixture: anAssocArray [
+	fixture := anAssocArray asDictionary .
+]
+
 { #category : #convenience }
 AlceNorthwindBasedSyntacticTest >> form [
 	^ model detect: [ :m | m class = AlcixForm ]
+]
+
+{ #category : #'as yet unclassified' }
+AlceNorthwindBasedSyntacticTest >> functionOrSub [
+	^ self module invocables
+		detect: [ :f | f selector = (fixture at: #functionOrSub) ]
 ]
 
 { #category : #convenience }
@@ -1998,6 +2014,17 @@ AlceNorthwindBasedSyntacticTest >> module [
 { #category : #convenience }
 AlceNorthwindBasedSyntacticTest >> report [
 	^ model detect: [ :m | m class = AlcixReport ]
+]
+
+{ #category : #'as yet unclassified' }
+AlceNorthwindBasedSyntacticTest >> setUp [
+	super setUp.
+	self perform: (setup ifNil: [ #yourself ])
+]
+
+{ #category : #'as yet unclassified' }
+AlceNorthwindBasedSyntacticTest >> setup: aSymbol [
+	setup := aSymbol
 ]
 
 { #category : #'setup - Class' }

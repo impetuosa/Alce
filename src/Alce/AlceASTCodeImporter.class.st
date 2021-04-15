@@ -80,17 +80,19 @@ AlceASTCodeImporter >> visitDefType: aDefType [
 
 { #category : #'type definition' }
 AlceASTCodeImporter >> visitDefineEnum: aDefineEnum [
-	| en |
+	| en i |
 	en := self instantiate: AlcixEnum.
 	en name: (self nodeToString: aDefineEnum name).
 	en anchor: self state top anchor / #src / #types / en name.
 	self state top addType: en.
+	i := 0.
 	aDefineEnum fields
-		doWithIndex: [ :d :i | 
+		do: [ :d | 
+			i := d value ifNil: [ i + 1 ] ifNotNil: [ :v | v token value asNumber ].
 			en
 				addEnumValue:
 					((self instantiate: AlcixEnumValue)
-						name:  (self nodeToString: d name );
+						name: (self nodeToString: d name);
 						Value: i;
 						yourself) ]
 ]

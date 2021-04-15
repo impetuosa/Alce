@@ -1,10 +1,6 @@
 Class {
 	#name : #AlceNorthwindModulesSyntacticTest,
 	#superclass : #AlceNorthwindBasedSyntacticTest,
-	#instVars : [
-		'fixture',
-		'setup'
-	],
 	#category : #'Alce-Tests'
 }
 
@@ -543,28 +539,6 @@ String cr join:( self class selectors select: [: s | s beginsWith:'setupModuleIn
 AlceNorthwindModulesSyntacticTest >> assert: aCollection allSatisfy: aBlock [
 	aCollection ifEmpty: [ ^ self skip ].
 	 self assert: (aCollection allSatisfy: aBlock )
-]
-
-{ #category : #'as yet unclassified' }
-AlceNorthwindModulesSyntacticTest >> fixture: anAssocArray [
-	fixture := anAssocArray asDictionary .
-]
-
-{ #category : #'as yet unclassified' }
-AlceNorthwindModulesSyntacticTest >> functionOrSub [
-	^ self module invocables
-		detect: [ :f | f selector = (fixture at: #functionOrSub) ]
-]
-
-{ #category : #'as yet unclassified' }
-AlceNorthwindModulesSyntacticTest >> setUp [
-	super setUp.
-	self perform: setup
-]
-
-{ #category : #'as yet unclassified' }
-AlceNorthwindModulesSyntacticTest >> setup: aSymbol [
-	setup := aSymbol
 ]
 
 { #category : #'as yet unclassified' }

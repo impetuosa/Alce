@@ -1,32 +1,27 @@
 Class {
-	#name : #AlceNorthwindCustomerOrdersSyntacticModuleTest,
+	#name : #AlceNorthwindCustomerOrdersOverview,
 	#superclass : #AlceNorthwindBasedSyntacticTest,
 	#category : #'Alce-Tests'
 }
 
 { #category : #'test - module' }
-AlceNorthwindCustomerOrdersSyntacticModuleTest >> setUp [
+AlceNorthwindCustomerOrdersOverview >> setUp [
 	super setUp.
 	self setupModuleCustomerOrders
 ]
 
-{ #category : #'test - module' }
-AlceNorthwindCustomerOrdersSyntacticModuleTest >> testModuleCustomerOrders [
-	self assertLoads: 1 of: AlcixModule. 
-]
-
 { #category : #'types definitions' }
-AlceNorthwindCustomerOrdersSyntacticModuleTest >> testModuleDefinesOneEnum [
+AlceNorthwindCustomerOrdersOverview >> testModuleDefinesNEnum [
 	self assert: self module types first class equals: AlcixEnum
 ]
 
 { #category : #'types definitions' }
-AlceNorthwindCustomerOrdersSyntacticModuleTest >> testModuleDefinesOneEnumWithFourValues [
+AlceNorthwindCustomerOrdersOverview >> testModuleDefinesOneEnumWithFourValues [
 	self assert: self module types first enumValues size equals: 4
 ]
 
 { #category : #'types definitions' }
-AlceNorthwindCustomerOrdersSyntacticModuleTest >> testModuleDefinesOneEnumWithFourValuesWithNames [
+AlceNorthwindCustomerOrdersOverview >> testModuleDefinesOneEnumWithFourValuesWithNames [
 	self
 		assert: self module types first enumValues first name
 		equals: 'New_CustomerOrder'.
@@ -42,20 +37,29 @@ AlceNorthwindCustomerOrdersSyntacticModuleTest >> testModuleDefinesOneEnumWithFo
 ]
 
 { #category : #'types definitions' }
-AlceNorthwindCustomerOrdersSyntacticModuleTest >> testModuleDefinesOneType [
+AlceNorthwindCustomerOrdersOverview >> testModuleDefinesOneType [
 	self assert: self module types size equals: 1
 ]
 
-{ #category : #'functions overview' }
-AlceNorthwindCustomerOrdersSyntacticModuleTest >> testModuleHas5Functions [
-	self
-		assert:
-			(self module invocables select: [ :i | i class = AlcixFunction ]) size
-		equals: 5
+{ #category : #'test - module' }
+AlceNorthwindCustomerOrdersOverview >> testModuleHasModule [
+	self assertLoads: 1 of: AlcixModule. 
 ]
 
 { #category : #'functions overview' }
-AlceNorthwindCustomerOrdersSyntacticModuleTest >> testModuleHasOnlyFunctions [
+AlceNorthwindCustomerOrdersOverview >> testModuleHasNFunctions [
+	self
+		assert: (self module invocables select: [ :i | i class = AlcixFunction ]) size
+		equals: 5
+]
+
+{ #category : #'test - module' }
+AlceNorthwindCustomerOrdersOverview >> testModuleHasNMembers [
+	self assert: self module members size equals: 0
+]
+
+{ #category : #'functions overview' }
+AlceNorthwindCustomerOrdersOverview >> testModuleHasOnlyFunctions [
 	self
 		assert: (self module invocables allSatisfy: [ :i | i class = AlcixFunction ])
 ]
