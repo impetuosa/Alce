@@ -189,7 +189,9 @@ AlceNorthwindReportSyntacticTest >> testDefinesHasVariables [
 
 { #category : #'as yet unclassified' }
 AlceNorthwindReportSyntacticTest >> testFunctionReturnsType [
-	self assertIfFunction: [ self functionOrSub typeName isString ]
+	self
+		assertIfFunction: [ self functionOrSub typeName isString ]
+		ifFalse: [ (fixture at: #return) = #SubsDoNotReturn ]
 ]
 
 { #category : #'as yet unclassified' }
