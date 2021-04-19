@@ -1,11 +1,11 @@
 Class {
-	#name : #AlceNorthwindOverviewUtilities,
+	#name : #AlceNorthwindUtilitiesOVCountingTest,
 	#superclass : #AlceNorthwindBasedSyntacticTest,
-	#category : #'Alce-Tests'
+	#category : #'Alce-Tests-EntityCounting'
 }
 
 { #category : #'types definitions' }
-AlceNorthwindOverviewUtilities >> enumNameAndValues [
+AlceNorthwindUtilitiesOVCountingTest >> enumNameAndValues [
 	^ {('AppTitle' -> 2).
 	('CannotRemovePostedInventory' -> 3).
 	('FilledBackOrderedProduct' -> 4).
@@ -71,23 +71,23 @@ AlceNorthwindOverviewUtilities >> enumNameAndValues [
 ]
 
 { #category : #'test - module' }
-AlceNorthwindOverviewUtilities >> setUp [
+AlceNorthwindUtilitiesOVCountingTest >> setUp [
 	super setUp.
 	self setupModuleUtilities 
 ]
 
 { #category : #'types definitions' }
-AlceNorthwindOverviewUtilities >> testModuleDefinesNEnum [
+AlceNorthwindUtilitiesOVCountingTest >> testModuleDefinesNEnum [
 	self assert: self module types first class equals: AlcixEnum
 ]
 
 { #category : #'types definitions' }
-AlceNorthwindOverviewUtilities >> testModuleDefinesOneEnumWith62Values [
+AlceNorthwindUtilitiesOVCountingTest >> testModuleDefinesOneEnumWith62Values [
 	self assert: self module types first enumValues size equals: 62
 ]
 
 { #category : #'types definitions' }
-AlceNorthwindOverviewUtilities >> testModuleDefinesOneEnumWithNamesAndValues [
+AlceNorthwindUtilitiesOVCountingTest >> testModuleDefinesOneEnumWithNamesAndValues [
 	self module types first enumValues asOrderedCollection
 		with: self enumNameAndValues
 		do: [ :e :env | 
@@ -96,50 +96,50 @@ AlceNorthwindOverviewUtilities >> testModuleDefinesOneEnumWithNamesAndValues [
 ]
 
 { #category : #'types definitions' }
-AlceNorthwindOverviewUtilities >> testModuleDefinesOneType [
+AlceNorthwindUtilitiesOVCountingTest >> testModuleDefinesOneType [
 	self assert: self module types size equals: 1
 ]
 
 { #category : #'test - module' }
-AlceNorthwindOverviewUtilities >> testModuleHasMemberNamedEh [
+AlceNorthwindUtilitiesOVCountingTest >> testModuleHasMemberNamedEh [
 	self
 		assert: self module members first name
 		equals: 'eh'
 ]
 
 { #category : #'test - module' }
-AlceNorthwindOverviewUtilities >> testModuleHasMemberTypeErrorHandling [
+AlceNorthwindUtilitiesOVCountingTest >> testModuleHasMemberTypeErrorHandling [
 	self
 		assert: self module members first typeName
 		equals: 'ErrorHandling'
 ]
 
 { #category : #'test - module' }
-AlceNorthwindOverviewUtilities >> testModuleHasModule [
+AlceNorthwindUtilitiesOVCountingTest >> testModuleHasModule [
 	self assertLoads: 1 of: AlcixModule. 
 ]
 
 { #category : #'functions overview' }
-AlceNorthwindOverviewUtilities >> testModuleHasNFunctions [
+AlceNorthwindUtilitiesOVCountingTest >> testModuleHasNFunctions [
 	self
 		assert: (self module invocables select: [ :i | i class = AlcixFunction ]) size
 		equals: 7
 ]
 
 { #category : #'test - module' }
-AlceNorthwindOverviewUtilities >> testModuleHasNMembers [
+AlceNorthwindUtilitiesOVCountingTest >> testModuleHasNMembers [
 	self assert: self module members size equals: 1
 ]
 
 { #category : #'functions overview' }
-AlceNorthwindOverviewUtilities >> testModuleHasNSubProcedures [
+AlceNorthwindUtilitiesOVCountingTest >> testModuleHasNSubProcedures [
 	self
 		assert: (self module invocables select: [ :i | i class = AlcixSubProcedure  ]) size
 		equals: 1
 ]
 
 { #category : #'functions overview' }
-AlceNorthwindOverviewUtilities >> testModuleHasOnlyFunctionsAndSubs [
+AlceNorthwindUtilitiesOVCountingTest >> testModuleHasOnlyFunctionsAndSubs [
 	self
 		assert:
 			(self module invocables

@@ -6,7 +6,8 @@ Class {
 		'#attributeName => FMProperty',
 		'#memberSelectors => FMProperty',
 		'#attribute => FMOne type: #AlcixAttribute opposite: #accesses',
-		'#invocable => FMOne type: #AlcixInvocable opposite: #accesses'
+		'#invocable => FMOne type: #AlcixInvocable opposite: #accesses',
+		'#methodInvocation => FMOne type: #AlcixMethodInvocation opposite: #receiver'
 	],
 	#category : #'Alce-Famix-Entities'
 }
@@ -18,6 +19,13 @@ AlcixAccess class >> annotation [
 	<package: #'Alce-Famix'>
 	<generated>
 	^self
+]
+
+{ #category : #accessing }
+AlcixAccess >> asString [
+	^ String
+		streamContents:
+			[ :stream | stream nextPutAll: ('.' join: {attributeName} , memberSelectors) ]
 ]
 
 { #category : #accessing }
@@ -86,7 +94,44 @@ AlcixAccess >> isWriting: anObject [
 	isWriting := anObject
 ]
 
-{ #category : #'as yet unclassified' }
-AlcixAccess >> memberSelectors: aCollection [ 
-	memberSelectors := aCollection
+{ #category : #accessing }
+AlcixAccess >> memberSelectors [
+
+	<FMProperty: #memberSelectors type: #Object>
+	<generated>
+	^ memberSelectors
+]
+
+{ #category : #accessing }
+AlcixAccess >> memberSelectors: anObject [
+	<generated>
+	memberSelectors := anObject
+]
+
+{ #category : #accessing }
+AlcixAccess >> methodInvocation [
+	"Relation named: #methodInvocation type: #AlcixMethodInvocation opposite: #receiver"
+
+	<generated>
+	<derived>
+	^ methodInvocation
+]
+
+{ #category : #accessing }
+AlcixAccess >> methodInvocation: anObject [
+
+	<generated>
+	methodInvocation := anObject
+]
+
+{ #category : #navigation }
+AlcixAccess >> printOn: aStream [
+	aStream
+		nextPutAll: 'Access(';
+		nextPut:
+			(isWriting
+				ifTrue: [ $w ]
+				ifFalse: [ $r ]);
+		nextPutAll: ')';
+		nextPutAll: ('.' join: {attributeName} , (memberSelectors ifNil: [ {} ]))
 ]

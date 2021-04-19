@@ -1,7 +1,7 @@
 Class {
 	#name : #AlceImportingSyntactiImporter,
 	#superclass : #AlceImporter,
-	#category : #'Alce-Tests'
+	#category : #'Alce-Tests-Core'
 }
 
 { #category : #'as yet unclassified' }

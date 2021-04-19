@@ -6,7 +6,7 @@ Class {
 		'fixture',
 		'setup'
 	],
-	#category : #'Alce-Tests'
+	#category : #'Alce-Tests-Core'
 }
 
 { #category : #modules }

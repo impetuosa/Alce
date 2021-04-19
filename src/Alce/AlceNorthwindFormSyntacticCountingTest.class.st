@@ -1,11 +1,11 @@
 Class {
-	#name : #AlceNorthwindFormSyntacticTest,
+	#name : #AlceNorthwindFormSyntacticCountingTest,
 	#superclass : #AlceNorthwindBasedSyntacticTest,
-	#category : #'Alce-Tests'
+	#category : #'Alce-Tests-EntityCounting'
 }
 
 { #category : #'form inventory list' }
-AlceNorthwindFormSyntacticTest class >> setupFormInventoryListcmdPurchase_Click [
+AlceNorthwindFormSyntacticCountingTest class >> setupFormInventoryListcmdPurchase_Click [
 	^ {(#setup -> #setupFormInventoryList).
 	(#fixture
 		->
@@ -18,7 +18,7 @@ AlceNorthwindFormSyntacticTest class >> setupFormInventoryListcmdPurchase_Click 
 ]
 
 { #category : #'order details' }
-AlceNorthwindFormSyntacticTest class >> setupFormOrderDetailsClearShippingAddress [
+AlceNorthwindFormSyntacticCountingTest class >> setupFormOrderDetailsClearShippingAddress [
 ^ {
 (#setup -> #setupFormOrderDetails).
 	(#fixture
@@ -32,7 +32,7 @@ AlceNorthwindFormSyntacticTest class >> setupFormOrderDetailsClearShippingAddres
 ]
 
 { #category : #'order details' }
-AlceNorthwindFormSyntacticTest class >> setupFormOrderDetailsCustomer_ID_AfterUpdate [
+AlceNorthwindFormSyntacticCountingTest class >> setupFormOrderDetailsCustomer_ID_AfterUpdate [
 ^ {
 (#setup -> #setupFormOrderDetails).
 	(#fixture
@@ -46,7 +46,7 @@ AlceNorthwindFormSyntacticTest class >> setupFormOrderDetailsCustomer_ID_AfterUp
 ]
 
 { #category : #'order details' }
-AlceNorthwindFormSyntacticTest class >> setupFormOrderDetailsForm_Current [
+AlceNorthwindFormSyntacticCountingTest class >> setupFormOrderDetailsForm_Current [
 ^ {
 (#setup -> #setupFormOrderDetails).
 	(#fixture
@@ -60,7 +60,7 @@ AlceNorthwindFormSyntacticTest class >> setupFormOrderDetailsForm_Current [
 ]
 
 { #category : #'order details' }
-AlceNorthwindFormSyntacticTest class >> setupFormOrderDetailsForm_Load [
+AlceNorthwindFormSyntacticCountingTest class >> setupFormOrderDetailsForm_Load [
 ^ {
 (#setup -> #setupFormOrderDetails).
 	(#fixture
@@ -74,7 +74,7 @@ AlceNorthwindFormSyntacticTest class >> setupFormOrderDetailsForm_Load [
 ]
 
 { #category : #'order details' }
-AlceNorthwindFormSyntacticTest class >> setupFormOrderDetailsSetDefaultShippingAddress [
+AlceNorthwindFormSyntacticCountingTest class >> setupFormOrderDetailsSetDefaultShippingAddress [
 ^ {
 (#setup -> #setupFormOrderDetails).
 	(#fixture
@@ -88,7 +88,7 @@ AlceNorthwindFormSyntacticTest class >> setupFormOrderDetailsSetDefaultShippingA
 ]
 
 { #category : #'Order Details Sub' }
-AlceNorthwindFormSyntacticTest class >> setupFormOrderDetailsSubForm_Current [
+AlceNorthwindFormSyntacticCountingTest class >> setupFormOrderDetailsSubForm_Current [
 ^ {
 (#setup -> #setupFormOrderDetailsSub).
 	(#fixture
@@ -102,7 +102,7 @@ AlceNorthwindFormSyntacticTest class >> setupFormOrderDetailsSubForm_Current [
 ]
 
 { #category : #'Order Details Sub' }
-AlceNorthwindFormSyntacticTest class >> setupFormOrderDetailsSubProduct_ID_AfterUpdate [
+AlceNorthwindFormSyntacticCountingTest class >> setupFormOrderDetailsSubProduct_ID_AfterUpdate [
 ^ {
 (#setup -> #setupFormOrderDetailsSub).
 	(#fixture
@@ -116,7 +116,7 @@ AlceNorthwindFormSyntacticTest class >> setupFormOrderDetailsSubProduct_ID_After
 ]
 
 { #category : #'Order Details Sub' }
-AlceNorthwindFormSyntacticTest class >> setupFormOrderDetailsSubQuantity_AfterUpdate [
+AlceNorthwindFormSyntacticCountingTest class >> setupFormOrderDetailsSubQuantity_AfterUpdate [
 ^ {
 (#setup -> #setupFormOrderDetailsSub).
 	(#fixture
@@ -130,7 +130,7 @@ AlceNorthwindFormSyntacticTest class >> setupFormOrderDetailsSubQuantity_AfterUp
 ]
 
 { #category : #'Order Details Sub' }
-AlceNorthwindFormSyntacticTest class >> setupFormOrderDetailsSubStatus_Name_DblClick [
+AlceNorthwindFormSyntacticCountingTest class >> setupFormOrderDetailsSubStatus_Name_DblClick [
 ^ {
 (#setup -> #setupFormOrderDetailsSub).
 	(#fixture
@@ -144,7 +144,7 @@ AlceNorthwindFormSyntacticTest class >> setupFormOrderDetailsSubStatus_Name_DblC
 ]
 
 { #category : #'order details' }
-AlceNorthwindFormSyntacticTest class >> setupFormOrderDetailscmdClearAddress_Click [
+AlceNorthwindFormSyntacticCountingTest class >> setupFormOrderDetailscmdClearAddress_Click [
 ^ {
 (#setup -> #setupFormOrderDetails).
 	(#fixture
@@ -158,7 +158,7 @@ AlceNorthwindFormSyntacticTest class >> setupFormOrderDetailscmdClearAddress_Cli
 ]
 
 { #category : #'order details' }
-AlceNorthwindFormSyntacticTest class >> setupFormOrderDetailscmdCompleteOrder_Click [
+AlceNorthwindFormSyntacticCountingTest class >> setupFormOrderDetailscmdCompleteOrder_Click [
 ^ {
 (#setup -> #setupFormOrderDetails).
 	(#fixture
@@ -172,7 +172,7 @@ AlceNorthwindFormSyntacticTest class >> setupFormOrderDetailscmdCompleteOrder_Cl
 ]
 
 { #category : #'order details' }
-AlceNorthwindFormSyntacticTest class >> setupFormOrderDetailscmdCreateInvoice_Click [
+AlceNorthwindFormSyntacticCountingTest class >> setupFormOrderDetailscmdCreateInvoice_Click [
 ^ {
 (#setup -> #setupFormOrderDetails).
 	(#fixture
@@ -186,7 +186,7 @@ AlceNorthwindFormSyntacticTest class >> setupFormOrderDetailscmdCreateInvoice_Cl
 ]
 
 { #category : #'order details' }
-AlceNorthwindFormSyntacticTest class >> setupFormOrderDetailscmdDeleteOrder_Click [
+AlceNorthwindFormSyntacticCountingTest class >> setupFormOrderDetailscmdDeleteOrder_Click [
 ^ {
 (#setup -> #setupFormOrderDetails).
 	(#fixture
@@ -200,7 +200,7 @@ AlceNorthwindFormSyntacticTest class >> setupFormOrderDetailscmdDeleteOrder_Clic
 ]
 
 { #category : #'order details' }
-AlceNorthwindFormSyntacticTest class >> setupFormOrderDetailscmdShipOrder_Click [
+AlceNorthwindFormSyntacticCountingTest class >> setupFormOrderDetailscmdShipOrder_Click [
 ^ {
 (#setup -> #setupFormOrderDetails).
 	(#fixture
@@ -214,7 +214,7 @@ AlceNorthwindFormSyntacticTest class >> setupFormOrderDetailscmdShipOrder_Click 
 ]
 
 { #category : #'Purchase Order Details' }
-AlceNorthwindFormSyntacticTest class >> setupFormPurchaseOrderDetailsFRemovePurchaseLineItems [
+AlceNorthwindFormSyntacticCountingTest class >> setupFormPurchaseOrderDetailsFRemovePurchaseLineItems [
 ^ {
 (#setup -> #setupFormPurchaseOrderDetails).
 	(#fixture
@@ -228,7 +228,7 @@ AlceNorthwindFormSyntacticTest class >> setupFormPurchaseOrderDetailsFRemovePurc
 ]
 
 { #category : #'Purchase Order Details' }
-AlceNorthwindFormSyntacticTest class >> setupFormPurchaseOrderDetailsForm_Current [
+AlceNorthwindFormSyntacticCountingTest class >> setupFormPurchaseOrderDetailsForm_Current [
 ^ {
 (#setup -> #setupFormPurchaseOrderDetails).
 	(#fixture
@@ -242,7 +242,7 @@ AlceNorthwindFormSyntacticTest class >> setupFormPurchaseOrderDetailsForm_Curren
 ]
 
 { #category : #'Purchase Order Details' }
-AlceNorthwindFormSyntacticTest class >> setupFormPurchaseOrderDetailsGetPurchaseDetailsSubform [
+AlceNorthwindFormSyntacticCountingTest class >> setupFormPurchaseOrderDetailsGetPurchaseDetailsSubform [
 ^ {
 (#setup -> #setupFormPurchaseOrderDetails).
 	(#fixture
@@ -256,7 +256,7 @@ AlceNorthwindFormSyntacticTest class >> setupFormPurchaseOrderDetailsGetPurchase
 ]
 
 { #category : #'Purchase Order Details' }
-AlceNorthwindFormSyntacticTest class >> setupFormPurchaseOrderDetailsInitFormState [
+AlceNorthwindFormSyntacticCountingTest class >> setupFormPurchaseOrderDetailsInitFormState [
 ^ {
 (#setup -> #setupFormPurchaseOrderDetails).
 	(#fixture
@@ -270,7 +270,7 @@ AlceNorthwindFormSyntacticTest class >> setupFormPurchaseOrderDetailsInitFormSta
 ]
 
 { #category : #'Purchase Order Details' }
-AlceNorthwindFormSyntacticTest class >> setupFormPurchaseOrderDetailsPurchaseContainsLineItems [
+AlceNorthwindFormSyntacticCountingTest class >> setupFormPurchaseOrderDetailsPurchaseContainsLineItems [
 ^ {
 (#setup -> #setupFormPurchaseOrderDetails).
 	(#fixture
@@ -284,7 +284,7 @@ AlceNorthwindFormSyntacticTest class >> setupFormPurchaseOrderDetailsPurchaseCon
 ]
 
 { #category : #'Purchase Order Details' }
-AlceNorthwindFormSyntacticTest class >> setupFormPurchaseOrderDetailsPurchaseOrderIsValid [
+AlceNorthwindFormSyntacticCountingTest class >> setupFormPurchaseOrderDetailsPurchaseOrderIsValid [
 	^ {(#setup -> #setupFormPurchaseOrderDetails).
 	(#fixture
 		->
@@ -297,7 +297,7 @@ AlceNorthwindFormSyntacticTest class >> setupFormPurchaseOrderDetailsPurchaseOrd
 ]
 
 { #category : #'Purchase Order Details' }
-AlceNorthwindFormSyntacticTest class >> setupFormPurchaseOrderDetailsPurchaseOrder_ContainsPostedInventory [
+AlceNorthwindFormSyntacticCountingTest class >> setupFormPurchaseOrderDetailsPurchaseOrder_ContainsPostedInventory [
 ^ {
 (#setup -> #setupFormPurchaseOrderDetails).
 	(#fixture
@@ -311,7 +311,7 @@ AlceNorthwindFormSyntacticTest class >> setupFormPurchaseOrderDetailsPurchaseOrd
 ]
 
 { #category : #'Purchase Order Details Sub' }
-AlceNorthwindFormSyntacticTest class >> setupFormPurchaseOrderDetailsSubForm_AfterInsert [
+AlceNorthwindFormSyntacticCountingTest class >> setupFormPurchaseOrderDetailsSubForm_AfterInsert [
 	^ {(#setup -> #setupFormPurchaseOrderDetailsSub).
 	(#fixture
 		->
@@ -324,7 +324,7 @@ AlceNorthwindFormSyntacticTest class >> setupFormPurchaseOrderDetailsSubForm_Aft
 ]
 
 { #category : #'Purchase Order Details Sub' }
-AlceNorthwindFormSyntacticTest class >> setupFormPurchaseOrderDetailsSubForm_BeforeUpdate [
+AlceNorthwindFormSyntacticCountingTest class >> setupFormPurchaseOrderDetailsSubForm_BeforeUpdate [
 ^ {
 (#setup -> #setupFormPurchaseOrderDetailsSub).
 	(#fixture
@@ -338,7 +338,7 @@ AlceNorthwindFormSyntacticTest class >> setupFormPurchaseOrderDetailsSubForm_Bef
 ]
 
 { #category : #'Purchase Order Details Sub' }
-AlceNorthwindFormSyntacticTest class >> setupFormPurchaseOrderDetailsSubInitParentState [
+AlceNorthwindFormSyntacticCountingTest class >> setupFormPurchaseOrderDetailsSubInitParentState [
 ^ {
 (#setup -> #setupFormPurchaseOrderDetailsSub).
 	(#fixture
@@ -352,7 +352,7 @@ AlceNorthwindFormSyntacticTest class >> setupFormPurchaseOrderDetailsSubInitPare
 ]
 
 { #category : #'Purchase Order Details Sub' }
-AlceNorthwindFormSyntacticTest class >> setupFormPurchaseOrderDetailsSubProduct_ID_AfterUpdate [
+AlceNorthwindFormSyntacticCountingTest class >> setupFormPurchaseOrderDetailsSubProduct_ID_AfterUpdate [
 ^ {
 (#setup -> #setupFormPurchaseOrderDetailsSub).
 	(#fixture
@@ -366,7 +366,7 @@ AlceNorthwindFormSyntacticTest class >> setupFormPurchaseOrderDetailsSubProduct_
 ]
 
 { #category : #'Purchase Order Details Sub' }
-AlceNorthwindFormSyntacticTest class >> setupFormPurchaseOrderDetailsSubQuantity_AfterUpdate [
+AlceNorthwindFormSyntacticCountingTest class >> setupFormPurchaseOrderDetailsSubQuantity_AfterUpdate [
 ^ {
 (#setup -> #setupFormPurchaseOrderDetailsSub).
 	(#fixture
@@ -380,7 +380,7 @@ AlceNorthwindFormSyntacticTest class >> setupFormPurchaseOrderDetailsSubQuantity
 ]
 
 { #category : #'Purchase Order Details Sub' }
-AlceNorthwindFormSyntacticTest class >> setupFormPurchaseOrderDetailsSubQuantity_BeforeUpdate [
+AlceNorthwindFormSyntacticCountingTest class >> setupFormPurchaseOrderDetailsSubQuantity_BeforeUpdate [
 	^ {(#setup -> #setupFormPurchaseOrderDetailsSub).
 	(#fixture
 		->
@@ -393,7 +393,7 @@ AlceNorthwindFormSyntacticTest class >> setupFormPurchaseOrderDetailsSubQuantity
 ]
 
 { #category : #'Purchase Order Details Sub' }
-AlceNorthwindFormSyntacticTest class >> setupFormPurchaseOrderDetailsSubRemoveCurrentLineItem [
+AlceNorthwindFormSyntacticCountingTest class >> setupFormPurchaseOrderDetailsSubRemoveCurrentLineItem [
 ^ {
 (#setup -> #setupFormPurchaseOrderDetailsSub).
 	(#fixture
@@ -407,7 +407,7 @@ AlceNorthwindFormSyntacticTest class >> setupFormPurchaseOrderDetailsSubRemoveCu
 ]
 
 { #category : #'Purchase Order Details Sub' }
-AlceNorthwindFormSyntacticTest class >> setupFormPurchaseOrderDetailsSubUnit_Cost_BeforeUpdate [
+AlceNorthwindFormSyntacticCountingTest class >> setupFormPurchaseOrderDetailsSubUnit_Cost_BeforeUpdate [
 ^ {
 (#setup -> #setupFormPurchaseOrderDetailsSub).
 	(#fixture
@@ -421,7 +421,7 @@ AlceNorthwindFormSyntacticTest class >> setupFormPurchaseOrderDetailsSubUnit_Cos
 ]
 
 { #category : #'Purchase Order Details' }
-AlceNorthwindFormSyntacticTest class >> setupFormPurchaseOrderDetailsSupplier_ID_AfterUpdate [
+AlceNorthwindFormSyntacticCountingTest class >> setupFormPurchaseOrderDetailsSupplier_ID_AfterUpdate [
 ^ {
 (#setup -> #setupFormPurchaseOrderDetails).
 	(#fixture
@@ -435,7 +435,7 @@ AlceNorthwindFormSyntacticTest class >> setupFormPurchaseOrderDetailsSupplier_ID
 ]
 
 { #category : #'Purchase Order Details' }
-AlceNorthwindFormSyntacticTest class >> setupFormPurchaseOrderDetailsSupplier_ID_BeforeUpdate [
+AlceNorthwindFormSyntacticCountingTest class >> setupFormPurchaseOrderDetailsSupplier_ID_BeforeUpdate [
 ^ {
 (#setup -> #setupFormPurchaseOrderDetails).
 	(#fixture
@@ -449,7 +449,7 @@ AlceNorthwindFormSyntacticTest class >> setupFormPurchaseOrderDetailsSupplier_ID
 ]
 
 { #category : #'Purchase Order Details' }
-AlceNorthwindFormSyntacticTest class >> setupFormPurchaseOrderDetailsTabCtlPurchasing_Change [
+AlceNorthwindFormSyntacticCountingTest class >> setupFormPurchaseOrderDetailsTabCtlPurchasing_Change [
 ^ {
 (#setup -> #setupFormPurchaseOrderDetails).
 	(#fixture
@@ -463,7 +463,7 @@ AlceNorthwindFormSyntacticTest class >> setupFormPurchaseOrderDetailsTabCtlPurch
 ]
 
 { #category : #'Purchase Order Details' }
-AlceNorthwindFormSyntacticTest class >> setupFormPurchaseOrderDetailscmdApprovePurchase_Click [
+AlceNorthwindFormSyntacticCountingTest class >> setupFormPurchaseOrderDetailscmdApprovePurchase_Click [
 ^ {
 (#setup -> #setupFormPurchaseOrderDetails).
 	(#fixture
@@ -477,7 +477,7 @@ AlceNorthwindFormSyntacticTest class >> setupFormPurchaseOrderDetailscmdApproveP
 ]
 
 { #category : #'Purchase Order Details' }
-AlceNorthwindFormSyntacticTest class >> setupFormPurchaseOrderDetailscmdCancelPurchase_Click [
+AlceNorthwindFormSyntacticCountingTest class >> setupFormPurchaseOrderDetailscmdCancelPurchase_Click [
 ^ {
 (#setup -> #setupFormPurchaseOrderDetails).
 	(#fixture
@@ -491,7 +491,7 @@ AlceNorthwindFormSyntacticTest class >> setupFormPurchaseOrderDetailscmdCancelPu
 ]
 
 { #category : #'Purchase Order Details' }
-AlceNorthwindFormSyntacticTest class >> setupFormPurchaseOrderDetailscmdClose_Click [
+AlceNorthwindFormSyntacticCountingTest class >> setupFormPurchaseOrderDetailscmdClose_Click [
 ^ {
 (#setup -> #setupFormPurchaseOrderDetails).
 	(#fixture
@@ -505,7 +505,7 @@ AlceNorthwindFormSyntacticTest class >> setupFormPurchaseOrderDetailscmdClose_Cl
 ]
 
 { #category : #'Purchase Order Details' }
-AlceNorthwindFormSyntacticTest class >> setupFormPurchaseOrderDetailscmdSubmitforApproval_Click [
+AlceNorthwindFormSyntacticCountingTest class >> setupFormPurchaseOrderDetailscmdSubmitforApproval_Click [
 ^ {
 (#setup -> #setupFormPurchaseOrderDetails).
 	(#fixture
@@ -519,7 +519,7 @@ AlceNorthwindFormSyntacticTest class >> setupFormPurchaseOrderDetailscmdSubmitfo
 ]
 
 { #category : #'Receiving Order Details Sub' }
-AlceNorthwindFormSyntacticTest class >> setupFormReceivingOrderDetailsSubDate_Received_AfterUpdate [
+AlceNorthwindFormSyntacticCountingTest class >> setupFormReceivingOrderDetailsSubDate_Received_AfterUpdate [
 	^ {(#setup -> #setupFormReceivingOrderDetailsSub).
 	(#fixture
 		->
@@ -532,7 +532,7 @@ AlceNorthwindFormSyntacticTest class >> setupFormReceivingOrderDetailsSubDate_Re
 ]
 
 { #category : #'Receiving Order Details Sub' }
-AlceNorthwindFormSyntacticTest class >> setupFormReceivingOrderDetailsSubForm_Current [
+AlceNorthwindFormSyntacticCountingTest class >> setupFormReceivingOrderDetailsSubForm_Current [
 	^ {(#setup -> #setupFormReceivingOrderDetailsSub).
 	(#fixture
 		->
@@ -545,7 +545,7 @@ AlceNorthwindFormSyntacticTest class >> setupFormReceivingOrderDetailsSubForm_Cu
 ]
 
 { #category : #'Receiving Order Details Sub' }
-AlceNorthwindFormSyntacticTest class >> setupFormReceivingOrderDetailsSubForm_Load [
+AlceNorthwindFormSyntacticCountingTest class >> setupFormReceivingOrderDetailsSubForm_Load [
 ^ {
 (#setup -> #setupFormReceivingOrderDetailsSub).
 	(#fixture
@@ -559,7 +559,7 @@ AlceNorthwindFormSyntacticTest class >> setupFormReceivingOrderDetailsSubForm_Lo
 ]
 
 { #category : #'Receiving Order Details Sub' }
-AlceNorthwindFormSyntacticTest class >> setupFormReceivingOrderDetailsSubPosted_To_Inventory_AfterUpdate [
+AlceNorthwindFormSyntacticCountingTest class >> setupFormReceivingOrderDetailsSubPosted_To_Inventory_AfterUpdate [
 ^ {
 (#setup -> #setupFormReceivingOrderDetailsSub).
 	(#fixture
@@ -573,7 +573,7 @@ AlceNorthwindFormSyntacticTest class >> setupFormReceivingOrderDetailsSubPosted_
 ]
 
 { #category : #'Form Sales Report' }
-AlceNorthwindFormSyntacticTest class >> setupFormSalesReportForm_Load [
+AlceNorthwindFormSyntacticCountingTest class >> setupFormSalesReportForm_Load [
 ^ {
 (#setup -> #setupFormSalesReport).
 	(#fixture
@@ -587,7 +587,7 @@ AlceNorthwindFormSyntacticTest class >> setupFormSalesReportForm_Load [
 ]
 
 { #category : #'Form Sales Report' }
-AlceNorthwindFormSyntacticTest class >> setupFormSalesReportGetLastOrderDate [
+AlceNorthwindFormSyntacticCountingTest class >> setupFormSalesReportGetLastOrderDate [
 ^ {
 (#setup -> #setupFormSalesReport).
 	(#fixture
@@ -601,7 +601,7 @@ AlceNorthwindFormSyntacticTest class >> setupFormSalesReportGetLastOrderDate [
 ]
 
 { #category : #'Form Sales Report' }
-AlceNorthwindFormSyntacticTest class >> setupFormSalesReportInitFilterItems [
+AlceNorthwindFormSyntacticCountingTest class >> setupFormSalesReportInitFilterItems [
 ^ {
 (#setup -> #setupFormSalesReport).
 	(#fixture
@@ -615,7 +615,7 @@ AlceNorthwindFormSyntacticTest class >> setupFormSalesReportInitFilterItems [
 ]
 
 { #category : #'Form Sales Report' }
-AlceNorthwindFormSyntacticTest class >> setupFormSalesReportPrintReports [
+AlceNorthwindFormSyntacticCountingTest class >> setupFormSalesReportPrintReports [
 ^ {
 (#setup -> #setupFormSalesReport).
 	(#fixture
@@ -629,7 +629,7 @@ AlceNorthwindFormSyntacticTest class >> setupFormSalesReportPrintReports [
 ]
 
 { #category : #'Form Sales Report' }
-AlceNorthwindFormSyntacticTest class >> setupFormSalesReportSetSalesPeriod [
+AlceNorthwindFormSyntacticCountingTest class >> setupFormSalesReportSetSalesPeriod [
 ^ {
 (#setup -> #setupFormSalesReport).
 	(#fixture
@@ -643,7 +643,7 @@ AlceNorthwindFormSyntacticTest class >> setupFormSalesReportSetSalesPeriod [
 ]
 
 { #category : #'Form Sales Report' }
-AlceNorthwindFormSyntacticTest class >> setupFormSalesReportcmdPreview_Click [
+AlceNorthwindFormSyntacticCountingTest class >> setupFormSalesReportcmdPreview_Click [
 ^ {
 (#setup -> #setupFormSalesReport).
 	(#fixture
@@ -657,7 +657,7 @@ AlceNorthwindFormSyntacticTest class >> setupFormSalesReportcmdPreview_Click [
 ]
 
 { #category : #'Form Sales Report' }
-AlceNorthwindFormSyntacticTest class >> setupFormSalesReportcmdPrint_Click [
+AlceNorthwindFormSyntacticCountingTest class >> setupFormSalesReportcmdPrint_Click [
 ^ {
 (#setup -> #setupFormSalesReport).
 	(#fixture
@@ -671,7 +671,7 @@ AlceNorthwindFormSyntacticTest class >> setupFormSalesReportcmdPrint_Click [
 ]
 
 { #category : #'Form Sales Report' }
-AlceNorthwindFormSyntacticTest class >> setupFormSalesReportlstSalesPeriod_AfterUpdate [
+AlceNorthwindFormSyntacticCountingTest class >> setupFormSalesReportlstSalesPeriod_AfterUpdate [
 ^ {
 (#setup -> #setupFormSalesReport).
 	(#fixture
@@ -685,7 +685,7 @@ AlceNorthwindFormSyntacticTest class >> setupFormSalesReportlstSalesPeriod_After
 ]
 
 { #category : #'Form Sales Report' }
-AlceNorthwindFormSyntacticTest class >> setupFormSalesReportlstSalesReports_AfterUpdate [
+AlceNorthwindFormSyntacticCountingTest class >> setupFormSalesReportlstSalesReports_AfterUpdate [
 ^ {
 (#setup -> #setupFormSalesReport).
 	(#fixture
@@ -699,7 +699,7 @@ AlceNorthwindFormSyntacticTest class >> setupFormSalesReportlstSalesReports_Afte
 ]
 
 { #category : #'building suites' }
-AlceNorthwindFormSyntacticTest class >> testParameters [
+AlceNorthwindFormSyntacticCountingTest class >> testParameters [
 	^ super testParameters
 		addCase: self setupFormSalesReportSetSalesPeriod;
 		addCase: self setupFormPurchaseOrderDetailsSupplier_ID_BeforeUpdate;
@@ -756,12 +756,12 @@ AlceNorthwindFormSyntacticTest class >> testParameters [
 ]
 
 { #category : #'as yet unclassified' }
-AlceNorthwindFormSyntacticTest >> assert: actual equals: expected [
+AlceNorthwindFormSyntacticCountingTest >> assert: actual equals: expected [
 	"This method raises an AssertionFailure if actual is different (using #= message) from expected.
 	 Else it does nothing and execution continues.
 	"
 
-	"
+	
 	actual = expected
 		ifFalse: [ (self class class methods
 				detect: [ :m | 
@@ -769,7 +769,7 @@ AlceNorthwindFormSyntacticTest >> assert: actual equals: expected [
 					sc := m sourceCode.
 					(sc includesSubstring: setup)
 						and: [ sc includesSubstring: '#' , (fixture at: #functionOrSub) ] ])
-				browse ]."
+				browse ].
 
 	^ self
 		assert: actual = expected
@@ -777,82 +777,82 @@ AlceNorthwindFormSyntacticTest >> assert: actual equals: expected [
 ]
 
 { #category : #'as yet unclassified' }
-AlceNorthwindFormSyntacticTest >> assertIfFunction: aBlock [
+AlceNorthwindFormSyntacticCountingTest >> assertIfFunction: aBlock [
 	self functionOrSub class = AlcixFunction
 		ifFalse: [ ^ self skip ].
 	self assert: aBlock value
 ]
 
 { #category : #'as yet unclassified' }
-AlceNorthwindFormSyntacticTest >> assertIfFunction: aBlock ifFalse: otherBlock [
+AlceNorthwindFormSyntacticCountingTest >> assertIfFunction: aBlock ifFalse: otherBlock [
 	self functionOrSub class = AlcixFunction
 		ifFalse: [ ^self assert: otherBlock value ].
 	self assert: aBlock value
 ]
 
 { #category : #'as yet unclassified' }
-AlceNorthwindFormSyntacticTest >> testAllLocalVariablesHaveName [
+AlceNorthwindFormSyntacticCountingTest >> testAllLocalVariablesHaveName [
 	self
 		assert: self functionOrSub localVariables
 		allSatisfy: [ :a | a name isString and: [ a name isNotEmpty ] ]
 ]
 
 { #category : #'as yet unclassified' }
-AlceNorthwindFormSyntacticTest >> testAllLocalVariablesHaveTypeName [
+AlceNorthwindFormSyntacticCountingTest >> testAllLocalVariablesHaveTypeName [
 	self
 		assert: self functionOrSub localVariables
 		allSatisfy: [ :a | a typeName isString and: [ a typeName isNotEmpty ] ]
 ]
 
 { #category : #'as yet unclassified' }
-AlceNorthwindFormSyntacticTest >> testAllTheAccessesHaveAttributeName [
+AlceNorthwindFormSyntacticCountingTest >> testAllTheAccessesHaveAttributeName [
 	self
 		assert: self functionOrSub accesses
 		allSatisfy: [ :a | a attributeName isString and: [ a attributeName isNotEmpty ] ]
 ]
 
 { #category : #'as yet unclassified' }
-AlceNorthwindFormSyntacticTest >> testAllTheInvocationsHaveSelector [
+AlceNorthwindFormSyntacticCountingTest >> testAllTheInvocationsHaveSelector [
 	self
 		assert: self functionOrSub outgoingInvocations
 		allSatisfy: [ :a | a selector isString ]
 ]
 
 { #category : #'as yet unclassified' }
-AlceNorthwindFormSyntacticTest >> testDefinedFunctionHasExpectedAmountParameters [
+AlceNorthwindFormSyntacticCountingTest >> testDefinedFunctionHasExpectedAmountParameters [
 	self
 		assert: self functionOrSub parameters size
 		equals: (fixture at: #parameters) size
 ]
 
 { #category : #'as yet unclassified' }
-AlceNorthwindFormSyntacticTest >> testDefinedFunctionHasNoneIncomingInvocationBeforeBindingPhase [
+AlceNorthwindFormSyntacticCountingTest >> testDefinedFunctionHasNoneIncomingInvocationBeforeBindingPhase [
 	self assert: self functionOrSub incomingInvocations isEmpty
 ]
 
 { #category : #'as yet unclassified' }
-AlceNorthwindFormSyntacticTest >> testDefinedFunctionHasParameters [
+AlceNorthwindFormSyntacticCountingTest >> testDefinedFunctionHasParameters [
 	self functionOrSub parameters asOrderedCollection
 		with: (fixture at: #parameters)
 		do: [ :p :pt | self assert: p typeName equals: pt ]
 ]
 
 { #category : #'as yet unclassified' }
-AlceNorthwindFormSyntacticTest >> testDefinedFunctionParametersHaveName [
+AlceNorthwindFormSyntacticCountingTest >> testDefinedFunctionParametersHaveName [
 	self
 		assert: self functionOrSub parameters
 		allSatisfy: [ :p | p name isString and: [ p name isNotEmpty ] ]
 ]
 
 { #category : #'as yet unclassified' }
-AlceNorthwindFormSyntacticTest >> testDefinedFunctionParametersHaveTypeName [
+AlceNorthwindFormSyntacticCountingTest >> testDefinedFunctionParametersHaveTypeName [
 	self
 		assert: self functionOrSub parameters
 		allSatisfy: [ :p | p typeName isString and: [ p typeName isNotEmpty ] ]
 ]
 
 { #category : #'as yet unclassified' }
-AlceNorthwindFormSyntacticTest >> testDefinedFunctionReturnsBoolean [
+AlceNorthwindFormSyntacticCountingTest >> testDefinedFunctionReturnsBoolean [
 	self
 		assertIfFunction: [ self
 				assert: self functionOrSub typeName
@@ -862,7 +862,7 @@ AlceNorthwindFormSyntacticTest >> testDefinedFunctionReturnsBoolean [
 ]
 
 { #category : #'as yet unclassified' }
-AlceNorthwindFormSyntacticTest >> testDefinesFunction [
+AlceNorthwindFormSyntacticCountingTest >> testDefinesFunction [
 	self
 		assert:
 			(self module invocables
@@ -870,59 +870,56 @@ AlceNorthwindFormSyntacticTest >> testDefinesFunction [
 ]
 
 { #category : #'as yet unclassified' }
-AlceNorthwindFormSyntacticTest >> testDefinesHasAssignments [
+AlceNorthwindFormSyntacticCountingTest >> testDefinesHasAssignments [
 	self
 		assert: (self functionOrSub accesses select: #isWriting) size
 		equals: (fixture at: #assignments)
 ]
 
 { #category : #'as yet unclassified' }
-AlceNorthwindFormSyntacticTest >> testDefinesHasOutgoingInvocation [
+AlceNorthwindFormSyntacticCountingTest >> testDefinesHasOutgoingInvocation [
 	self
 		assert: self functionOrSub outgoingInvocations size
 		equals: (fixture at: #outgoingInvocations)
 ]
 
 { #category : #'as yet unclassified' }
-AlceNorthwindFormSyntacticTest >> testDefinesHasVariables [
+AlceNorthwindFormSyntacticCountingTest >> testDefinesHasVariables [
 	self
 		assert: self functionOrSub localVariables size
 		equals: (fixture at: #localVariables)
 ]
 
 { #category : #'as yet unclassified' }
-AlceNorthwindFormSyntacticTest >> testFunctionReturnsType [
+AlceNorthwindFormSyntacticCountingTest >> testFunctionReturnsType [
 	self
 		assertIfFunction: [ self functionOrSub typeName isString ]
 		ifFalse: [ (fixture at: #return) = #SubsDoNotReturn ]
 ]
 
 { #category : #'as yet unclassified' }
-AlceNorthwindFormSyntacticTest >> testIfInvocationExpressionContainsAPointIsMessageSend [
+AlceNorthwindFormSyntacticCountingTest >> testIfInvocationExpressionContainsAPointIsMessageSend [
 	| isMessageSend |
 	self functionOrSub outgoingInvocations
 		do: [ :inv | 
-			isMessageSend := inv invocationExpression includes: $..
+			isMessageSend := inv selector includes: $..
 			self assert: inv isVBMessageSend equals: isMessageSend ]
 ]
 
 { #category : #'as yet unclassified' }
-AlceNorthwindFormSyntacticTest >> testMessageSendMustReturnReceiverIfNotError [
+AlceNorthwindFormSyntacticCountingTest >> testMessageSendMustReturnReceiverIfNotError [
 	self functionOrSub outgoingInvocations
 		do: [ :inv | 
 			inv isVBMessageSend
-				ifTrue: [ self assert: inv receiver isNotEmpty ]
+				ifTrue: [ self assert: inv receiver class equals: AlcixAccess  ]
 				ifFalse: [ self should: [ inv receiver ] raise: Error ] ]
 ]
 
 { #category : #'as yet unclassified' }
-AlceNorthwindFormSyntacticTest >> testSelectorIsCalculatedFromInvocationExpression [
+AlceNorthwindFormSyntacticCountingTest >> testSelectorIsCalculatedFromInvocationExpression [
 	self functionOrSub outgoingInvocations
 		do: [ :inv | 
 			inv isVBMessageSend
-				ifTrue: [ self
-						assert: inv receiver , '.' , inv selector
-						equals: inv invocationExpression ]
-				ifFalse:
-					[ self assert: inv selector equals: inv invocationExpression ] ]
+				ifTrue: [ self assert: inv receiver asString equals: inv selector ]
+				ifFalse: [ self assert: (inv selector indexOf: $.) equals: 0 ] ]
 ]

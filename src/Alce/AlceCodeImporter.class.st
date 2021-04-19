@@ -21,6 +21,7 @@ AlceCodeImporter >> visitModule: anObject [
 	obj := anObject isClassModule
 		ifTrue: [ self instantiate: AlcixClass ]
 		ifFalse: [ self instantiate: AlcixModule ].
+	self state top addType: obj.
 	obj name: anObject name.
 	obj anchor: self state top anchor / #modules / anObject name.
 	self state push: obj.

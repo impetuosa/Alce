@@ -10,6 +10,7 @@ AlceGUIImporter >> visitForm: anObject [
 	frm := self instantiate: AlcixForm.
 	frm name: anObject name.
 	frm anchor: self state top anchor / #forms / anObject name.
+	self state top addType: frm.
 	self state push: frm.
 	super visitForm: anObject.
 	anObject ensureUnload.
@@ -22,6 +23,7 @@ AlceGUIImporter >> visitReport: anObject [
 	rpt := self instantiate: AlcixReport.
 	rpt name: anObject name.
 	rpt anchor: self state top anchor / #reports / anObject name.
+	self state top addType: rpt.
 	self state push: rpt.
 	super visitReport: anObject.
 	anObject ensureUnload.

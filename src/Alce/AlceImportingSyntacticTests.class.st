@@ -5,7 +5,7 @@ Class {
 		'importer',
 		'model'
 	],
-	#category : #'Alce-Tests'
+	#category : #'Alce-Tests-Core'
 }
 
 { #category : #running }

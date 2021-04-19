@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'importer'
 	],
-	#category : #'Alce-Tests'
+	#category : #'Alce-Tests-EntityCounting'
 }
 
 { #category : #'building suites' }
@@ -139,6 +139,7 @@ AlceImportingCountingTests >> testSyntacticCodeImporterImportsModulesClassesForm
 		importCodeElements;
 		importSyntacticElements.
 	model := importer import: self class norwind.
+	model inspect.
 	self assertModel: model loads: 396 of: AlcixInvocation.
 	self assertModel: model loads: 0 of: AlcixRaiseEvent.
 	self assertModel: model loads: 707 of: AlcixAccess.

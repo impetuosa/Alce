@@ -1,9 +1,12 @@
 Class {
 	#name : #AlcixInvocation,
 	#superclass : #AlcixAccessEntity,
+	#traits : 'TAlceInvocation',
+	#classTraits : 'TAlceInvocation classTrait',
 	#instVars : [
 		'#selector => FMProperty',
 		'#invocable => FMOne type: #AlcixInvocable opposite: #outgoingInvocations',
+		'#candidates => FMMany type: #AlcixInvocable opposite: #invocation',
 		'#arguments => FMMany type: #AlcixArgument opposite: #invocation'
 	],
 	#category : #'Alce-Famix-Entities'
@@ -22,6 +25,12 @@ AlcixInvocation class >> annotation [
 AlcixInvocation >> addArgument: anObject [
 	<generated>
 	^ self arguments add: anObject
+]
+
+{ #category : #adding }
+AlcixInvocation >> addCandidate: anObject [
+	<generated>
+	^ self candidates add: anObject
 ]
 
 { #category : #accessing }
@@ -48,6 +57,29 @@ AlcixInvocation >> argumentsGroup [
 ]
 
 { #category : #accessing }
+AlcixInvocation >> candidates [
+	"Relation named: #candidates type: #AlcixInvocable opposite: #invocation"
+
+	<generated>
+	<derived>
+	^ candidates
+]
+
+{ #category : #accessing }
+AlcixInvocation >> candidates: anObject [
+
+	<generated>
+	candidates value: anObject
+]
+
+{ #category : #navigation }
+AlcixInvocation >> candidatesGroup [
+	<generated>
+	<navigation: 'Candidates'>
+	^ MooseSpecializedGroup withAll: self candidates asSet
+]
+
+{ #category : #accessing }
 AlcixInvocation >> invocable [
 	"Relation named: #invocable type: #AlcixInvocable opposite: #outgoingInvocations"
 
@@ -71,27 +103,22 @@ AlcixInvocation >> invocableGroup [
 ]
 
 { #category : #accessing }
-AlcixInvocation >> invocationExpression [
-	^ selector
-]
-
-{ #category : #navigation }
-AlcixInvocation >> isVBMessageSend [
-	^ selector includes: $.
-]
-
-{ #category : #navigation }
-AlcixInvocation >> receiver [
-	self isVBMessageSend
-		ifFalse: [ self error: 'This is not a message send ' ].
-	^ $. join: ($. split: selector) allButLast
+AlcixInvocation >> printOn: aStream [
+	aStream
+		nextPutAll: self class name;
+		nextPutAll:'::'; 
+		nextPutAll: selector;
+		nextPutAll: '(a:#';
+		nextPutAll: arguments size asString;
+		nextPutAll: ')'
 ]
 
 { #category : #accessing }
 AlcixInvocation >> selector [
+
 	<FMProperty: #selector type: #String>
 	<generated>
-	^ ($. split: selector) last
+	^ selector
 ]
 
 { #category : #accessing }

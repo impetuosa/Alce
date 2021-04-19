@@ -42,7 +42,8 @@ Class {
 		'attributeAccessor',
 		'typed',
 		'type',
-		'userType'
+		'userType',
+		'methodInvocation'
 	],
 	#category : #'Alce-Generator'
 }
@@ -83,6 +84,7 @@ AlceAccessGenerator >> defineClasses [
 	guiClass := builder newClassNamed: #GUIClass.
 	implicitVariable := builder newClassNamed: #ImplicitVariable.
 	invocation := builder newClassNamed: #Invocation.
+	methodInvocation := builder newClassNamed: #MethodInvocation.
 	localVariable := builder newClassNamed: #LocalVariable.
 	function := builder newClassNamed: #Function.
 	externalFunction := builder newClassNamed: #ExternalFunction.
@@ -135,6 +137,7 @@ AlceAccessGenerator >> defineHierarchy [
 	guiClass --|> class.
 	implicitVariable --|> typedEntity.
 	invocation --|> accessEntity.
+	methodInvocation --|> invocation. 
 	localVariable --|> typedEntity.
 	externalFunction --|> function.
 	macro --|> invocable.
@@ -159,7 +162,7 @@ AlceAccessGenerator >> defineHierarchy [
 AlceAccessGenerator >> defineProperties [
 	access property: #isWriting type: #Boolean.
 	access property: #attributeName type: #String.
-	access property: #memberSelectors type:#OrderedCollection. 
+	access property: #memberSelectors type:#Object. 
 	accessEntity property: #anchor type: #Object.
 	argument property: #value type: #Object.
 	containerType property: #name type: #String.
@@ -191,9 +194,11 @@ AlceAccessGenerator >> defineRelations [
 	databaseTypedEntity - databaseType.
 	datasource <>-* field.
 	enum <>-* enumValue.
-	(invocable property: #outgoingInvocations)  <>-* invocation.
-	(invocable property: #incomingInvocations)  <>-* invocation.
+	(invocable property: #outgoingInvocations) <>-* invocation.
+	(invocable property: #incomingInvocations) <>-* invocation.
+	(invocation property: #candidates) <>-* invocable.
 	invocation <>-* argument.
+	(methodInvocation property: #receiver) - access.
 	module <>-* invocable.
 	module <>-* globalVariable.
 	attribute <>-* attributeAccessor.

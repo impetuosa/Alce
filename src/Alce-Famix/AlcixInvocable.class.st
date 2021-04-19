@@ -8,6 +8,7 @@ Class {
 		'#localVariables => FMMany type: #AlcixLocalVariable opposite: #invocable',
 		'#outgoingInvocations => FMMany type: #AlcixInvocation opposite: #invocable',
 		'#incomingInvocations => FMMany type: #AlcixInvocation opposite: #invocable',
+		'#invocation => FMOne type: #AlcixInvocation opposite: #candidates',
 		'#module => FMOne type: #AlcixModule opposite: #invocables'
 	],
 	#category : #'Alce-Famix-Entities'
@@ -96,6 +97,29 @@ AlcixInvocable >> incomingInvocationsGroup [
 	<generated>
 	<navigation: 'IncomingInvocations'>
 	^ MooseSpecializedGroup withAll: self incomingInvocations asSet
+]
+
+{ #category : #accessing }
+AlcixInvocable >> invocation [
+	"Relation named: #invocation type: #AlcixInvocation opposite: #candidates"
+
+	<generated>
+	<container>
+	^ invocation
+]
+
+{ #category : #accessing }
+AlcixInvocable >> invocation: anObject [
+
+	<generated>
+	invocation := anObject
+]
+
+{ #category : #navigation }
+AlcixInvocable >> invocationGroup [
+	<generated>
+	<navigation: 'Invocation'>
+	^ MooseSpecializedGroup with: self invocation
 ]
 
 { #category : #accessing }

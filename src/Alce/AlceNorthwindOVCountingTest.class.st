@@ -1,27 +1,27 @@
 Class {
-	#name : #AlceNorthwindOverviewPrivileges,
+	#name : #AlceNorthwindOVCountingTest,
 	#superclass : #AlceNorthwindBasedSyntacticTest,
-	#category : #'Alce-Tests'
+	#category : #'Alce-Tests-EntityCounting'
 }
 
 { #category : #'test - module' }
-AlceNorthwindOverviewPrivileges >> setUp [
+AlceNorthwindOVCountingTest >> setUp [
 	super setUp.
 	self setupModulePrivileges 
 ]
 
 { #category : #'types definitions' }
-AlceNorthwindOverviewPrivileges >> testModuleDefinesNEnum [
+AlceNorthwindOVCountingTest >> testModuleDefinesNEnum [
 	self assert: self module types first class equals: AlcixEnum
 ]
 
 { #category : #'types definitions' }
-AlceNorthwindOverviewPrivileges >> testModuleDefinesOneEnumWith2Values [
+AlceNorthwindOVCountingTest >> testModuleDefinesOneEnumWith2Values [
 	self assert: self module types first enumValues size equals: 2
 ]
 
 { #category : #'types definitions' }
-AlceNorthwindOverviewPrivileges >> testModuleDefinesOneEnumWithWithNames [
+AlceNorthwindOVCountingTest >> testModuleDefinesOneEnumWithWithNames [
 	self
 		assert: self module types first enumValues first name
 		equals: 'Administrator_Privilege'.
@@ -31,29 +31,29 @@ AlceNorthwindOverviewPrivileges >> testModuleDefinesOneEnumWithWithNames [
 ]
 
 { #category : #'types definitions' }
-AlceNorthwindOverviewPrivileges >> testModuleDefinesOneType [
+AlceNorthwindOVCountingTest >> testModuleDefinesOneType [
 	self assert: self module types size equals: 1
 ]
 
 { #category : #'test - module' }
-AlceNorthwindOverviewPrivileges >> testModuleHasModule [
+AlceNorthwindOVCountingTest >> testModuleHasModule [
 	self assertLoads: 1 of: AlcixModule. 
 ]
 
 { #category : #'functions overview' }
-AlceNorthwindOverviewPrivileges >> testModuleHasNFunctions [
+AlceNorthwindOVCountingTest >> testModuleHasNFunctions [
 	self
 		assert: (self module invocables select: [ :i | i class = AlcixFunction ]) size
 		equals: 4
 ]
 
 { #category : #'test - module' }
-AlceNorthwindOverviewPrivileges >> testModuleHasNMembers [
+AlceNorthwindOVCountingTest >> testModuleHasNMembers [
 	self assert: self module members size equals: 0
 ]
 
 { #category : #'functions overview' }
-AlceNorthwindOverviewPrivileges >> testModuleHasOnlyFunctions [
+AlceNorthwindOVCountingTest >> testModuleHasOnlyFunctions [
 	self
 		assert: (self module invocables allSatisfy: [ :i | i class = AlcixFunction ])
 ]

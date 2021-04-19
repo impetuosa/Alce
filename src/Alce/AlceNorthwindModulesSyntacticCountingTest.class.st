@@ -1,11 +1,11 @@
 Class {
-	#name : #AlceNorthwindModulesSyntacticTest,
+	#name : #AlceNorthwindModulesSyntacticCountingTest,
 	#superclass : #AlceNorthwindBasedSyntacticTest,
-	#category : #'Alce-Tests'
+	#category : #'Alce-Tests-EntityCounting'
 }
 
 { #category : #'customer purchase' }
-AlceNorthwindModulesSyntacticTest class >> setupModuleCustomerOrdersCaseCreateInvoice [
+AlceNorthwindModulesSyntacticCountingTest class >> setupModuleCustomerOrdersCaseCreateInvoice [
 	^ {(#setup -> #setupModuleCustomerOrders).
 	(#fixture
 		->
@@ -18,7 +18,7 @@ AlceNorthwindModulesSyntacticTest class >> setupModuleCustomerOrdersCaseCreateIn
 ]
 
 { #category : #'customer purchase' }
-AlceNorthwindModulesSyntacticTest class >> setupModuleCustomerOrdersCaseDelete [
+AlceNorthwindModulesSyntacticCountingTest class >> setupModuleCustomerOrdersCaseDelete [
 	^ {(#setup -> #setupModuleCustomerOrders).
 	(#fixture
 		->
@@ -31,7 +31,7 @@ AlceNorthwindModulesSyntacticTest class >> setupModuleCustomerOrdersCaseDelete [
 ]
 
 { #category : #'customer purchase' }
-AlceNorthwindModulesSyntacticTest class >> setupModuleCustomerOrdersCaseIsInvoiced [
+AlceNorthwindModulesSyntacticCountingTest class >> setupModuleCustomerOrdersCaseIsInvoiced [
 	^ {(#setup -> #setupModuleCustomerOrders).
 	(#fixture
 		->
@@ -44,7 +44,7 @@ AlceNorthwindModulesSyntacticTest class >> setupModuleCustomerOrdersCaseIsInvoic
 ]
 
 { #category : #'customer purchase' }
-AlceNorthwindModulesSyntacticTest class >> setupModuleCustomerOrdersCasePrintInvoice [
+AlceNorthwindModulesSyntacticCountingTest class >> setupModuleCustomerOrdersCasePrintInvoice [
 	^ {(#setup -> #setupModuleCustomerOrders).
 	(#fixture
 		->
@@ -57,7 +57,7 @@ AlceNorthwindModulesSyntacticTest class >> setupModuleCustomerOrdersCasePrintInv
 ]
 
 { #category : #'customer purchase' }
-AlceNorthwindModulesSyntacticTest class >> setupModuleCustomerOrdersCaseSetStatus [
+AlceNorthwindModulesSyntacticCountingTest class >> setupModuleCustomerOrdersCaseSetStatus [
 	^ {(#setup -> #setupModuleCustomerOrders).
 	(#fixture
 		->
@@ -70,7 +70,7 @@ AlceNorthwindModulesSyntacticTest class >> setupModuleCustomerOrdersCaseSetStatu
 ]
 
 { #category : #'domain function' }
-AlceNorthwindModulesSyntacticTest class >> setupModuleDomainFunctionDomainDAvgWrapper [
+AlceNorthwindModulesSyntacticCountingTest class >> setupModuleDomainFunctionDomainDAvgWrapper [
 	^ {(#setup -> #setupModuleDomainFunction).
 	(#fixture
 		->
@@ -83,7 +83,7 @@ AlceNorthwindModulesSyntacticTest class >> setupModuleDomainFunctionDomainDAvgWr
 ]
 
 { #category : #'domain function' }
-AlceNorthwindModulesSyntacticTest class >> setupModuleDomainFunctionDomainDCountWrapper [
+AlceNorthwindModulesSyntacticCountingTest class >> setupModuleDomainFunctionDomainDCountWrapper [
 	^ {(#setup -> #setupModuleDomainFunction).
 	(#fixture
 		->
@@ -96,7 +96,7 @@ AlceNorthwindModulesSyntacticTest class >> setupModuleDomainFunctionDomainDCount
 ]
 
 { #category : #'domain function' }
-AlceNorthwindModulesSyntacticTest class >> setupModuleDomainFunctionDomainDLookupNumberWrapper [
+AlceNorthwindModulesSyntacticCountingTest class >> setupModuleDomainFunctionDomainDLookupNumberWrapper [
 	^ {(#setup -> #setupModuleDomainFunction).
 	(#fixture
 		->
@@ -109,7 +109,7 @@ AlceNorthwindModulesSyntacticTest class >> setupModuleDomainFunctionDomainDLooku
 ]
 
 { #category : #'domain function' }
-AlceNorthwindModulesSyntacticTest class >> setupModuleDomainFunctionDomainDLookupStringWrapper [
+AlceNorthwindModulesSyntacticCountingTest class >> setupModuleDomainFunctionDomainDLookupStringWrapper [
 	^ {(#setup -> #setupModuleDomainFunction).
 	(#fixture
 		->
@@ -122,7 +122,7 @@ AlceNorthwindModulesSyntacticTest class >> setupModuleDomainFunctionDomainDLooku
 ]
 
 { #category : #'domain function' }
-AlceNorthwindModulesSyntacticTest class >> setupModuleDomainFunctionDomainDLookupWrapper [
+AlceNorthwindModulesSyntacticCountingTest class >> setupModuleDomainFunctionDomainDLookupWrapper [
 	^ {(#setup -> #setupModuleDomainFunction).
 	(#fixture
 		->
@@ -135,7 +135,7 @@ AlceNorthwindModulesSyntacticTest class >> setupModuleDomainFunctionDomainDLooku
 ]
 
 { #category : #'domain function' }
-AlceNorthwindModulesSyntacticTest class >> setupModuleDomainFunctionDomainDMaxWrapper [
+AlceNorthwindModulesSyntacticCountingTest class >> setupModuleDomainFunctionDomainDMaxWrapper [
 	^ {(#setup -> #setupModuleDomainFunction).
 	(#fixture
 		->
@@ -148,7 +148,7 @@ AlceNorthwindModulesSyntacticTest class >> setupModuleDomainFunctionDomainDMaxWr
 ]
 
 { #category : #'domain function' }
-AlceNorthwindModulesSyntacticTest class >> setupModuleDomainFunctionDomainDMinWrapper [
+AlceNorthwindModulesSyntacticCountingTest class >> setupModuleDomainFunctionDomainDMinWrapper [
 	^ {(#setup -> #setupModuleDomainFunction).
 	(#fixture
 		->
@@ -161,7 +161,7 @@ AlceNorthwindModulesSyntacticTest class >> setupModuleDomainFunctionDomainDMinWr
 ]
 
 { #category : #'domain function' }
-AlceNorthwindModulesSyntacticTest class >> setupModuleDomainFunctionDomainDSumWrapper [
+AlceNorthwindModulesSyntacticCountingTest class >> setupModuleDomainFunctionDomainDSumWrapper [
 	^ {(#setup -> #setupModuleDomainFunction).
 	(#fixture
 		->
@@ -174,7 +174,7 @@ AlceNorthwindModulesSyntacticTest class >> setupModuleDomainFunctionDomainDSumWr
 ]
 
 { #category : #'domain function' }
-AlceNorthwindModulesSyntacticTest class >> setupModuleDomainFunctionDomainFunctionWrapper [
+AlceNorthwindModulesSyntacticCountingTest class >> setupModuleDomainFunctionDomainFunctionWrapper [
 	^ {(#setup -> #setupModuleDomainFunction).
 	(#fixture
 		->
@@ -187,7 +187,7 @@ AlceNorthwindModulesSyntacticTest class >> setupModuleDomainFunctionDomainFuncti
 ]
 
 { #category : #'module inventory' }
-AlceNorthwindModulesSyntacticTest class >> setupModuleInventoryAddHold [
+AlceNorthwindModulesSyntacticCountingTest class >> setupModuleInventoryAddHold [
 	^ {(#setup -> #setupModuleInventory).
 	(#fixture
 		->
@@ -200,7 +200,7 @@ AlceNorthwindModulesSyntacticTest class >> setupModuleInventoryAddHold [
 ]
 
 { #category : #'module inventory' }
-AlceNorthwindModulesSyntacticTest class >> setupModuleInventoryAddPurchase [
+AlceNorthwindModulesSyntacticCountingTest class >> setupModuleInventoryAddPurchase [
 	^ {(#setup -> #setupModuleInventory).
 	(#fixture
 		->
@@ -213,7 +213,7 @@ AlceNorthwindModulesSyntacticTest class >> setupModuleInventoryAddPurchase [
 ]
 
 { #category : #'module inventory' }
-AlceNorthwindModulesSyntacticTest class >> setupModuleInventoryDeleteTransaction [
+AlceNorthwindModulesSyntacticCountingTest class >> setupModuleInventoryDeleteTransaction [
 	^ {(#setup -> #setupModuleInventory).
 	(#fixture
 		->
@@ -226,7 +226,7 @@ AlceNorthwindModulesSyntacticTest class >> setupModuleInventoryDeleteTransaction
 ]
 
 { #category : #'module inventory' }
-AlceNorthwindModulesSyntacticTest class >> setupModuleInventoryEditTransaction [
+AlceNorthwindModulesSyntacticCountingTest class >> setupModuleInventoryEditTransaction [
 	^ {(#setup -> #setupModuleInventory).
 	(#fixture
 		->
@@ -239,7 +239,7 @@ AlceNorthwindModulesSyntacticTest class >> setupModuleInventoryEditTransaction [
 ]
 
 { #category : #'module inventory' }
-AlceNorthwindModulesSyntacticTest class >> setupModuleInventoryFillBackOrder [
+AlceNorthwindModulesSyntacticCountingTest class >> setupModuleInventoryFillBackOrder [
 	^ {(#setup -> #setupModuleInventory).
 	(#fixture
 		->
@@ -252,7 +252,7 @@ AlceNorthwindModulesSyntacticTest class >> setupModuleInventoryFillBackOrder [
 ]
 
 { #category : #'module inventory' }
-AlceNorthwindModulesSyntacticTest class >> setupModuleInventoryFillBackOrders [
+AlceNorthwindModulesSyntacticCountingTest class >> setupModuleInventoryFillBackOrders [
 	^ {(#setup -> #setupModuleInventory).
 	(#fixture
 		->
@@ -265,7 +265,7 @@ AlceNorthwindModulesSyntacticTest class >> setupModuleInventoryFillBackOrders [
 ]
 
 { #category : #'module inventory' }
-AlceNorthwindModulesSyntacticTest class >> setupModuleInventoryFindProductSupplier [
+AlceNorthwindModulesSyntacticCountingTest class >> setupModuleInventoryFindProductSupplier [
 	^ {(#setup -> #setupModuleInventory).
 	(#fixture
 		->
@@ -278,7 +278,7 @@ AlceNorthwindModulesSyntacticTest class >> setupModuleInventoryFindProductSuppli
 ]
 
 { #category : #'module inventory' }
-AlceNorthwindModulesSyntacticTest class >> setupModuleInventoryGetInventoryQuantity [
+AlceNorthwindModulesSyntacticCountingTest class >> setupModuleInventoryGetInventoryQuantity [
 	^ {(#setup -> #setupModuleInventory).
 	(#fixture
 		->
@@ -291,7 +291,7 @@ AlceNorthwindModulesSyntacticTest class >> setupModuleInventoryGetInventoryQuant
 ]
 
 { #category : #'module inventory' }
-AlceNorthwindModulesSyntacticTest class >> setupModuleInventoryGetQtyAvailable [
+AlceNorthwindModulesSyntacticCountingTest class >> setupModuleInventoryGetQtyAvailable [
 	^ {(#setup -> #setupModuleInventory).
 	(#fixture
 		->
@@ -304,7 +304,7 @@ AlceNorthwindModulesSyntacticTest class >> setupModuleInventoryGetQtyAvailable [
 ]
 
 { #category : #'module inventory' }
-AlceNorthwindModulesSyntacticTest class >> setupModuleInventoryGetQtyOnBackOrder [
+AlceNorthwindModulesSyntacticCountingTest class >> setupModuleInventoryGetQtyOnBackOrder [
 	^ {(#setup -> #setupModuleInventory).
 	(#fixture
 		->
@@ -317,7 +317,7 @@ AlceNorthwindModulesSyntacticTest class >> setupModuleInventoryGetQtyOnBackOrder
 ]
 
 { #category : #'module inventory' }
-AlceNorthwindModulesSyntacticTest class >> setupModuleInventoryGetQtyOnHand [
+AlceNorthwindModulesSyntacticCountingTest class >> setupModuleInventoryGetQtyOnHand [
 	^ {(#setup -> #setupModuleInventory).
 	(#fixture
 		->
@@ -330,7 +330,7 @@ AlceNorthwindModulesSyntacticTest class >> setupModuleInventoryGetQtyOnHand [
 ]
 
 { #category : #'module inventory' }
-AlceNorthwindModulesSyntacticTest class >> setupModuleInventoryGetQtyToReorder [
+AlceNorthwindModulesSyntacticCountingTest class >> setupModuleInventoryGetQtyToReorder [
 	^ {(#setup -> #setupModuleInventory).
 	(#fixture
 		->
@@ -343,7 +343,7 @@ AlceNorthwindModulesSyntacticTest class >> setupModuleInventoryGetQtyToReorder [
 ]
 
 { #category : #'module inventory' }
-AlceNorthwindModulesSyntacticTest class >> setupModuleInventoryGetRestockingPurchaseOrder [
+AlceNorthwindModulesSyntacticCountingTest class >> setupModuleInventoryGetRestockingPurchaseOrder [
 	^ {(#setup -> #setupModuleInventory).
 	(#fixture
 		->
@@ -356,7 +356,7 @@ AlceNorthwindModulesSyntacticTest class >> setupModuleInventoryGetRestockingPurc
 ]
 
 { #category : #'module inventory' }
-AlceNorthwindModulesSyntacticTest class >> setupModuleInventoryGetTransaction [
+AlceNorthwindModulesSyntacticCountingTest class >> setupModuleInventoryGetTransaction [
 	^ {(#setup -> #setupModuleInventory).
 	(#fixture
 		->
@@ -369,7 +369,7 @@ AlceNorthwindModulesSyntacticTest class >> setupModuleInventoryGetTransaction [
 ]
 
 { #category : #'module inventory' }
-AlceNorthwindModulesSyntacticTest class >> setupModuleInventoryHoldToSold [
+AlceNorthwindModulesSyntacticCountingTest class >> setupModuleInventoryHoldToSold [
 	^ {(#setup -> #setupModuleInventory).
 	(#fixture
 		->
@@ -382,7 +382,7 @@ AlceNorthwindModulesSyntacticTest class >> setupModuleInventoryHoldToSold [
 ]
 
 { #category : #'module inventory' }
-AlceNorthwindModulesSyntacticTest class >> setupModuleInventoryModifyHold [
+AlceNorthwindModulesSyntacticCountingTest class >> setupModuleInventoryModifyHold [
 	^ {(#setup -> #setupModuleInventory).
 	(#fixture
 		->
@@ -395,7 +395,7 @@ AlceNorthwindModulesSyntacticTest class >> setupModuleInventoryModifyHold [
 ]
 
 { #category : #'module inventory' }
-AlceNorthwindModulesSyntacticTest class >> setupModuleInventoryRemoveHold [
+AlceNorthwindModulesSyntacticCountingTest class >> setupModuleInventoryRemoveHold [
 	^ {(#setup -> #setupModuleInventory).
 	(#fixture
 		->
@@ -408,7 +408,7 @@ AlceNorthwindModulesSyntacticTest class >> setupModuleInventoryRemoveHold [
 ]
 
 { #category : #'module inventory' }
-AlceNorthwindModulesSyntacticTest class >> setupModuleInventoryRemovePurchase [
+AlceNorthwindModulesSyntacticCountingTest class >> setupModuleInventoryRemovePurchase [
 	^ {(#setup -> #setupModuleInventory).
 	(#fixture
 		->
@@ -421,7 +421,7 @@ AlceNorthwindModulesSyntacticTest class >> setupModuleInventoryRemovePurchase [
 ]
 
 { #category : #'module inventory' }
-AlceNorthwindModulesSyntacticTest class >> setupModuleInventoryRequestHold [
+AlceNorthwindModulesSyntacticCountingTest class >> setupModuleInventoryRequestHold [
 	^ {(#setup -> #setupModuleInventory).
 	(#fixture
 		->
@@ -434,7 +434,7 @@ AlceNorthwindModulesSyntacticTest class >> setupModuleInventoryRequestHold [
 ]
 
 { #category : #'module inventory' }
-AlceNorthwindModulesSyntacticTest class >> setupModuleInventoryRestockProduct [
+AlceNorthwindModulesSyntacticCountingTest class >> setupModuleInventoryRestockProduct [
 	^ {(#setup -> #setupModuleInventory).
 	(#fixture
 		->
@@ -447,7 +447,7 @@ AlceNorthwindModulesSyntacticTest class >> setupModuleInventoryRestockProduct [
 ]
 
 { #category : #'building suites' }
-AlceNorthwindModulesSyntacticTest class >> setupModulePrivileges [
+AlceNorthwindModulesSyntacticCountingTest class >> setupModulePrivileges [
 	^ {(#setup -> #setupModulePrivileges).
 	(#fixture
 		->
@@ -460,7 +460,7 @@ AlceNorthwindModulesSyntacticTest class >> setupModulePrivileges [
 ]
 
 { #category : #'building suites' }
-AlceNorthwindModulesSyntacticTest class >> setupModulePurchaseOrders [
+AlceNorthwindModulesSyntacticCountingTest class >> setupModulePurchaseOrders [
 	^ {(#setup -> #setupModulePurchaseOrders).
 	(#fixture
 		->
@@ -473,7 +473,7 @@ AlceNorthwindModulesSyntacticTest class >> setupModulePurchaseOrders [
 ]
 
 { #category : #'building suites' }
-AlceNorthwindModulesSyntacticTest class >> setupModuleReflective [
+AlceNorthwindModulesSyntacticCountingTest class >> setupModuleReflective [
 	^ {(#setup -> #setupModuleUtilities).
 	(#fixture
 		->
@@ -486,7 +486,7 @@ AlceNorthwindModulesSyntacticTest class >> setupModuleReflective [
 ]
 
 { #category : #'building suites' }
-AlceNorthwindModulesSyntacticTest class >> testParameters [
+AlceNorthwindModulesSyntacticCountingTest class >> testParameters [
 	^ super testParameters
 		addCase: self setupModuleCustomerOrdersCaseCreateInvoice;
 		addCase: self setupModuleCustomerOrdersCaseDelete;
@@ -536,47 +536,47 @@ String cr join:( self class selectors select: [: s | s beginsWith:'setupModuleIn
 ]
 
 { #category : #'as yet unclassified' }
-AlceNorthwindModulesSyntacticTest >> testAllLocalVariablesHaveName [
+AlceNorthwindModulesSyntacticCountingTest >> testAllLocalVariablesHaveName [
 	self
 		assert: self functionOrSub localVariables
 		allSatisfy: [ :a | a name isString and: [ a name isNotEmpty ] ]
 ]
 
 { #category : #'as yet unclassified' }
-AlceNorthwindModulesSyntacticTest >> testAllLocalVariablesHaveTypeName [
+AlceNorthwindModulesSyntacticCountingTest >> testAllLocalVariablesHaveTypeName [
 	self
 		assert: self functionOrSub localVariables
 		allSatisfy: [ :a | a typeName isString and: [ a typeName isNotEmpty ] ]
 ]
 
 { #category : #'as yet unclassified' }
-AlceNorthwindModulesSyntacticTest >> testAllTheAccessesHaveAttributeName [
+AlceNorthwindModulesSyntacticCountingTest >> testAllTheAccessesHaveAttributeName [
 	self
 		assert: self functionOrSub accesses
 		allSatisfy: [ :a | a attributeName isString and: [ a attributeName isNotEmpty ] ]
 ]
 
 { #category : #'as yet unclassified' }
-AlceNorthwindModulesSyntacticTest >> testAllTheInvocationsHaveSelector [
+AlceNorthwindModulesSyntacticCountingTest >> testAllTheInvocationsHaveSelector [
 	self
 		assert: self functionOrSub outgoingInvocations
 		allSatisfy: [ :a | a selector isString ]
 ]
 
 { #category : #'as yet unclassified' }
-AlceNorthwindModulesSyntacticTest >> testDefinedFunctionHasExpectedAmountParameters [
+AlceNorthwindModulesSyntacticCountingTest >> testDefinedFunctionHasExpectedAmountParameters [
 	self
 		assert: self functionOrSub parameters size
 		equals: (fixture at: #parameters) size
 ]
 
 { #category : #'as yet unclassified' }
-AlceNorthwindModulesSyntacticTest >> testDefinedFunctionHasNoneIncomingInvocationBeforeBindingPhase [
+AlceNorthwindModulesSyntacticCountingTest >> testDefinedFunctionHasNoneIncomingInvocationBeforeBindingPhase [
 	self assert: self functionOrSub incomingInvocations isEmpty
 ]
 
 { #category : #'as yet unclassified' }
-AlceNorthwindModulesSyntacticTest >> testDefinedFunctionHasParameters [
+AlceNorthwindModulesSyntacticCountingTest >> testDefinedFunctionHasParameters [
 	| comparison |
 	comparison := self functionOrSub parameters asOrderedCollection
 		with: (fixture at: #parameters)
@@ -585,28 +585,28 @@ AlceNorthwindModulesSyntacticTest >> testDefinedFunctionHasParameters [
 ]
 
 { #category : #'as yet unclassified' }
-AlceNorthwindModulesSyntacticTest >> testDefinedFunctionParametersHaveName [
+AlceNorthwindModulesSyntacticCountingTest >> testDefinedFunctionParametersHaveName [
 	self
 		assert: self functionOrSub parameters
 		allSatisfy: [ :p | p name isString and: [ p name isNotEmpty ] ]
 ]
 
 { #category : #'as yet unclassified' }
-AlceNorthwindModulesSyntacticTest >> testDefinedFunctionParametersHaveTypeName [
+AlceNorthwindModulesSyntacticCountingTest >> testDefinedFunctionParametersHaveTypeName [
 	self
 		assert: self functionOrSub parameters
 		allSatisfy: [ :p | p typeName isString and: [ p typeName isNotEmpty ] ]
 ]
 
 { #category : #'as yet unclassified' }
-AlceNorthwindModulesSyntacticTest >> testDefinedFunctionReturnsBoolean [
+AlceNorthwindModulesSyntacticCountingTest >> testDefinedFunctionReturnsBoolean [
 	self
 		assert: self functionOrSub typeName
 		equals: (fixture at: #return)
 ]
 
 { #category : #'as yet unclassified' }
-AlceNorthwindModulesSyntacticTest >> testDefinesFunction [
+AlceNorthwindModulesSyntacticCountingTest >> testDefinesFunction [
 	self
 		assert:
 			(self module invocables
@@ -614,57 +614,54 @@ AlceNorthwindModulesSyntacticTest >> testDefinesFunction [
 ]
 
 { #category : #'as yet unclassified' }
-AlceNorthwindModulesSyntacticTest >> testDefinesHasAssignments [
+AlceNorthwindModulesSyntacticCountingTest >> testDefinesHasAssignments [
 	self
 		assert: (self functionOrSub accesses select: #isWriting) size
 		equals: (fixture at: #assignments)
 ]
 
 { #category : #'as yet unclassified' }
-AlceNorthwindModulesSyntacticTest >> testDefinesHasOutgoingInvocation [
+AlceNorthwindModulesSyntacticCountingTest >> testDefinesHasOutgoingInvocation [
 	self
 		assert: self functionOrSub outgoingInvocations size
 		equals: (fixture at: #outgoingInvocations)
 ]
 
 { #category : #'as yet unclassified' }
-AlceNorthwindModulesSyntacticTest >> testDefinesHasVariables [
+AlceNorthwindModulesSyntacticCountingTest >> testDefinesHasVariables [
 	self
 		assert: self functionOrSub localVariables size
 		equals: (fixture at: #localVariables)
 ]
 
 { #category : #'as yet unclassified' }
-AlceNorthwindModulesSyntacticTest >> testFunctionReturnsType [
+AlceNorthwindModulesSyntacticCountingTest >> testFunctionReturnsType [
 	self assert: self functionOrSub typeName isString
 ]
 
 { #category : #'as yet unclassified' }
-AlceNorthwindModulesSyntacticTest >> testIfInvocationExpressionContainsAPointIsMessageSend [
+AlceNorthwindModulesSyntacticCountingTest >> testIfInvocationExpressionContainsAPointIsMessageSend [
 	| isMessageSend |
 	self functionOrSub outgoingInvocations
 		do: [ :inv | 
-			isMessageSend := inv invocationExpression includes: $..
+			isMessageSend := inv selector includes: $..
 			self assert: inv isVBMessageSend equals: isMessageSend ]
 ]
 
 { #category : #'as yet unclassified' }
-AlceNorthwindModulesSyntacticTest >> testMessageSendMustReturnReceiverIfNotError [
+AlceNorthwindModulesSyntacticCountingTest >> testMessageSendMustReturnReceiverIfNotError [
 	self functionOrSub outgoingInvocations
 		do: [ :inv | 
 			inv isVBMessageSend
-				ifTrue: [ self assert: inv receiver isNotEmpty ]
+				ifTrue: [ self assert: inv receiver class equals: AlcixAccess ]
 				ifFalse: [ self should: [ inv receiver ] raise: Error ] ]
 ]
 
 { #category : #'as yet unclassified' }
-AlceNorthwindModulesSyntacticTest >> testSelectorIsCalculatedFromInvocationExpression [
+AlceNorthwindModulesSyntacticCountingTest >> testSelectorIsCalculatedFromInvocationExpression [
 	self functionOrSub outgoingInvocations
 		do: [ :inv | 
 			inv isVBMessageSend
-				ifTrue: [ self
-						assert: inv receiver , '.' , inv selector
-						equals: inv invocationExpression ]
-				ifFalse:
-					[ self assert: inv selector equals: inv invocationExpression ] ]
+				ifTrue: [ self assert: (inv receiver asString endsWith: inv selector) ]
+				ifFalse: [ self assert: (inv selector indexOf: $.) equals: 0 ] ]
 ]

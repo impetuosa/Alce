@@ -1,27 +1,27 @@
 Class {
-	#name : #AlceNorthwindOverviewPurchaseOrders,
+	#name : #AlceNorthwindPurchaseOrdersOVCountingTest,
 	#superclass : #AlceNorthwindBasedSyntacticTest,
-	#category : #'Alce-Tests'
+	#category : #'Alce-Tests-EntityCounting'
 }
 
 { #category : #'test - module' }
-AlceNorthwindOverviewPurchaseOrders >> setUp [
+AlceNorthwindPurchaseOrdersOVCountingTest >> setUp [
 	super setUp.
 	self setupModulePurchaseOrders 
 ]
 
 { #category : #'types definitions' }
-AlceNorthwindOverviewPurchaseOrders >> testModuleDefinesNEnum [
+AlceNorthwindPurchaseOrdersOVCountingTest >> testModuleDefinesNEnum [
 	self assert: self module types first class equals: AlcixEnum
 ]
 
 { #category : #'types definitions' }
-AlceNorthwindOverviewPurchaseOrders >> testModuleDefinesOneEnumWith4Values [
+AlceNorthwindPurchaseOrdersOVCountingTest >> testModuleDefinesOneEnumWith4Values [
 	self assert: self module types first enumValues size equals: 4
 ]
 
 { #category : #'types definitions' }
-AlceNorthwindOverviewPurchaseOrders >> testModuleDefinesOneEnumWithWithNames [
+AlceNorthwindPurchaseOrdersOVCountingTest >> testModuleDefinesOneEnumWithWithNames [
 	self
 		assert: self module types first enumValues first name
 		equals: 'New_PurchaseOrder'.
@@ -37,36 +37,36 @@ AlceNorthwindOverviewPurchaseOrders >> testModuleDefinesOneEnumWithWithNames [
 ]
 
 { #category : #'types definitions' }
-AlceNorthwindOverviewPurchaseOrders >> testModuleDefinesOneType [
+AlceNorthwindPurchaseOrdersOVCountingTest >> testModuleDefinesOneType [
 	self assert: self module types size equals: 1
 ]
 
 { #category : #'test - module' }
-AlceNorthwindOverviewPurchaseOrders >> testModuleHasModule [
+AlceNorthwindPurchaseOrdersOVCountingTest >> testModuleHasModule [
 	self assertLoads: 1 of: AlcixModule. 
 ]
 
 { #category : #'functions overview' }
-AlceNorthwindOverviewPurchaseOrders >> testModuleHasNFunctions [
+AlceNorthwindPurchaseOrdersOVCountingTest >> testModuleHasNFunctions [
 	self
 		assert: (self module invocables select: [ :i | i class = AlcixFunction ]) size
 		equals: 11
 ]
 
 { #category : #'test - module' }
-AlceNorthwindOverviewPurchaseOrders >> testModuleHasNMembers [
+AlceNorthwindPurchaseOrdersOVCountingTest >> testModuleHasNMembers [
 	self assert: self module members size equals: 0
 ]
 
 { #category : #'functions overview' }
-AlceNorthwindOverviewPurchaseOrders >> testModuleHasNSubProcedures [
+AlceNorthwindPurchaseOrdersOVCountingTest >> testModuleHasNSubProcedures [
 	self
 		assert: (self module invocables select: [ :i | i class = AlcixSubProcedure  ]) size
 		equals: 2
 ]
 
 { #category : #'functions overview' }
-AlceNorthwindOverviewPurchaseOrders >> testModuleHasOnlyFunctionsAndSubs [
+AlceNorthwindPurchaseOrdersOVCountingTest >> testModuleHasOnlyFunctionsAndSubs [
 	self
 		assert:
 			(self module invocables

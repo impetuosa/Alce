@@ -1,39 +1,39 @@
 Class {
-	#name : #AlceNorthwindOverviewReflective,
+	#name : #AlceNorthwindReflectiveOVCountingTest,
 	#superclass : #AlceNorthwindBasedSyntacticTest,
-	#category : #'Alce-Tests'
+	#category : #'Alce-Tests-EntityCounting'
 }
 
 { #category : #'test - module' }
-AlceNorthwindOverviewReflective >> setUp [
+AlceNorthwindReflectiveOVCountingTest >> setUp [
 	super setUp.
 	self setupModuleReflective 
 ]
 
 { #category : #'types definitions' }
-AlceNorthwindOverviewReflective >> testModuleDefines0Types [
+AlceNorthwindReflectiveOVCountingTest >> testModuleDefines0Types [
 	self assert: self module types size equals: 0
 ]
 
 { #category : #'test - module' }
-AlceNorthwindOverviewReflective >> testModuleHasModule [
+AlceNorthwindReflectiveOVCountingTest >> testModuleHasModule [
 	self assertLoads: 1 of: AlcixModule. 
 ]
 
 { #category : #'functions overview' }
-AlceNorthwindOverviewReflective >> testModuleHasNFunctions [
+AlceNorthwindReflectiveOVCountingTest >> testModuleHasNFunctions [
 	self
 		assert: (self module invocables select: [ :i | i class = AlcixFunction ]) size
 		equals: 1
 ]
 
 { #category : #'test - module' }
-AlceNorthwindOverviewReflective >> testModuleHasNMembers [
+AlceNorthwindReflectiveOVCountingTest >> testModuleHasNMembers [
 	self assert: self module members size equals: 0
 ]
 
 { #category : #'functions overview' }
-AlceNorthwindOverviewReflective >> testModuleHasOnlyFunctions [
+AlceNorthwindReflectiveOVCountingTest >> testModuleHasOnlyFunctions [
 	self
 		assert:
 			(self module invocables
@@ -41,7 +41,7 @@ AlceNorthwindOverviewReflective >> testModuleHasOnlyFunctions [
 ]
 
 { #category : #'functions overview' }
-AlceNorthwindOverviewReflective >> testModuleHasOnlyFunctionsAndSubs [
+AlceNorthwindReflectiveOVCountingTest >> testModuleHasOnlyFunctionsAndSubs [
 	self
 		assert:
 			(self module invocables

@@ -1,11 +1,11 @@
 Class {
-	#name : #AlceNorthwindClassSyntacticTest,
+	#name : #AlceNorthwindClassSyntacticCountingTest,
 	#superclass : #AlceNorthwindBasedSyntacticTest,
-	#category : #'Alce-Tests'
+	#category : #'Alce-Tests-EntityCounting'
 }
 
 { #category : #'as yet unclassified' }
-AlceNorthwindClassSyntacticTest class >> setupClassErrorHandlingLogError [
+AlceNorthwindClassSyntacticCountingTest class >> setupClassErrorHandlingLogError [
 ^ {
 (#setup -> #setupClassErrorHandling).
 	(#fixture
@@ -19,7 +19,7 @@ AlceNorthwindClassSyntacticTest class >> setupClassErrorHandlingLogError [
 ]
 
 { #category : #'as yet unclassified' }
-AlceNorthwindClassSyntacticTest class >> setupClassErrorHandlingTryToCloseObject [
+AlceNorthwindClassSyntacticCountingTest class >> setupClassErrorHandlingTryToCloseObject [
 ^ {
 (#setup -> #setupClassErrorHandling).
 	(#fixture
@@ -33,7 +33,7 @@ AlceNorthwindClassSyntacticTest class >> setupClassErrorHandlingTryToCloseObject
 ]
 
 { #category : #'as yet unclassified' }
-AlceNorthwindClassSyntacticTest class >> setupClassErrorHandlingTryToGoToRecord [
+AlceNorthwindClassSyntacticCountingTest class >> setupClassErrorHandlingTryToGoToRecord [
 ^ {
 (#setup -> #setupClassErrorHandling).
 	(#fixture
@@ -47,7 +47,7 @@ AlceNorthwindClassSyntacticTest class >> setupClassErrorHandlingTryToGoToRecord 
 ]
 
 { #category : #'as yet unclassified' }
-AlceNorthwindClassSyntacticTest class >> setupClassErrorHandlingTryToRunCommand [
+AlceNorthwindClassSyntacticCountingTest class >> setupClassErrorHandlingTryToRunCommand [
 ^ {
 (#setup -> #setupClassErrorHandling).
 	(#fixture
@@ -61,7 +61,7 @@ AlceNorthwindClassSyntacticTest class >> setupClassErrorHandlingTryToRunCommand 
 ]
 
 { #category : #'as yet unclassified' }
-AlceNorthwindClassSyntacticTest class >> setupClassErrorHandlingTryToSaveRecord [
+AlceNorthwindClassSyntacticCountingTest class >> setupClassErrorHandlingTryToSaveRecord [
 ^ {
 (#setup -> #setupClassErrorHandling).
 	(#fixture
@@ -75,7 +75,7 @@ AlceNorthwindClassSyntacticTest class >> setupClassErrorHandlingTryToSaveRecord 
 ]
 
 { #category : #'as yet unclassified' }
-AlceNorthwindClassSyntacticTest class >> setupClassRecordsetWrapperAddNew [
+AlceNorthwindClassSyntacticCountingTest class >> setupClassRecordsetWrapperAddNew [
 ^ {
 (#setup -> #setupClassRecordsetWrapper).
 	(#fixture
@@ -89,7 +89,7 @@ AlceNorthwindClassSyntacticTest class >> setupClassRecordsetWrapperAddNew [
 ]
 
 { #category : #'as yet unclassified' }
-AlceNorthwindClassSyntacticTest class >> setupClassRecordsetWrapperClass_Terminate [
+AlceNorthwindClassSyntacticCountingTest class >> setupClassRecordsetWrapperClass_Terminate [
 ^ {
 (#setup -> #setupClassRecordsetWrapper).
 	(#fixture
@@ -103,7 +103,7 @@ AlceNorthwindClassSyntacticTest class >> setupClassRecordsetWrapperClass_Termina
 ]
 
 { #category : #'as yet unclassified' }
-AlceNorthwindClassSyntacticTest class >> setupClassRecordsetWrapperCloseRecordset [
+AlceNorthwindClassSyntacticCountingTest class >> setupClassRecordsetWrapperCloseRecordset [
 ^ {
 (#setup -> #setupClassRecordsetWrapper).
 	(#fixture
@@ -117,7 +117,7 @@ AlceNorthwindClassSyntacticTest class >> setupClassRecordsetWrapperCloseRecordse
 ]
 
 { #category : #'as yet unclassified' }
-AlceNorthwindClassSyntacticTest class >> setupClassRecordsetWrapperDelete [
+AlceNorthwindClassSyntacticCountingTest class >> setupClassRecordsetWrapperDelete [
 ^ {
 (#setup -> #setupClassRecordsetWrapper).
 	(#fixture
@@ -131,7 +131,7 @@ AlceNorthwindClassSyntacticTest class >> setupClassRecordsetWrapperDelete [
 ]
 
 { #category : #'as yet unclassified' }
-AlceNorthwindClassSyntacticTest class >> setupClassRecordsetWrapperEdit [
+AlceNorthwindClassSyntacticCountingTest class >> setupClassRecordsetWrapperEdit [
 ^ {
 (#setup -> #setupClassRecordsetWrapper).
 	(#fixture
@@ -145,7 +145,7 @@ AlceNorthwindClassSyntacticTest class >> setupClassRecordsetWrapperEdit [
 ]
 
 { #category : #'as yet unclassified' }
-AlceNorthwindClassSyntacticTest class >> setupClassRecordsetWrapperGetRecordsetClone [
+AlceNorthwindClassSyntacticCountingTest class >> setupClassRecordsetWrapperGetRecordsetClone [
 ^ {
 (#setup -> #setupClassRecordsetWrapper).
 	(#fixture
@@ -159,7 +159,7 @@ AlceNorthwindClassSyntacticTest class >> setupClassRecordsetWrapperGetRecordsetC
 ]
 
 { #category : #'as yet unclassified' }
-AlceNorthwindClassSyntacticTest class >> setupClassRecordsetWrapperMoveNext [
+AlceNorthwindClassSyntacticCountingTest class >> setupClassRecordsetWrapperMoveNext [
 ^ {
 (#setup -> #setupClassRecordsetWrapper).
 	(#fixture
@@ -173,7 +173,7 @@ AlceNorthwindClassSyntacticTest class >> setupClassRecordsetWrapperMoveNext [
 ]
 
 { #category : #'as yet unclassified' }
-AlceNorthwindClassSyntacticTest class >> setupClassRecordsetWrapperOpenRecordset [
+AlceNorthwindClassSyntacticCountingTest class >> setupClassRecordsetWrapperOpenRecordset [
 	^ {(#setup -> #setupClassRecordsetWrapper).
 	(#fixture
 		->
@@ -189,7 +189,7 @@ AlceNorthwindClassSyntacticTest class >> setupClassRecordsetWrapperOpenRecordset
 ]
 
 { #category : #'as yet unclassified' }
-AlceNorthwindClassSyntacticTest class >> setupClassRecordsetWrapperUpdate [
+AlceNorthwindClassSyntacticCountingTest class >> setupClassRecordsetWrapperUpdate [
 ^ {
 (#setup -> #setupClassRecordsetWrapper).
 	(#fixture
@@ -203,7 +203,7 @@ AlceNorthwindClassSyntacticTest class >> setupClassRecordsetWrapperUpdate [
 ]
 
 { #category : #'building suites' }
-AlceNorthwindClassSyntacticTest class >> testParameters [
+AlceNorthwindClassSyntacticCountingTest class >> testParameters [
 	^ super testParameters
 		addCase: self setupClassRecordsetWrapperAddNew;
 		addCase: self setupClassRecordsetWrapperMoveNext;
@@ -222,7 +222,7 @@ AlceNorthwindClassSyntacticTest class >> testParameters [
 ]
 
 { #category : #'as yet unclassified' }
-AlceNorthwindClassSyntacticTest >> assert: actual equals: expected [
+AlceNorthwindClassSyntacticCountingTest >> assert: actual equals: expected [
 	"This method raises an AssertionFailure if actual is different (using #= message) from expected.
 	 Else it does nothing and execution continues.
 	"
@@ -241,80 +241,80 @@ AlceNorthwindClassSyntacticTest >> assert: actual equals: expected [
 ]
 
 { #category : #'as yet unclassified' }
-AlceNorthwindClassSyntacticTest >> assertIfFunction: aBlockClosure [
+AlceNorthwindClassSyntacticCountingTest >> assertIfFunction: aBlockClosure [
 	^ self assertIfFunction: aBlockClosure ifFalse: [ true ]
 ]
 
 { #category : #'as yet unclassified' }
-AlceNorthwindClassSyntacticTest >> assertIfFunction: aBlock ifFalse: otherBlock [
+AlceNorthwindClassSyntacticCountingTest >> assertIfFunction: aBlock ifFalse: otherBlock [
 	self functionOrSub class = AlcixFunction
 		ifFalse: [ ^self assert: otherBlock value ].
 	self assert: aBlock value
 ]
 
 { #category : #'as yet unclassified' }
-AlceNorthwindClassSyntacticTest >> testAllLocalVariablesHaveName [
+AlceNorthwindClassSyntacticCountingTest >> testAllLocalVariablesHaveName [
 	self
 		assert: self functionOrSub localVariables
 		allSatisfy: [ :a | a name isString and: [ a name isNotEmpty ] ]
 ]
 
 { #category : #'as yet unclassified' }
-AlceNorthwindClassSyntacticTest >> testAllLocalVariablesHaveTypeName [
+AlceNorthwindClassSyntacticCountingTest >> testAllLocalVariablesHaveTypeName [
 	self
 		assert: self functionOrSub localVariables
 		allSatisfy: [ :a | a typeName isString and: [ a typeName isNotEmpty ] ]
 ]
 
 { #category : #'as yet unclassified' }
-AlceNorthwindClassSyntacticTest >> testAllTheAccessesHaveAttributeName [
+AlceNorthwindClassSyntacticCountingTest >> testAllTheAccessesHaveAttributeName [
 	self
 		assert: self functionOrSub accesses
 		allSatisfy: [ :a | a attributeName isString and: [ a attributeName isNotEmpty ] ]
 ]
 
 { #category : #'as yet unclassified' }
-AlceNorthwindClassSyntacticTest >> testAllTheInvocationsHaveSelector [
+AlceNorthwindClassSyntacticCountingTest >> testAllTheInvocationsHaveSelector [
 	self
 		assert: self functionOrSub outgoingInvocations
 		allSatisfy: [ :a | a selector isString ]
 ]
 
 { #category : #'as yet unclassified' }
-AlceNorthwindClassSyntacticTest >> testDefinedFunctionHasExpectedAmountParameters [
+AlceNorthwindClassSyntacticCountingTest >> testDefinedFunctionHasExpectedAmountParameters [
 	self
 		assert: self functionOrSub parameters size
 		equals: (fixture at: #parameters) size
 ]
 
 { #category : #'as yet unclassified' }
-AlceNorthwindClassSyntacticTest >> testDefinedFunctionHasNoneIncomingInvocationBeforeBindingPhase [
+AlceNorthwindClassSyntacticCountingTest >> testDefinedFunctionHasNoneIncomingInvocationBeforeBindingPhase [
 	self assert: self functionOrSub incomingInvocations isEmpty
 ]
 
 { #category : #'as yet unclassified' }
-AlceNorthwindClassSyntacticTest >> testDefinedFunctionHasParameters [
+AlceNorthwindClassSyntacticCountingTest >> testDefinedFunctionHasParameters [
 	self functionOrSub parameters asOrderedCollection
 		with: (fixture at: #parameters)
 		do: [ :p :pt | self assert: p typeName equals: pt ]
 ]
 
 { #category : #'as yet unclassified' }
-AlceNorthwindClassSyntacticTest >> testDefinedFunctionParametersHaveName [
+AlceNorthwindClassSyntacticCountingTest >> testDefinedFunctionParametersHaveName [
 	self
 		assert: self functionOrSub parameters
 		allSatisfy: [ :p | p name isString and: [ p name isNotEmpty ] ]
 ]
 
 { #category : #'as yet unclassified' }
-AlceNorthwindClassSyntacticTest >> testDefinedFunctionParametersHaveTypeName [
+AlceNorthwindClassSyntacticCountingTest >> testDefinedFunctionParametersHaveTypeName [
 	self
 		assert: self functionOrSub parameters
 		allSatisfy: [ :p | p typeName isString and: [ p typeName isNotEmpty ] ]
 ]
 
 { #category : #'as yet unclassified' }
-AlceNorthwindClassSyntacticTest >> testDefinedFunctionReturnsBoolean [
+AlceNorthwindClassSyntacticCountingTest >> testDefinedFunctionReturnsBoolean [
 	self
 		assertIfFunction: [ self
 				assert: self functionOrSub typeName
@@ -324,7 +324,7 @@ AlceNorthwindClassSyntacticTest >> testDefinedFunctionReturnsBoolean [
 ]
 
 { #category : #'as yet unclassified' }
-AlceNorthwindClassSyntacticTest >> testDefinesFunction [
+AlceNorthwindClassSyntacticCountingTest >> testDefinesFunction [
 	self
 		assert:
 			(self module invocables
@@ -332,59 +332,56 @@ AlceNorthwindClassSyntacticTest >> testDefinesFunction [
 ]
 
 { #category : #'as yet unclassified' }
-AlceNorthwindClassSyntacticTest >> testDefinesHasAssignments [
+AlceNorthwindClassSyntacticCountingTest >> testDefinesHasAssignments [
 	self
 		assert: (self functionOrSub accesses select: #isWriting) size
 		equals: (fixture at: #assignments)
 ]
 
 { #category : #'as yet unclassified' }
-AlceNorthwindClassSyntacticTest >> testDefinesHasOutgoingInvocation [
+AlceNorthwindClassSyntacticCountingTest >> testDefinesHasOutgoingInvocation [
 	self
 		assert: self functionOrSub outgoingInvocations size
 		equals: (fixture at: #outgoingInvocations)
 ]
 
 { #category : #'as yet unclassified' }
-AlceNorthwindClassSyntacticTest >> testDefinesHasVariables [
+AlceNorthwindClassSyntacticCountingTest >> testDefinesHasVariables [
 	self
 		assert: self functionOrSub localVariables size
 		equals: (fixture at: #localVariables)
 ]
 
 { #category : #'as yet unclassified' }
-AlceNorthwindClassSyntacticTest >> testFunctionReturnsType [
+AlceNorthwindClassSyntacticCountingTest >> testFunctionReturnsType [
 	self
 		assertIfFunction: [ self functionOrSub typeName isString ]
 		ifFalse: [ (fixture at: #return) = #SubsDoNotReturn ]
 ]
 
 { #category : #'as yet unclassified' }
-AlceNorthwindClassSyntacticTest >> testIfInvocationExpressionContainsAPointIsMessageSend [
+AlceNorthwindClassSyntacticCountingTest >> testIfInvocationExpressionContainsAPointIsMessageSend [
 	| isMessageSend |
 	self functionOrSub outgoingInvocations
 		do: [ :inv | 
-			isMessageSend := inv invocationExpression includes: $..
+			isMessageSend := inv selector includes: $..
 			self assert: inv isVBMessageSend equals: isMessageSend ]
 ]
 
 { #category : #'as yet unclassified' }
-AlceNorthwindClassSyntacticTest >> testMessageSendMustReturnReceiverIfNotError [
+AlceNorthwindClassSyntacticCountingTest >> testMessageSendMustReturnReceiverIfNotError [
 	self functionOrSub outgoingInvocations
 		do: [ :inv | 
 			inv isVBMessageSend
-				ifTrue: [ self assert: inv receiver isNotEmpty ]
+				ifTrue: [ self assert: inv receiver class equals: AlcixAccess ]
 				ifFalse: [ self should: [ inv receiver ] raise: Error ] ]
 ]
 
 { #category : #'as yet unclassified' }
-AlceNorthwindClassSyntacticTest >> testSelectorIsCalculatedFromInvocationExpression [
+AlceNorthwindClassSyntacticCountingTest >> testSelectorIsCalculatedFromInvocationExpression [
 	self functionOrSub outgoingInvocations
 		do: [ :inv | 
 			inv isVBMessageSend
-				ifTrue: [ self
-						assert: inv receiver , '.' , inv selector
-						equals: inv invocationExpression ]
-				ifFalse:
-					[ self assert: inv selector equals: inv invocationExpression ] ]
+				ifTrue: [ self assert: inv receiver asString equals: inv selector ]
+				ifFalse: [ self assert: (inv selector indexOf: $.) equals: 0 ] ]
 ]
