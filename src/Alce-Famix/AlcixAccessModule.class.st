@@ -16,6 +16,12 @@ AlcixAccessModule class >> annotation [
 	^self
 ]
 
+{ #category : #visiting }
+AlcixAccessModule >> accept: aVisitor [
+	^ aVisitor visitAccessModule: self
+
+]
+
 { #category : #adding }
 AlcixAccessModule >> addReference: anObject [
 	<generated>

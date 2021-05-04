@@ -16,6 +16,12 @@ AlcixAccessEntity class >> annotation [
 	^self
 ]
 
+{ #category : #visiting }
+AlcixAccessEntity >> accept: aVisitor [
+	^ aVisitor visitAccessEntity: self
+
+]
+
 { #category : #accessing }
 AlcixAccessEntity >> anchor [
 

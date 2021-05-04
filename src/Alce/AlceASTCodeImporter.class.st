@@ -15,16 +15,29 @@ AlceASTCodeImporter >> ensureInContextOf: aClass [
 
 { #category : #'member access' }
 AlceASTCodeImporter >> instantiateAccess: aMemberOrDictAccess [
-	| access |
+	| access receiver parts |
+	receiver := aMemberOrDictAccess receiver
+		ifNil: [ self nodeToString: aMemberOrDictAccess enclosingWith with ]
+		ifNotNil: [ self nodeToString: aMemberOrDictAccess receiver ].
+	parts := '.'
+		split:
+			('.'
+				join:
+					{receiver.
+					(self nodeToString: aMemberOrDictAccess member)}).
 	access := self instantiate: AlcixAccess.
 	access isWriting: false.
-	aMemberOrDictAccess receiver
-		ifNil: [ access
-				attributeName: (self nodeToString: aMemberOrDictAccess enclosingWith with) ]
-		ifNotNil: [ access
-				attributeName: (self nodeToString: aMemberOrDictAccess receiver) ].
-	access
-		memberSelectors: {(self nodeToString: aMemberOrDictAccess member)}.
+	access attributeName: parts first.
+	parts allButFirst
+		inject: access
+		into: [ :acc :each | 
+			| cur |
+			cur := self instantiate: AlcixAccess.
+			cur isWriting: false.
+			cur attribute: acc.
+			acc member: cur.
+			cur attributeName: each.
+			cur ].
 	^ access
 ]
 
@@ -56,6 +69,8 @@ AlceASTCodeImporter >> instantiateInvocation: aCall [
 AlceASTCodeImporter >> instantiateMethodInvocation: selector for: aCall [
 	| receiver call |
 	receiver := self instantiateAccess: aCall selector.
+
+	receiver member ifNil: [ self halt ].
 	call := self instantiate: AlcixMethodInvocation.
 	call receiver: receiver.
 	call selector: selector.
@@ -202,7 +217,7 @@ AlceASTCodeImporter >> visitEquals: anAssignementOrEquals [
 	| access |
 	"
 	Ensure that is an assignment: 
-"
+	"
 	anAssignementOrEquals isReturn
 		ifFalse: [ anAssignementOrEquals isAssignment
 				ifTrue: [ access := self instantiate: AlcixAccess.

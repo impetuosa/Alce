@@ -18,6 +18,12 @@ AlcixEnum class >> annotation [
 	^self
 ]
 
+{ #category : #visiting }
+AlcixEnum >> accept: aVisitor [
+	^ aVisitor visitEnum: self
+
+]
+
 { #category : #adding }
 AlcixEnum >> addEnumValue: anObject [
 	<generated>

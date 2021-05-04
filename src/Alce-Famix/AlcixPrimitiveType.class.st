@@ -14,3 +14,9 @@ AlcixPrimitiveType class >> annotation [
 	<generated>
 	^self
 ]
+
+{ #category : #visiting }
+AlcixPrimitiveType >> accept: aVisitor [
+	^ aVisitor visitPrimitiveType: self
+
+]

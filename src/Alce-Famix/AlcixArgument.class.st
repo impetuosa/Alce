@@ -17,6 +17,12 @@ AlcixArgument class >> annotation [
 	^self
 ]
 
+{ #category : #visiting }
+AlcixArgument >> accept: aVisitor [
+	^ aVisitor visitArgument: self
+
+]
+
 { #category : #accessing }
 AlcixArgument >> invocation [
 	"Relation named: #invocation type: #AlcixInvocation opposite: #arguments"

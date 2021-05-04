@@ -32,6 +32,12 @@ AlcixEnumValue >> Value: anObject [
 	Value := anObject
 ]
 
+{ #category : #visiting }
+AlcixEnumValue >> accept: aVisitor [
+	^ aVisitor visitEnumValue: self
+
+]
+
 { #category : #accessing }
 AlcixEnumValue >> enum [
 	"Relation named: #enum type: #AlcixEnum opposite: #enumValues"

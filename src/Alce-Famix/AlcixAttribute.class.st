@@ -1,9 +1,9 @@
 Class {
 	#name : #AlcixAttribute,
-	#superclass : #AlcixTypedEntity,
+	#superclass : #AlcixVariable,
 	#instVars : [
 		'#isConstant => FMProperty',
-		'#accesses => FMMany type: #AlcixAccess opposite: #attribute',
+		'#userType => FMOne type: #AlcixUserType opposite: #members',
 		'#attributeAccessors => FMMany type: #AlcixAttributeAccessor opposite: #attribute'
 	],
 	#category : #'Alce-Famix-Entities'
@@ -12,32 +12,16 @@ Class {
 { #category : #meta }
 AlcixAttribute class >> annotation [
 
-	<FMClass: #Attribute super: #AlcixTypedEntity>
+	<FMClass: #Attribute super: #AlcixVariable>
 	<package: #'Alce-Famix'>
 	<generated>
 	^self
 ]
 
-{ #category : #accessing }
-AlcixAttribute >> accesses [
-	"Relation named: #accesses type: #AlcixAccess opposite: #attribute"
+{ #category : #visiting }
+AlcixAttribute >> accept: aVisitor [
+	^ aVisitor visitAttribute: self
 
-	<generated>
-	<derived>
-	^ accesses
-]
-
-{ #category : #accessing }
-AlcixAttribute >> accesses: anObject [
-
-	<generated>
-	accesses value: anObject
-]
-
-{ #category : #adding }
-AlcixAttribute >> addAccess: anObject [
-	<generated>
-	^ self accesses add: anObject
 ]
 
 { #category : #adding }
@@ -81,4 +65,27 @@ AlcixAttribute >> isConstant [
 AlcixAttribute >> isConstant: anObject [
 	<generated>
 	isConstant := anObject
+]
+
+{ #category : #accessing }
+AlcixAttribute >> userType [
+	"Relation named: #userType type: #AlcixUserType opposite: #members"
+
+	<generated>
+	<container>
+	^ userType
+]
+
+{ #category : #accessing }
+AlcixAttribute >> userType: anObject [
+
+	<generated>
+	userType := anObject
+]
+
+{ #category : #navigation }
+AlcixAttribute >> userTypeGroup [
+	<generated>
+	<navigation: 'UserType'>
+	^ MooseSpecializedGroup with: self userType
 ]

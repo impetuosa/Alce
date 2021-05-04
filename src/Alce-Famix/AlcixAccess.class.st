@@ -1,13 +1,12 @@
 Class {
 	#name : #AlcixAccess,
-	#superclass : #AlcixAccessEntity,
+	#superclass : #AlcixAccessible,
 	#instVars : [
 		'#isWriting => FMProperty',
 		'#attributeName => FMProperty',
-		'#memberSelectors => FMProperty',
-		'#attribute => FMOne type: #AlcixAttribute opposite: #accesses',
-		'#invocable => FMOne type: #AlcixInvocable opposite: #accesses',
-		'#methodInvocation => FMOne type: #AlcixMethodInvocation opposite: #receiver'
+		'#member => FMProperty',
+		'#attribute => FMOne type: #AlcixAccessible opposite: #access',
+		'#invocable => FMOne type: #AlcixInvocable opposite: #accesses'
 	],
 	#category : #'Alce-Famix-Entities'
 }
@@ -15,22 +14,21 @@ Class {
 { #category : #meta }
 AlcixAccess class >> annotation [
 
-	<FMClass: #Access super: #AlcixAccessEntity>
+	<FMClass: #Access super: #AlcixAccessible>
 	<package: #'Alce-Famix'>
 	<generated>
 	^self
 ]
 
-{ #category : #accessing }
-AlcixAccess >> asString [
-	^ String
-		streamContents:
-			[ :stream | stream nextPutAll: ('.' join: {attributeName} , memberSelectors) ]
+{ #category : #visiting }
+AlcixAccess >> accept: aVisitor [
+	^ aVisitor visitAccess: self
+
 ]
 
 { #category : #accessing }
 AlcixAccess >> attribute [
-	"Relation named: #attribute type: #AlcixAttribute opposite: #accesses"
+	"Relation named: #attribute type: #AlcixAccessible opposite: #access"
 
 	<generated>
 	^ attribute
@@ -95,43 +93,15 @@ AlcixAccess >> isWriting: anObject [
 ]
 
 { #category : #accessing }
-AlcixAccess >> memberSelectors [
+AlcixAccess >> member [
 
-	<FMProperty: #memberSelectors type: #Object>
+	<FMProperty: #member type: #Object>
 	<generated>
-	^ memberSelectors
+	^ member
 ]
 
 { #category : #accessing }
-AlcixAccess >> memberSelectors: anObject [
+AlcixAccess >> member: anObject [
 	<generated>
-	memberSelectors := anObject
-]
-
-{ #category : #accessing }
-AlcixAccess >> methodInvocation [
-	"Relation named: #methodInvocation type: #AlcixMethodInvocation opposite: #receiver"
-
-	<generated>
-	<derived>
-	^ methodInvocation
-]
-
-{ #category : #accessing }
-AlcixAccess >> methodInvocation: anObject [
-
-	<generated>
-	methodInvocation := anObject
-]
-
-{ #category : #navigation }
-AlcixAccess >> printOn: aStream [
-	aStream
-		nextPutAll: 'Access(';
-		nextPut:
-			(isWriting
-				ifTrue: [ $w ]
-				ifFalse: [ $r ]);
-		nextPutAll: ')';
-		nextPutAll: ('.' join: {attributeName} , (memberSelectors ifNil: [ {} ]))
+	member := anObject
 ]

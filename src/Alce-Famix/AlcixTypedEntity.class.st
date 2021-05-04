@@ -1,11 +1,10 @@
 Class {
 	#name : #AlcixTypedEntity,
-	#superclass : #AlcixAccessEntity,
+	#superclass : #AlcixAccessible,
 	#traits : 'AlcixTTyped',
 	#classTraits : 'AlcixTTyped classTrait',
 	#instVars : [
-		'#name => FMProperty',
-		'#userType => FMOne type: #AlcixUserType opposite: #members'
+		'#name => FMProperty'
 	],
 	#category : #'Alce-Famix-Entities'
 }
@@ -13,10 +12,16 @@ Class {
 { #category : #meta }
 AlcixTypedEntity class >> annotation [
 
-	<FMClass: #TypedEntity super: #AlcixAccessEntity>
+	<FMClass: #TypedEntity super: #AlcixAccessible>
 	<package: #'Alce-Famix'>
 	<generated>
 	^self
+]
+
+{ #category : #visiting }
+AlcixTypedEntity >> accept: aVisitor [
+	^ aVisitor visitTypedEntity: self
+
 ]
 
 { #category : #accessing }
@@ -31,27 +36,4 @@ AlcixTypedEntity >> name [
 AlcixTypedEntity >> name: anObject [
 	<generated>
 	name := anObject
-]
-
-{ #category : #accessing }
-AlcixTypedEntity >> userType [
-	"Relation named: #userType type: #AlcixUserType opposite: #members"
-
-	<generated>
-	<container>
-	^ userType
-]
-
-{ #category : #accessing }
-AlcixTypedEntity >> userType: anObject [
-
-	<generated>
-	userType := anObject
-]
-
-{ #category : #navigation }
-AlcixTypedEntity >> userTypeGroup [
-	<generated>
-	<navigation: 'UserType'>
-	^ MooseSpecializedGroup with: self userType
 ]

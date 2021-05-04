@@ -1,6 +1,6 @@
 Class {
 	#name : #AlcixGlobalVariable,
-	#superclass : #AlcixTypedEntity,
+	#superclass : #AlcixVariable,
 	#instVars : [
 		'#module => FMOne type: #AlcixModule opposite: #globalVariables'
 	],
@@ -10,10 +10,16 @@ Class {
 { #category : #meta }
 AlcixGlobalVariable class >> annotation [
 
-	<FMClass: #GlobalVariable super: #AlcixTypedEntity>
+	<FMClass: #GlobalVariable super: #AlcixVariable>
 	<package: #'Alce-Famix'>
 	<generated>
 	^self
+]
+
+{ #category : #visiting }
+AlcixGlobalVariable >> accept: aVisitor [
+	^ aVisitor visitGlobalVariable: self
+
 ]
 
 { #category : #accessing }

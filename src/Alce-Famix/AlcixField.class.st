@@ -16,6 +16,12 @@ AlcixField class >> annotation [
 	^self
 ]
 
+{ #category : #visiting }
+AlcixField >> accept: aVisitor [
+	^ aVisitor visitField: self
+
+]
+
 { #category : #accessing }
 AlcixField >> dataSource [
 	"Relation named: #dataSource type: #AlcixDataSource opposite: #fields"

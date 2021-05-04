@@ -12,3 +12,9 @@ AlcixForm class >> annotation [
 	<generated>
 	^self
 ]
+
+{ #category : #visiting }
+AlcixForm >> accept: aVisitor [
+	^ aVisitor visitForm: self
+
+]

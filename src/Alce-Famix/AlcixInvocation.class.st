@@ -1,12 +1,10 @@
 Class {
 	#name : #AlcixInvocation,
-	#superclass : #AlcixAccessEntity,
-	#traits : 'TAlceInvocation',
-	#classTraits : 'TAlceInvocation classTrait',
+	#superclass : #AlcixAccess,
 	#instVars : [
 		'#selector => FMProperty',
-		'#invocable => FMOne type: #AlcixInvocable opposite: #outgoingInvocations',
-		'#candidates => FMMany type: #AlcixInvocable opposite: #invocation',
+		'#sender => FMOne type: #AlcixInvocable opposite: #outgoingInvocations',
+		'#candidate => FMOne type: #AlcixInvocable opposite: #incomingInvocations',
 		'#arguments => FMMany type: #AlcixArgument opposite: #invocation'
 	],
 	#category : #'Alce-Famix-Entities'
@@ -15,22 +13,22 @@ Class {
 { #category : #meta }
 AlcixInvocation class >> annotation [
 
-	<FMClass: #Invocation super: #AlcixAccessEntity>
+	<FMClass: #Invocation super: #AlcixAccess>
 	<package: #'Alce-Famix'>
 	<generated>
 	^self
+]
+
+{ #category : #visiting }
+AlcixInvocation >> accept: aVisitor [
+	^ aVisitor visitInvocation: self
+
 ]
 
 { #category : #adding }
 AlcixInvocation >> addArgument: anObject [
 	<generated>
 	^ self arguments add: anObject
-]
-
-{ #category : #adding }
-AlcixInvocation >> addCandidate: anObject [
-	<generated>
-	^ self candidates add: anObject
 ]
 
 { #category : #accessing }
@@ -57,60 +55,26 @@ AlcixInvocation >> argumentsGroup [
 ]
 
 { #category : #accessing }
-AlcixInvocation >> candidates [
-	"Relation named: #candidates type: #AlcixInvocable opposite: #invocation"
-
-	<generated>
-	<derived>
-	^ candidates
-]
-
-{ #category : #accessing }
-AlcixInvocation >> candidates: anObject [
-
-	<generated>
-	candidates value: anObject
-]
-
-{ #category : #navigation }
-AlcixInvocation >> candidatesGroup [
-	<generated>
-	<navigation: 'Candidates'>
-	^ MooseSpecializedGroup withAll: self candidates asSet
-]
-
-{ #category : #accessing }
-AlcixInvocation >> invocable [
-	"Relation named: #invocable type: #AlcixInvocable opposite: #outgoingInvocations"
+AlcixInvocation >> candidate [
+	"Relation named: #candidate type: #AlcixInvocable opposite: #incomingInvocations"
 
 	<generated>
 	<container>
-	^ invocable
+	^ candidate
 ]
 
 { #category : #accessing }
-AlcixInvocation >> invocable: anObject [
+AlcixInvocation >> candidate: anObject [
 
 	<generated>
-	invocable := anObject
+	candidate := anObject
 ]
 
 { #category : #navigation }
-AlcixInvocation >> invocableGroup [
+AlcixInvocation >> candidateGroup [
 	<generated>
-	<navigation: 'Invocable'>
-	^ MooseSpecializedGroup with: self invocable
-]
-
-{ #category : #accessing }
-AlcixInvocation >> printOn: aStream [
-	aStream
-		nextPutAll: self class name;
-		nextPutAll:'::'; 
-		nextPutAll: selector;
-		nextPutAll: '(a:#';
-		nextPutAll: arguments size asString;
-		nextPutAll: ')'
+	<navigation: 'Candidate'>
+	^ MooseSpecializedGroup with: self candidate
 ]
 
 { #category : #accessing }
@@ -125,4 +89,27 @@ AlcixInvocation >> selector [
 AlcixInvocation >> selector: anObject [
 	<generated>
 	selector := anObject
+]
+
+{ #category : #accessing }
+AlcixInvocation >> sender [
+	"Relation named: #sender type: #AlcixInvocable opposite: #outgoingInvocations"
+
+	<generated>
+	<container>
+	^ sender
+]
+
+{ #category : #accessing }
+AlcixInvocation >> sender: anObject [
+
+	<generated>
+	sender := anObject
+]
+
+{ #category : #navigation }
+AlcixInvocation >> senderGroup [
+	<generated>
+	<navigation: 'Sender'>
+	^ MooseSpecializedGroup with: self sender
 ]

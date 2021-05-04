@@ -12,3 +12,9 @@ AlcixExternalSubProcedure class >> annotation [
 	<generated>
 	^self
 ]
+
+{ #category : #visiting }
+AlcixExternalSubProcedure >> accept: aVisitor [
+	^ aVisitor visitExternalSubProcedure: self
+
+]

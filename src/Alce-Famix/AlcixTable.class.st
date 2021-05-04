@@ -16,6 +16,12 @@ AlcixTable class >> annotation [
 	^self
 ]
 
+{ #category : #visiting }
+AlcixTable >> accept: aVisitor [
+	^ aVisitor visitTable: self
+
+]
+
 { #category : #accessing }
 AlcixTable >> query [
 	"Relation named: #query type: #AlcixQuery opposite: #tables"

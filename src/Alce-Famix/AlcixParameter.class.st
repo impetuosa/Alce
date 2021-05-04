@@ -16,6 +16,12 @@ AlcixParameter class >> annotation [
 	^self
 ]
 
+{ #category : #visiting }
+AlcixParameter >> accept: aVisitor [
+	^ aVisitor visitParameter: self
+
+]
+
 { #category : #accessing }
 AlcixParameter >> invocable [
 	"Relation named: #invocable type: #AlcixInvocable opposite: #parameters"

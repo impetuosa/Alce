@@ -12,3 +12,9 @@ AlcixMacro class >> annotation [
 	<generated>
 	^self
 ]
+
+{ #category : #visiting }
+AlcixMacro >> accept: aVisitor [
+	^ aVisitor visitMacro: self
+
+]

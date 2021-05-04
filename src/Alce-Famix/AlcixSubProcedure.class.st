@@ -12,3 +12,9 @@ AlcixSubProcedure class >> annotation [
 	<generated>
 	^self
 ]
+
+{ #category : #visiting }
+AlcixSubProcedure >> accept: aVisitor [
+	^ aVisitor visitSubProcedure: self
+
+]

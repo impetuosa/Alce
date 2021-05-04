@@ -12,3 +12,9 @@ AlcixCodeSegment class >> annotation [
 	<generated>
 	^self
 ]
+
+{ #category : #visiting }
+AlcixCodeSegment >> accept: aVisitor [
+	^ aVisitor visitCodeSegment: self
+
+]

@@ -12,3 +12,9 @@ AlcixGUIClass class >> annotation [
 	<generated>
 	^self
 ]
+
+{ #category : #visiting }
+AlcixGUIClass >> accept: aVisitor [
+	^ aVisitor visitGUIClass: self
+
+]

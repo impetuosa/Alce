@@ -1,6 +1,6 @@
 Class {
 	#name : #AlcixLocalVariable,
-	#superclass : #AlcixTypedEntity,
+	#superclass : #AlcixVariable,
 	#instVars : [
 		'#invocable => FMOne type: #AlcixInvocable opposite: #localVariables'
 	],
@@ -10,10 +10,16 @@ Class {
 { #category : #meta }
 AlcixLocalVariable class >> annotation [
 
-	<FMClass: #LocalVariable super: #AlcixTypedEntity>
+	<FMClass: #LocalVariable super: #AlcixVariable>
 	<package: #'Alce-Famix'>
 	<generated>
 	^self
+]
+
+{ #category : #visiting }
+AlcixLocalVariable >> accept: aVisitor [
+	^ aVisitor visitLocalVariable: self
+
 ]
 
 { #category : #accessing }

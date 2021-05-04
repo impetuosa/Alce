@@ -16,6 +16,12 @@ AlcixLibrary class >> annotation [
 	^self
 ]
 
+{ #category : #visiting }
+AlcixLibrary >> accept: aVisitor [
+	^ aVisitor visitLibrary: self
+
+]
+
 { #category : #accessing }
 AlcixLibrary >> isBuiltIn [
 

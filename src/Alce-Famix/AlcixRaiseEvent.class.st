@@ -12,3 +12,9 @@ AlcixRaiseEvent class >> annotation [
 	<generated>
 	^self
 ]
+
+{ #category : #visiting }
+AlcixRaiseEvent >> accept: aVisitor [
+	^ aVisitor visitRaiseEvent: self
+
+]

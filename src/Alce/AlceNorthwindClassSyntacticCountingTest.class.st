@@ -378,6 +378,16 @@ AlceNorthwindClassSyntacticCountingTest >> testMessageSendMustReturnReceiverIfNo
 ]
 
 { #category : #'as yet unclassified' }
+AlceNorthwindClassSyntacticCountingTest >> testMethodInvocationMustHaveAPointAndOthersMustHaveNotPoint [
+	self functionOrSub outgoingInvocations
+		do: [ :inv | 
+			inv isVBMessageSend
+				ifTrue: [ self assert: inv receiver memberSelectors isNotEmpty.
+					self assert: (inv selector includes: $.) ]
+				ifFalse: [ self deny: (inv selector includes: $.) ] ]
+]
+
+{ #category : #'as yet unclassified' }
 AlceNorthwindClassSyntacticCountingTest >> testSelectorIsCalculatedFromInvocationExpression [
 	self functionOrSub outgoingInvocations
 		do: [ :inv | 

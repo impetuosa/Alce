@@ -18,6 +18,12 @@ AlcixDatabaseType class >> annotation [
 	^self
 ]
 
+{ #category : #visiting }
+AlcixDatabaseType >> accept: aVisitor [
+	^ aVisitor visitDatabaseType: self
+
+]
+
 { #category : #accessing }
 AlcixDatabaseType >> databaseTypedEntity [
 	"Relation named: #databaseTypedEntity type: #AlcixDatabaseTypedEntity opposite: #databaseType"

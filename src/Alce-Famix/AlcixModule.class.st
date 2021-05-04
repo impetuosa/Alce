@@ -17,6 +17,12 @@ AlcixModule class >> annotation [
 	^self
 ]
 
+{ #category : #visiting }
+AlcixModule >> accept: aVisitor [
+	^ aVisitor visitModule: self
+
+]
+
 { #category : #adding }
 AlcixModule >> addGlobalVariable: anObject [
 	<generated>

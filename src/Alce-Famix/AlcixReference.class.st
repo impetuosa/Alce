@@ -17,6 +17,12 @@ AlcixReference class >> annotation [
 	^self
 ]
 
+{ #category : #visiting }
+AlcixReference >> accept: aVisitor [
+	^ aVisitor visitReference: self
+
+]
+
 { #category : #accessing }
 AlcixReference >> accessModule [
 	"Relation named: #accessModule type: #AlcixAccessModule opposite: #references"

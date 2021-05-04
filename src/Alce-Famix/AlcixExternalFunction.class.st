@@ -12,3 +12,9 @@ AlcixExternalFunction class >> annotation [
 	<generated>
 	^self
 ]
+
+{ #category : #visiting }
+AlcixExternalFunction >> accept: aVisitor [
+	^ aVisitor visitExternalFunction: self
+
+]

@@ -17,6 +17,12 @@ AlcixAttributeAccessor class >> annotation [
 	^self
 ]
 
+{ #category : #visiting }
+AlcixAttributeAccessor >> accept: aVisitor [
+	^ aVisitor visitAttributeAccessor: self
+
+]
+
 { #category : #accessing }
 AlcixAttributeAccessor >> attribute [
 	"Relation named: #attribute type: #AlcixAttribute opposite: #attributeAccessors"

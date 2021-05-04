@@ -16,6 +16,12 @@ AlcixContainer class >> annotation [
 	^self
 ]
 
+{ #category : #visiting }
+AlcixContainer >> accept: aVisitor [
+	^ aVisitor visitContainer: self
+
+]
+
 { #category : #adding }
 AlcixContainer >> addType: anObject [
 	<generated>

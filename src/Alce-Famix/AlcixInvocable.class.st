@@ -6,9 +6,8 @@ Class {
 		'#parameters => FMMany type: #AlcixParameter opposite: #invocable',
 		'#accesses => FMMany type: #AlcixAccess opposite: #invocable',
 		'#localVariables => FMMany type: #AlcixLocalVariable opposite: #invocable',
-		'#outgoingInvocations => FMMany type: #AlcixInvocation opposite: #invocable',
-		'#incomingInvocations => FMMany type: #AlcixInvocation opposite: #invocable',
-		'#invocation => FMOne type: #AlcixInvocation opposite: #candidates',
+		'#outgoingInvocations => FMMany type: #AlcixInvocation opposite: #sender',
+		'#incomingInvocations => FMMany type: #AlcixInvocation opposite: #candidate',
 		'#module => FMOne type: #AlcixModule opposite: #invocables'
 	],
 	#category : #'Alce-Famix-Entities'
@@ -21,6 +20,12 @@ AlcixInvocable class >> annotation [
 	<package: #'Alce-Famix'>
 	<generated>
 	^self
+]
+
+{ #category : #visiting }
+AlcixInvocable >> accept: aVisitor [
+	^ aVisitor visitInvocable: self
+
 ]
 
 { #category : #accessing }
@@ -78,7 +83,7 @@ AlcixInvocable >> addParameter: anObject [
 
 { #category : #accessing }
 AlcixInvocable >> incomingInvocations [
-	"Relation named: #incomingInvocations type: #AlcixInvocation opposite: #invocable"
+	"Relation named: #incomingInvocations type: #AlcixInvocation opposite: #candidate"
 
 	<generated>
 	<derived>
@@ -97,29 +102,6 @@ AlcixInvocable >> incomingInvocationsGroup [
 	<generated>
 	<navigation: 'IncomingInvocations'>
 	^ MooseSpecializedGroup withAll: self incomingInvocations asSet
-]
-
-{ #category : #accessing }
-AlcixInvocable >> invocation [
-	"Relation named: #invocation type: #AlcixInvocation opposite: #candidates"
-
-	<generated>
-	<container>
-	^ invocation
-]
-
-{ #category : #accessing }
-AlcixInvocable >> invocation: anObject [
-
-	<generated>
-	invocation := anObject
-]
-
-{ #category : #navigation }
-AlcixInvocable >> invocationGroup [
-	<generated>
-	<navigation: 'Invocation'>
-	^ MooseSpecializedGroup with: self invocation
 ]
 
 { #category : #accessing }
@@ -170,7 +152,7 @@ AlcixInvocable >> moduleGroup [
 
 { #category : #accessing }
 AlcixInvocable >> outgoingInvocations [
-	"Relation named: #outgoingInvocations type: #AlcixInvocation opposite: #invocable"
+	"Relation named: #outgoingInvocations type: #AlcixInvocation opposite: #sender"
 
 	<generated>
 	<derived>

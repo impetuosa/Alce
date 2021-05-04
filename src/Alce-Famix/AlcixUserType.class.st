@@ -1,10 +1,10 @@
 Class {
 	#name : #AlcixUserType,
-	#superclass : #AlcixAccessEntity,
+	#superclass : #AlcixAccessible,
 	#traits : 'AlcixTType',
 	#classTraits : 'AlcixTType classTrait',
 	#instVars : [
-		'#members => FMMany type: #AlcixTypedEntity opposite: #userType'
+		'#members => FMMany type: #AlcixAttribute opposite: #userType'
 	],
 	#category : #'Alce-Famix-Entities'
 }
@@ -12,10 +12,16 @@ Class {
 { #category : #meta }
 AlcixUserType class >> annotation [
 
-	<FMClass: #UserType super: #AlcixAccessEntity>
+	<FMClass: #UserType super: #AlcixAccessible>
 	<package: #'Alce-Famix'>
 	<generated>
 	^self
+]
+
+{ #category : #visiting }
+AlcixUserType >> accept: aVisitor [
+	^ aVisitor visitUserType: self
+
 ]
 
 { #category : #adding }
@@ -26,7 +32,7 @@ AlcixUserType >> addMember: anObject [
 
 { #category : #accessing }
 AlcixUserType >> members [
-	"Relation named: #members type: #AlcixTypedEntity opposite: #userType"
+	"Relation named: #members type: #AlcixAttribute opposite: #userType"
 
 	<generated>
 	<derived>

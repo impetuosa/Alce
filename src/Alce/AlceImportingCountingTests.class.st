@@ -140,7 +140,8 @@ AlceImportingCountingTests >> testSyntacticCodeImporterImportsModulesClassesForm
 		importSyntacticElements.
 	model := importer import: self class norwind.
 	model inspect.
-	self assertModel: model loads: 396 of: AlcixInvocation.
+	self assertModel: model loads: 269 of: AlcixInvocation.
+	self assertModel: model loads: 127 of: AlcixMethodInvocation .
 	self assertModel: model loads: 0 of: AlcixRaiseEvent.
 	self assertModel: model loads: 707 of: AlcixAccess.
 	self assertModel: model loads: 2 of: AlcixClass.

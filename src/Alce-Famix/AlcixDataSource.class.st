@@ -16,6 +16,12 @@ AlcixDataSource class >> annotation [
 	^self
 ]
 
+{ #category : #visiting }
+AlcixDataSource >> accept: aVisitor [
+	^ aVisitor visitDataSource: self
+
+]
+
 { #category : #adding }
 AlcixDataSource >> addField: anObject [
 	<generated>

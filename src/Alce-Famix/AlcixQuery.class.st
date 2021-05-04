@@ -16,6 +16,12 @@ AlcixQuery class >> annotation [
 	^self
 ]
 
+{ #category : #visiting }
+AlcixQuery >> accept: aVisitor [
+	^ aVisitor visitQuery: self
+
+]
+
 { #category : #adding }
 AlcixQuery >> addTable: anObject [
 	<generated>

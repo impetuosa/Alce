@@ -14,3 +14,9 @@ AlcixFunction class >> annotation [
 	<generated>
 	^self
 ]
+
+{ #category : #visiting }
+AlcixFunction >> accept: aVisitor [
+	^ aVisitor visitFunction: self
+
+]
