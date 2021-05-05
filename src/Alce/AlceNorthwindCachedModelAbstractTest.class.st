@@ -12781,7 +12781,6 @@ cachedModelMSE
 AlceNorthwindCachedModelAbstractTest class >> resetNorwindCachedModel [
  	<example>
  	norwindCachedModel := nil.
-	self norwindCachedModel 
 ]
 
 { #category : #'as yet unclassified' }
