@@ -1,15 +1,14 @@
 Class {
-	#name : #AlceLookup,
-	#superclass : #AlceVisitor,
+	#name : #AlceLookUp,
+	#superclass : #AlceLook,
 	#instVars : [
-		'match',
-		'findings'
+		'lookInClass'
 	],
 	#category : #'Alce-Importer-Linker'
 }
 
 { #category : #'as yet unclassified' }
-AlceLookup class >> lookFor: aMatch from: aNode [
+AlceLookUp class >> lookFor: aMatch from: aNode [
 	| instance |
 	instance := self new.
 	instance match: aMatch.
@@ -17,21 +16,25 @@ AlceLookup class >> lookFor: aMatch from: aNode [
 	^ instance findings
 ]
 
-{ #category : #visiting }
-AlceLookup >> findings [
-	^ findings
+{ #category : #'as yet unclassified' }
+AlceLookUp class >> lookFor: aLookInClass matching: aMatch from: aNode [
+	| instance |
+	instance := self new.
+	instance lookInClass: aLookInClass.
+	instance match: aMatch.
+	aNode accept: instance.
+	^ instance findings
 ]
 
-{ #category : #visiting }
-AlceLookup >> findings: anObject [
-	anObject ifNil: [ ^ self ].
-	findings := anObject
+{ #category : #'look-in' }
+AlceLookUp >> lookIn: aNode or: aBlock [
+	^ self lookIn: aNode using: lookInClass or: aBlock
 ]
 
-{ #category : #visiting }
-AlceLookup >> lookIn: aNode or: aBlock [
+{ #category : #'look-in' }
+AlceLookUp >> lookIn: aNode using: aLookInClass or: aBlock [
 	| lookin |
-	lookin := AlceLookin new
+	lookin := aLookInClass new
 		match: match;
 		yourself.
 	aNode accept: lookin.
@@ -40,52 +43,52 @@ AlceLookup >> lookIn: aNode or: aBlock [
 		ifNotNil: [ :f | self findings: f ]
 ]
 
-{ #category : #visiting }
-AlceLookup >> match: aMatch [
- 	match := aMatch 
+{ #category : #'look-in' }
+AlceLookUp >> lookInClass: aClass [
+	lookInClass := aClass
 ]
 
 { #category : #visiting }
-AlceLookup >> visitAccessModule: anAccessModule [
+AlceLookUp >> visitAccessModule: anAccessModule [
 	self lookIn: anAccessModule or: [ " nothing to do " ]
 ]
 
-{ #category : #'as yet unclassified' }
-AlceLookup >> visitAttribute: anAlcixAttribute [ 
+{ #category : #visiting }
+AlceLookUp >> visitAttribute: anAlcixAttribute [ 
 	self shouldBeImplemented.
 ]
 
-{ #category : #'as yet unclassified' }
-AlceLookup >> visitClass: anAlcixClass [ 
+{ #category : #visiting }
+AlceLookUp >> visitClass: anAlcixClass [ 
 	self visitModule: anAlcixClass 
 ]
 
 { #category : #visiting }
-AlceLookup >> visitFunction: aFunction [
+AlceLookUp >> visitFunction: aFunction [
 	self lookIn: aFunction or: [ aFunction module accept: self ]
 ]
 
-{ #category : #'as yet unclassified' }
-AlceLookup >> visitMethodInvocation: anAlcixMethodInvocation [
+{ #category : #visiting }
+AlceLookUp >> visitMethodInvocation: anAlcixMethodInvocation [
 	anAlcixMethodInvocation invocable accept: self
 ]
 
 { #category : #visiting }
-AlceLookup >> visitModule: anModule [
+AlceLookUp >> visitModule: anModule [
 	self lookIn: anModule or: [ anModule container accept: self ]
 ]
 
-{ #category : #'as yet unclassified' }
-AlceLookup >> visitSubProcedure: anAlcixSubProcedure [
+{ #category : #visiting }
+AlceLookUp >> visitSubProcedure: anAlcixSubProcedure [
 	^ self visitFunction: anAlcixSubProcedure
 ]
 
 { #category : #visiting }
-AlceLookup >> visitTypedEntity: aTypedEntity [
+AlceLookUp >> visitTypedEntity: aTypedEntity [
 	^ aTypedEntity userType accept: self
 ]
 
-{ #category : #'as yet unclassified' }
-AlceLookup >> visitUserType: anAlcixUserType [ 
+{ #category : #visiting }
+AlceLookUp >> visitUserType: anAlcixUserType [ 
 
 ]

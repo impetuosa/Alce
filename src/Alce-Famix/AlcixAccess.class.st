@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'#isWriting => FMProperty',
 		'#attributeName => FMProperty',
-		'#member => FMProperty',
+		'#memberSelectors => FMProperty',
 		'#attribute => FMOne type: #AlcixAccessible opposite: #access',
 		'#invocable => FMOne type: #AlcixInvocable opposite: #accesses'
 	],
@@ -24,6 +24,11 @@ AlcixAccess class >> annotation [
 AlcixAccess >> accept: aVisitor [
 	^ aVisitor visitAccess: self
 
+]
+
+{ #category : #accessing }
+AlcixAccess >> asString [
+	^ '.' join: ({attributeName} , memberSelectors ifNil: [ {} ])
 ]
 
 { #category : #accessing }
@@ -93,15 +98,15 @@ AlcixAccess >> isWriting: anObject [
 ]
 
 { #category : #accessing }
-AlcixAccess >> member [
+AlcixAccess >> memberSelectors [
 
-	<FMProperty: #member type: #Object>
+	<FMProperty: #memberSelectors type: #Object>
 	<generated>
-	^ member
+	^ memberSelectors
 ]
 
 { #category : #accessing }
-AlcixAccess >> member: anObject [
+AlcixAccess >> memberSelectors: anObject [
 	<generated>
-	member := anObject
+	memberSelectors := anObject
 ]

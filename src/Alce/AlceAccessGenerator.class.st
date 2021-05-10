@@ -201,7 +201,9 @@ AlceAccessGenerator >> defineProperties [
 	type property: #name type: #String.
 	typed property: #typeName type: #String.
 	library property: #isBuiltIn type: #Boolean.
-	invocable property: #selector type: #String
+	invocable property: #selector type: #String.
+	invocation property: #selector type: #String.
+	methodInvocation property: #receiver type: #Object
 ]
 
 { #category : #definition }
@@ -214,7 +216,6 @@ AlceAccessGenerator >> defineRelations [
 	invocable <>-* access.
 	invocable <>-* localVariable.
 	
-	
 	(userType property: #members) <>-* attribute.
 	containerType <>-* type.
 	databaseTypedEntity - databaseType.
@@ -223,7 +224,6 @@ AlceAccessGenerator >> defineRelations [
 	
 	(invocable property: #outgoingInvocations) <>-* (invocation property: #sender).
 	(invocable property: #incomingInvocations) <>-* (invocation property: #candidate).
-	
 	
 	invocation <>-* argument.
 	module <>-* invocable.
