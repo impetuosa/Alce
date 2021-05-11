@@ -1,97 +1,57 @@
 Class {
-	#name : #AlceLookin,
-	#superclass : #AlceVisitor,
-	#instVars : [
-		'match',
-		'findings'
-	],
+	#name : #AlceLookIn,
+	#superclass : #AlceLook,
 	#category : #'Alce-Importer-Linker'
 }
 
-{ #category : #'as yet unclassified' }
-AlceLookin >> findings [
-	^ findings
-]
-
-{ #category : #'as yet unclassified' }
-AlceLookin >> findings: anObject [
-	anObject ifNil: [ ^ self ].
-	findings := anObject
-]
-
 { #category : #visiting }
-AlceLookin >> hasFinding [
-	^ findings isNotNil 
-]
-
-{ #category : #'as yet unclassified' }
-AlceLookin >> match: aString [ 
-	match := aString
-]
-
-{ #category : #visiting }
-AlceLookin >> visitAccessModule: anAccessModule [
+AlceLookIn >> visitAccessModule: anAccessModule [
 	anAccessModule types do: [ :t | t accept: self ].
-	self hasFinding
-		ifTrue: [ ^ self ].
 	anAccessModule references do: [ :r | r accept: self ]
 ]
 
 { #category : #'as yet unclassified' }
-AlceLookin >> visitClass: anAlcixClass [
+AlceLookIn >> visitClass: anAlcixClass [
 	^ self visitModule: anAlcixClass
 ]
 
 { #category : #'as yet unclassified' }
-AlceLookin >> visitForm: anAlcixForm [
+AlceLookIn >> visitForm: anAlcixForm [
 	^ self visitClass: anAlcixForm
 ]
 
 { #category : #visiting }
-AlceLookin >> visitFunction: aFunction [
-	match = aFunction selector
-		ifTrue: [ ^ self finding: aFunction ].
+AlceLookIn >> visitFunction: aFunction [
 	aFunction parameters do: [ :p | p accept: self ].
 	aFunction localVariables do: [ :p | p accept: self ]
 ]
 
 { #category : #'as yet unclassified' }
-AlceLookin >> visitLibrary: anAlcixLibrary [
+AlceLookIn >> visitLibrary: anAlcixLibrary [
 	^ nil
 ]
 
 { #category : #'as yet unclassified' }
-AlceLookin >> visitLocalVariable: anAlcixLocalVariable [ 
-	anAlcixLocalVariable name = match ifTrue: [ 
-		self findings: anAlcixLocalVariable 	
-	 ]
+AlceLookIn >> visitLocalVariable: anAlcixLocalVariable [ 
+
 ]
 
 { #category : #visiting }
-AlceLookin >> visitModule: aModule [
-	aModule name = match
-		ifTrue: [ ^ self findings: aModule ].
-	self
-		findings: (aModule members detect: [ :m | m name = match ] ifNone: [ nil ]).
-	self
-		findings: (aModule types detect: [ :m | m name = match ] ifNone: [ nil ]).
-	self
-		findings: (aModule invocables detect: [ :m | m selector = match ] ifNone: [ nil ]).
+AlceLookIn >> visitModule: aModule [
+
+]
+
+{ #category : #'as yet unclassified' }
+AlceLookIn >> visitParameter: anAlcixParameter [
 	
 ]
 
 { #category : #'as yet unclassified' }
-AlceLookin >> visitParameter: anAlcixParameter [
-	match = anAlcixParameter name
-		ifTrue: [ ^ anAlcixParameter ]
-]
-
-{ #category : #'as yet unclassified' }
-AlceLookin >> visitReport: anAlcixReport [
+AlceLookIn >> visitReport: anAlcixReport [
 	^ self visitForm: anAlcixReport
 ]
 
 { #category : #'as yet unclassified' }
-AlceLookin >> visitSubProcedure: anAlcixSubProcedure [
+AlceLookIn >> visitSubProcedure: anAlcixSubProcedure [
 	^ self visitFunction: anAlcixSubProcedure
 ]

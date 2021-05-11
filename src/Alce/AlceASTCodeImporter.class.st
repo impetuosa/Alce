@@ -28,16 +28,7 @@ AlceASTCodeImporter >> instantiateAccess: aMemberOrDictAccess [
 	access := self instantiate: AlcixAccess.
 	access isWriting: false.
 	access attributeName: parts first.
-	parts allButFirst
-		inject: access
-		into: [ :acc :each | 
-			| cur |
-			cur := self instantiate: AlcixAccess.
-			cur isWriting: false.
-			cur attribute: acc.
-			acc member: cur.
-			cur attributeName: each.
-			cur ].
+	access memberSelectors: parts allButFirst.
 	^ access
 ]
 
@@ -70,7 +61,7 @@ AlceASTCodeImporter >> instantiateMethodInvocation: selector for: aCall [
 	| receiver call |
 	receiver := self instantiateAccess: aCall selector.
 
-	receiver member ifNil: [ self halt ].
+	receiver memberSelectors isEmptyOrNil ifTrue: [ self halt ].
 	call := self instantiate: AlcixMethodInvocation.
 	call receiver: receiver.
 	call selector: selector.

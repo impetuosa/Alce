@@ -1,3 +1,6 @@
+"
+A linker does link calls with definitionsm by the applciation of a lookup method for name resolution
+"
 Class {
 	#name : #AlceLinker,
 	#superclass : #AlceVisitor,
@@ -11,22 +14,32 @@ AlceLinker class >> link: anAlcixModel [
 	anAlcixModel accept: linker .
 ]
 
-{ #category : #visiting }
-AlceLinker >> lookup: aMatch in: aNode [
-	^ AlceLookup lookFor: aMatch from: aNode
+{ #category : #'lookup flavors' }
+AlceLinker >> lookupFunctionOrSub: aMatch in: aNode [
+	^ AlceLookUp lookFor: AlceLookForFunctionOrSubIn matching: aMatch from: aNode
+]
+
+{ #category : #'lookup flavors' }
+AlceLinker >> lookupMethod: aMatch in: aNode [
+	^ AlceLookUp lookFor: AlceLookForMethodsIn matching: aMatch from: aNode
+]
+
+{ #category : #'lookup flavors' }
+AlceLinker >> lookupType: aMatch in: aNode [
+	^ AlceLookUp lookFor: AlceLookForTypesIn matching: aMatch from: aNode
+]
+
+{ #category : #'lookup flavors' }
+AlceLinker >> lookupVariable: aMatch in: aNode [
+	^ AlceLookUp lookFor: AlceLookForVariablesIn matching: aMatch from: aNode
 ]
 
 { #category : #'as yet unclassified' }
 AlceLinker >> visitAccess: anAlcixAccess [
-	| context |
-	self
-		assert:
-			(anAlcixAccess invocable isNil
-				xor: anAlcixAccess methodInvocation isNil).
-	context := anAlcixAccess invocable
-		ifNil: [ anAlcixAccess methodInvocation ].
 	anAlcixAccess attribute
-		ifNil: [ (self lookup: anAlcixAccess attributeName in: context)
+		ifNil: [ (self
+				lookupVariable: anAlcixAccess attributeName
+				in: anAlcixAccess invocable)
 				ifNotNil: [ :a | anAlcixAccess attribute: a ] ]
 ]
 
@@ -58,7 +71,7 @@ AlceLinker >> visitForm: anAlcixForm [
 { #category : #visiting }
 AlceLinker >> visitFunction: aFunction [
 	aFunction type
-		ifNil: [ aFunction type: (self lookup: aFunction typeName in: aFunction module) ].
+		ifNil: [ aFunction type: (self lookupType: aFunction typeName in: aFunction module) ].
 	self visitInvocable: aFunction
 ]
 
@@ -73,7 +86,7 @@ AlceLinker >> visitInvocable: anInvocable [
 AlceLinker >> visitInvocation: anAlcixInvocation [
 	anAlcixInvocation candidate
 		ifNil: [ (self
-				lookup: anAlcixInvocation selector
+				lookupFunctionOrSub: anAlcixInvocation selector
 				in: anAlcixInvocation invocable)
 				ifNotNil: [ :c | anAlcixInvocation candidate: c ] ]
 ]
@@ -89,7 +102,7 @@ AlceLinker >> visitMethodInvocation: anAlcixMethodInvocation [
 					anAlcixMethodInvocation
 						candidate:
 							(self
-								lookup: anAlcixMethodInvocation receiver memberSelectors first
+								lookupMethod: anAlcixMethodInvocation receiver memberSelectors first
 								in: type) ] ]
 ]
 
@@ -109,7 +122,7 @@ AlceLinker >> visitModule: aModule [
 AlceLinker >> visitParameter: anAlcixParameter [
 	anAlcixParameter type
 		ifNil: [ (self
-				lookup: anAlcixParameter typeName
+				lookupType: anAlcixParameter typeName
 				in: anAlcixParameter invocable)
 				ifNotNil: [ :t | anAlcixParameter type: t ] ]
 ]
@@ -127,7 +140,7 @@ AlceLinker >> visitSubProcedure: aSub [
 { #category : #visiting }
 AlceLinker >> visitTypedEntity: aTyped [
 	aTyped type
-		ifNil: [ aTyped type: (self lookup: aTyped typeName in: aTyped userType) ]
+		ifNil: [ aTyped type: (self lookupType: aTyped typeName in: aTyped userType) ]
 ]
 
 { #category : #'as yet unclassified' }
