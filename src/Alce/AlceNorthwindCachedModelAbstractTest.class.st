@@ -12738,17 +12738,44 @@ AlceNorthwindCachedModelAbstractTest class >> cachedModelMSE [
 ]
 
 { #category : #'building suites' }
+AlceNorthwindCachedModelAbstractTest class >> hoovesModel [
+
+	" 
+	
+	This is really hacky. should change to something cleaner: 
+	It checks that hoovesstore exists. 
+	It looks for a model subscriber that is working on the norwind model. 
+	If there is a such model, we use it. 
+	
+	"
+	
+	(Smalltalk at: #HoovesStore) ifNotNil: [ :s | 
+		s instance applications
+			detect: [ :a | 
+				a class name = #HoovesModelSubscriber and: [ 
+					a modelName = 'norwind' ] ]
+			ifFound: [ :sub | 
+				[ ^ sub model ]
+					on: Error
+					do: [  ] ] ].
+	^ nil
+]
+
+{ #category : #'building suites' }
 AlceNorthwindCachedModelAbstractTest class >> norwind [
 	^ 'c:\Northwind.accdb' asFileReference
 ]
 
 { #category : #'building suites' }
 AlceNorthwindCachedModelAbstractTest class >> norwindCachedModel [
-	self = AlceNorthwindCachedModelAbstractTest
-		ifFalse: [ ^ AlceNorthwindCachedModelAbstractTest norwindCachedModel ].
-	^ norwindCachedModel
-		ifNil: [ norwindCachedModel := AlcixModel
-				importFromMSEStream: self cachedModelMSE readStream ]
+
+	self = AlceNorthwindCachedModelAbstractTest ifFalse: [ 
+		^ AlceNorthwindCachedModelAbstractTest norwindCachedModel ].
+
+	self hoovesModel ifNotNil: [ :m | ^ m ].
+	^ norwindCachedModel ifNil: [ 
+		  norwindCachedModel := AlcixModel importFromMSEStream:
+			                        self cachedModelMSE readStream ]
 ]
 
 { #category : #'building suites' }
