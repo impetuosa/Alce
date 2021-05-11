@@ -87,7 +87,7 @@ AlceLinker >> visitInvocation: anAlcixInvocation [
 	anAlcixInvocation candidate
 		ifNil: [ (self
 				lookupFunctionOrSub: anAlcixInvocation selector
-				in: anAlcixInvocation invocable)
+				in: anAlcixInvocation sender)
 				ifNotNil: [ :c | anAlcixInvocation candidate: c ] ]
 ]
 
