@@ -3,7 +3,8 @@ Class {
 	#superclass : #JinSingleInstanceDispatchVisitor,
 	#instVars : [
 		'model',
-		'filter'
+		'filter',
+		'sdkLibrary'
 	],
 	#category : #'Alce-Importer-Jindao'
 }
@@ -28,6 +29,11 @@ AlceDispatchingImporter >> instantiate: aClass [
 { #category : #'instance creation' }
 AlceDispatchingImporter >> model: aModel [
 	model := aModel
+]
+
+{ #category : #'instance creation' }
+AlceDispatchingImporter >> sdkLibrary [
+	^ sdkLibrary ifNil: [  sdkLibrary := (AlceSDKLibraryBuilder forModel: model) build ]
 ]
 
 { #category : #'instance creation' }

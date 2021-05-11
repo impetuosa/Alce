@@ -4,7 +4,8 @@ Class {
 	#traits : 'AlcixTType',
 	#classTraits : 'AlcixTType classTrait',
 	#instVars : [
-		'#members => FMMany type: #AlcixAttribute opposite: #userType'
+		'#members => FMMany type: #AlcixAttribute opposite: #userType',
+		'#invocables => FMMany type: #AlcixInvocable opposite: #userType'
 	],
 	#category : #'Alce-Famix-Entities'
 }
@@ -25,9 +26,38 @@ AlcixUserType >> accept: aVisitor [
 ]
 
 { #category : #adding }
+AlcixUserType >> addInvocable: anObject [
+	<generated>
+	^ self invocables add: anObject
+]
+
+{ #category : #adding }
 AlcixUserType >> addMember: anObject [
 	<generated>
 	^ self members add: anObject
+]
+
+{ #category : #accessing }
+AlcixUserType >> invocables [
+	"Relation named: #invocables type: #AlcixInvocable opposite: #userType"
+
+	<generated>
+	<derived>
+	^ invocables
+]
+
+{ #category : #accessing }
+AlcixUserType >> invocables: anObject [
+
+	<generated>
+	invocables value: anObject
+]
+
+{ #category : #navigation }
+AlcixUserType >> invocablesGroup [
+	<generated>
+	<navigation: 'Invocables'>
+	^ MooseSpecializedGroup withAll: self invocables asSet
 ]
 
 { #category : #accessing }

@@ -93,6 +93,7 @@ AlceLinker >> visitInvocation: anAlcixInvocation [
 
 { #category : #'as yet unclassified' }
 AlceLinker >> visitMethodInvocation: anAlcixMethodInvocation [
+	anAlcixMethodInvocation receiver invocable  ifNil: [  anAlcixMethodInvocation receiver invocable: anAlcixMethodInvocation sender ].
 	anAlcixMethodInvocation receiver accept: self.
 	"anAlcixMethodInvocation receiver attribute accept: self. "
 	anAlcixMethodInvocation receiver attribute

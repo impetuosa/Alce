@@ -8,7 +8,7 @@ Class {
 		'#localVariables => FMMany type: #AlcixLocalVariable opposite: #invocable',
 		'#outgoingInvocations => FMMany type: #AlcixInvocation opposite: #sender',
 		'#incomingInvocations => FMMany type: #AlcixInvocation opposite: #candidate',
-		'#module => FMOne type: #AlcixModule opposite: #invocables'
+		'#userType => FMOne type: #AlcixUserType opposite: #invocables'
 	],
 	#category : #'Alce-Famix-Entities'
 }
@@ -128,29 +128,6 @@ AlcixInvocable >> localVariablesGroup [
 ]
 
 { #category : #accessing }
-AlcixInvocable >> module [
-	"Relation named: #module type: #AlcixModule opposite: #invocables"
-
-	<generated>
-	<container>
-	^ module
-]
-
-{ #category : #accessing }
-AlcixInvocable >> module: anObject [
-
-	<generated>
-	module := anObject
-]
-
-{ #category : #navigation }
-AlcixInvocable >> moduleGroup [
-	<generated>
-	<navigation: 'Module'>
-	^ MooseSpecializedGroup with: self module
-]
-
-{ #category : #accessing }
 AlcixInvocable >> outgoingInvocations [
 	"Relation named: #outgoingInvocations type: #AlcixInvocation opposite: #sender"
 
@@ -208,4 +185,27 @@ AlcixInvocable >> selector [
 AlcixInvocable >> selector: anObject [
 	<generated>
 	selector := anObject
+]
+
+{ #category : #accessing }
+AlcixInvocable >> userType [
+	"Relation named: #userType type: #AlcixUserType opposite: #invocables"
+
+	<generated>
+	<container>
+	^ userType
+]
+
+{ #category : #accessing }
+AlcixInvocable >> userType: anObject [
+
+	<generated>
+	userType := anObject
+]
+
+{ #category : #navigation }
+AlcixInvocable >> userTypeGroup [
+	<generated>
+	<navigation: 'UserType'>
+	^ MooseSpecializedGroup with: self userType
 ]

@@ -27,11 +27,6 @@ AlcixAccess >> accept: aVisitor [
 ]
 
 { #category : #accessing }
-AlcixAccess >> asString [
-	^ '.' join: ({attributeName} , memberSelectors ifNil: [ {} ])
-]
-
-{ #category : #accessing }
 AlcixAccess >> attribute [
 	"Relation named: #attribute type: #AlcixAccessible opposite: #access"
 

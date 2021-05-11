@@ -37,7 +37,7 @@ AlceLookUp >> lookIn: aNode using: aLookInClass or: aBlock [
 	lookin := aLookInClass new
 		match: match;
 		yourself.
-	aNode accept: lookin.
+	lookin lookInto: aNode  .
 	lookin findings
 		ifNil: [ aBlock value ]
 		ifNotNil: [ :f | self findings: f ]

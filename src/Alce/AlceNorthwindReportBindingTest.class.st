@@ -69,7 +69,7 @@ AlceNorthwindReportBindingTest >> testBoundedReturnType [
 	self functionOrSub class = AlcixSubProcedure
 		ifTrue: [ ^ self skip ].
 	self
-		assert: self functionOrSub type isNil
+		assert: self functionOrSub type isNotNil
 		equals: (fixture at: #returnTypeBindingExpected)
 ]
 
