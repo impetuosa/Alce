@@ -2,7 +2,6 @@ Class {
 	#name : #AlcixModule,
 	#superclass : #AlcixContainer,
 	#instVars : [
-		'#invocables => FMMany type: #AlcixInvocable opposite: #module',
 		'#globalVariables => FMMany type: #AlcixGlobalVariable opposite: #module'
 	],
 	#category : #'Alce-Famix-Entities'
@@ -29,12 +28,6 @@ AlcixModule >> addGlobalVariable: anObject [
 	^ self globalVariables add: anObject
 ]
 
-{ #category : #adding }
-AlcixModule >> addInvocable: anObject [
-	<generated>
-	^ self invocables add: anObject
-]
-
 { #category : #accessing }
 AlcixModule >> globalVariables [
 	"Relation named: #globalVariables type: #AlcixGlobalVariable opposite: #module"
@@ -56,27 +49,4 @@ AlcixModule >> globalVariablesGroup [
 	<generated>
 	<navigation: 'GlobalVariables'>
 	^ MooseSpecializedGroup withAll: self globalVariables asSet
-]
-
-{ #category : #accessing }
-AlcixModule >> invocables [
-	"Relation named: #invocables type: #AlcixInvocable opposite: #module"
-
-	<generated>
-	<derived>
-	^ invocables
-]
-
-{ #category : #accessing }
-AlcixModule >> invocables: anObject [
-
-	<generated>
-	invocables value: anObject
-]
-
-{ #category : #navigation }
-AlcixModule >> invocablesGroup [
-	<generated>
-	<navigation: 'Invocables'>
-	^ MooseSpecializedGroup withAll: self invocables asSet
 ]

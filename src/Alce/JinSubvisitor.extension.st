@@ -9,3 +9,8 @@ JinSubvisitor >> instantiate: aClass [
 JinSubvisitor >> parent: aParent [
 	parent := aParent
 ]
+
+{ #category : #'*Alce' }
+JinSubvisitor >> sdkLibrary [
+	^ parent sdkLibrary
+]

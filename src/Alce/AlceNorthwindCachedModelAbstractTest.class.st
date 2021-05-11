@@ -12748,8 +12748,8 @@ AlceNorthwindCachedModelAbstractTest class >> hoovesModel [
 	If there is a such model, we use it. 
 	
 	"
-	
-	(Smalltalk at: #HoovesStore) ifNotNil: [ :s | 
+
+	Smalltalk at: #HoovesStore ifPresent: [ :s | 
 		s instance applications
 			detect: [ :a | 
 				a class name = #HoovesModelSubscriber and: [ 

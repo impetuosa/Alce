@@ -2,10 +2,10 @@ Class {
 	#name : #AlcixInvocation,
 	#superclass : #AlcixAccessEntity,
 	#instVars : [
-		'#arguments => FMMany type: #AlcixArgument opposite: #invocation',
-		'#candidate => FMOne type: #AlcixInvocable opposite: #incomingInvocations',
 		'#selector => FMProperty',
-		'#sender => FMOne type: #AlcixInvocable opposite: #outgoingInvocations'
+		'#sender => FMOne type: #AlcixInvocable opposite: #outgoingInvocations',
+		'#candidate => FMOne type: #AlcixInvocable opposite: #incomingInvocations',
+		'#arguments => FMMany type: #AlcixArgument opposite: #invocation'
 	],
 	#category : #'Alce-Famix-Entities'
 }
@@ -75,11 +75,6 @@ AlcixInvocation >> candidateGroup [
 	<generated>
 	<navigation: 'Candidate'>
 	^ MooseSpecializedGroup with: self candidate
-]
-
-{ #category : #'as yet unclassified' }
-AlcixInvocation >> isVBMessageSend [
-	^ false 
 ]
 
 { #category : #accessing }

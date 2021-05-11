@@ -226,7 +226,7 @@ AlceAccessGenerator >> defineRelations [
 	(invocable property: #incomingInvocations) <>-* (invocation property: #candidate).
 	
 	invocation <>-* argument.
-	module <>-* invocable.
+	userType <>-* invocable.
 	module <>-* globalVariable.
 	attribute <>-* attributeAccessor.
 	query <>-* table.

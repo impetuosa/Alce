@@ -58,20 +58,20 @@ AlceASTCodeImporter >> instantiateInvocation: aCall [
 
 { #category : #invocations }
 AlceASTCodeImporter >> instantiateMethodInvocation: selector for: aCall [
+
 	| receiver call |
 	receiver := self instantiateAccess: aCall selector.
-
+	self state top addAccess: receiver.
 	receiver memberSelectors isEmptyOrNil ifTrue: [ self halt ].
 	call := self instantiate: AlcixMethodInvocation.
 	call receiver: receiver.
 	call selector: selector.
 	call anchor: self state top anchor / #invocation / call selector.
-	aCall arguments arguments
-		do: [ :a | 
-			| arg |
-			arg := self instantiate: AlcixArgument.
-			arg value: (self nodeToString: a).
-			call addArgument: arg ].
+	aCall arguments arguments do: [ :a | 
+		| arg |
+		arg := self instantiate: AlcixArgument.
+		arg value: (self nodeToString: a).
+		call addArgument: arg ].
 	self state top addOutgoingInvocation: call
 ]
 

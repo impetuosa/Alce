@@ -4,10 +4,21 @@ Class {
 	#category : #'Alce-Importer-Linker'
 }
 
+{ #category : #'as yet unclassified' }
+AlceLookIn >> lookInto: aNode [
+
+	^ aNode accept: self
+]
+
+{ #category : #testing }
+AlceLookIn >> matches: aString [
+
+	^ match = aString
+]
+
 { #category : #visiting }
 AlceLookIn >> visitAccessModule: anAccessModule [
-	anAccessModule types do: [ :t | t accept: self ].
-	anAccessModule references do: [ :r | r accept: self ]
+
 ]
 
 { #category : #'as yet unclassified' }
@@ -22,13 +33,12 @@ AlceLookIn >> visitForm: anAlcixForm [
 
 { #category : #visiting }
 AlceLookIn >> visitFunction: aFunction [
-	aFunction parameters do: [ :p | p accept: self ].
-	aFunction localVariables do: [ :p | p accept: self ]
+	
 ]
 
 { #category : #'as yet unclassified' }
 AlceLookIn >> visitLibrary: anAlcixLibrary [
-	^ nil
+
 ]
 
 { #category : #'as yet unclassified' }

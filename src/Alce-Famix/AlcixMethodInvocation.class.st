@@ -23,11 +23,6 @@ AlcixMethodInvocation >> accept: aVisitor [
 ]
 
 { #category : #accessing }
-AlcixMethodInvocation >> isVBMessageSend [
-	^ true 
-]
-
-{ #category : #accessing }
 AlcixMethodInvocation >> receiver [
 
 	<FMProperty: #receiver type: #Object>
