@@ -19,12 +19,36 @@ AlceSDKLibraryBuilder class >> forModel: aModel [
 		  yourself
 ]
 
+{ #category : #'sdk functions math' }
+AlceSDKLibraryBuilder >> abs [
+	^ self
+		  functionNamed: #Abs
+		  returns: self variant
+		  parametersFromString: 'number required variant'
+]
+
 { #category : #'sdk functions' }
 AlceSDKLibraryBuilder >> array [
 	^ self
 		  functionNamed: #Array
 		  returns: self variant
 		  parametersFromString: 'arglist Optional: Variant'
+]
+
+{ #category : #'sdk functions conversion' }
+AlceSDKLibraryBuilder >> asc [
+	^ self
+		  functionNamed: #Asc
+		  returns: self integer
+		  parametersFromString: 'expr required string'
+]
+
+{ #category : #'sdk functions math' }
+AlceSDKLibraryBuilder >> atn [
+	^ self
+		  functionNamed: #Atn
+		  returns: self double
+		  parametersFromString: 'number required variant'
 ]
 
 { #category : #'primitive types' }
@@ -48,6 +72,14 @@ AlceSDKLibraryBuilder >> byte [
 	^ self primitiveTypeNamed: #Byte
 		
 	
+]
+
+{ #category : #'sdk functions conversion' }
+AlceSDKLibraryBuilder >> cVErr [
+	^ self
+		  functionNamed: #CVErr
+		  returns: self variant
+		  parametersFromString: 'errornumber required integer'
 ]
 
 { #category : #'enum constants' }
@@ -91,6 +123,33 @@ AlceSDKLibraryBuilder >> choose [
 choice 	Required. Variant expression containing one of the possible choices.'
 ]
 
+{ #category : #'sdk functions conversion' }
+AlceSDKLibraryBuilder >> chr [
+	^ self
+		  functionNamed: #Chr
+		  returns: self string
+		  parametersFromString: 'expr required long'
+
+]
+
+{ #category : #'sdk functions conversion' }
+AlceSDKLibraryBuilder >> chrB [
+	^ self
+		  functionNamed: #ChrB
+		  returns: self string
+		  parametersFromString: 'expr required long'
+
+]
+
+{ #category : #'sdk functions conversion' }
+AlceSDKLibraryBuilder >> chrW [
+	^ self
+		  functionNamed: #ChrW
+		  returns: self string
+		  parametersFromString: 'expr required long'
+
+]
+
 { #category : #'enum constants' }
 AlceSDKLibraryBuilder >> color [
 		^ self
@@ -123,6 +182,14 @@ vbBinaryCompare 	0 	Performs a binary comparison.
 vbTextCompare 	1 	Performs a textual comparison.
 vbDatabaseCompare 	2 	For Microsoft Access (Windows only), performs a comparison based on information contained in your database.' 	
 
+]
+
+{ #category : #'sdk functions math' }
+AlceSDKLibraryBuilder >> cos [
+	^ self
+		  functionNamed: #Cos
+		  returns: self double
+		  parametersFromString: 'number required variant'
 ]
 
 { #category : #'sdk functions' }
@@ -373,6 +440,14 @@ AlceSDKLibraryBuilder >> errorFunction [
 		  parametersFromString: ''
 ]
 
+{ #category : #'sdk functions math' }
+AlceSDKLibraryBuilder >> exp [
+	^ self
+		  functionNamed: #Exp
+		  returns: self double
+		  parametersFromString: 'number required variant'
+]
+
 { #category : #'sdk functions' }
 AlceSDKLibraryBuilder >> fileAttr [
 	^ self
@@ -435,6 +510,14 @@ include 	Optional. Boolean value indicating whether to return substrings that in
 compare 	Optional. comparison  value indicating the kind of string comparison to use. See Settings section for values.'
 ]
 
+{ #category : #'sdk functions math' }
+AlceSDKLibraryBuilder >> fix [
+	^ self
+		  functionNamed: #Fix
+		  returns: self variant
+		  parametersFromString: 'number required double'
+]
+
 { #category : #'enum constants' }
 AlceSDKLibraryBuilder >> form [
 		^ self
@@ -442,6 +525,17 @@ AlceSDKLibraryBuilder >> form [
 		  definedWith:'vbModeless 	0 	UserForm is modeless.
 vbModal 	1 	UserForm is modal (default).' 	
 
+]
+
+{ #category : #'sdk functions conversion' }
+AlceSDKLibraryBuilder >> format [
+	^ self
+		  functionNamed: #Format
+		  returns: self string
+		  parametersFromString: 'Expression 	Required. String Variant Any valid expression.
+Format 	Optional. A valid named or user-defined format expression.
+FirstDayOfWeek 	Optional. DateEnum  A constant that specifies the first day of the week.
+FirstWeekOfYear 	Optional. DateEnum A constant that specifies the first week of the year.'
 ]
 
 { #category : #'sdk functions' }
@@ -589,6 +683,14 @@ AlceSDKLibraryBuilder >> globals [
 	}
 ]
 
+{ #category : #'sdk functions conversion' }
+AlceSDKLibraryBuilder >> hex [
+	^ self
+		  functionNamed: #Hex
+		  returns: self string
+		  parametersFromString: 'num required longLong'
+]
+
 { #category : #'sdk functions' }
 AlceSDKLibraryBuilder >> hour [
 	^ self
@@ -708,6 +810,14 @@ context 	Optional. Numeric expression that is the Help context number assigned t
 { #category : #building }
 AlceSDKLibraryBuilder >> instantiate: aClass [
  	^ model instantiate: aClass
+]
+
+{ #category : #'sdk functions math' }
+AlceSDKLibraryBuilder >> int [
+	^ self
+		  functionNamed: #Int
+		  returns: self variant
+		  parametersFromString: 'number required double'
 ]
 
 { #category : #'primitive types' }
@@ -962,6 +1072,14 @@ AlceSDKLibraryBuilder >> loc [
 		  parametersFromString: 'fileno required integer'
 ]
 
+{ #category : #'sdk functions math' }
+AlceSDKLibraryBuilder >> log [
+	^ self
+		  functionNamed: #Log
+		  returns: self double
+		  parametersFromString: 'number required variant'
+]
+
 { #category : #'primitive types' }
 AlceSDKLibraryBuilder >> long [
 	^ self primitiveTypeNamed: #Long
@@ -1138,6 +1256,15 @@ AlceSDKLibraryBuilder >> object [
 	^ self primitiveTypeNamed: #Object
 		
 	
+]
+
+{ #category : #'sdk functions conversion' }
+AlceSDKLibraryBuilder >> oct [
+
+	^ self
+		  functionNamed: #Oct
+		  returns: self string
+		  parametersFromString: 'num required longLong'
 ]
 
 { #category : #'sdk functions' }
@@ -1317,6 +1444,14 @@ AlceSDKLibraryBuilder >> right [
 length 	Required; Long Variant (Long). Numeric expression indicating how many characters to return. If 0, a zero-length string ("") is returned. If greater than or equal to the number of characters in string, the entire string is returned.'
 ]
 
+{ #category : #'sdk functions math' }
+AlceSDKLibraryBuilder >> rnd [
+	^ self
+		  functionNamed: #Rnd
+		  returns: self single
+		  parametersFromString: 'number required variant'
+]
+
 { #category : #'sdk functions' }
 AlceSDKLibraryBuilder >> round [
 	^ self
@@ -1489,6 +1624,24 @@ AlceSDKLibraryBuilder >> sdkFunctions [
 		  self year }
 ]
 
+{ #category : #'sdk functions math' }
+AlceSDKLibraryBuilder >> sdkStatements [
+
+	^ { 
+		  self abs.
+		  self atn.
+		  self cos.
+		  self exp.
+		  self int.
+		  self fix.
+		  self log.
+		  self rnd.
+		  self sgn.
+		  self sin.
+		  self sqr.
+		  self tan }
+]
+
 { #category : #'sdk functions' }
 AlceSDKLibraryBuilder >> second [
 	^ self
@@ -1503,6 +1656,14 @@ AlceSDKLibraryBuilder >> seek [
 		  functionNamed: #Seek
 		  returns: self long
 		  parametersFromString: 'filenumber required integer'
+]
+
+{ #category : #'sdk functions math' }
+AlceSDKLibraryBuilder >> sgn [
+	^ self
+		  functionNamed: #Sgn
+		  returns: self integer
+		  parametersFromString: 'number required variant'
 ]
 
 { #category : #'sdk functions' }
@@ -1525,6 +1686,14 @@ vbMaximizedFocus 	3 	Window is maximized with focus.
 vbNormalNoFocus 	4 	Window is restored to its most recent size and position. The currently active window remains active.
 vbMinimizedNoFocus 	6 	Window is displayed as an icon. The currently active window remains active.' 	
 
+]
+
+{ #category : #'sdk functions math' }
+AlceSDKLibraryBuilder >> sin [
+	^ self
+		  functionNamed: #Sin
+		  returns: self double
+		  parametersFromString: 'number required variant'
 ]
 
 { #category : #'primitive types' }
@@ -1569,6 +1738,22 @@ AlceSDKLibraryBuilder >> split [
 delimiter 	Optional. String character used to identify substring limits. If omitted, the space character (" ") is assumed to be the delimiter. If delimiter is a zero-length string, a single-element array containing the entire expression string is returned.
 limit 	Optional. Integer of substrings to be returned; -1 indicates that all substrings are returned.
 compare 	Optional. comparison Numeric value indicating the kind of comparison to use when evaluating substrings. See Settings section for values.'
+]
+
+{ #category : #'sdk functions math' }
+AlceSDKLibraryBuilder >> sqr [
+	^ self
+		  functionNamed: #Sqr
+		  returns: self double
+		  parametersFromString: 'number required variant'
+]
+
+{ #category : #'sdk functions conversion' }
+AlceSDKLibraryBuilder >> str [
+	^ self
+		  functionNamed: #Str
+		  returns: self string
+		  parametersFromString: 'val required long'
 ]
 
 { #category : #'sdk functions' }
@@ -1680,6 +1865,14 @@ AlceSDKLibraryBuilder >> tab [
 		  parametersFromString: 'amount required integer'
 ]
 
+{ #category : #'sdk functions math' }
+AlceSDKLibraryBuilder >> tan [
+	^ self
+		  functionNamed: #Tan
+		  returns: self double
+		  parametersFromString: 'number required variant'
+]
+
 { #category : #'sdk functions' }
 AlceSDKLibraryBuilder >> time [
 	^ self
@@ -1732,6 +1925,22 @@ vbUseDefault 	-2 	Use default setting'
 
 ]
 
+{ #category : #'sdk functions conversion' }
+AlceSDKLibraryBuilder >> typeConversionSdkFunctions [
+
+	^ { 
+		  self asc.
+		  self chr.
+		  self chrB.
+		  self chrW.
+		  self cVErr.
+		  self format.
+		  self hex.
+		  self oct.
+		  self str.
+		  self val }
+]
+
 { #category : #'sdk functions' }
 AlceSDKLibraryBuilder >> typeName [
 	^ self
@@ -1773,6 +1982,14 @@ AlceSDKLibraryBuilder >> uCase [
 		  functionNamed: #UCase
 		  returns: self string
 		  parametersFromString: 'expr required string'
+]
+
+{ #category : #'sdk functions conversion' }
+AlceSDKLibraryBuilder >> val [
+	^ self
+		  functionNamed: #Val
+		  returns: self variant
+		  parametersFromString: 'val required long'
 ]
 
 { #category : #'sdk functions' }
