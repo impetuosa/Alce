@@ -44,3 +44,8 @@ AlcixParameter >> invocableGroup [
 	<navigation: 'Invocable'>
 	^ MooseSpecializedGroup with: self invocable
 ]
+
+{ #category : #navigation }
+AlcixParameter >> isOptional: aBool [
+	
+]
