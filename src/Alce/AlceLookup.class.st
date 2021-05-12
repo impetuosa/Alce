@@ -65,7 +65,7 @@ AlceLookUp >> visitClass: anAlcixClass [
 
 { #category : #visiting }
 AlceLookUp >> visitFunction: aFunction [
-	self lookIn: aFunction or: [ aFunction module accept: self ]
+	self lookIn: aFunction or: [ aFunction userType accept: self ]
 ]
 
 { #category : #visiting }

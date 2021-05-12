@@ -60,11 +60,12 @@ AlceSDKLibraryBuilder >> boolean [
 { #category : #building }
 AlceSDKLibraryBuilder >> build [
 	| library |
-	self halt.
+
 	library := self instantiate: AlcixLibrary.
 	self types do: [ :t | library addType: t ].
 	self functionsOrSubs do: [ :f | library addInvocable: f ].
-	self globals do: [ :g | g addGlobal: g ]
+	self globals do: [ :g | g addGlobal: g ].
+	^ library 
 ]
 
 { #category : #'primitive types' }
@@ -402,7 +403,7 @@ AlceSDKLibraryBuilder >> enumNamed: aName definedWith: aStringDefinition [
 	| genname defLines enum stream value |
 	genname := 'vb{1}' format: { aName capitalized }.
 
-	created at: genname, 'EnumConstant' ifAbsent: [ 
+	^ created at: genname, 'EnumConstant' ifAbsent: [ 
 		defLines := aStringDefinition lines collect: [ :l | 
 			            l trimBoth copyReplaceAll: String tab with: '' ].
 		enum := self instantiate: AlcixEnum.
@@ -593,26 +594,28 @@ AlceSDKLibraryBuilder >> freeFile [
 
 { #category : #'sdk functions' }
 AlceSDKLibraryBuilder >> functionNamed: aName returns: aType parametersFromString: aStringDefinition [
-
 	| func param defLines stream type |
-	^ created at: aName , 'function' ifAbsentPut: [ 
-		  func := self instantiate: AlcixFunction.
-		  func type: aType.
-		  func typeName: aType name.
-
-		  defLines := aStringDefinition lines collect: [ :l | 
-			              l trimBoth copyReplaceAll: String tab with: '' ].
-		  defLines do: [ :l | 
-			  param := self instantiate: AlcixParameter.
-			  func addParameter: param.
-			  stream := l readStream.
-			  param name: (stream upToAll: ' ') trimBoth.
-			  param isOptional: (self isOptionalOrNot: (stream upToAll: ' ') trimBoth).
-			  type := self typeNamed: (stream upToAll: ' ') trimBoth.
-			  param type: type.
-			  param typeName: type name ].
-
-		  func ]
+	^ created
+		at: aName , 'function'
+		ifAbsentPut: [ func := self instantiate: AlcixFunction.
+			func type: aType.
+			func typeName: aType name.
+			func selector: aName.
+			defLines := aStringDefinition lines
+				collect:
+					[ :l | l trimBoth copyReplaceAll: String tab with: '' ].
+			defLines
+				do: [ :l | 
+					param := self instantiate: AlcixParameter.
+					func addParameter: param.
+					stream := l readStream.
+					param name: (stream upToAll: ' ') trimBoth.
+					param
+						isOptional: (self isOptionalOrNot: (stream upToAll: ' ') trimBoth).
+					type := self typeNamed: (stream upToAll: ' ') trimBoth.
+					param type: type.
+					param typeName: type name ].
+			func ]
 ]
 
 { #category : #building }
@@ -1105,7 +1108,7 @@ AlceSDKLibraryBuilder >> mIRR [
 	^ self
 		  functionNamed: #MIRR
 		  returns: self double
-		  parametersFromString: 'values( ) 	Required. Variant Array of Double specifying cash flow values. The array must contain at least one negative value (a payment) and one positive value (a receipt).
+		  parametersFromString: 'values() 	Required. Variant Array of Double specifying cash flow values. The array must contain at least one negative value (a payment) and one positive value (a receipt).
 finance_rate 	Required. Double specifying interest rate paid as the cost of financing.
 reinvest_rate 	Required. Double specifying interest rate received on gains from cash reinvestment.'
 ]
@@ -1182,6 +1185,11 @@ vbVerticalTab 	Chr(11) 	Not useful in Microsoft Windows or on the Macintosh'
 
 ]
 
+{ #category : #'as yet unclassified' }
+AlceSDKLibraryBuilder >> model: anAlcixModel [ 
+	model := anAlcixModel
+]
+
 { #category : #'sdk functions' }
 AlceSDKLibraryBuilder >> month [
 	^ self
@@ -1248,7 +1256,7 @@ AlceSDKLibraryBuilder >> nPV [
 		  functionNamed: #NPV
 		  returns: self double
 		  parametersFromString: 'rate 	Required. Double specifying discount rate over the length of the period, expressed as a decimal.
-values( ) 	Required. Variant Array of Double specifying cash flow values. The array must contain at least one negative value (a payment) and one positive value (a receipt).'
+values() 	Required. Variant Array of Double specifying cash flow values. The array must contain at least one negative value (a payment) and one positive value (a receipt).'
 ]
 
 { #category : #'sdk functions' }
@@ -1545,7 +1553,7 @@ AlceSDKLibraryBuilder >> sdkFunctions [
 		  self command.
 		  self createObject.
 		  self curDir.
-		  self date.
+		  self dateFunction.
 		  self dateAdd.
 		  self dateDiff.
 		  self datePart.
@@ -1629,7 +1637,7 @@ AlceSDKLibraryBuilder >> sdkFunctions [
 		  self split.
 		  self strComp.
 		  self strConv.
-		  self string.
+		  self stringFunction.
 		  self strReverse.
 		  self switch.
 		  self sYD.
@@ -1833,7 +1841,7 @@ AlceSDKLibraryBuilder >> switch [
 		  functionNamed: #Switch
 		  returns: self variant
 		  parametersFromString: 'expr 	Required. Variant expression that you want to evaluate.
-value 	Required. Value or expression to be returned if the corresponding expression is True.'
+value 	Required. variant Value or expression to be returned if the corresponding expression is True.'
 ]
 
 { #category : #'enum constants' }
@@ -1966,10 +1974,13 @@ AlceSDKLibraryBuilder >> typeNamed: aName [
 	If i respond to the typename as a msg send, i return that. 
 	If not: variant
 	"
-	(self respondsTo: aName asSymbol) ifTrue: [ 
-		^ self perform: aName asSymbol ].
-	(self respondsTo: aName uncapitalized asSymbol) ifTrue: [ 
-		^ self perform: aName uncapitalized asSymbol ].
+
+	aName asLowercase = #value
+		ifTrue: [ ^ self variant ].
+	(self respondsTo: aName asSymbol)
+		ifTrue: [ ^ self perform: aName asSymbol ].
+	(self respondsTo: aName uncapitalized asSymbol)
+		ifTrue: [ ^ self perform: aName uncapitalized asSymbol ].
 	^ self variant
 ]
 

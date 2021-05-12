@@ -71,7 +71,7 @@ AlceLinker >> visitForm: anAlcixForm [
 { #category : #visiting }
 AlceLinker >> visitFunction: aFunction [
 	aFunction type
-		ifNil: [ aFunction type: (self lookupType: aFunction typeName in: aFunction module) ].
+		ifNil: [ aFunction type: (self lookupType: aFunction typeName in: aFunction userType) ].
 	self visitInvocable: aFunction
 ]
 
