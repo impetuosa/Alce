@@ -59,8 +59,8 @@ AlceSDKLibraryBuilder >> boolean [
 
 { #category : #building }
 AlceSDKLibraryBuilder >> build [
-
 	| library |
+	self halt.
 	library := self instantiate: AlcixLibrary.
 	self types do: [ :t | library addType: t ].
 	self functionsOrSubs do: [ :f | library addInvocable: f ].

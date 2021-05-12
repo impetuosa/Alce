@@ -2,8 +2,8 @@ Class {
 	#name : #AlcixParameter,
 	#superclass : #AlcixTypedEntity,
 	#instVars : [
-		'#invocable => FMOne type: #AlcixInvocable opposite: #parameters',
-		'#isOptional => FMProperty'
+		'#isOptional => FMProperty',
+		'#invocable => FMOne type: #AlcixInvocable opposite: #parameters'
 	],
 	#category : #'Alce-Famix-Entities'
 }
@@ -54,7 +54,8 @@ AlcixParameter >> isOptional [
 	^ isOptional
 ]
 
-{ #category : #navigation }
-AlcixParameter >> isOptional: aBool [
-	
+{ #category : #accessing }
+AlcixParameter >> isOptional: anObject [
+	<generated>
+	isOptional := anObject
 ]

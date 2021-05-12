@@ -2,12 +2,12 @@ Class {
 	#name : #AlcixInvocable,
 	#superclass : #AlcixAccessEntity,
 	#instVars : [
-		'#selector => FMProperty',
-		'#parameters => FMMany type: #AlcixParameter opposite: #invocable',
 		'#accesses => FMMany type: #AlcixAccess opposite: #invocable',
+		'#incomingInvocations => FMMany type: #AlcixInvocation opposite: #candidate',
 		'#localVariables => FMMany type: #AlcixLocalVariable opposite: #invocable',
 		'#outgoingInvocations => FMMany type: #AlcixInvocation opposite: #sender',
-		'#incomingInvocations => FMMany type: #AlcixInvocation opposite: #candidate',
+		'#parameters => FMMany type: #AlcixParameter opposite: #invocable',
+		'#selector => FMProperty',
 		'#userType => FMOne type: #AlcixUserType opposite: #invocables'
 	],
 	#category : #'Alce-Famix-Entities'

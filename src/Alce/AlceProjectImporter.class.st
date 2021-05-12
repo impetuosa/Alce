@@ -9,8 +9,7 @@ AlceProjectImporter >> visitProject: aJinAccessProject [
 	self state push: (self instantiate: AlcixAccessModule).
 	self state top name: aJinAccessProject name.
 	self state top anchor: (AlceAnchor on: #/).
-	
-	
+	self state top addReference: self sdkLibrary.
 	self visitCollection: aJinAccessProject references.
 	self visitCollection: aJinAccessProject tables.
 	self visitCollection: aJinAccessProject queries.
