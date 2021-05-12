@@ -673,13 +673,13 @@ default 	Optional. Expression containing the value to return if no value is set 
 
 { #category : #building }
 AlceSDKLibraryBuilder >> globals [
-
+	"Yet to define"
 	^ { 
-		  self errObject.
+		"  self errObject.
 		  self nullObject.
 		  self nothingObject.
 		  self emptyObject.
-		  self errorObject 
+		  self errorObject "
 	}
 ]
 
@@ -1126,6 +1126,24 @@ AlceSDKLibraryBuilder >> macScript [
 		  parametersFromString: 'expr required string'
 ]
 
+{ #category : #'sdk functions math' }
+AlceSDKLibraryBuilder >> mathSdkFunctions [
+
+	^ { 
+		  self abs.
+		  self atn.
+		  self cos.
+		  self exp.
+		  self int.
+		  self fix.
+		  self log.
+		  self rnd.
+		  self sgn.
+		  self sin.
+		  self sqr.
+		  self tan }
+]
+
 { #category : #'sdk functions' }
 AlceSDKLibraryBuilder >> mid [
 	^ self
@@ -1483,6 +1501,11 @@ period 	Required. Double specifying period for which asset depreciation is calcu
 ]
 
 { #category : #building }
+AlceSDKLibraryBuilder >> sdkClasses [
+	^{ "Yet to define " }
+]
+
+{ #category : #building }
 AlceSDKLibraryBuilder >> sdkEnums [
 	^ { 
 		self calendar . 
@@ -1624,22 +1647,10 @@ AlceSDKLibraryBuilder >> sdkFunctions [
 		  self year }
 ]
 
-{ #category : #'sdk functions math' }
+{ #category : #'sdk statements' }
 AlceSDKLibraryBuilder >> sdkStatements [
-
-	^ { 
-		  self abs.
-		  self atn.
-		  self cos.
-		  self exp.
-		  self int.
-		  self fix.
-		  self log.
-		  self rnd.
-		  self sgn.
-		  self sin.
-		  self sqr.
-		  self tan }
+	"Still to define"
+	^ {   }
 ]
 
 { #category : #'sdk functions' }
