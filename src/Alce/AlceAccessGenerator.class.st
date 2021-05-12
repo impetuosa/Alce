@@ -203,7 +203,8 @@ AlceAccessGenerator >> defineProperties [
 	library property: #isBuiltIn type: #Boolean.
 	invocable property: #selector type: #String.
 	invocation property: #selector type: #String.
-	methodInvocation property: #receiver type: #Object
+	methodInvocation property: #receiver type: #Object.
+	parameter property: #isOptional type: #Boolean.
 ]
 
 { #category : #definition }

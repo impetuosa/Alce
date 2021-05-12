@@ -2,7 +2,8 @@ Class {
 	#name : #AlcixParameter,
 	#superclass : #AlcixTypedEntity,
 	#instVars : [
-		'#invocable => FMOne type: #AlcixInvocable opposite: #parameters'
+		'#invocable => FMOne type: #AlcixInvocable opposite: #parameters',
+		'#isOptional => FMProperty'
 	],
 	#category : #'Alce-Famix-Entities'
 }
@@ -43,6 +44,14 @@ AlcixParameter >> invocableGroup [
 	<generated>
 	<navigation: 'Invocable'>
 	^ MooseSpecializedGroup with: self invocable
+]
+
+{ #category : #accessing }
+AlcixParameter >> isOptional [
+
+	<FMProperty: #isOptional type: #Boolean>
+	<generated>
+	^ isOptional
 ]
 
 { #category : #navigation }
