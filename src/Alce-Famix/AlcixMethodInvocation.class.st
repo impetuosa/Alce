@@ -35,3 +35,11 @@ AlcixMethodInvocation >> receiver: anObject [
 	<generated>
 	receiver := anObject
 ]
+
+{ #category : #accessing }
+AlcixMethodInvocation >> selectors [
+	| parts |
+	parts := '.' split: selector. 
+	self assert: parts size = 2 .
+	^ parts second
+]

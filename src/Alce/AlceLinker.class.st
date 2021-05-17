@@ -104,7 +104,7 @@ AlceLinker >> visitMethodInvocation: anAlcixMethodInvocation [
 					anAlcixMethodInvocation
 						candidate:
 							(self
-								lookupMethod: anAlcixMethodInvocation receiver memberSelectors first
+								lookupMethod: anAlcixMethodInvocation selectors first
 								in: type) ] ]
 ]
 
