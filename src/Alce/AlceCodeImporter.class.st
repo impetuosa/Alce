@@ -5,6 +5,11 @@ Class {
 }
 
 { #category : #'visit-first-objects' }
+AlceCodeImporter >> registerClassVariables: anAlcixClass [ 
+	
+]
+
+{ #category : #'visit-first-objects' }
 AlceCodeImporter >> visitFormModule: anObject [
 	super visitModule: anObject.
 

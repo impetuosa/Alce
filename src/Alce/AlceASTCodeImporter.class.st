@@ -93,6 +93,17 @@ AlceASTCodeImporter >> nodeToString: aNode [
 	^ str
 ]
 
+{ #category : #'properties - variables' }
+AlceASTCodeImporter >> registerSpecialVariable: aName type: aType [
+	| var |
+	var := self instantiate: AlcixAttribute.
+	var name: aName.
+	var typeName: aType name.
+	var type: aType.
+	var anchor: self state top anchor / #variables / var name.
+	^ var
+]
+
 { #category : #helper }
 AlceASTCodeImporter >> stringConverter [
 	^ stringConverter
@@ -313,6 +324,9 @@ AlceASTCodeImporter >> visitMemberAccess: aMemberAccess [
 
 { #category : #generated }
 AlceASTCodeImporter >> visitModule: aModule [
+	aModule isClassModule ifTrue: [  
+		self registerSpecialVariable: #Me type: self state top. 
+	 ].
 	^ self visitProgram: aModule.
 
 ]

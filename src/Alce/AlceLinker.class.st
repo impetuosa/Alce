@@ -50,12 +50,13 @@ AlceLinker >> visitAttribute: anAttribute [
 
 { #category : #'as yet unclassified' }
 AlceLinker >> visitClass: anAlcixClass [
-
+	self visitModule: anAlcixClass 
+	
 ]
 
 { #category : #'as yet unclassified' }
 AlceLinker >> visitEnum: anAlcixEnum [
-	anAlcixEnum enumValues do: [  : e | e accept: self  ] 
+
 ]
 
 { #category : #'as yet unclassified' }
@@ -70,7 +71,6 @@ AlceLinker >> visitForm: anAlcixForm [
 
 { #category : #visiting }
 AlceLinker >> visitFunction: aFunction [
-	self halt.
 	aFunction type
 		ifNil: [ aFunction type: (self lookupType: aFunction typeName in: aFunction userType) ].
 	self visitInvocable: aFunction
