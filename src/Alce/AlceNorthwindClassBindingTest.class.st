@@ -10,7 +10,7 @@ AlceNorthwindClassBindingTest class >> setupAlcixClassErrorHandlingLogError [
 	(#nameOfFSTCitizen -> #ErrorHandling).
 	(#fixture -> {
 	(#functionOrSub -> #LogError).
-	(#accessBoundAttributes -> 0) .
+	(#accessBoundAttributes -> 5) .
 	(#returnTypeBindingExpected -> true) .
 	(#variableTypesBound -> 0) .
 	(#variableBound -> 0) .
@@ -85,7 +85,7 @@ AlceNorthwindClassBindingTest class >> setupAlcixClassRecordsetWrapperAddNew [
 	(#nameOfFSTCitizen -> #RecordsetWrapper).
 	(#fixture -> {
 	(#functionOrSub -> #AddNew).
-	(#accessBoundAttributes -> 0) .
+	(#accessBoundAttributes -> 2) .
 	(#returnTypeBindingExpected -> true) .
 	(#variableTypesBound -> 0) .
 	(#variableBound -> 0) .
@@ -100,7 +100,7 @@ AlceNorthwindClassBindingTest class >> setupAlcixClassRecordsetWrapperClass_Term
 	(#nameOfFSTCitizen -> #RecordsetWrapper).
 	(#fixture -> {
 	(#functionOrSub -> #Class_Terminate).
-	(#accessBoundAttributes -> 0) .
+	(#accessBoundAttributes -> 2) .
 	(#returnTypeBindingExpected -> true) .
 	(#variableTypesBound -> 0) .
 	(#variableBound -> 0) .
@@ -115,7 +115,7 @@ AlceNorthwindClassBindingTest class >> setupAlcixClassRecordsetWrapperCloseRecor
 	(#nameOfFSTCitizen -> #RecordsetWrapper).
 	(#fixture -> {
 	(#functionOrSub -> #CloseRecordset).
-	(#accessBoundAttributes -> 0) .
+	(#accessBoundAttributes -> 3) .
 	(#returnTypeBindingExpected -> true) .
 	(#variableTypesBound -> 0) .
 	(#variableBound -> 0) .
@@ -130,7 +130,7 @@ AlceNorthwindClassBindingTest class >> setupAlcixClassRecordsetWrapperDelete [
 	(#nameOfFSTCitizen -> #RecordsetWrapper).
 	(#fixture -> {
 	(#functionOrSub -> #Delete).
-	(#accessBoundAttributes -> 0) .
+	(#accessBoundAttributes -> 2) .
 	(#returnTypeBindingExpected -> true) .
 	(#variableTypesBound -> 0) .
 	(#variableBound -> 0) .
@@ -145,7 +145,7 @@ AlceNorthwindClassBindingTest class >> setupAlcixClassRecordsetWrapperEdit [
 	(#nameOfFSTCitizen -> #RecordsetWrapper).
 	(#fixture -> {
 	(#functionOrSub -> #Edit).
-	(#accessBoundAttributes -> 0) .
+	(#accessBoundAttributes -> 2) .
 	(#returnTypeBindingExpected -> true) .
 	(#variableTypesBound -> 0) .
 	(#variableBound -> 0) .
@@ -160,7 +160,7 @@ AlceNorthwindClassBindingTest class >> setupAlcixClassRecordsetWrapperGetRecords
 	(#nameOfFSTCitizen -> #RecordsetWrapper).
 	(#fixture -> {
 	(#functionOrSub -> #GetRecordsetClone).
-	(#accessBoundAttributes -> 0) .
+	(#accessBoundAttributes -> 2) .
 	(#returnTypeBindingExpected -> true) .
 	(#variableTypesBound -> 0) .
 	(#variableBound -> 0) .
@@ -175,7 +175,7 @@ AlceNorthwindClassBindingTest class >> setupAlcixClassRecordsetWrapperMoveNext [
 	(#nameOfFSTCitizen -> #RecordsetWrapper).
 	(#fixture -> {
 	(#functionOrSub -> #MoveNext).
-	(#accessBoundAttributes -> 0) .
+	(#accessBoundAttributes -> 2) .
 	(#returnTypeBindingExpected -> true) .
 	(#variableTypesBound -> 0) .
 	(#variableBound -> 0) .
@@ -190,7 +190,7 @@ AlceNorthwindClassBindingTest class >> setupAlcixClassRecordsetWrapperOpenRecord
 	(#nameOfFSTCitizen -> #RecordsetWrapper).
 	(#fixture -> {
 	(#functionOrSub -> #OpenRecordset).
-	(#accessBoundAttributes -> 0) .
+	(#accessBoundAttributes -> 6) .
 	(#returnTypeBindingExpected -> true) .
 	(#variableTypesBound -> 0) .
 	(#variableBound -> 0) .
@@ -205,7 +205,7 @@ AlceNorthwindClassBindingTest class >> setupAlcixClassRecordsetWrapperUpdate [
 	(#nameOfFSTCitizen -> #RecordsetWrapper).
 	(#fixture -> {
 	(#functionOrSub -> #Update).
-	(#accessBoundAttributes -> 0) .
+	(#accessBoundAttributes -> 2) .
 	(#returnTypeBindingExpected -> true) .
 	(#variableTypesBound -> 0) .
 	(#variableBound -> 0) .
