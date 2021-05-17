@@ -354,7 +354,7 @@ AlceASTCodeImporter >> visitModuleProperty: aModuleProperty [
 	fn typeName: (self nodeToString: aModuleProperty variable type type).
 	fn visibility: (aModuleProperty visibility
 			 ifNil: [ #Private ]
-			 ifNotNil: [ self nodeToString: aModuleProperty visibility ]).
+			 ifNotNil: [ self nodeToString: aModuleProperty visibility ]) asSymbol.
 	fn isConstant: false.
 	fn anchor: self state top anchor / #attributes / fn name.
 
