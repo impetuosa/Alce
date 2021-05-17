@@ -407,6 +407,7 @@ AlceSDKLibraryBuilder >> enumNamed: aName definedWith: aStringDefinition [
 		defLines := aStringDefinition lines collect: [ :l | 
 			            l trimBoth copyReplaceAll: String tab with: '' ].
 		enum := self instantiate: AlcixEnum.
+		enum name: genname. 
 		defLines do: [ :l | 
 			value := self instantiate: AlcixEnumValue.
 			value enum: enum.

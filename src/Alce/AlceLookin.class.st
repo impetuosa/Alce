@@ -12,8 +12,7 @@ AlceLookIn >> lookInto: aNode [
 
 { #category : #testing }
 AlceLookIn >> matches: aString [
-
-	^ match = aString
+	^ (match compare: aString caseSensitive: false) = 2
 ]
 
 { #category : #visiting }

@@ -12,14 +12,20 @@ AlceLookForTypesIn >> visitAccessModule: anAccessModule [
 
 { #category : #visiting }
 AlceLookForTypesIn >> visitClass: anAlcixClass [
-
 	(self matches: anAlcixClass name)
 		ifTrue: [ self findings: anAlcixClass ]
 		ifFalse: [ super visitClass: anAlcixClass ]
 ]
 
 { #category : #visiting }
+AlceLookForTypesIn >> visitLibrary: aLibrary [
+	aLibrary types do: [ :t | 
+		(self matches: t name) ifTrue: [ ^ self findings: t ] ]
+]
+
+{ #category : #visiting }
 AlceLookForTypesIn >> visitModule: aModule [
-	(aModule types select: [ :t | self matches: t name ]) ifNotEmpty: [ 
-		:types | self findings: types first ]
+
+	aModule types do: [ :t | 
+		(self matches: t name) ifTrue: [ ^ self findings: t ] ]
 ]

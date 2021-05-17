@@ -19,6 +19,7 @@ AlceLookUp class >> lookFor: aMatch from: aNode [
 { #category : #'as yet unclassified' }
 AlceLookUp class >> lookFor: aLookInClass matching: aMatch from: aNode [
 	| instance |
+	aMatch ifNil: [ ^ nil ].
 	instance := self new.
 	instance lookInClass: aLookInClass.
 	instance match: aMatch.

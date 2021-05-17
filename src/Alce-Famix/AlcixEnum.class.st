@@ -52,3 +52,9 @@ AlcixEnum >> enumValuesGroup [
 	<navigation: 'EnumValues'>
 	^ MooseSpecializedGroup withAll: self enumValues asSet
 ]
+
+{ #category : #navigation }
+AlcixEnum >> name [
+
+	^ name ifNil: [ 'vbEnum' , super name ]
+]
