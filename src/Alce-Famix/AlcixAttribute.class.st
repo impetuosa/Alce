@@ -2,9 +2,9 @@ Class {
 	#name : #AlcixAttribute,
 	#superclass : #AlcixVariable,
 	#instVars : [
-		'#attributeAccessors => FMMany type: #AlcixAttributeAccessor opposite: #attribute',
 		'#isConstant => FMProperty',
-		'#userType => FMOne type: #AlcixUserType opposite: #members'
+		'#userType => FMOne type: #AlcixUserType opposite: #members',
+		'#attributeAccessors => FMMany type: #AlcixAttributeAccessor opposite: #attribute'
 	],
 	#category : #'Alce-Famix-Entities'
 }
