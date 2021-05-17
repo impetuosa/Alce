@@ -127,6 +127,7 @@ AlceASTCodeImporter >> visitComparisonOperation: aComparisonOperation [
 AlceASTCodeImporter >> visitConstant: aConstant [
 	| fn |
 	fn := self instantiate: AlcixAttribute.
+	fn visibility: #Public.
 	fn name: (self nodeToString: aConstant constant).
 	fn isConstant: true.
 	fn
@@ -186,6 +187,7 @@ AlceASTCodeImporter >> visitDefineType: aDefineType [
 					((self instantiate: AlcixAttribute)
 						name: (self nodeToString: d name);
 						typeName: (self nodeToString: d type type);
+						visibility: #Public;
 						yourself) ]
 ]
 
@@ -324,7 +326,7 @@ AlceASTCodeImporter >> visitMemberAccess: aMemberAccess [
 
 { #category : #generated }
 AlceASTCodeImporter >> visitModule: aModule [
-	aModule isClassModule ifTrue: [  
+	(self state top isKindOf: AlcixClass) ifTrue: [  
 		self registerSpecialVariable: #Me type: self state top. 
 	 ].
 	^ self visitProgram: aModule.
@@ -351,7 +353,7 @@ AlceASTCodeImporter >> visitModuleProperty: aModuleProperty [
 	fn name: (self nodeToString: aModuleProperty variable name).
 	fn typeName: (self nodeToString: aModuleProperty variable type type).
 	fn visibility: (aModuleProperty visibility
-			 ifNil: [ #private ]
+			 ifNil: [ #Private ]
 			 ifNotNil: [ self nodeToString: aModuleProperty visibility ]).
 	fn isConstant: false.
 	fn anchor: self state top anchor / #attributes / fn name.
