@@ -2,7 +2,7 @@ Trait {
 	#name : #AlcixTTyped,
 	#instVars : [
 		'#typeName => FMProperty',
-		'#type => FMOne type: #AlcixTType opposite: #typed'
+		'#type => FMOne type: #AlcixTType opposite: #typeds'
 	],
 	#category : #'Alce-Famix-Traits'
 }
@@ -18,7 +18,7 @@ AlcixTTyped classSide >> annotation [
 
 { #category : #accessing }
 AlcixTTyped >> type [
-	"Relation named: #type type: #AlcixTType opposite: #typed"
+	"Relation named: #type type: #AlcixTType opposite: #typeds"
 
 	<generated>
 	^ type
@@ -29,13 +29,6 @@ AlcixTTyped >> type: anObject [
 
 	<generated>
 	type := anObject
-]
-
-{ #category : #navigation }
-AlcixTTyped >> typeGroup [
-	<generated>
-	<navigation: 'Type'>
-	^ MooseSpecializedGroup with: self type
 ]
 
 { #category : #accessing }

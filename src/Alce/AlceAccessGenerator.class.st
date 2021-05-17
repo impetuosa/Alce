@@ -231,7 +231,7 @@ AlceAccessGenerator >> defineRelations [
 	module <>-* globalVariable.
 	attribute <>-* attributeAccessor.
 	query <>-* table.
-	typed <>- type
+	typed *- type
 ]
 
 { #category : #definition }
