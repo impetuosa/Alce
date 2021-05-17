@@ -345,12 +345,17 @@ AlceASTCodeImporter >> visitModuleConstant: aModuleConstant [
 
 { #category : #'properties - variables' }
 AlceASTCodeImporter >> visitModuleProperty: aModuleProperty [
+
 	| fn |
 	fn := self instantiate: AlcixAttribute.
 	fn name: (self nodeToString: aModuleProperty variable name).
 	fn typeName: (self nodeToString: aModuleProperty variable type type).
+	fn visibility: (aModuleProperty visibility
+			 ifNil: [ #private ]
+			 ifNotNil: [ self nodeToString: aModuleProperty visibility ]).
 	fn isConstant: false.
 	fn anchor: self state top anchor / #attributes / fn name.
+
 	self state top addMember: fn
 ]
 

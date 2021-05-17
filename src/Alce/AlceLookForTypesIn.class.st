@@ -6,8 +6,8 @@ Class {
 
 { #category : #visiting }
 AlceLookForTypesIn >> visitAccessModule: anAccessModule [
-	anAccessModule types do: [ :t | t accept: self ].
-	anAccessModule references do: [ :r | r accept: self ]
+	self visitCollection: anAccessModule types.
+	self visitCollection: anAccessModule references
 ]
 
 { #category : #visiting }
@@ -18,8 +18,17 @@ AlceLookForTypesIn >> visitClass: anAlcixClass [
 ]
 
 { #category : #visiting }
-AlceLookForTypesIn >> visitLibrary: aLibrary [ 
+AlceLookForTypesIn >> visitForm: anAlcixForm [
+	super visitForm: anAlcixForm.
+	self hasFinding ifTrue: [ ^ self ].
+	(match beginsWith: 'Form_') ifTrue: [ 
+		(self
+			 match: (match copyFrom: 'Form_' size +1 to: match size)
+			 with: anAlcixForm name) ifTrue: [ self findings: anAlcixForm ] ]
+]
 
+{ #category : #visiting }
+AlceLookForTypesIn >> visitLibrary: aLibrary [ 
 	aLibrary types do: [ :t | 
 		(self matches: t name) ifTrue: [ ^ self findings: t ] ]
 ]

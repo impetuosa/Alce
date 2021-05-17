@@ -1,18 +1,27 @@
 Class {
 	#name : #AlceLookIn,
 	#superclass : #AlceLook,
+	#instVars : [
+		'context'
+	],
 	#category : #'Alce-Importer-Linker'
 }
 
 { #category : #'as yet unclassified' }
 AlceLookIn >> lookInto: aNode [
-
+	context := aNode. 
 	^ aNode accept: self
 ]
 
 { #category : #testing }
+AlceLookIn >> match: aString with: anOtherString [ 
+	^ (aString compare: anOtherString caseSensitive: false) = 2
+]
+
+{ #category : #testing }
 AlceLookIn >> matches: aString [
-	^ (match compare: aString caseSensitive: false) = 2
+
+	^ self match: match with: aString
 ]
 
 { #category : #visiting }
@@ -23,6 +32,14 @@ AlceLookIn >> visitAccessModule: anAccessModule [
 { #category : #'as yet unclassified' }
 AlceLookIn >> visitClass: anAlcixClass [
 	^ self visitModule: anAlcixClass
+]
+
+{ #category : #testing }
+AlceLookIn >> visitCollection: aCollection [
+
+	aCollection do: [ :a | 
+		a accept: self.
+		self hasFinding ifTrue: [ ^ self ] ]
 ]
 
 { #category : #'as yet unclassified' }

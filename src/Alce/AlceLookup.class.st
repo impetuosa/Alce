@@ -65,6 +65,11 @@ AlceLookUp >> visitClass: anAlcixClass [
 ]
 
 { #category : #visiting }
+AlceLookUp >> visitForm: anAlcixForm [ 
+	self visitClass: anAlcixForm 
+]
+
+{ #category : #visiting }
 AlceLookUp >> visitFunction: aFunction [
 	self lookIn: aFunction or: [ aFunction userType accept: self ]
 ]
@@ -77,6 +82,11 @@ AlceLookUp >> visitMethodInvocation: anAlcixMethodInvocation [
 { #category : #visiting }
 AlceLookUp >> visitModule: anModule [
 	self lookIn: anModule or: [ anModule container accept: self ]
+]
+
+{ #category : #visiting }
+AlceLookUp >> visitReport: anAlcixReport [ 
+	self visitForm: anAlcixReport 
 ]
 
 { #category : #visiting }

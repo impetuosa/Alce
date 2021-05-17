@@ -4,7 +4,8 @@ Class {
 	#instVars : [
 		'#isConstant => FMProperty',
 		'#userType => FMOne type: #AlcixUserType opposite: #members',
-		'#attributeAccessors => FMMany type: #AlcixAttributeAccessor opposite: #attribute'
+		'#attributeAccessors => FMMany type: #AlcixAttributeAccessor opposite: #attribute',
+		'#visibility'
 	],
 	#category : #'Alce-Famix-Entities'
 }
@@ -88,4 +89,18 @@ AlcixAttribute >> userTypeGroup [
 	<generated>
 	<navigation: 'UserType'>
 	^ MooseSpecializedGroup with: self userType
+]
+
+{ #category : #accessing }
+AlcixAttribute >> visibility [
+
+	<FMProperty: #visibility type: #String>
+	<generated>
+	^ visibility
+]
+
+{ #category : #accessing }
+AlcixAttribute >> visibility: anObject [
+	<generated>
+	visibility := anObject
 ]

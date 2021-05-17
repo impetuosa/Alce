@@ -194,6 +194,7 @@ AlceAccessGenerator >> defineProperties [
 	enumValue property: #name type: #String.
 	enumValue property: #Value type: #Object.
 	attribute property: #isConstant type: #Boolean.
+	attribute property: #visibility type: #String.
 	attributeAccessor property: #kind type: #String.
 	typedEntity property: #name type: #String.
 	reference property: #name type: #String.
