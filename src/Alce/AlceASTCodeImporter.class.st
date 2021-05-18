@@ -62,7 +62,6 @@ AlceASTCodeImporter >> instantiateMethodInvocation: selector for: aCall [
 	| receiver call |
 	receiver := self instantiateAccess: aCall selector.
 	self state top addAccess: receiver.
-	receiver memberSelectors isEmptyOrNil ifTrue: [ self halt ].
 	call := self instantiate: AlcixMethodInvocation.
 	call receiver: receiver.
 	call selector: selector.
@@ -89,7 +88,6 @@ AlceASTCodeImporter >> instantiateVariable: aClass from: aVariable [
 AlceASTCodeImporter >> nodeToString: aNode [
 	| str |
 	str := self stringConverter toString: aNode.
-	
 	^ str
 ]
 
