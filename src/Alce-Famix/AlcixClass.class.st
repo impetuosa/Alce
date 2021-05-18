@@ -18,3 +18,14 @@ AlcixClass >> accept: aVisitor [
 	^ aVisitor visitClass: self
 
 ]
+
+{ #category : #visiting }
+AlcixClass >> isAlcixClass [ 
+	^ true
+]
+
+{ #category : #'as yet unclassified' }
+AlcixClass >> me [
+
+	^ self typeds detect: [ :t | t name = #Me ]
+]

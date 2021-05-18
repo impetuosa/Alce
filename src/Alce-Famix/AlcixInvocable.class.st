@@ -104,6 +104,11 @@ AlcixInvocable >> incomingInvocationsGroup [
 	^ MooseSpecializedGroup withAll: self incomingInvocations asSet
 ]
 
+{ #category : #adding }
+AlcixInvocable >> isMethod [
+	^ self userType isAlcixClass 
+]
+
 { #category : #accessing }
 AlcixInvocable >> localVariables [
 	"Relation named: #localVariables type: #AlcixLocalVariable opposite: #invocable"

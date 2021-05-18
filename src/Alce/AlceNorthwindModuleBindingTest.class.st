@@ -45,7 +45,7 @@ AlceNorthwindModuleBindingTest class >> setupAlcixModuleCustomerOrdersIsInvoiced
 	(#variableTypesBound -> 0) .
 	(#variableBound -> 0) .
 	(#expectedIncomingBound -> 0) .
-	(#expectedOutgoingBound -> 0) 
+	(#expectedOutgoingBound -> 1) 
 	})}
 ]
 
@@ -90,7 +90,7 @@ AlceNorthwindModuleBindingTest class >> setupAlcixModuleDomainFunctionWrappersDA
 	(#variableTypesBound -> 0) .
 	(#variableBound -> 0) .
 	(#expectedIncomingBound -> 0) .
-	(#expectedOutgoingBound -> 0) 
+	(#expectedOutgoingBound -> 1) 
 	})}
 ]
 
@@ -105,7 +105,7 @@ AlceNorthwindModuleBindingTest class >> setupAlcixModuleDomainFunctionWrappersDC
 	(#variableTypesBound -> 0) .
 	(#variableBound -> 0) .
 	(#expectedIncomingBound -> 0) .
-	(#expectedOutgoingBound -> 0) 
+	(#expectedOutgoingBound -> 1) 
 	})}
 ]
 
@@ -150,7 +150,7 @@ AlceNorthwindModuleBindingTest class >> setupAlcixModuleDomainFunctionWrappersDL
 	(#variableTypesBound -> 0) .
 	(#variableBound -> 0) .
 	(#expectedIncomingBound -> 0) .
-	(#expectedOutgoingBound -> 0) 
+	(#expectedOutgoingBound -> 1) 
 	})}
 ]
 
@@ -165,7 +165,7 @@ AlceNorthwindModuleBindingTest class >> setupAlcixModuleDomainFunctionWrappersDM
 	(#variableTypesBound -> 0) .
 	(#variableBound -> 0) .
 	(#expectedIncomingBound -> 0) .
-	(#expectedOutgoingBound -> 0) 
+	(#expectedOutgoingBound -> 1) 
 	})}
 ]
 
@@ -180,7 +180,7 @@ AlceNorthwindModuleBindingTest class >> setupAlcixModuleDomainFunctionWrappersDM
 	(#variableTypesBound -> 0) .
 	(#variableBound -> 0) .
 	(#expectedIncomingBound -> 0) .
-	(#expectedOutgoingBound -> 0) 
+	(#expectedOutgoingBound -> 1) 
 	})}
 ]
 
@@ -195,7 +195,7 @@ AlceNorthwindModuleBindingTest class >> setupAlcixModuleDomainFunctionWrappersDS
 	(#variableTypesBound -> 0) .
 	(#variableBound -> 0) .
 	(#expectedIncomingBound -> 0) .
-	(#expectedOutgoingBound -> 0) 
+	(#expectedOutgoingBound -> 1) 
 	})}
 ]
 
@@ -225,7 +225,7 @@ AlceNorthwindModuleBindingTest class >> setupAlcixModuleInventoryAddHold [
 	(#variableTypesBound -> 0) .
 	(#variableBound -> 0) .
 	(#expectedIncomingBound -> 0) .
-	(#expectedOutgoingBound -> 0) 
+	(#expectedOutgoingBound -> 2) 
 	})}
 ]
 
@@ -240,7 +240,7 @@ AlceNorthwindModuleBindingTest class >> setupAlcixModuleInventoryAddPurchase [
 	(#variableTypesBound -> 0) .
 	(#variableBound -> 0) .
 	(#expectedIncomingBound -> 0) .
-	(#expectedOutgoingBound -> 0) 
+	(#expectedOutgoingBound -> 1) 
 	})}
 ]
 
@@ -250,7 +250,7 @@ AlceNorthwindModuleBindingTest class >> setupAlcixModuleInventoryDeleteTransacti
 	(#nameOfFSTCitizen -> #Inventory).
 	(#fixture -> {
 	(#functionOrSub -> #DeleteTransaction).
-	(#accessBoundAttributes -> 0) .
+	(#accessBoundAttributes -> 2) .
 	(#returnTypeBindingExpected -> true) .
 	(#variableTypesBound -> 0) .
 	(#variableBound -> 0) .
@@ -315,7 +315,7 @@ AlceNorthwindModuleBindingTest class >> setupAlcixModuleInventoryFindProductSupp
 	(#variableTypesBound -> 0) .
 	(#variableBound -> 0) .
 	(#expectedIncomingBound -> 0) .
-	(#expectedOutgoingBound -> 0) 
+	(#expectedOutgoingBound -> 1) 
 	})}
 ]
 
@@ -345,7 +345,7 @@ AlceNorthwindModuleBindingTest class >> setupAlcixModuleInventoryGetQtyAvailable
 	(#variableTypesBound -> 0) .
 	(#variableBound -> 0) .
 	(#expectedIncomingBound -> 0) .
-	(#expectedOutgoingBound -> 0) 
+	(#expectedOutgoingBound -> 1) 
 	})}
 ]
 
@@ -360,7 +360,7 @@ AlceNorthwindModuleBindingTest class >> setupAlcixModuleInventoryGetQtyOnBackOrd
 	(#variableTypesBound -> 0) .
 	(#variableBound -> 0) .
 	(#expectedIncomingBound -> 0) .
-	(#expectedOutgoingBound -> 0) 
+	(#expectedOutgoingBound -> 1) 
 	})}
 ]
 
@@ -390,7 +390,7 @@ AlceNorthwindModuleBindingTest class >> setupAlcixModuleInventoryGetQtyToReorder
 	(#variableTypesBound -> 0) .
 	(#variableBound -> 0) .
 	(#expectedIncomingBound -> 0) .
-	(#expectedOutgoingBound -> 0) 
+	(#expectedOutgoingBound -> 1) 
 	})}
 ]
 
@@ -405,7 +405,7 @@ AlceNorthwindModuleBindingTest class >> setupAlcixModuleInventoryGetRestockingPu
 	(#variableTypesBound -> 0) .
 	(#variableBound -> 0) .
 	(#expectedIncomingBound -> 0) .
-	(#expectedOutgoingBound -> 0) 
+	(#expectedOutgoingBound -> 1) 
 	})}
 ]
 
@@ -435,7 +435,7 @@ AlceNorthwindModuleBindingTest class >> setupAlcixModuleInventoryHoldToSold [
 	(#variableTypesBound -> 0) .
 	(#variableBound -> 0) .
 	(#expectedIncomingBound -> 0) .
-	(#expectedOutgoingBound -> 0) 
+	(#expectedOutgoingBound -> 2) 
 	})}
 ]
 
@@ -450,7 +450,7 @@ AlceNorthwindModuleBindingTest class >> setupAlcixModuleInventoryModifyHold [
 	(#variableTypesBound -> 0) .
 	(#variableBound -> 0) .
 	(#expectedIncomingBound -> 0) .
-	(#expectedOutgoingBound -> 0) 
+	(#expectedOutgoingBound -> 3) 
 	})}
 ]
 
@@ -465,7 +465,7 @@ AlceNorthwindModuleBindingTest class >> setupAlcixModuleInventoryRemoveHold [
 	(#variableTypesBound -> 0) .
 	(#variableBound -> 0) .
 	(#expectedIncomingBound -> 0) .
-	(#expectedOutgoingBound -> 0) 
+	(#expectedOutgoingBound -> 1) 
 	})}
 ]
 
@@ -480,7 +480,7 @@ AlceNorthwindModuleBindingTest class >> setupAlcixModuleInventoryRemovePurchase 
 	(#variableTypesBound -> 0) .
 	(#variableBound -> 0) .
 	(#expectedIncomingBound -> 0) .
-	(#expectedOutgoingBound -> 0) 
+	(#expectedOutgoingBound -> 1) 
 	})}
 ]
 
@@ -495,7 +495,7 @@ AlceNorthwindModuleBindingTest class >> setupAlcixModuleInventoryRequestHold [
 	(#variableTypesBound -> 0) .
 	(#variableBound -> 0) .
 	(#expectedIncomingBound -> 0) .
-	(#expectedOutgoingBound -> 0) 
+	(#expectedOutgoingBound -> 2) 
 	})}
 ]
 
@@ -525,7 +525,7 @@ AlceNorthwindModuleBindingTest class >> setupAlcixModulePrivilegesCanApprovePurc
 	(#variableTypesBound -> 0) .
 	(#variableBound -> 0) .
 	(#expectedIncomingBound -> 0) .
-	(#expectedOutgoingBound -> 0) 
+	(#expectedOutgoingBound -> 2) 
 	})}
 ]
 
@@ -540,7 +540,7 @@ AlceNorthwindModuleBindingTest class >> setupAlcixModulePrivilegesEmployeeHas [
 	(#variableTypesBound -> 0) .
 	(#variableBound -> 0) .
 	(#expectedIncomingBound -> 0) .
-	(#expectedOutgoingBound -> 0) 
+	(#expectedOutgoingBound -> 1) 
 	})}
 ]
 
@@ -570,7 +570,7 @@ AlceNorthwindModuleBindingTest class >> setupAlcixModulePrivilegesIsAdministrato
 	(#variableTypesBound -> 0) .
 	(#variableBound -> 0) .
 	(#expectedIncomingBound -> 0) .
-	(#expectedOutgoingBound -> 0) 
+	(#expectedOutgoingBound -> 2) 
 	})}
 ]
 
@@ -610,7 +610,7 @@ AlceNorthwindModuleBindingTest class >> setupAlcixModulePurchaseOrdersDelete [
 	(#nameOfFSTCitizen -> #PurchaseOrders).
 	(#fixture -> {
 	(#functionOrSub -> #Delete).
-	(#accessBoundAttributes -> 0) .
+	(#accessBoundAttributes -> 2) .
 	(#returnTypeBindingExpected -> true) .
 	(#variableTypesBound -> 0) .
 	(#variableBound -> 0) .
@@ -640,7 +640,7 @@ AlceNorthwindModuleBindingTest class >> setupAlcixModulePurchaseOrdersGenerate [
 	(#nameOfFSTCitizen -> #PurchaseOrders).
 	(#fixture -> {
 	(#functionOrSub -> #Generate).
-	(#accessBoundAttributes -> 0) .
+	(#accessBoundAttributes -> 1) .
 	(#returnTypeBindingExpected -> true) .
 	(#variableTypesBound -> 0) .
 	(#variableBound -> 0) .
@@ -660,7 +660,7 @@ AlceNorthwindModuleBindingTest class >> setupAlcixModulePurchaseOrdersGetListPri
 	(#variableTypesBound -> 0) .
 	(#variableBound -> 0) .
 	(#expectedIncomingBound -> 0) .
-	(#expectedOutgoingBound -> 0) 
+	(#expectedOutgoingBound -> 1) 
 	})}
 ]
 
@@ -675,7 +675,7 @@ AlceNorthwindModuleBindingTest class >> setupAlcixModulePurchaseOrdersGetStandar
 	(#variableTypesBound -> 0) .
 	(#variableBound -> 0) .
 	(#expectedIncomingBound -> 0) .
-	(#expectedOutgoingBound -> 0) 
+	(#expectedOutgoingBound -> 1) 
 	})}
 ]
 
@@ -720,7 +720,7 @@ AlceNorthwindModuleBindingTest class >> setupAlcixModulePurchaseOrdersMarkSubmit
 	(#variableTypesBound -> 0) .
 	(#variableBound -> 0) .
 	(#expectedIncomingBound -> 0) .
-	(#expectedOutgoingBound -> 0) 
+	(#expectedOutgoingBound -> 1) 
 	})}
 ]
 
@@ -735,7 +735,7 @@ AlceNorthwindModuleBindingTest class >> setupAlcixModulePurchaseOrdersNewOrder [
 	(#variableTypesBound -> 0) .
 	(#variableBound -> 0) .
 	(#expectedIncomingBound -> 0) .
-	(#expectedOutgoingBound -> 0) 
+	(#expectedOutgoingBound -> 1) 
 	})}
 ]
 
@@ -795,7 +795,7 @@ AlceNorthwindModuleBindingTest class >> setupAlcixModuleUtilitiesDebuggingSuppor
 	(#variableTypesBound -> 0) .
 	(#variableBound -> 0) .
 	(#expectedIncomingBound -> 0) .
-	(#expectedOutgoingBound -> 0) 
+	(#expectedOutgoingBound -> 2) 
 	})}
 ]
 
@@ -884,7 +884,7 @@ AlceNorthwindModuleBindingTest class >> setupAlcixModuleUtilitiesMsgBoxOKOnly [
 	(#returnTypeBindingExpected -> true) .
 	(#variableTypesBound -> 0) .
 	(#variableBound -> 0) .
-	(#expectedIncomingBound -> 0) .
+	(#expectedIncomingBound -> 1) .
 	(#expectedOutgoingBound -> 0) 
 	})}
 ]
@@ -900,7 +900,7 @@ AlceNorthwindModuleBindingTest class >> setupAlcixModuleUtilitiesMsgBoxYesNo [
 	(#variableTypesBound -> 0) .
 	(#variableBound -> 0) .
 	(#expectedIncomingBound -> 0) .
-	(#expectedOutgoingBound -> 0) 
+	(#expectedOutgoingBound -> 1) 
 	})}
 ]
 
@@ -970,9 +970,19 @@ AlceNorthwindModuleBindingTest class >> testParameters [
 ]
 
 { #category : #tests }
+AlceNorthwindModuleBindingTest >> setUp [
+	super setUp.
+	AlceLinker link: model . 
+]
+
+{ #category : #tests }
 AlceNorthwindModuleBindingTest >> testAccessesAreBoundProperly [
+
+
 	self
-		assert: (self functionOrSub accesses select: [ :s | s attribute isNotNil ]) size
+		assert:
+			(self functionOrSub accesses select: [ :s | s attribute isNotNil ])
+				size
 		equals: (fixture at: #accessBoundAttributes)
 ]
 
@@ -996,8 +1006,10 @@ AlceNorthwindModuleBindingTest >> testBoundedVariableTypes [
 
 { #category : #tests }
 AlceNorthwindModuleBindingTest >> testBoundedVariables [
+
 	self
-		assert: (self functionOrSub localVariables select: [ :s | s access isEmptyOrNil not ]) size
+		assert: (self functionOrSub localVariables select: [ :s | 
+				 s access isEmptyOrNil not ]) size
 		equals: (fixture at: #variableBound)
 ]
 
@@ -1010,6 +1022,7 @@ AlceNorthwindModuleBindingTest >> testIncomingCallsAreBoundProperly [
 
 { #category : #tests }
 AlceNorthwindModuleBindingTest >> testOutgoingCallsAreBoundProperly [
+
 	self
 		assert: (self functionOrSub outgoingInvocations select: [ :s | s candidate isNotNil ]) size
 		equals: (fixture at: #expectedOutgoingBound) 

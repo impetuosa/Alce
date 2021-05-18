@@ -36,10 +36,12 @@ AlcixMethodInvocation >> receiver: anObject [
 	receiver := anObject
 ]
 
-{ #category : #accessing }
-AlcixMethodInvocation >> selectors [
+{ #category : #'as yet unclassified' }
+AlcixMethodInvocation >> signatureSelector [
+
 	| parts |
-	parts := '.' split: selector. 
-	self assert: parts size = 2 .
-	^ parts second
+	parts := '.' split: selector.
+	parts size = 1 ifTrue: [ ^ parts first ].
+	parts size = 2 ifTrue: [ ^ parts second ].
+	self error: ' Not ready for chained messages '
 ]

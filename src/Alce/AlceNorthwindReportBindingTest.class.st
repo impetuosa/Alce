@@ -58,6 +58,12 @@ AlceNorthwindReportBindingTest class >> testParameters [
 ]
 
 { #category : #tests }
+AlceNorthwindReportBindingTest >> setUp [
+	super setUp.
+	AlceLinker link: model . 
+]
+
+{ #category : #tests }
 AlceNorthwindReportBindingTest >> testAccessesAreBoundProperly [
 	self
 		assert: (self functionOrSub accesses select: [ :s | s attribute isNotNil ]) size
@@ -98,7 +104,13 @@ AlceNorthwindReportBindingTest >> testIncomingCallsAreBoundProperly [
 
 { #category : #tests }
 AlceNorthwindReportBindingTest >> testOutgoingCallsAreBoundProperly [
+
+	(self functionOrSub outgoingInvocations select: [ :s | 
+		 s candidate isNotNil ]) size
+	= self functionOrSub outgoingInvocations size ifTrue: [ 
+		self error: '' ].
 	self
-		assert: (self functionOrSub outgoingInvocations select: [ :s | s candidate isNotNil ]) size
-		equals: (fixture at: #expectedOutgoingBound) 
+		assert: (self functionOrSub outgoingInvocations select: [ :s | 
+				 s candidate isNotNil ]) size
+		equals: (fixture at: #expectedOutgoingBound)
 ]

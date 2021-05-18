@@ -4,6 +4,11 @@ A linker does link calls with definitionsm by the applciation of a lookup method
 Class {
 	#name : #AlceLinker,
 	#superclass : #AlceVisitor,
+	#instVars : [
+		'changed',
+		'maxTries',
+		'tries'
+	],
 	#category : #'Alce-Importer-Linker'
 }
 
@@ -11,12 +16,52 @@ Class {
 AlceLinker class >> link: anAlcixModel [ 
 	| linker | 
 	linker := self new.
-	anAlcixModel accept: linker .
+	linker link: anAlcixModel .
+	^ linker.
+]
+
+{ #category : #'as yet unclassified' }
+AlceLinker class >> maxTries [ 	
+	^ 10.
+]
+
+{ #category : #changes }
+AlceLinker >> beginIteration [
+	changed := false. 
+	tries := tries + 1. 
+]
+
+{ #category : #initialization }
+AlceLinker >> initialize [
+	super initialize.
+	changed := false.
+	maxTries := self class maxTries.
+	tries := 0.
+]
+
+{ #category : #changes }
+AlceLinker >> isFinished [
+	^ tries >= maxTries or: [ changed not ]
+]
+
+{ #category : #changes }
+AlceLinker >> link: aModel [
+	" 
+		The linking process is iterative. 
+		Some elements cannot be linked before types, or function return type, etc. 
+	"
+	[ 
+	self beginIteration.
+	aModel accept: self ] doWhileFalse: [ self isFinished ].
 ]
 
 { #category : #'lookup flavors' }
 AlceLinker >> lookupFunctionOrSub: aMatch in: aNode [
-	^ AlceLookUp lookFor: AlceLookForFunctionOrSubIn matching: aMatch from: aNode
+
+	^ AlceLookUp
+		  lookFor: AlceLookForFunctionOrSubIn
+		  matching: aMatch
+		  from: aNode
 ]
 
 { #category : #'lookup flavors' }
@@ -34,13 +79,20 @@ AlceLinker >> lookupVariable: aMatch in: aNode [
 	^ AlceLookUp lookFor: AlceLookForVariablesIn matching: aMatch from: aNode
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #changes }
+AlceLinker >> noteChange [
+	changed := true.
+]
+
+{ #category : #visiting }
 AlceLinker >> visitAccess: anAlcixAccess [
-	anAlcixAccess attribute
-		ifNil: [ (self
-				lookupVariable: anAlcixAccess attributeName
-				in: anAlcixAccess invocable)
-				ifNotNil: [ :a | anAlcixAccess attribute: a ] ]
+
+	anAlcixAccess attribute ifNil: [ 
+		(self
+			 lookupVariable: anAlcixAccess attributeName
+			 in: anAlcixAccess invocable) ifNotNil: [ :a | 
+			anAlcixAccess attribute: a.
+			self noteChange ] ]
 ]
 
 { #category : #visiting }
@@ -48,31 +100,35 @@ AlceLinker >> visitAttribute: anAttribute [
 	self visitTypedEntity: anAttribute 
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #visiting }
 AlceLinker >> visitClass: anAlcixClass [
 	self visitModule: anAlcixClass 
 	
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #visiting }
 AlceLinker >> visitEnum: anAlcixEnum [
 
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #visiting }
 AlceLinker >> visitEnumValue: anAlcixEnumValue [
 	
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #visiting }
 AlceLinker >> visitForm: anAlcixForm [
 	self visitClass: anAlcixForm
 ]
 
 { #category : #visiting }
 AlceLinker >> visitFunction: aFunction [
-	aFunction type
-		ifNil: [ aFunction type: (self lookupType: aFunction typeName in: aFunction userType) ].
+
+	aFunction type ifNil: [ 
+		(self lookupType: aFunction typeName in: aFunction userType) 
+			ifNotNil: [ :t | 
+				self noteChange.
+				aFunction type: t ] ].
 	self visitInvocable: aFunction
 ]
 
@@ -83,29 +139,33 @@ AlceLinker >> visitInvocable: anInvocable [
 	anInvocable accesses do: [ :a | a accept: self ]
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #visiting }
 AlceLinker >> visitInvocation: anAlcixInvocation [
-	anAlcixInvocation candidate
-		ifNil: [ (self
-				lookupFunctionOrSub: anAlcixInvocation selector
-				in: anAlcixInvocation sender)
-				ifNotNil: [ :c | anAlcixInvocation candidate: c ] ]
+
+	anAlcixInvocation candidate ifNil: [ 
+		(self
+			 lookupFunctionOrSub: anAlcixInvocation selector
+			 in: anAlcixInvocation sender) ifNotNil: [ :c | 
+			self noteChange.
+			anAlcixInvocation setCandidate: c ] ]
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #visiting }
 AlceLinker >> visitMethodInvocation: anAlcixMethodInvocation [
-	anAlcixMethodInvocation receiver invocable  ifNil: [  anAlcixMethodInvocation receiver invocable: anAlcixMethodInvocation sender ].
+
+	anAlcixMethodInvocation receiver invocable ifNil: [ 
+		anAlcixMethodInvocation receiver invocable:
+			anAlcixMethodInvocation sender ].
 	anAlcixMethodInvocation receiver accept: self.
 	"anAlcixMethodInvocation receiver attribute accept: self. "
-	anAlcixMethodInvocation receiver attribute
-		ifNotNil: [ :attr | 
-			attr type
-				ifNotNil: [ :type | 
-					anAlcixMethodInvocation
-						candidate:
-							(self
-								lookupMethod: anAlcixMethodInvocation selectors first
-								in: type) ] ]
+	anAlcixMethodInvocation candidate ifNil: [ 
+		anAlcixMethodInvocation receiver attribute ifNotNil: [ :attr | 
+			attr type ifNotNil: [ :type | 
+				self noteChange.
+				anAlcixMethodInvocation setCandidate:
+					(self
+						 lookupMethod: anAlcixMethodInvocation signatureSelector
+						 in: type) ] ] ]
 ]
 
 { #category : #visiting }
@@ -120,16 +180,18 @@ AlceLinker >> visitModule: aModule [
 	aModule invocables do: [ :m | m accept: self ]
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #visiting }
 AlceLinker >> visitParameter: anAlcixParameter [
-	anAlcixParameter type
-		ifNil: [ (self
-				lookupType: anAlcixParameter typeName
-				in: anAlcixParameter invocable)
-				ifNotNil: [ :t | anAlcixParameter type: t ] ]
+
+	anAlcixParameter type ifNil: [ 
+		(self
+			 lookupType: anAlcixParameter typeName
+			 in: anAlcixParameter invocable) ifNotNil: [ :t | 
+			self noteChange.
+			anAlcixParameter type: t ] ]
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #visiting }
 AlceLinker >> visitReport: anAlcixReport [
 	self visitForm: anAlcixReport
 ]
@@ -141,11 +203,15 @@ AlceLinker >> visitSubProcedure: aSub [
 
 { #category : #visiting }
 AlceLinker >> visitTypedEntity: aTyped [
-	aTyped type
-		ifNil: [ aTyped type: (self lookupType: aTyped typeName in: aTyped userType) ]
+
+	aTyped type ifNil: [ 
+		(self lookupType: aTyped typeName in: aTyped userType) ifNotNil: [ 
+			:t | 
+			aTyped type: t.
+			self noteChange ] ]
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #visiting }
 AlceLinker >> visitUserType: anAlcixUserType [
 	anAlcixUserType members do: [ :m | m accept: self ]
 ]

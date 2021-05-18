@@ -70,12 +70,12 @@ AlceNorthwindClassBindingTest class >> setupAlcixClassErrorHandlingTryToSaveReco
 	(#nameOfFSTCitizen -> #ErrorHandling).
 	(#fixture -> {
 	(#functionOrSub -> #TryToSaveRecord).
-	(#accessBoundAttributes -> 0) .
+	(#accessBoundAttributes -> 1) .
 	(#returnTypeBindingExpected -> true) .
 	(#variableTypesBound -> 0) .
 	(#variableBound -> 0) .
 	(#expectedIncomingBound -> 0) .
-	(#expectedOutgoingBound -> 0) 
+	(#expectedOutgoingBound -> 1) 
 	})}
 ]
 
@@ -241,6 +241,7 @@ AlceNorthwindClassBindingTest >> setUp [
 
 { #category : #'as yet unclassified' }
 AlceNorthwindClassBindingTest >> testAccessesAreBoundProperly [
+
 	self
 		assert: (self functionOrSub accesses select: [ :s | s attribute isNotNil ]) size
 		equals: (fixture at: #accessBoundAttributes)

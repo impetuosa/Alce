@@ -1,6 +1,8 @@
 Class {
 	#name : #AlcixInvocation,
 	#superclass : #AlcixAccessEntity,
+	#traits : 'TAlceInvocation',
+	#classTraits : 'TAlceInvocation classTrait',
 	#instVars : [
 		'#selector => FMProperty',
 		'#sender => FMOne type: #AlcixInvocable opposite: #outgoingInvocations',

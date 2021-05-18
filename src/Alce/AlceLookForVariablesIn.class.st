@@ -15,16 +15,13 @@ AlceLookForVariablesIn >> initialize [
 
 { #category : #visiting }
 AlceLookForVariablesIn >> visitAccessModule: anAccessModule [
-
 	onlyGlobals := true.
 	self visitCollection: anAccessModule types.
-
 	self visitCollection: anAccessModule references
 ]
 
 { #category : #visiting }
 AlceLookForVariablesIn >> visitAttribute: anAttribute [
-
 	((anAttribute visibility = #Public or: onlyGlobals) and: [ 
 		 self matches: anAttribute name ]) ifTrue: [ 
 		self findings: anAttribute ]
@@ -50,13 +47,11 @@ AlceLookForVariablesIn >> visitLocalVariable: anAlcixLocalVariable [
 
 { #category : #visiting }
 AlceLookForVariablesIn >> visitModule: aModule [
-
 	self visitCollection: aModule members
 ]
 
 { #category : #visiting }
 AlceLookForVariablesIn >> visitParameter: anAlcixParameter [
-
 	(onlyGlobals not and: [ self matches: anAlcixParameter name ]) 
 		ifTrue: [ self findings: anAlcixParameter ]
 ]

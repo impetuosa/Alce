@@ -326,11 +326,11 @@ AlceASTCodeImporter >> visitMemberAccess: aMemberAccess [
 
 { #category : #generated }
 AlceASTCodeImporter >> visitModule: aModule [
-	(self state top isKindOf: AlcixClass) ifTrue: [  
-		self registerSpecialVariable: #Me type: self state top. 
-	 ].
-	^ self visitProgram: aModule.
 
+	(self state top isKindOf: AlcixClass) ifTrue: [ 
+		self state top addMember:
+			(self registerSpecialVariable: #Me type: self state top) ].
+	^ self visitProgram: aModule
 ]
 
 { #category : #generated }

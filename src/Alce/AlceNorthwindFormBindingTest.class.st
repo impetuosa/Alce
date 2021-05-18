@@ -89,7 +89,7 @@ AlceNorthwindFormBindingTest class >> setupAlcixFormOrderDetailsGetDefaultSalesP
 	(#returnTypeBindingExpected -> true) .
 	(#variableTypesBound -> 0) .
 	(#variableBound -> 0) .
-	(#expectedIncomingBound -> 0) .
+	(#expectedIncomingBound -> 1) .
 	(#expectedOutgoingBound -> 0) 
 	})}
 ]
@@ -100,7 +100,7 @@ AlceNorthwindFormBindingTest class >> setupAlcixFormOrderDetailsSetDefaultShippi
 	(#nameOfFSTCitizen -> #'Order Details').
 	(#fixture -> {
 	(#functionOrSub -> #SetDefaultShippingAddress).
-	(#accessBoundAttributes -> 0) .
+	(#accessBoundAttributes -> 14) .
 	(#returnTypeBindingExpected -> true) .
 	(#variableTypesBound -> 0) .
 	(#variableBound -> 0) .
@@ -115,7 +115,7 @@ AlceNorthwindFormBindingTest class >> setupAlcixFormOrderDetailsSetFormState [
 	(#nameOfFSTCitizen -> #'Order Details').
 	(#fixture -> {
 	(#functionOrSub -> #SetFormState).
-	(#accessBoundAttributes -> 0) .
+	(#accessBoundAttributes -> 38) .
 	(#returnTypeBindingExpected -> true) .
 	(#variableTypesBound -> 0) .
 	(#variableBound -> 0) .
@@ -130,7 +130,7 @@ AlceNorthwindFormBindingTest class >> setupAlcixFormOrderDetailsValidateOrder [
 	(#nameOfFSTCitizen -> #'Order Details').
 	(#fixture -> {
 	(#functionOrSub -> #ValidateOrder).
-	(#accessBoundAttributes -> 0) .
+	(#accessBoundAttributes -> 13) .
 	(#returnTypeBindingExpected -> true) .
 	(#variableTypesBound -> 0) .
 	(#variableBound -> 0) .
@@ -175,12 +175,12 @@ AlceNorthwindFormBindingTest class >> setupAlcixFormOrderDetailscmdClearAddress_
 	(#nameOfFSTCitizen -> #'Order Details').
 	(#fixture -> {
 	(#functionOrSub -> #cmdClearAddress_Click).
-	(#accessBoundAttributes -> 0) .
+	(#accessBoundAttributes -> 1) .
 	(#returnTypeBindingExpected -> true) .
 	(#variableTypesBound -> 0) .
 	(#variableBound -> 0) .
 	(#expectedIncomingBound -> 0) .
-	(#expectedOutgoingBound -> 0) 
+	(#expectedOutgoingBound -> 1) 
 	})}
 ]
 
@@ -190,12 +190,12 @@ AlceNorthwindFormBindingTest class >> setupAlcixFormOrderDetailscmdCompleteOrder
 	(#nameOfFSTCitizen -> #'Order Details').
 	(#fixture -> {
 	(#functionOrSub -> #cmdCompleteOrder_Click).
-	(#accessBoundAttributes -> 0) .
+	(#accessBoundAttributes -> 6) .
 	(#returnTypeBindingExpected -> true) .
 	(#variableTypesBound -> 0) .
 	(#variableBound -> 0) .
 	(#expectedIncomingBound -> 0) .
-	(#expectedOutgoingBound -> 0) 
+	(#expectedOutgoingBound -> 5) 
 	})}
 ]
 
@@ -205,7 +205,7 @@ AlceNorthwindFormBindingTest class >> setupAlcixFormOrderDetailscmdCreateInvoice
 	(#nameOfFSTCitizen -> #'Order Details').
 	(#fixture -> {
 	(#functionOrSub -> #cmdCreateInvoice_Click).
-	(#accessBoundAttributes -> 0) .
+	(#accessBoundAttributes -> 21) .
 	(#returnTypeBindingExpected -> true) .
 	(#variableTypesBound -> 0) .
 	(#variableBound -> 0) .
@@ -220,7 +220,7 @@ AlceNorthwindFormBindingTest class >> setupAlcixFormOrderDetailscmdDeleteOrder_C
 	(#nameOfFSTCitizen -> #'Order Details').
 	(#fixture -> {
 	(#functionOrSub -> #cmdDeleteOrder_Click).
-	(#accessBoundAttributes -> 0) .
+	(#accessBoundAttributes -> 7) .
 	(#returnTypeBindingExpected -> true) .
 	(#variableTypesBound -> 0) .
 	(#variableBound -> 0) .
@@ -235,7 +235,7 @@ AlceNorthwindFormBindingTest class >> setupAlcixFormOrderDetailscmdShipOrder_Cli
 	(#nameOfFSTCitizen -> #'Order Details').
 	(#fixture -> {
 	(#functionOrSub -> #cmdShipOrder_Click).
-	(#accessBoundAttributes -> 0) .
+	(#accessBoundAttributes -> 10) .
 	(#returnTypeBindingExpected -> true) .
 	(#variableTypesBound -> 0) .
 	(#variableBound -> 0) .
@@ -265,7 +265,7 @@ AlceNorthwindFormBindingTest class >> setupAlcixFormOrderSubformforOrderDetailsP
 	(#nameOfFSTCitizen -> #'Order Subform for Order Details').
 	(#fixture -> {
 	(#functionOrSub -> #Product_ID_AfterUpdate).
-	(#accessBoundAttributes -> 0) .
+	(#accessBoundAttributes -> 13) .
 	(#returnTypeBindingExpected -> true) .
 	(#variableTypesBound -> 0) .
 	(#variableBound -> 0) .
@@ -295,7 +295,7 @@ AlceNorthwindFormBindingTest class >> setupAlcixFormOrderSubformforOrderDetailsS
 	(#nameOfFSTCitizen -> #'Order Subform for Order Details').
 	(#fixture -> {
 	(#functionOrSub -> #Status_Name_DblClick).
-	(#accessBoundAttributes -> 0) .
+	(#accessBoundAttributes -> 6) .
 	(#returnTypeBindingExpected -> true) .
 	(#variableTypesBound -> 0) .
 	(#variableBound -> 0) .
@@ -310,7 +310,7 @@ AlceNorthwindFormBindingTest class >> setupAlcixFormPurchaseOrderDetailsFRemoveP
 	(#nameOfFSTCitizen -> #'Purchase Order Details').
 	(#fixture -> {
 	(#functionOrSub -> #FRemovePurchaseLineItems).
-	(#accessBoundAttributes -> 0) .
+	(#accessBoundAttributes -> 9) .
 	(#returnTypeBindingExpected -> true) .
 	(#variableTypesBound -> 0) .
 	(#variableBound -> 0) .
@@ -325,12 +325,12 @@ AlceNorthwindFormBindingTest class >> setupAlcixFormPurchaseOrderDetailsForm_Cur
 	(#nameOfFSTCitizen -> #'Purchase Order Details').
 	(#fixture -> {
 	(#functionOrSub -> #Form_Current).
-	(#accessBoundAttributes -> 0) .
+	(#accessBoundAttributes -> 1) .
 	(#returnTypeBindingExpected -> true) .
 	(#variableTypesBound -> 0) .
 	(#variableBound -> 0) .
 	(#expectedIncomingBound -> 0) .
-	(#expectedOutgoingBound -> 0) 
+	(#expectedOutgoingBound -> 1) 
 	})}
 ]
 
@@ -355,7 +355,7 @@ AlceNorthwindFormBindingTest class >> setupAlcixFormPurchaseOrderDetailsInitForm
 	(#nameOfFSTCitizen -> #'Purchase Order Details').
 	(#fixture -> {
 	(#functionOrSub -> #InitFormState).
-	(#accessBoundAttributes -> 0) .
+	(#accessBoundAttributes -> 30) .
 	(#returnTypeBindingExpected -> true) .
 	(#variableTypesBound -> 0) .
 	(#variableBound -> 0) .
@@ -385,7 +385,7 @@ AlceNorthwindFormBindingTest class >> setupAlcixFormPurchaseOrderDetailsPurchase
 	(#nameOfFSTCitizen -> #'Purchase Order Details').
 	(#fixture -> {
 	(#functionOrSub -> #PurchaseOrderIsValid).
-	(#accessBoundAttributes -> 0) .
+	(#accessBoundAttributes -> 6) .
 	(#returnTypeBindingExpected -> true) .
 	(#variableTypesBound -> 0) .
 	(#variableBound -> 0) .
@@ -400,7 +400,7 @@ AlceNorthwindFormBindingTest class >> setupAlcixFormPurchaseOrderDetailsPurchase
 	(#nameOfFSTCitizen -> #'Purchase Order Details').
 	(#fixture -> {
 	(#functionOrSub -> #PurchaseOrder_ContainsPostedInventory).
-	(#accessBoundAttributes -> 0) .
+	(#accessBoundAttributes -> 6) .
 	(#returnTypeBindingExpected -> true) .
 	(#variableTypesBound -> 0) .
 	(#variableBound -> 0) .
@@ -435,7 +435,7 @@ AlceNorthwindFormBindingTest class >> setupAlcixFormPurchaseOrderDetailsSupplier
 	(#variableTypesBound -> 0) .
 	(#variableBound -> 0) .
 	(#expectedIncomingBound -> 0) .
-	(#expectedOutgoingBound -> 0) 
+	(#expectedOutgoingBound -> 6) 
 	})}
 ]
 
@@ -460,7 +460,7 @@ AlceNorthwindFormBindingTest class >> setupAlcixFormPurchaseOrderDetailscmdAppro
 	(#nameOfFSTCitizen -> #'Purchase Order Details').
 	(#fixture -> {
 	(#functionOrSub -> #cmdApprovePurchase_Click).
-	(#accessBoundAttributes -> 0) .
+	(#accessBoundAttributes -> 2) .
 	(#returnTypeBindingExpected -> true) .
 	(#variableTypesBound -> 0) .
 	(#variableBound -> 0) .
@@ -475,7 +475,7 @@ AlceNorthwindFormBindingTest class >> setupAlcixFormPurchaseOrderDetailscmdCance
 	(#nameOfFSTCitizen -> #'Purchase Order Details').
 	(#fixture -> {
 	(#functionOrSub -> #cmdCancelPurchase_Click).
-	(#accessBoundAttributes -> 0) .
+	(#accessBoundAttributes -> 4) .
 	(#returnTypeBindingExpected -> true) .
 	(#variableTypesBound -> 0) .
 	(#variableBound -> 0) .
@@ -490,12 +490,12 @@ AlceNorthwindFormBindingTest class >> setupAlcixFormPurchaseOrderDetailscmdClose
 	(#nameOfFSTCitizen -> #'Purchase Order Details').
 	(#fixture -> {
 	(#functionOrSub -> #cmdClose_Click).
-	(#accessBoundAttributes -> 0) .
+	(#accessBoundAttributes -> 2) .
 	(#returnTypeBindingExpected -> true) .
 	(#variableTypesBound -> 0) .
 	(#variableBound -> 0) .
 	(#expectedIncomingBound -> 0) .
-	(#expectedOutgoingBound -> 0) 
+	(#expectedOutgoingBound -> 2) 
 	})}
 ]
 
@@ -505,12 +505,12 @@ AlceNorthwindFormBindingTest class >> setupAlcixFormPurchaseOrderDetailscmdSubmi
 	(#nameOfFSTCitizen -> #'Purchase Order Details').
 	(#fixture -> {
 	(#functionOrSub -> #cmdSubmitforApproval_Click).
-	(#accessBoundAttributes -> 0) .
+	(#accessBoundAttributes -> 9) .
 	(#returnTypeBindingExpected -> true) .
 	(#variableTypesBound -> 0) .
 	(#variableBound -> 0) .
 	(#expectedIncomingBound -> 0) .
-	(#expectedOutgoingBound -> 0) 
+	(#expectedOutgoingBound -> 6) 
 	})}
 ]
 
@@ -520,12 +520,12 @@ AlceNorthwindFormBindingTest class >> setupAlcixFormPurchasesSubformforPurchaseO
 	(#nameOfFSTCitizen -> #'Purchases Subform for Purchase Order Details').
 	(#fixture -> {
 	(#functionOrSub -> #Form_AfterInsert).
-	(#accessBoundAttributes -> 0) .
+	(#accessBoundAttributes -> 1) .
 	(#returnTypeBindingExpected -> true) .
 	(#variableTypesBound -> 0) .
 	(#variableBound -> 0) .
 	(#expectedIncomingBound -> 0) .
-	(#expectedOutgoingBound -> 0) 
+	(#expectedOutgoingBound -> 1) 
 	})}
 ]
 
@@ -535,7 +535,7 @@ AlceNorthwindFormBindingTest class >> setupAlcixFormPurchasesSubformforPurchaseO
 	(#nameOfFSTCitizen -> #'Purchases Subform for Purchase Order Details').
 	(#fixture -> {
 	(#functionOrSub -> #Form_BeforeUpdate).
-	(#accessBoundAttributes -> 0) .
+	(#accessBoundAttributes -> 2) .
 	(#returnTypeBindingExpected -> true) .
 	(#variableTypesBound -> 0) .
 	(#variableBound -> 0) .
@@ -550,7 +550,7 @@ AlceNorthwindFormBindingTest class >> setupAlcixFormPurchasesSubformforPurchaseO
 	(#nameOfFSTCitizen -> #'Purchases Subform for Purchase Order Details').
 	(#fixture -> {
 	(#functionOrSub -> #InitParentState).
-	(#accessBoundAttributes -> 0) .
+	(#accessBoundAttributes -> 3) .
 	(#returnTypeBindingExpected -> true) .
 	(#variableTypesBound -> 0) .
 	(#variableBound -> 0) .
@@ -580,12 +580,12 @@ AlceNorthwindFormBindingTest class >> setupAlcixFormPurchasesSubformforPurchaseO
 	(#nameOfFSTCitizen -> #'Purchases Subform for Purchase Order Details').
 	(#fixture -> {
 	(#functionOrSub -> #Quantity_AfterUpdate).
-	(#accessBoundAttributes -> 0) .
+	(#accessBoundAttributes -> 43) .
 	(#returnTypeBindingExpected -> true) .
 	(#variableTypesBound -> 0) .
 	(#variableBound -> 0) .
 	(#expectedIncomingBound -> 0) .
-	(#expectedOutgoingBound -> 0) 
+	(#expectedOutgoingBound -> 1) 
 	})}
 ]
 
@@ -595,7 +595,7 @@ AlceNorthwindFormBindingTest class >> setupAlcixFormPurchasesSubformforPurchaseO
 	(#nameOfFSTCitizen -> #'Purchases Subform for Purchase Order Details').
 	(#fixture -> {
 	(#functionOrSub -> #Quantity_BeforeUpdate).
-	(#accessBoundAttributes -> 0) .
+	(#accessBoundAttributes -> 3) .
 	(#returnTypeBindingExpected -> true) .
 	(#variableTypesBound -> 0) .
 	(#variableBound -> 0) .
@@ -610,12 +610,12 @@ AlceNorthwindFormBindingTest class >> setupAlcixFormPurchasesSubformforPurchaseO
 	(#nameOfFSTCitizen -> #'Purchases Subform for Purchase Order Details').
 	(#fixture -> {
 	(#functionOrSub -> #RemoveCurrentLineItem).
-	(#accessBoundAttributes -> 0) .
+	(#accessBoundAttributes -> 1) .
 	(#returnTypeBindingExpected -> true) .
 	(#variableTypesBound -> 0) .
 	(#variableBound -> 0) .
 	(#expectedIncomingBound -> 0) .
-	(#expectedOutgoingBound -> 0) 
+	(#expectedOutgoingBound -> 1) 
 	})}
 ]
 
@@ -625,7 +625,7 @@ AlceNorthwindFormBindingTest class >> setupAlcixFormPurchasesSubformforPurchaseO
 	(#nameOfFSTCitizen -> #'Purchases Subform for Purchase Order Details').
 	(#fixture -> {
 	(#functionOrSub -> #Unit_Cost_BeforeUpdate).
-	(#accessBoundAttributes -> 0) .
+	(#accessBoundAttributes -> 3) .
 	(#returnTypeBindingExpected -> true) .
 	(#variableTypesBound -> 0) .
 	(#variableBound -> 0) .
@@ -640,7 +640,7 @@ AlceNorthwindFormBindingTest class >> setupAlcixFormReceivingSubformforPurchaseO
 	(#nameOfFSTCitizen -> #'Receiving Subform for Purchase Order Details').
 	(#fixture -> {
 	(#functionOrSub -> #Date_Received_AfterUpdate).
-	(#accessBoundAttributes -> 0) .
+	(#accessBoundAttributes -> 5) .
 	(#returnTypeBindingExpected -> true) .
 	(#variableTypesBound -> 0) .
 	(#variableBound -> 0) .
@@ -670,12 +670,12 @@ AlceNorthwindFormBindingTest class >> setupAlcixFormReceivingSubformforPurchaseO
 	(#nameOfFSTCitizen -> #'Receiving Subform for Purchase Order Details').
 	(#fixture -> {
 	(#functionOrSub -> #Form_Load).
-	(#accessBoundAttributes -> 0) .
+	(#accessBoundAttributes -> 9) .
 	(#returnTypeBindingExpected -> true) .
 	(#variableTypesBound -> 0) .
 	(#variableBound -> 0) .
 	(#expectedIncomingBound -> 0) .
-	(#expectedOutgoingBound -> 0) 
+	(#expectedOutgoingBound -> 2) 
 	})}
 ]
 
@@ -685,7 +685,7 @@ AlceNorthwindFormBindingTest class >> setupAlcixFormReceivingSubformforPurchaseO
 	(#nameOfFSTCitizen -> #'Receiving Subform for Purchase Order Details').
 	(#fixture -> {
 	(#functionOrSub -> #Posted_To_Inventory_AfterUpdate).
-	(#accessBoundAttributes -> 0) .
+	(#accessBoundAttributes -> 24) .
 	(#returnTypeBindingExpected -> true) .
 	(#variableTypesBound -> 0) .
 	(#variableBound -> 0) .
@@ -780,7 +780,7 @@ AlceNorthwindFormBindingTest class >> setupAlcixFormSalesReportsDialogcmdPreview
 	(#variableTypesBound -> 0) .
 	(#variableBound -> 0) .
 	(#expectedIncomingBound -> 0) .
-	(#expectedOutgoingBound -> 0) 
+	(#expectedOutgoingBound -> 1) 
 	})}
 ]
 
@@ -795,7 +795,7 @@ AlceNorthwindFormBindingTest class >> setupAlcixFormSalesReportsDialogcmdPrint_C
 	(#variableTypesBound -> 0) .
 	(#variableBound -> 0) .
 	(#expectedIncomingBound -> 0) .
-	(#expectedOutgoingBound -> 0) 
+	(#expectedOutgoingBound -> 1) 
 	})}
 ]
 
@@ -810,7 +810,7 @@ AlceNorthwindFormBindingTest class >> setupAlcixFormSalesReportsDialoglstSalesPe
 	(#variableTypesBound -> 0) .
 	(#variableBound -> 0) .
 	(#expectedIncomingBound -> 0) .
-	(#expectedOutgoingBound -> 0) 
+	(#expectedOutgoingBound -> 1) 
 	})}
 ]
 
@@ -825,7 +825,7 @@ AlceNorthwindFormBindingTest class >> setupAlcixFormSalesReportsDialoglstSalesRe
 	(#variableTypesBound -> 0) .
 	(#variableBound -> 0) .
 	(#expectedIncomingBound -> 0) .
-	(#expectedOutgoingBound -> 0) 
+	(#expectedOutgoingBound -> 1) 
 	})}
 ]
 
@@ -912,6 +912,12 @@ AlceNorthwindFormBindingTest class >> testParameters [
 ]
 
 { #category : #tests }
+AlceNorthwindFormBindingTest >> setUp [
+	super setUp.
+	AlceLinker link: model . 
+]
+
+{ #category : #tests }
 AlceNorthwindFormBindingTest >> testAccessesAreBoundProperly [
 	self
 		assert: (self functionOrSub accesses select: [ :s | s attribute isNotNil ]) size
@@ -952,6 +958,7 @@ AlceNorthwindFormBindingTest >> testIncomingCallsAreBoundProperly [
 
 { #category : #tests }
 AlceNorthwindFormBindingTest >> testOutgoingCallsAreBoundProperly [
+
 	self
 		assert: (self functionOrSub outgoingInvocations select: [ :s | s candidate isNotNil ]) size
 		equals: (fixture at: #expectedOutgoingBound) 
