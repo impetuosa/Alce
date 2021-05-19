@@ -3,9 +3,8 @@ Class {
 	#superclass : #AlcixAccessible,
 	#instVars : [
 		'#isWriting => FMProperty',
-		'#attributeName => FMProperty',
-		'#memberSelectors => FMProperty',
-		'#attribute => FMOne type: #AlcixAccessible opposite: #access',
+		'#rightElementName => FMProperty',
+		'#rightElement => FMOne type: #AlcixAccessible opposite: #readingAccesses',
 		'#invocable => FMOne type: #AlcixInvocable opposite: #accesses'
 	],
 	#category : #'Alce-Famix-Entities'
@@ -24,35 +23,6 @@ AlcixAccess class >> annotation [
 AlcixAccess >> accept: aVisitor [
 	^ aVisitor visitAccess: self
 
-]
-
-{ #category : #accessing }
-AlcixAccess >> attribute [
-	"Relation named: #attribute type: #AlcixAccessible opposite: #access"
-
-	<generated>
-	^ attribute
-]
-
-{ #category : #accessing }
-AlcixAccess >> attribute: anObject [
-
-	<generated>
-	attribute := anObject
-]
-
-{ #category : #accessing }
-AlcixAccess >> attributeName [
-
-	<FMProperty: #attributeName type: #String>
-	<generated>
-	^ attributeName
-]
-
-{ #category : #accessing }
-AlcixAccess >> attributeName: anObject [
-	<generated>
-	attributeName := anObject
 ]
 
 { #category : #accessing }
@@ -93,15 +63,30 @@ AlcixAccess >> isWriting: anObject [
 ]
 
 { #category : #accessing }
-AlcixAccess >> memberSelectors [
+AlcixAccess >> rightElement [
+	"Relation named: #rightElement type: #AlcixAccessible opposite: #readingAccesses"
 
-	<FMProperty: #memberSelectors type: #Object>
 	<generated>
-	^ memberSelectors
+	^ rightElement
 ]
 
 { #category : #accessing }
-AlcixAccess >> memberSelectors: anObject [
+AlcixAccess >> rightElement: anObject [
+
 	<generated>
-	memberSelectors := anObject
+	rightElement := anObject
+]
+
+{ #category : #accessing }
+AlcixAccess >> rightElementName [
+
+	<FMProperty: #rightElementName type: #AlcixReferenceName>
+	<generated>
+	^ rightElementName
+]
+
+{ #category : #accessing }
+AlcixAccess >> rightElementName: anObject [
+	<generated>
+	rightElementName := anObject
 ]

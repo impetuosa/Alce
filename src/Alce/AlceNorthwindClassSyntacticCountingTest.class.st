@@ -270,7 +270,14 @@ AlceNorthwindClassSyntacticCountingTest >> testAllLocalVariablesHaveTypeName [
 AlceNorthwindClassSyntacticCountingTest >> testAllTheAccessesHaveAttributeName [
 	self
 		assert: self functionOrSub accesses
-		allSatisfy: [ :a | a attributeName isString and: [ a attributeName isNotEmpty ] ]
+		allSatisfy: [ :a | 
+			(a rightElementName isKindOf: AlcixReferenceName)
+				and: [ a rightElementName isNotEmpty ] ].
+	self
+		assert: (self functionOrSub accesses select:#isWriting)
+		allSatisfy: [ :a | 
+			(a leftElementName isKindOf: AlcixReferenceName)
+				and: [ a leftElementName isNotEmpty ] ]
 ]
 
 { #category : #'as yet unclassified' }
@@ -382,7 +389,7 @@ AlceNorthwindClassSyntacticCountingTest >> testMethodInvocationMustHaveAPointAnd
 	self functionOrSub outgoingInvocations
 		do: [ :inv | 
 			inv isVBMessageSend
-				ifTrue: [ self assert: inv receiver memberSelectors isNotEmpty.
+				ifTrue: [ self assert: inv receiver rightElementName isNotEmpty.
 					self assert: (inv selector includes: $.) ]
 				ifFalse: [ self deny: (inv selector includes: $.) ] ]
 ]

@@ -190,8 +190,11 @@ AlceAccessGenerator >> defineHierarchy [
 AlceAccessGenerator >> defineProperties [
 
 	access property: #isWriting type: #Boolean.
-	access property: #rightElementName type: #ReferenceName.
-	accessWrite property: #leftElementName type: #ReferenceName.
+	access property: #rightElementName type: #AlcixReferenceName .
+	accessWrite property: #leftElementName type: #AlcixReferenceName.
+	
+	referenceName property: #names type: #Object. 
+	
 
 	accessEntity property: #anchor type: #Object.
 	argument property: #value type: #Object.
@@ -210,12 +213,16 @@ AlceAccessGenerator >> defineProperties [
 	reference property: #name type: #String.
 	reference property: #path type: #String.
 	type property: #name type: #String.
-	typed property: #typeName type: #ReferenceName.
+	typed property: #typeName type: #AlcixReferenceName.
 	library property: #isBuiltIn type: #Boolean.
 	invocable property: #selector type: #String.
 	invocation property: #selector type: #String.
 	methodInvocation property: #receiver type: #Object.
-	parameter property: #isOptional type: #Boolean
+	parameter property: #isOptional type: #Boolean.
+		
+	variable property:#instantiatesObjectOnDefinition type: #Boolean.
+
+
 ]
 
 { #category : #definition }

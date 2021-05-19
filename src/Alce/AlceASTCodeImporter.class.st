@@ -2,7 +2,8 @@ Class {
 	#name : #AlceASTCodeImporter,
 	#superclass : #JinASTCodeVisitor,
 	#instVars : [
-		'stringConverter'
+		'stringConverter',
+		'referenceNameConverter'
 	],
 	#category : #'Alce-Importer-Jindao'
 }
@@ -15,20 +16,11 @@ AlceASTCodeImporter >> ensureInContextOf: aClass [
 
 { #category : #'member access' }
 AlceASTCodeImporter >> instantiateAccess: aMemberOrDictAccess [
-	| access receiver parts |
-	receiver := aMemberOrDictAccess receiver
-		ifNil: [ self nodeToString: aMemberOrDictAccess enclosingWith with ]
-		ifNotNil: [ self nodeToString: aMemberOrDictAccess receiver ].
-	parts := '.'
-		split:
-			('.'
-				join:
-					{receiver.
-					(self nodeToString: aMemberOrDictAccess member)}).
-	access := self instantiate: AlcixAccess.
+	| access receiver |
+	access := self instantiate: AlcixAccessRead.
 	access isWriting: false.
-	access attributeName: parts first.
-	access memberSelectors: parts allButFirst.
+	access
+		rightElementName: (self nodeToReferenceName: aMemberOrDictAccess).
 	^ access
 ]
 
@@ -79,9 +71,16 @@ AlceASTCodeImporter >> instantiateVariable: aClass from: aVariable [
 	| var |
 	var := self instantiate: aClass.
 	var name: (self nodeToString: aVariable name).
-	var typeName: (self nodeToString: aVariable type type).
+	var typeName: (self typeName: aVariable type).
+	var
+		instantiatesObjectOnDefinition: aVariable type class = VBAsTypeAndNewNode.
 	var anchor: self state top anchor / #variables / var name.
 	^ var
+]
+
+{ #category : #'as yet unclassified' }
+AlceASTCodeImporter >> nodeToReferenceName: aVBNode [
+	^ self referenceNameConverter toReferenceName: aVBNode
 ]
 
 { #category : #helper }
@@ -89,6 +88,12 @@ AlceASTCodeImporter >> nodeToString: aNode [
 	| str |
 	str := self stringConverter toString: aNode.
 	^ str
+]
+
+{ #category : #'as yet unclassified' }
+AlceASTCodeImporter >> referenceNameConverter [
+	^ referenceNameConverter
+		ifNil: [ referenceNameConverter := AlceVBVisitorToReferenceName new ]
 ]
 
 { #category : #'properties - variables' }
@@ -112,7 +117,7 @@ AlceASTCodeImporter >> stringConverter [
 AlceASTCodeImporter >> typeName: aTypeOrNil [
 	^ aTypeOrNil
 		ifNil: [ #Undefined ]
-		ifNotNil: [ self nodeToString: aTypeOrNil ]
+		ifNotNil: [ self nodeToReferenceName: aTypeOrNil ]
 ]
 
 { #category : #generated }
@@ -246,10 +251,12 @@ AlceASTCodeImporter >> visitEvent: anEvent [
 AlceASTCodeImporter >> visitExplicitAssignement: anExplicitAssignement [
 	| access |
 	anExplicitAssignement isReturn
-		ifFalse: [ access := self instantiate: AlcixAccess.
+		ifFalse: [ access := self instantiate: AlcixAccessWrite.
 			access isWriting: true.
 			access
-				attributeName: (self nodeToString: anExplicitAssignement left).
+				leftElementName: (self nodeToReferenceName: anExplicitAssignement left).
+			access
+				rightElementName: (self nodeToReferenceName: anExplicitAssignement right).
 			self state top addAccess: access ].
 	super visitExplicitAssignement: anExplicitAssignement
 ]
@@ -349,7 +356,7 @@ AlceASTCodeImporter >> visitModuleProperty: aModuleProperty [
 	| fn |
 	fn := self instantiate: AlcixAttribute.
 	fn name: (self nodeToString: aModuleProperty variable name).
-	fn typeName: (self nodeToString: aModuleProperty variable type type).
+	fn typeName: (self typeName: aModuleProperty variable type).
 	fn visibility: (aModuleProperty visibility
 			 ifNil: [ #Private ]
 			 ifNotNil: [ self nodeToString: aModuleProperty visibility ]) asSymbol.
@@ -384,7 +391,7 @@ AlceASTCodeImporter >> visitParameter: aParameter [
 	| param |
 	param := self instantiate: AlcixParameter.
 	param name: (self nodeToString: aParameter name).
-	param typeName: (self typeName: aParameter).
+	param typeName: (self typeName: aParameter type).
 	self state top addParameter: param
 ]
 

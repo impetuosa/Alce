@@ -34,7 +34,7 @@ AlcixTTyped >> type: anObject [
 { #category : #accessing }
 AlcixTTyped >> typeName [
 
-	<FMProperty: #typeName type: #String>
+	<FMProperty: #typeName type: #AlcixReferenceName>
 	<generated>
 	^ typeName
 ]

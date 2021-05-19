@@ -33,6 +33,7 @@ AlcixLocalVariable >> invocable [
 
 { #category : #accessing }
 AlcixLocalVariable >> invocable: anObject [
+
 	<generated>
 	invocable := anObject
 ]
