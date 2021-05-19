@@ -46,7 +46,8 @@ Class {
 		'variable',
 		'accessible',
 		'accessRead',
-		'accessWrite'
+		'accessWrite',
+		'referenceName'
 	],
 	#category : #'Alce-Generator'
 }
@@ -78,6 +79,7 @@ AlceAccessGenerator class >> prefix [
 { #category : #definition }
 AlceAccessGenerator >> defineClasses [
 	super defineClasses.
+	
 	access := builder newClassNamed: #Access.
 	accessRead := builder newClassNamed: #AccessRead.
 	accessWrite := builder newClassNamed: #AccessWrite.
@@ -95,6 +97,7 @@ AlceAccessGenerator >> defineClasses [
 	databaseType := builder newClassNamed: #DatabaseType.
 	databaseTypedEntity := builder newClassNamed: #DatabaseTypedEntity.
 	datasource := builder newClassNamed: #DataSource.
+	referenceName := builder newClassNamed: #ReferenceName.
 	enum := builder newClassNamed: #Enum.
 	enumValue := builder newClassNamed: #EnumValue.
 	event := builder newClassNamed: #Event.
@@ -185,48 +188,61 @@ AlceAccessGenerator >> defineHierarchy [
 
 { #category : #definition }
 AlceAccessGenerator >> defineProperties [
+
 	access property: #isWriting type: #Boolean.
-	access property: #attributeName type: #String.
-	access property: #memberSelectors type: #Object.
+	access property: #rightElementName type: #ReferenceName.
+	accessWrite property: #leftElementName type: #ReferenceName.
+
 	accessEntity property: #anchor type: #Object.
 	argument property: #value type: #Object.
+
 	containerType property: #name type: #String.
+
 	enumValue property: #name type: #String.
 	enumValue property: #Value type: #Object.
+
 	attribute property: #isConstant type: #Boolean.
 	attribute property: #visibility type: #String.
 	attributeAccessor property: #kind type: #String.
+
 	typedEntity property: #name type: #String.
+
 	reference property: #name type: #String.
 	reference property: #path type: #String.
 	type property: #name type: #String.
-	typed property: #typeName type: #String.
+	typed property: #typeName type: #ReferenceName.
 	library property: #isBuiltIn type: #Boolean.
 	invocable property: #selector type: #String.
 	invocation property: #selector type: #String.
 	methodInvocation property: #receiver type: #Object.
-	parameter property: #isOptional type: #Boolean.
+	parameter property: #isOptional type: #Boolean
 ]
 
 { #category : #definition }
 AlceAccessGenerator >> defineRelations [
 
-	(access property: #attribute) *- accessible.
+	(access property: #rightElement)
+	*- (accessible property: #readingAccesses).
+	(accessWrite property: #leftElement)
+	*- (accessible property: #writingAccesses).
+
 	(accessModule property: #references) <>-* reference.
-	
+
 	invocable <>-* parameter.
 	invocable <>-* access.
 	invocable <>-* localVariable.
-	
+
 	(userType property: #members) <>-* attribute.
 	containerType <>-* type.
 	databaseTypedEntity - databaseType.
 	datasource <>-* field.
 	enum <>-* enumValue.
-	
-	(invocable property: #outgoingInvocations) <>-* (invocation property: #sender).
-	(invocable property: #incomingInvocations) <>-* (invocation property: #candidate).
-	
+
+	(invocable property: #outgoingInvocations)
+	<>-* (invocation property: #sender).
+	(invocable property: #incomingInvocations)
+	<>-* (invocation property: #candidate).
+
 	invocation <>-* argument.
 	userType <>-* invocable.
 	module <>-* globalVariable.
