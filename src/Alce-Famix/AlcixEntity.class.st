@@ -19,3 +19,8 @@ AlcixEntity class >> metamodel [
 	<generated>
 	^ AlcixModel metamodel
 ]
+
+{ #category : #testing }
+AlcixEntity >> isValidName [
+	^ false
+]

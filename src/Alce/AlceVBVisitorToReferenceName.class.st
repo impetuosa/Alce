@@ -49,6 +49,12 @@ AlceVBVisitorToReferenceName >> visitAsTypeAndNew: aVBAsTypeAndNewNode [
 ]
 
 { #category : #'as yet unclassified' }
+AlceVBVisitorToReferenceName >> visitBaseType: aVBBaseTypeNode [
+	aVBBaseTypeNode variantToken ifNil: [ self error: ' ' ].
+	^ aVBBaseTypeNode variantToken acceptVisitor: self
+]
+
+{ #category : #'as yet unclassified' }
 AlceVBVisitorToReferenceName >> visitBooleanLiteral: aVBBooleanLiteralNode [
 	^ nil
 ]
@@ -136,6 +142,11 @@ AlceVBVisitorToReferenceName >> visitSquareBracketIdentifier: aVBSquareBracketId
 	"Square brackets identifiers are used in vb for using whitespaces in a name. In our context we dont care about the first nor the last symbol  "
 	str := aVBSquareBracketIdentifierNode token value.
 	^ {(str copyFrom: 2 to: str size - 1)}
+]
+
+{ #category : #'as yet unclassified' }
+AlceVBVisitorToReferenceName >> visitStringLiteral: aVBStringLiteralNode [ 
+	^ nil
 ]
 
 { #category : #'as yet unclassified' }

@@ -24,6 +24,16 @@ AlcixReferenceName >> accept: aVisitor [
 ]
 
 { #category : #accessing }
+AlcixReferenceName >> isNotEmpty [
+	^ names isEmptyOrNil not 
+]
+
+{ #category : #accessing }
+AlcixReferenceName >> isValidName [
+	^ true
+]
+
+{ #category : #accessing }
 AlcixReferenceName >> names [
 
 	<FMProperty: #names type: #Object>

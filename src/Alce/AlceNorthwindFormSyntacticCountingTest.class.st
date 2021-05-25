@@ -808,7 +808,7 @@ AlceNorthwindFormSyntacticCountingTest >> testAllLocalVariablesHaveTypeName [
 AlceNorthwindFormSyntacticCountingTest >> testAllTheAccessesHaveAttributeName [
 	self
 		assert: self functionOrSub accesses
-		allSatisfy: [ :a | a attributeName isString and: [ a attributeName isNotEmpty ] ]
+		allSatisfy: [ :a | a rightElementName  isValidName and: [ a rightElementName isNotEmpty ] ]
 ]
 
 { #category : #'as yet unclassified' }
@@ -920,7 +920,7 @@ AlceNorthwindFormSyntacticCountingTest >> testMethodInvocationMustHaveAPointAndO
 	self functionOrSub outgoingInvocations
 		do: [ :inv | 
 			inv isVBMessageSend
-				ifTrue: [ self assert: inv receiver memberSelectors isNotEmpty.
+				ifTrue: [ self assert: inv receiver rightElementName isNotEmpty.
 					self assert: (inv selector includes: $.) ]
 				ifFalse: [ self deny: (inv selector includes: $.) ] ]
 ]
