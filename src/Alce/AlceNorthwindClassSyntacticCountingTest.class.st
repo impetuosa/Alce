@@ -226,8 +226,8 @@ AlceNorthwindClassSyntacticCountingTest >> assert: actual equals: expected [
 	"This method raises an AssertionFailure if actual is different (using #= message) from expected.
 	 Else it does nothing and execution continues.
 	"
-"
-	actual = expected
+
+"	actual = expected
 		ifFalse: [ (self class class methods
 				detect: [ :m | 
 					| sc |
