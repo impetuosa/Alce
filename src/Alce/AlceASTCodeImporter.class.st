@@ -227,10 +227,12 @@ AlceASTCodeImporter >> visitEquals: anAssignementOrEquals [
 	"
 	anAssignementOrEquals isReturn
 		ifFalse: [ anAssignementOrEquals isAssignment
-				ifTrue: [ access := self instantiate: AlcixAccess.
+				ifTrue: [ access := self instantiate: AlcixAccessWrite.
 					access isWriting: true.
 					access
-						attributeName: (self nodeToString: anAssignementOrEquals left).
+						leftElementName: (self nodeToReferenceName: anAssignementOrEquals left).
+					access
+						rightElementName: (self nodeToReferenceName: anAssignementOrEquals right).
 					self state top addAccess: access ] ].
 	super visitEquals: anAssignementOrEquals
 ]

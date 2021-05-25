@@ -2,7 +2,8 @@ Class {
 	#name : #AlcixReferenceName,
 	#superclass : #AlcixEntity,
 	#instVars : [
-		'#names => FMProperty'
+		'#names => FMProperty',
+		'#processedElement => FMProperty'
 	],
 	#category : #'Alce-Famix-Entities'
 }
@@ -34,4 +35,18 @@ AlcixReferenceName >> names [
 AlcixReferenceName >> names: anObject [
 	<generated>
 	names := anObject
+]
+
+{ #category : #accessing }
+AlcixReferenceName >> processedElement [
+
+	<FMProperty: #processedElement type: #Boolean>
+	<generated>
+	^ names
+]
+
+{ #category : #accessing }
+AlcixReferenceName >> processedElement: anObject [
+	<generated>
+	processedElement := anObject
 ]

@@ -194,7 +194,7 @@ AlceAccessGenerator >> defineProperties [
 	accessWrite property: #leftElementName type: #AlcixReferenceName.
 	
 	referenceName property: #names type: #Object. 
-	
+	referenceName property: #processedElement type:#Boolean.
 
 	accessEntity property: #anchor type: #Object.
 	argument property: #value type: #Object.

@@ -1,23 +1,61 @@
 Class {
 	#name : #AlceVBVisitorToReferenceName,
 	#superclass : #Object,
+	#instVars : [
+		'processedElement'
+	],
+	#classInstVars : [
+		'noneAttribute'
+	],
 	#category : #'Alce-Importer-Jindao'
 }
 
 { #category : #'as yet unclassified' }
+AlceVBVisitorToReferenceName class >> noneAttribute [
+	^ noneAttribute ifNil: [ noneAttribute := AlcixReferenceName new ]
+]
+
+{ #category : #'as yet unclassified' }
+AlceVBVisitorToReferenceName >> noneAttribute [
+	^ self class noneAttribute 
+]
+
+{ #category : #'as yet unclassified' }
+AlceVBVisitorToReferenceName >> noteProcessedElement [
+	processedElement := true .
+]
+
+{ #category : #'as yet unclassified' }
 AlceVBVisitorToReferenceName >> toReferenceName: aNode [
 	| refChain |
+	processedElement := false. 
 	refChain := aNode acceptVisitor: self.
 	^ refChain
-		ifNil: [ AlcixReferenceName noneAttribute ]
+		ifNil: [ self noneAttribute  ]
 		ifNotNil: [ AlcixReferenceName new
 				names: (aNode acceptVisitor: self);
+				processedElement: processedElement;
 				yourself ]
+]
+
+{ #category : #'as yet unclassified' }
+AlceVBVisitorToReferenceName >> visitArithmeticOperation: aVBArithmeticOperationNode [
+	^ nil
 ]
 
 { #category : #'as yet unclassified' }
 AlceVBVisitorToReferenceName >> visitAsTypeAndNew: aVBAsTypeAndNewNode [ 
 	^ aVBAsTypeAndNewNode type acceptVisitor: self 
+]
+
+{ #category : #'as yet unclassified' }
+AlceVBVisitorToReferenceName >> visitBooleanLiteral: aVBBooleanLiteralNode [
+	^ nil
+]
+
+{ #category : #'as yet unclassified' }
+AlceVBVisitorToReferenceName >> visitComparisonOperation: aVBComparisonOperationNode [
+	^ nil
 ]
 
 { #category : #'as yet unclassified' }
@@ -34,6 +72,21 @@ AlceVBVisitorToReferenceName >> visitConcatenationOperation: aVBConcatenationOpe
 ]
 
 { #category : #'as yet unclassified' }
+AlceVBVisitorToReferenceName >> visitDictionaryAccess: aVBDictionaryAccessNode [
+	^ self visitMemberAccess: aVBDictionaryAccessNode
+]
+
+{ #category : #'as yet unclassified' }
+AlceVBVisitorToReferenceName >> visitEquals: aVBEqualsNode [ 
+	^ nil
+]
+
+{ #category : #'as yet unclassified' }
+AlceVBVisitorToReferenceName >> visitIntegerLiteral: aVBIntegerLiteralNode [ 
+	^ nil
+]
+
+{ #category : #'as yet unclassified' }
 AlceVBVisitorToReferenceName >> visitMemberAccess: aVBMemberAccessNode [
 	| receiver |
 	receiver := aVBMemberAccessNode receiver
@@ -43,12 +96,27 @@ AlceVBVisitorToReferenceName >> visitMemberAccess: aVBMemberAccessNode [
 ]
 
 { #category : #'as yet unclassified' }
+AlceVBVisitorToReferenceName >> visitNotOperation: aVBNotOperationNode [
+	self noteProcessedElement.
+	^ aVBNotOperationNode value acceptVisitor: self
+]
+
+{ #category : #'as yet unclassified' }
 AlceVBVisitorToReferenceName >> visitNull: aVBNullNode [
 	^ {#Nothing}
 ]
 
 { #category : #'as yet unclassified' }
+AlceVBVisitorToReferenceName >> visitParentheseesExpression: aVBParentheseesExpressionNode [ 
+	^ aVBParentheseesExpressionNode expression acceptVisitor: self 
+]
+
+{ #category : #'as yet unclassified' }
 AlceVBVisitorToReferenceName >> visitProcedureCallOrArrayAccess: aVBProcedureCallOrArrayAccessNode [
+	self noteProcessedElement.
+	aVBProcedureCallOrArrayAccessNode arguments arguments size = 1
+		ifTrue: [ aVBProcedureCallOrArrayAccessNode arguments arguments first value
+				acceptVisitor: self ].
 	^ nil
 ]
 
@@ -60,6 +128,14 @@ AlceVBVisitorToReferenceName >> visitSimpleIdentifier: aVBSimpleIdentifierNode [
 { #category : #'*Alce' }
 AlceVBVisitorToReferenceName >> visitSmaccToken: aSmaCCCaseInsensitiveToken [
 	^ {aSmaCCCaseInsensitiveToken value asSymbol}
+]
+
+{ #category : #'as yet unclassified' }
+AlceVBVisitorToReferenceName >> visitSquareBracketIdentifier: aVBSquareBracketIdentifierNode [
+	| str |
+	"Square brackets identifiers are used in vb for using whitespaces in a name. In our context we dont care about the first nor the last symbol  "
+	str := aVBSquareBracketIdentifierNode token value.
+	^ {(str copyFrom: 2 to: str size - 1)}
 ]
 
 { #category : #'as yet unclassified' }
