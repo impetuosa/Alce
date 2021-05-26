@@ -1,7 +1,7 @@
 Trait {
 	#name : #AlcixTTyped,
 	#instVars : [
-		'#typeName => FMProperty',
+		'#typeName => FMOne type: #AlcixTypeReference opposite: #typed',
 		'#type => FMOne type: #AlcixTType opposite: #typeds'
 	],
 	#category : #'Alce-Famix-Traits'
@@ -33,14 +33,15 @@ AlcixTTyped >> type: anObject [
 
 { #category : #accessing }
 AlcixTTyped >> typeName [
+	"Relation named: #typeName type: #AlcixTypeReference opposite: #typed"
 
-	<FMProperty: #typeName type: #AlcixReferenceName>
 	<generated>
 	^ typeName
 ]
 
 { #category : #accessing }
 AlcixTTyped >> typeName: anObject [
+
 	<generated>
 	typeName := anObject
 ]

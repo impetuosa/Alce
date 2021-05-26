@@ -1,9 +1,9 @@
 Class {
 	#name : #AlcixReferenceName,
-	#superclass : #AlcixEntity,
+	#superclass : #AlcixAccessEntity,
 	#instVars : [
 		'#names => FMProperty',
-		'#processedElement => FMProperty'
+		'#isProcessedElement => FMProperty'
 	],
 	#category : #'Alce-Famix-Entities'
 }
@@ -11,7 +11,7 @@ Class {
 { #category : #meta }
 AlcixReferenceName class >> annotation [
 
-	<FMClass: #ReferenceName super: #AlcixEntity>
+	<FMClass: #ReferenceName super: #AlcixAccessEntity>
 	<package: #'Alce-Famix'>
 	<generated>
 	^self
@@ -23,14 +23,23 @@ AlcixReferenceName >> accept: aVisitor [
 
 ]
 
-{ #category : #accessing }
-AlcixReferenceName >> isNotEmpty [
-	^ names isEmptyOrNil not 
+{ #category : #'as yet unclassified' }
+AlcixReferenceName >> adaptToAlceAnchorPathFragment [
+	^ '.' join: names
 ]
 
 { #category : #accessing }
-AlcixReferenceName >> isValidName [
-	^ true
+AlcixReferenceName >> isProcessedElement [
+
+	<FMProperty: #isProcessedElement type: #Boolean>
+	<generated>
+	^ isProcessedElement
+]
+
+{ #category : #accessing }
+AlcixReferenceName >> isProcessedElement: anObject [
+	<generated>
+	isProcessedElement := anObject
 ]
 
 { #category : #accessing }
@@ -45,18 +54,4 @@ AlcixReferenceName >> names [
 AlcixReferenceName >> names: anObject [
 	<generated>
 	names := anObject
-]
-
-{ #category : #accessing }
-AlcixReferenceName >> processedElement [
-
-	<FMProperty: #processedElement type: #Boolean>
-	<generated>
-	^ names
-]
-
-{ #category : #accessing }
-AlcixReferenceName >> processedElement: anObject [
-	<generated>
-	processedElement := anObject
 ]

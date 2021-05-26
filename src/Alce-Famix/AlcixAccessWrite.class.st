@@ -2,8 +2,8 @@ Class {
 	#name : #AlcixAccessWrite,
 	#superclass : #AlcixAccess,
 	#instVars : [
-		'#leftElementName => FMProperty',
-		'#leftElement => FMOne type: #AlcixAccessible opposite: #writingAccesses'
+		'#leftElement => FMOne type: #AlcixAccessible opposite: #writingAccesses',
+		'#leftElementName => FMOne type: #AlcixVariableReference opposite: #accessWrite'
 	],
 	#category : #'Alce-Famix-Entities'
 }
@@ -40,14 +40,15 @@ AlcixAccessWrite >> leftElement: anObject [
 
 { #category : #accessing }
 AlcixAccessWrite >> leftElementName [
+	"Relation named: #leftElementName type: #AlcixVariableReference opposite: #accessWrite"
 
-	<FMProperty: #leftElementName type: #AlcixReferenceName>
 	<generated>
 	^ leftElementName
 ]
 
 { #category : #accessing }
 AlcixAccessWrite >> leftElementName: anObject [
+
 	<generated>
 	leftElementName := anObject
 ]
