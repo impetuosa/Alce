@@ -17,9 +17,9 @@ TAlceInvocation >> becomeMethodInvocation [
 	sender := self sender.
 	candidate := self candidate.
 	arguments := self arguments.
-	access := self mooseModel instantiate: AlcixAccess.
-	access attributeName: #Me.
-	access attribute: sender userType me.
+	access := self mooseModel instantiate: AlcixAccessRead.
+	access rightElementName: #Me.
+	access rightElement: sender userType me.
 	access isWriting: false.
 	access invocable: sender.
 

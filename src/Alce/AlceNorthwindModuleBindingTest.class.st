@@ -981,7 +981,7 @@ AlceNorthwindModuleBindingTest >> testAccessesAreBoundProperly [
 
 	self
 		assert:
-			(self functionOrSub accesses select: [ :s | s attribute isNotNil ])
+			(self functionOrSub accesses select: [ :s | s rightElement isNotNil ])
 				size
 		equals: (fixture at: #accessBoundAttributes)
 ]
@@ -1009,7 +1009,8 @@ AlceNorthwindModuleBindingTest >> testBoundedVariables [
 
 	self
 		assert: (self functionOrSub localVariables select: [ :s | 
-				 s access isEmptyOrNil not ]) size
+				 s readingAccesses isEmptyOrNil not or:
+					 s writingAccesses isEmptyOrNil not ]) size
 		equals: (fixture at: #variableBound)
 ]
 

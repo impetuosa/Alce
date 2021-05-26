@@ -87,11 +87,27 @@ AlceLinker >> noteChange [
 { #category : #visiting }
 AlceLinker >> visitAccess: anAlcixAccess [
 
-	anAlcixAccess attribute ifNil: [ 
+	anAlcixAccess rightElement ifNil: [ 
 		(self
-			 lookupVariable: anAlcixAccess attributeName
+			 lookupVariable: anAlcixAccess rightElementName 
 			 in: anAlcixAccess invocable) ifNotNil: [ :a | 
-			anAlcixAccess attribute: a.
+			anAlcixAccess rightElement:  a.
+			self noteChange ] ]
+]
+
+{ #category : #visiting }
+AlceLinker >> visitAccessRead: anAlcixAccessRead [ 
+	self visitAccess: anAlcixAccessRead 
+]
+
+{ #category : #visiting }
+AlceLinker >> visitAccessWrite: anAlcixAccessWrite [ 
+	self visitAccess: anAlcixAccessWrite.
+	anAlcixAccessWrite leftElement ifNil: [ 
+		(self
+			 lookupVariable: anAlcixAccessWrite leftElementName 
+			 in: anAlcixAccessWrite invocable) ifNotNil: [ :a | 
+			anAlcixAccessWrite leftElement:  a.
 			self noteChange ] ]
 ]
 
@@ -159,7 +175,7 @@ AlceLinker >> visitMethodInvocation: anAlcixMethodInvocation [
 	anAlcixMethodInvocation receiver accept: self.
 	"anAlcixMethodInvocation receiver attribute accept: self. "
 	anAlcixMethodInvocation candidate ifNil: [ 
-		anAlcixMethodInvocation receiver attribute ifNotNil: [ :attr | 
+		anAlcixMethodInvocation receiver rightElement  ifNotNil: [ :attr | 
 			attr type ifNotNil: [ :type | 
 				self noteChange.
 				anAlcixMethodInvocation setCandidate:

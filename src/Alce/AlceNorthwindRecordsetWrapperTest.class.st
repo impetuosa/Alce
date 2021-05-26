@@ -114,19 +114,19 @@ AlceNorthwindRecordsetWrapperTest >> testClassHasOneAttributeMemberNameIsMRS [
 
 { #category : #'test attribute' }
 AlceNorthwindRecordsetWrapperTest >> testClassHasOneAttributeMemberNameIsMRSWith17Usages [
-	self assert: self mrs access size equals: 17
+	self assert: self mrs readingAccesses size + self mrs writingAccesses size   equals: 17
 ]
 
 { #category : #'test attribute' }
 AlceNorthwindRecordsetWrapperTest >> testClassHasOneAttributeMemberNameIsMRSWith4WrittingUsages [
-	self assert: (self mrs access select:[ : a  | a isWriting ]) size equals: 4
+
+	self assert: self mrs writingAccesses size equals: 4
 ]
 
 { #category : #'test attribute' }
 AlceNorthwindRecordsetWrapperTest >> testClassHasOneAttributeMemberNameIsMRSWithOnlyInClassUsages [
 
-	self assert:
-		(self mrs  access allSatisfy: [ :a | 
+	self assert: (self mrs readingAccesses allSatisfy: [ :a | 
 			 a invocable userType = self recordsetWrapper ])
 ]
 
@@ -142,7 +142,7 @@ AlceNorthwindRecordsetWrapperTest >> testClassHasOneAttributeMemberNamedMRSHasOn
 
 { #category : #'test functions recordset clone' }
 AlceNorthwindRecordsetWrapperTest >> testGetRecordsetCloneAccessesMrs2Times [
-	self assert: (self getRecordsetClone accesses select: [ : a | a attribute = self mrs ])size equals: 1
+	self assert: (self getRecordsetClone accesses select: [ : a | a rightElement = self mrs ])size equals: 1
 ]
 
 { #category : #'test functions recordset clone' }
