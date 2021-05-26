@@ -22,6 +22,16 @@ AlcixTypeReference >> accept: aVisitor [
 
 ]
 
+{ #category : #'as yet unclassified' }
+AlcixTypeReference >> refersToFormNamed: aString [
+"	self assert: names size = 1."
+	(names last beginsWith: 'Form_')
+		ifFalse: [ ^ false ].
+	^ ((names last copyFrom: 'Form_' size + 1 to: names last size)
+		compare: aString
+		caseSensitive: false) = 2
+]
+
 { #category : #accessing }
 AlcixTypeReference >> typed [
 	"Relation named: #typed type: #AlcixTTyped opposite: #typeName"

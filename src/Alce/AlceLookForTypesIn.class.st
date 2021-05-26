@@ -4,6 +4,11 @@ Class {
 	#category : #'Alce-Importer-Linker'
 }
 
+{ #category : #'as yet unclassified' }
+AlceLookForTypesIn >> matchesFormNamed: aString [
+	^ match refersToFormNamed: aString
+]
+
 { #category : #visiting }
 AlceLookForTypesIn >> visitAccessModule: anAccessModule [
 	self visitCollection: anAccessModule types.
@@ -20,11 +25,10 @@ AlceLookForTypesIn >> visitClass: anAlcixClass [
 { #category : #visiting }
 AlceLookForTypesIn >> visitForm: anAlcixForm [
 	super visitForm: anAlcixForm.
-	self hasFinding ifTrue: [ ^ self ].
-	(match beginsWith: 'Form_') ifTrue: [ 
-		(self
-			 match: (match copyFrom: 'Form_' size +1 to: match size)
-			 with: anAlcixForm name) ifTrue: [ self findings: anAlcixForm ] ]
+	self hasFinding
+		ifTrue: [ ^ self ].
+	(self matchesFormNamed: anAlcixForm name)
+		ifTrue: [ self findings: anAlcixForm ]
 ]
 
 { #category : #visiting }

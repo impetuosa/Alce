@@ -86,13 +86,30 @@ AlceLinker >> noteChange [
 
 { #category : #visiting }
 AlceLinker >> visitAccess: anAlcixAccess [
+	anAlcixAccess rightElement
+		ifNil: [ (self
+				lookupVariable: anAlcixAccess rightElementName
+				in: anAlcixAccess invocable)
+				ifNotNil: [ :a | 
+					anAlcixAccess rightElement: a.
+					self noteChange ] ]
+]
 
-	anAlcixAccess attribute ifNil: [ 
-		(self
-			 lookupVariable: anAlcixAccess attributeName
-			 in: anAlcixAccess invocable) ifNotNil: [ :a | 
-			anAlcixAccess attribute: a.
-			self noteChange ] ]
+{ #category : #'as yet unclassified' }
+AlceLinker >> visitAccessRead: anAlcixAccessRead [
+	self visitAccess: anAlcixAccessRead
+]
+
+{ #category : #'as yet unclassified' }
+AlceLinker >> visitAccessWrite: anAlcixAccessWrite [
+	self visitAccess: anAlcixAccessWrite.
+	anAlcixAccessWrite leftElement
+		ifNil: [ (self
+				lookupVariable: anAlcixAccessWrite leftElementName
+				in: anAlcixAccessWrite invocable)
+				ifNotNil: [ :a | 
+					anAlcixAccessWrite leftElement: a.
+					self noteChange ] ]
 ]
 
 { #category : #visiting }
@@ -159,12 +176,12 @@ AlceLinker >> visitMethodInvocation: anAlcixMethodInvocation [
 	anAlcixMethodInvocation receiver accept: self.
 	"anAlcixMethodInvocation receiver attribute accept: self. "
 	anAlcixMethodInvocation candidate ifNil: [ 
-		anAlcixMethodInvocation receiver attribute ifNotNil: [ :attr | 
+		anAlcixMethodInvocation receiver rightElement ifNotNil: [ :attr | 
 			attr type ifNotNil: [ :type | 
 				self noteChange.
 				anAlcixMethodInvocation setCandidate:
 					(self
-						 lookupMethod: anAlcixMethodInvocation signatureSelector
+						 lookupMethod: anAlcixMethodInvocation selector 
 						 in: type) ] ] ]
 ]
 

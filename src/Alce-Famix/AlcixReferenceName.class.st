@@ -28,6 +28,11 @@ AlcixReferenceName >> adaptToAlceAnchorPathFragment [
 	^ '.' join: names
 ]
 
+{ #category : #'as yet unclassified' }
+AlcixReferenceName >> isNotEmpty [
+	^ names isEmptyOrNil not 
+]
+
 { #category : #accessing }
 AlcixReferenceName >> isProcessedElement [
 
@@ -43,6 +48,11 @@ AlcixReferenceName >> isProcessedElement: anObject [
 ]
 
 { #category : #accessing }
+AlcixReferenceName >> isValidName [
+	^ true
+]
+
+{ #category : #accessing }
 AlcixReferenceName >> names [
 
 	<FMProperty: #names type: #Object>
@@ -54,4 +64,10 @@ AlcixReferenceName >> names [
 AlcixReferenceName >> names: anObject [
 	<generated>
 	names := anObject
+]
+
+{ #category : #'as yet unclassified' }
+AlcixReferenceName >> referersTo: aString [
+"	self assert: names size = 1."
+	^ (names last compare: aString caseSensitive: false) = 2
 ]

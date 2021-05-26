@@ -119,7 +119,9 @@ AlceNorthwindRecordsetWrapperTest >> testClassHasOneAttributeMemberNameIsMRSWith
 
 { #category : #'test attribute' }
 AlceNorthwindRecordsetWrapperTest >> testClassHasOneAttributeMemberNameIsMRSWith4WrittingUsages [
-	self assert: (self mrs access select:[ : a  | a isWriting ]) size equals: 4
+	self
+		assert: (self mrs writingAccesses select: [ :a | a isWriting ]) size
+		equals: 4
 ]
 
 { #category : #'test attribute' }

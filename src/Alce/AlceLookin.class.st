@@ -14,13 +14,13 @@ AlceLookIn >> lookInto: aNode [
 ]
 
 { #category : #testing }
-AlceLookIn >> match: aString with: anOtherString [ 
-	^ (aString compare: anOtherString caseSensitive: false) = 2
+AlceLookIn >> match: aNameReferenceNode with: anOtherString [ 
+	 
+	^ aNameReferenceNode referersTo: anOtherString
 ]
 
 { #category : #testing }
 AlceLookIn >> matches: aString [
-
 	^ self match: match with: aString
 ]
 

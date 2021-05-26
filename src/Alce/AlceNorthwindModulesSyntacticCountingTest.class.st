@@ -553,7 +553,8 @@ AlceNorthwindModulesSyntacticCountingTest >> testAllLocalVariablesHaveTypeName [
 AlceNorthwindModulesSyntacticCountingTest >> testAllTheAccessesHaveAttributeName [
 	self
 		assert: self functionOrSub accesses
-		allSatisfy: [ :a | a rightElementName  isValidName and: [ a rightElementName isNotEmpty ] ]
+		allSatisfy:
+			[ :a | a rightElementName isValidName and: [ a rightElementName isNotEmpty ] ]
 ]
 
 { #category : #'as yet unclassified' }
@@ -641,11 +642,11 @@ AlceNorthwindModulesSyntacticCountingTest >> testFunctionReturnsType [
 
 { #category : #'as yet unclassified' }
 AlceNorthwindModulesSyntacticCountingTest >> testIfInvocationExpressionContainsAPointIsMessageSend [
-	| isMessageSend |
 	self functionOrSub outgoingInvocations
 		do: [ :inv | 
-			isMessageSend := inv selector includes: $..
-			self assert: inv isVBMessageSend equals: isMessageSend ]
+			self
+				assert: inv isVBMessageSend
+				equals: inv selector selectorSeemsToBeMethodInvocation ]
 ]
 
 { #category : #'as yet unclassified' }
@@ -663,8 +664,8 @@ AlceNorthwindModulesSyntacticCountingTest >> testMethodInvocationMustHaveAPointA
 		do: [ :inv | 
 			inv isVBMessageSend
 				ifTrue: [ self assert: inv receiver rightElementName isNotEmpty.
-					self assert: (inv selector includes: $.) ]
-				ifFalse: [ self deny: (inv selector includes: $.) ] ]
+					self assert: (inv selector selectorSeemsToBeMethodInvocation ) ]
+				ifFalse: [ self deny: (inv selector selectorSeemsToBeMethodInvocation ) ] ]
 ]
 
 { #category : #'as yet unclassified' }
@@ -672,6 +673,9 @@ AlceNorthwindModulesSyntacticCountingTest >> testSelectorIsCalculatedFromInvocat
 	self functionOrSub outgoingInvocations
 		do: [ :inv | 
 			inv isVBMessageSend
-				ifTrue: [ self assert: (inv receiver asString endsWith: inv selector) ]
-				ifFalse: [ self assert: (inv selector indexOf: $.) equals: 0 ] ]
+				ifTrue: [ self
+						assert:
+							(inv receiver rightElementName names last
+								endsWith: inv selector names last) ]
+				ifFalse: [ self deny: inv selector selectorSeemsToBeMethodInvocation ] ]
 ]
