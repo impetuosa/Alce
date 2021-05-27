@@ -3,11 +3,11 @@ Class {
 	#superclass : #FFIExternalStructure,
 	#classVars : [
 		'OFFSET_ADDRESS',
+		'OFFSET_FIRSTCHARACTEROFNAME',
 		'OFFSET_FLAGS',
 		'OFFSET_INDEX',
 		'OFFSET_MAXNAMELEN',
 		'OFFSET_MODBASE',
-		'OFFSET_NAME',
 		'OFFSET_NAMELEN',
 		'OFFSET_REGISTER',
 		'OFFSET_RESERVED1',
@@ -29,213 +29,226 @@ DBGSymbolInfo class >> fieldsDesc [
 	"
 
 	^ #(
-   ulong   SizeOfStruct;
-  ulong   TypeIndex;
-  ulonglong Reserved1;
-  ulonglong Reserved2;
-  ulong   Index;
-  ulong   Size;
-  ulonglong ModBase;
-  ulong   Flags;
-  ulonglong Value;
-  ulonglong Address;
-  ulong   Register;
-  ulong   Scope;
-  ulong   Tag;
-  ulong   NameLen;
-  ulong   MaxNameLen;
-  char    Name;
+   ulong   sizeOfStruct;
+  ulong   typeIndex;
+  ulonglong reserved1;
+  ulonglong reserved2;
+  ulong   index;
+  ulong   size;
+  ulonglong modBase;
+  ulong   flags;
+  ulonglong value;
+  ulonglong address;
+  ulong   register;
+  ulong   scope;
+  ulong   tag;
+  ulong   nameLen;
+  ulong   maxNameLen;
+  char    firstCharacterOfName;
 	)
 ]
 
 { #category : #'accessing structure variables' }
-DBGSymbolInfo >> Address [
+DBGSymbolInfo >> address [
 	"This method was automatically generated"
 	^handle unsignedLongLongAt: OFFSET_ADDRESS
 ]
 
 { #category : #'accessing structure variables' }
-DBGSymbolInfo >> Address: anObject [
+DBGSymbolInfo >> address: anObject [
 	"This method was automatically generated"
 	handle unsignedLongLongAt: OFFSET_ADDRESS put: anObject
 ]
 
 { #category : #'accessing structure variables' }
-DBGSymbolInfo >> Flags [
+DBGSymbolInfo >> firstCharacterOfName [
+	"This method was automatically generated"
+	^handle unsignedCharAt: OFFSET_FIRSTCHARACTEROFNAME
+]
+
+{ #category : #'accessing structure variables' }
+DBGSymbolInfo >> firstCharacterOfName: anObject [
+	"This method was automatically generated"
+	handle unsignedCharAt: OFFSET_FIRSTCHARACTEROFNAME put: anObject
+]
+
+{ #category : #'accessing structure variables' }
+DBGSymbolInfo >> flags [
 	"This method was automatically generated"
 	^handle platformUnsignedLongAt: OFFSET_FLAGS
 ]
 
 { #category : #'accessing structure variables' }
-DBGSymbolInfo >> Flags: anObject [
+DBGSymbolInfo >> flags: anObject [
 	"This method was automatically generated"
 	^handle platformUnsignedLongAt: OFFSET_FLAGS put: anObject
 ]
 
 { #category : #'accessing structure variables' }
-DBGSymbolInfo >> Index [
+DBGSymbolInfo >> index [
 	"This method was automatically generated"
 	^handle platformUnsignedLongAt: OFFSET_INDEX
 ]
 
 { #category : #'accessing structure variables' }
-DBGSymbolInfo >> Index: anObject [
+DBGSymbolInfo >> index: anObject [
 	"This method was automatically generated"
 	^handle platformUnsignedLongAt: OFFSET_INDEX put: anObject
 ]
 
 { #category : #'accessing structure variables' }
-DBGSymbolInfo >> MaxNameLen [
+DBGSymbolInfo >> maxNameLen [
 	"This method was automatically generated"
 	^handle platformUnsignedLongAt: OFFSET_MAXNAMELEN
 ]
 
 { #category : #'accessing structure variables' }
-DBGSymbolInfo >> MaxNameLen: anObject [
+DBGSymbolInfo >> maxNameLen: anObject [
 	"This method was automatically generated"
 	^handle platformUnsignedLongAt: OFFSET_MAXNAMELEN put: anObject
 ]
 
 { #category : #'accessing structure variables' }
-DBGSymbolInfo >> ModBase [
+DBGSymbolInfo >> modBase [
 	"This method was automatically generated"
 	^handle unsignedLongLongAt: OFFSET_MODBASE
 ]
 
 { #category : #'accessing structure variables' }
-DBGSymbolInfo >> ModBase: anObject [
+DBGSymbolInfo >> modBase: anObject [
 	"This method was automatically generated"
 	handle unsignedLongLongAt: OFFSET_MODBASE put: anObject
 ]
 
 { #category : #'accessing structure variables' }
-DBGSymbolInfo >> Name [
+DBGSymbolInfo >> name [
+
 	"This method was automatically generated"
-	^handle unsignedCharAt: OFFSET_NAME
+
+	| stream |
+	stream := WriteStream on: String new.
+	OFFSET_FIRSTCHARACTEROFNAME to:
+	OFFSET_FIRSTCHARACTEROFNAME + self nameLen - 1 do: [ :i | 
+	stream nextPut: (handle unsignedCharAt: i) ].
+	^ stream contents
 ]
 
 { #category : #'accessing structure variables' }
-DBGSymbolInfo >> Name: anObject [
-	"This method was automatically generated"
-	handle unsignedCharAt: OFFSET_NAME put: anObject
-]
-
-{ #category : #'accessing structure variables' }
-DBGSymbolInfo >> NameLen [
+DBGSymbolInfo >> nameLen [
 	"This method was automatically generated"
 	^handle platformUnsignedLongAt: OFFSET_NAMELEN
 ]
 
 { #category : #'accessing structure variables' }
-DBGSymbolInfo >> NameLen: anObject [
+DBGSymbolInfo >> nameLen: anObject [
 	"This method was automatically generated"
 	^handle platformUnsignedLongAt: OFFSET_NAMELEN put: anObject
 ]
 
 { #category : #'accessing structure variables' }
-DBGSymbolInfo >> Register [
+DBGSymbolInfo >> register [
 	"This method was automatically generated"
 	^handle platformUnsignedLongAt: OFFSET_REGISTER
 ]
 
 { #category : #'accessing structure variables' }
-DBGSymbolInfo >> Register: anObject [
+DBGSymbolInfo >> register: anObject [
 	"This method was automatically generated"
 	^handle platformUnsignedLongAt: OFFSET_REGISTER put: anObject
 ]
 
 { #category : #'accessing structure variables' }
-DBGSymbolInfo >> Reserved1 [
+DBGSymbolInfo >> reserved1 [
 	"This method was automatically generated"
 	^handle unsignedLongLongAt: OFFSET_RESERVED1
 ]
 
 { #category : #'accessing structure variables' }
-DBGSymbolInfo >> Reserved1: anObject [
+DBGSymbolInfo >> reserved1: anObject [
 	"This method was automatically generated"
 	handle unsignedLongLongAt: OFFSET_RESERVED1 put: anObject
 ]
 
 { #category : #'accessing structure variables' }
-DBGSymbolInfo >> Reserved2 [
+DBGSymbolInfo >> reserved2 [
 	"This method was automatically generated"
 	^handle unsignedLongLongAt: OFFSET_RESERVED2
 ]
 
 { #category : #'accessing structure variables' }
-DBGSymbolInfo >> Reserved2: anObject [
+DBGSymbolInfo >> reserved2: anObject [
 	"This method was automatically generated"
 	handle unsignedLongLongAt: OFFSET_RESERVED2 put: anObject
 ]
 
 { #category : #'accessing structure variables' }
-DBGSymbolInfo >> Scope [
+DBGSymbolInfo >> scope [
 	"This method was automatically generated"
 	^handle platformUnsignedLongAt: OFFSET_SCOPE
 ]
 
 { #category : #'accessing structure variables' }
-DBGSymbolInfo >> Scope: anObject [
+DBGSymbolInfo >> scope: anObject [
 	"This method was automatically generated"
 	^handle platformUnsignedLongAt: OFFSET_SCOPE put: anObject
 ]
 
 { #category : #'accessing structure variables' }
-DBGSymbolInfo >> Size [
+DBGSymbolInfo >> size [
 	"This method was automatically generated"
 	^handle platformUnsignedLongAt: OFFSET_SIZE
 ]
 
 { #category : #'accessing structure variables' }
-DBGSymbolInfo >> Size: anObject [
+DBGSymbolInfo >> size: anObject [
 	"This method was automatically generated"
 	^handle platformUnsignedLongAt: OFFSET_SIZE put: anObject
 ]
 
 { #category : #'accessing structure variables' }
-DBGSymbolInfo >> SizeOfStruct [
+DBGSymbolInfo >> sizeOfStruct [
 	"This method was automatically generated"
 	^handle platformUnsignedLongAt: OFFSET_SIZEOFSTRUCT
 ]
 
 { #category : #'accessing structure variables' }
-DBGSymbolInfo >> SizeOfStruct: anObject [
+DBGSymbolInfo >> sizeOfStruct: anObject [
 	"This method was automatically generated"
 	^handle platformUnsignedLongAt: OFFSET_SIZEOFSTRUCT put: anObject
 ]
 
 { #category : #'accessing structure variables' }
-DBGSymbolInfo >> Tag [
+DBGSymbolInfo >> tag [
 	"This method was automatically generated"
 	^handle platformUnsignedLongAt: OFFSET_TAG
 ]
 
 { #category : #'accessing structure variables' }
-DBGSymbolInfo >> Tag: anObject [
+DBGSymbolInfo >> tag: anObject [
 	"This method was automatically generated"
 	^handle platformUnsignedLongAt: OFFSET_TAG put: anObject
 ]
 
 { #category : #'accessing structure variables' }
-DBGSymbolInfo >> TypeIndex [
+DBGSymbolInfo >> typeIndex [
 	"This method was automatically generated"
 	^handle platformUnsignedLongAt: OFFSET_TYPEINDEX
 ]
 
 { #category : #'accessing structure variables' }
-DBGSymbolInfo >> TypeIndex: anObject [
+DBGSymbolInfo >> typeIndex: anObject [
 	"This method was automatically generated"
 	^handle platformUnsignedLongAt: OFFSET_TYPEINDEX put: anObject
 ]
 
 { #category : #'accessing structure variables' }
-DBGSymbolInfo >> Value [
+DBGSymbolInfo >> value [
 	"This method was automatically generated"
 	^handle unsignedLongLongAt: OFFSET_VALUE
 ]
 
 { #category : #'accessing structure variables' }
-DBGSymbolInfo >> Value: anObject [
+DBGSymbolInfo >> value: anObject [
 	"This method was automatically generated"
 	handle unsignedLongLongAt: OFFSET_VALUE put: anObject
 ]

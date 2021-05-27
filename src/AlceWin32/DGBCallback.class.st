@@ -15,7 +15,6 @@ DGBCallback class >> fnSpec [
 { #category : #'instance creation' }
 DGBCallback class >> new [
 	^ super new
-		beNull;
 		yourself
 ]
 
