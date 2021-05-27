@@ -12,7 +12,7 @@ Class {
 
 { #category : #'as yet unclassified' }
 AlceVBVisitorToReferenceName class >> noneAttribute [
-	^ noneAttribute ifNil: [ noneAttribute := AlcixReferenceName new ]
+	^ noneAttribute ifNil: [ noneAttribute := AlcixVariableReference new ]
 ]
 
 { #category : #'as yet unclassified' }
@@ -26,16 +26,50 @@ AlceVBVisitorToReferenceName >> noteProcessedElement [
 ]
 
 { #category : #'as yet unclassified' }
-AlceVBVisitorToReferenceName >> toReferenceName: aNode [
+AlceVBVisitorToReferenceName >> toInvocableReferenceName: aNode [
+	| refChain |
+	processedElement := false.
+	refChain := aNode acceptVisitor: self.
+	^ refChain
+		ifNil: [ self error: 'Unexpected ' ]
+		ifNotNil: [ AlcixInvocableReference new
+				names: (aNode acceptVisitor: self);
+				isProcessedElement: processedElement;
+				yourself ]
+]
+
+{ #category : #'as yet unclassified' }
+AlceVBVisitorToReferenceName >> toTypeReferenceName: aNode [
+	| refChain |
+	processedElement := false. 
+	refChain := aNode acceptVisitor: self.
+	^ refChain
+		ifNil: [ self error: 'Unexpected ' . "self undefinedTypeReference "  ]
+		ifNotNil: [ AlcixTypeReference new
+				names: (aNode acceptVisitor: self);
+				isProcessedElement: processedElement;
+				yourself ]
+]
+
+{ #category : #'as yet unclassified' }
+AlceVBVisitorToReferenceName >> toVariableReferenceName: aNode [
 	| refChain |
 	processedElement := false. 
 	refChain := aNode acceptVisitor: self.
 	^ refChain
 		ifNil: [ self noneAttribute  ]
-		ifNotNil: [ AlcixReferenceName new
+		ifNotNil: [ AlcixVariableReference new
 				names: (aNode acceptVisitor: self);
-				processedElement: processedElement;
+				isProcessedElement: processedElement;
 				yourself ]
+]
+
+{ #category : #'as yet unclassified' }
+AlceVBVisitorToReferenceName >> undefinedTypeReference [
+	^ AlcixTypeReference new
+		names: {#Undefined};
+		isProcessedElement: false;
+		yourself
 ]
 
 { #category : #'as yet unclassified' }
@@ -98,7 +132,8 @@ AlceVBVisitorToReferenceName >> visitMemberAccess: aVBMemberAccessNode [
 	receiver := aVBMemberAccessNode receiver
 		ifNil: [ aVBMemberAccessNode enclosingWith with acceptVisitor: self ]
 		ifNotNil: [ aVBMemberAccessNode receiver acceptVisitor: self ].
-	^ {receiver} ,( aVBMemberAccessNode member acceptVisitor: self)
+	^ (receiver ifNil: [ {} ])
+		, (aVBMemberAccessNode member acceptVisitor: self)
 ]
 
 { #category : #'as yet unclassified' }

@@ -3,9 +3,9 @@ Class {
 	#superclass : #AlcixAccessible,
 	#instVars : [
 		'#isWriting => FMProperty',
-		'#rightElementName => FMProperty',
 		'#rightElement => FMOne type: #AlcixAccessible opposite: #readingAccesses',
-		'#invocable => FMOne type: #AlcixInvocable opposite: #accesses'
+		'#invocable => FMOne type: #AlcixInvocable opposite: #accesses',
+		'#rightElementName => FMOne type: #AlcixVariableReference opposite: #access'
 	],
 	#category : #'Alce-Famix-Entities'
 }
@@ -79,14 +79,15 @@ AlcixAccess >> rightElement: anObject [
 
 { #category : #accessing }
 AlcixAccess >> rightElementName [
+	"Relation named: #rightElementName type: #AlcixVariableReference opposite: #access"
 
-	<FMProperty: #rightElementName type: #AlcixReferenceName>
 	<generated>
 	^ rightElementName
 ]
 
 { #category : #accessing }
 AlcixAccess >> rightElementName: anObject [
+
 	<generated>
 	rightElementName := anObject
 ]

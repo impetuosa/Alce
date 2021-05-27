@@ -4,10 +4,10 @@ Class {
 	#traits : 'TAlceInvocation',
 	#classTraits : 'TAlceInvocation classTrait',
 	#instVars : [
-		'#selector => FMProperty',
 		'#sender => FMOne type: #AlcixInvocable opposite: #outgoingInvocations',
 		'#candidate => FMOne type: #AlcixInvocable opposite: #incomingInvocations',
-		'#arguments => FMMany type: #AlcixArgument opposite: #invocation'
+		'#arguments => FMMany type: #AlcixArgument opposite: #invocation',
+		'#selector => FMOne type: #AlcixInvocableReference opposite: #invocation'
 	],
 	#category : #'Alce-Famix-Entities'
 }
@@ -81,14 +81,15 @@ AlcixInvocation >> candidateGroup [
 
 { #category : #accessing }
 AlcixInvocation >> selector [
+	"Relation named: #selector type: #AlcixInvocableReference opposite: #invocation"
 
-	<FMProperty: #selector type: #String>
 	<generated>
 	^ selector
 ]
 
 { #category : #accessing }
 AlcixInvocation >> selector: anObject [
+
 	<generated>
 	selector := anObject
 ]

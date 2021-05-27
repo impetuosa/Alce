@@ -16,7 +16,8 @@ AlceAnchor class >> on: aString [
 AlceAnchor >> / aString [
 	| new |
 	new := self class new.
-	new privateSetPath: path / aString. 
+	
+	new privateSetPath: path / aString adaptToAlceAnchorPathFragment  . 
 	^ new 
 ]
 

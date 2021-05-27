@@ -98,21 +98,25 @@ AlceNorthwindReportSyntacticCountingTest >> testAllLocalVariablesHaveName [
 AlceNorthwindReportSyntacticCountingTest >> testAllLocalVariablesHaveTypeName [
 	self
 		assert: self functionOrSub localVariables
-		allSatisfy: [ :a | a typeName isString and: [ a typeName isNotEmpty ] ]
+		allSatisfy: [ :a | 
+			(a typeName isKindOf: AlcixTypeReference)
+				and: [ a typeName isNotEmpty ] ]
 ]
 
 { #category : #'as yet unclassified' }
 AlceNorthwindReportSyntacticCountingTest >> testAllTheAccessesHaveAttributeName [
 	self
 		assert: self functionOrSub accesses
-		allSatisfy:[ :a | a rightElementName  isValidName and: [ a rightElementName isNotEmpty ] ]
+		allSatisfy: [ :a | 
+			((a rightElementName isKindOf: AlcixReferenceName)
+				and: [ a rightElementName isNotEmpty ]) or: [ a isWriting ] ]
 ]
 
 { #category : #'as yet unclassified' }
 AlceNorthwindReportSyntacticCountingTest >> testAllTheInvocationsHaveSelector [
 	self
 		assert: self functionOrSub outgoingInvocations
-		allSatisfy: [ :a | a selector isString ]
+		allSatisfy: [ :a | a selector isKindOf: AlcixInvocableReference  ]
 ]
 
 { #category : #'as yet unclassified' }
@@ -131,7 +135,7 @@ AlceNorthwindReportSyntacticCountingTest >> testDefinedFunctionHasNoneIncomingIn
 AlceNorthwindReportSyntacticCountingTest >> testDefinedFunctionHasParameters [
 	self functionOrSub parameters asOrderedCollection
 		with: (fixture at: #parameters)
-		do: [ :p :pt | self assert: p typeName equals: pt ]
+		do: [ :p :pt | self assert: p typeName stringName equals: pt ]
 ]
 
 { #category : #'as yet unclassified' }
@@ -145,14 +149,16 @@ AlceNorthwindReportSyntacticCountingTest >> testDefinedFunctionParametersHaveNam
 AlceNorthwindReportSyntacticCountingTest >> testDefinedFunctionParametersHaveTypeName [
 	self
 		assert: self functionOrSub parameters
-		allSatisfy: [ :p | p typeName isString and: [ p typeName isNotEmpty ] ]
+		allSatisfy: [ :p | 
+			(p typeName isKindOf: AlcixTypeReference)
+				and: [ p typeName isNotEmpty ] ]
 ]
 
 { #category : #'as yet unclassified' }
 AlceNorthwindReportSyntacticCountingTest >> testDefinedFunctionReturnsBoolean [
 	self
 		assertIfFunction: [ self
-				assert: self functionOrSub typeName
+				assert: self functionOrSub typeName stringName
 				equals: (fixture at: #return).
 			true ]
 		ifFalse: [ (fixture at: #return) = #SubsDoNotReturn ]
@@ -190,17 +196,19 @@ AlceNorthwindReportSyntacticCountingTest >> testDefinesHasVariables [
 { #category : #'as yet unclassified' }
 AlceNorthwindReportSyntacticCountingTest >> testFunctionReturnsType [
 	self
-		assertIfFunction: [ self functionOrSub typeName isString ]
+		assertIfFunction: [ self functionOrSub typeName isKindOf: AlcixTypeReference ]
 		ifFalse: [ (fixture at: #return) = #SubsDoNotReturn ]
 ]
 
 { #category : #'as yet unclassified' }
 AlceNorthwindReportSyntacticCountingTest >> testIfInvocationExpressionContainsAPointIsMessageSend [
-	| isMessageSend |
 	self functionOrSub outgoingInvocations
 		do: [ :inv | 
-			isMessageSend := inv selector includes: $..
-			self assert: inv isVBMessageSend equals: isMessageSend ]
+			self
+				assert:
+					(inv isVBMessageSend = inv selector selectorSeemsToBeMethodInvocation
+						or: [ inv isVBMessageSend
+								and: [ inv receiver rightElementName names first = #Me ] ]) ]
 ]
 
 { #category : #'as yet unclassified' }
@@ -208,7 +216,7 @@ AlceNorthwindReportSyntacticCountingTest >> testMessageSendMustReturnReceiverIfN
 	self functionOrSub outgoingInvocations
 		do: [ :inv | 
 			inv isVBMessageSend
-				ifTrue: [ self assert: inv receiver class equals: AlcixAccess ]
+				ifTrue: [ self assert: inv receiver class equals: AlcixAccessRead ]
 				ifFalse: [ self should: [ inv receiver ] raise: Error ] ]
 ]
 
@@ -218,8 +226,11 @@ AlceNorthwindReportSyntacticCountingTest >> testMethodInvocationMustHaveAPointAn
 		do: [ :inv | 
 			inv isVBMessageSend
 				ifTrue: [ self assert: inv receiver rightElementName isNotEmpty.
-					self assert: (inv selector includes: $.) ]
-				ifFalse: [ self deny: (inv selector includes: $.) ] ]
+					self
+						assert:
+							(inv selector selectorSeemsToBeMethodInvocation
+								or: [ inv receiver rightElementName names first = #Me ]) ]
+				ifFalse: [ self deny: inv selector selectorSeemsToBeMethodInvocation ] ]
 ]
 
 { #category : #'as yet unclassified' }
@@ -227,6 +238,9 @@ AlceNorthwindReportSyntacticCountingTest >> testSelectorIsCalculatedFromInvocati
 	self functionOrSub outgoingInvocations
 		do: [ :inv | 
 			inv isVBMessageSend
-				ifTrue: [ self assert: inv receiver asString equals: inv selector ]
-				ifFalse: [ self assert: (inv selector indexOf: $.) equals: 0 ] ]
+				ifTrue: [ self
+						assert:
+							(inv receiver rightElementName names last
+								endsWith: inv selector names last) ]
+				ifFalse: [ self deny: inv selector selectorSeemsToBeMethodInvocation ] ]
 ]

@@ -90,11 +90,12 @@ AlceNorthwindReportBindingTest >> testBoundedVariableTypes [
 
 { #category : #tests }
 AlceNorthwindReportBindingTest >> testBoundedVariables [
-
 	self
-		assert: (self functionOrSub localVariables select: [ :s | 
-				 s readingAccesses isEmptyOrNil not or:
-					 s writingAccesses isEmptyOrNil not ]) size
+		assert:
+			(self functionOrSub localVariables
+				select: [ :s | 
+					s readingAccesses isEmptyOrNil not
+						or: [ s writingAccesses isEmptyOrNil not ] ]) size
 		equals: (fixture at: #variableBound)
 ]
 

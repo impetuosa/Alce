@@ -600,7 +600,7 @@ AlceSDKLibraryBuilder >> functionNamed: aName returns: aType parametersFromStrin
 		at: aName , 'function'
 		ifAbsentPut: [ func := self instantiate: AlcixFunction.
 			func type: aType.
-			func typeName: aType name.
+			func typeName:( self typeNameReference: aType name).
 			func selector: aName.
 			defLines := aStringDefinition lines
 				collect:
@@ -615,7 +615,7 @@ AlceSDKLibraryBuilder >> functionNamed: aName returns: aType parametersFromStrin
 						isOptional: (self isOptionalOrNot: (stream upToAll: ' ') trimBoth).
 					type := self typeNamed: (stream upToAll: ' ') trimBoth.
 					param type: type.
-					param typeName: type name ].
+					param typeName:( self typeNameReference: aType name). ].
 			func ]
 ]
 
@@ -1967,6 +1967,14 @@ AlceSDKLibraryBuilder >> typeName [
 		  functionNamed: #TypeName
 		  returns: self string
 		  parametersFromString: 'variableName required variant'
+]
+
+{ #category : #'as yet unclassified' }
+AlceSDKLibraryBuilder >> typeNameReference: aString [
+	self assert: (aString indexOf: $.) = 0.
+	^ (self instantiate: AlcixTypeReference)
+		names: {aString};
+		yourself
 ]
 
 { #category : #'sdk functions' }

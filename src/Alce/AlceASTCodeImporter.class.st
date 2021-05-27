@@ -20,7 +20,7 @@ AlceASTCodeImporter >> instantiateAccess: aMemberOrDictAccess [
 	access := self instantiate: AlcixAccessRead.
 	access isWriting: false.
 	access
-		rightElementName: (self nodeToReferenceName: aMemberOrDictAccess).
+		rightElementName: (self nodeToVariableReferenceName: aMemberOrDictAccess).
 	^ access
 ]
 
@@ -42,10 +42,10 @@ AlceASTCodeImporter >> instantiateFlatInvocation: selector for: aCall [
 { #category : #invocations }
 AlceASTCodeImporter >> instantiateInvocation: aCall [
 	| selector |
-	selector := self nodeToString: aCall selector.
-	(selector indexOf: $.) = 0
-		ifTrue: [ self instantiateFlatInvocation: selector for: aCall ]
-		ifFalse: [ self instantiateMethodInvocation: selector for: aCall ]
+	selector := self nodeToInvocableReferenceName: aCall selector.
+	selector selectorSeemsToBeMethodInvocation
+		ifTrue: [ self instantiateMethodInvocation: selector for: aCall ]
+		ifFalse: [ self instantiateFlatInvocation: selector for: aCall ]
 ]
 
 { #category : #invocations }
@@ -79,8 +79,8 @@ AlceASTCodeImporter >> instantiateVariable: aClass from: aVariable [
 ]
 
 { #category : #'as yet unclassified' }
-AlceASTCodeImporter >> nodeToReferenceName: aVBNode [
-	^ self referenceNameConverter toReferenceName: aVBNode
+AlceASTCodeImporter >> nodeToInvocableReferenceName: aVBNode [
+	^ self referenceNameConverter toInvocableReferenceName: aVBNode
 ]
 
 { #category : #helper }
@@ -88,6 +88,16 @@ AlceASTCodeImporter >> nodeToString: aNode [
 	| str |
 	str := self stringConverter toString: aNode.
 	^ str
+]
+
+{ #category : #'as yet unclassified' }
+AlceASTCodeImporter >> nodeToTypeReferenceName: aVBNode [
+	^ self referenceNameConverter toTypeReferenceName: aVBNode
+]
+
+{ #category : #'as yet unclassified' }
+AlceASTCodeImporter >> nodeToVariableReferenceName: aVBNode [
+	^ self referenceNameConverter toVariableReferenceName: aVBNode
 ]
 
 { #category : #'as yet unclassified' }
@@ -101,7 +111,7 @@ AlceASTCodeImporter >> registerSpecialVariable: aName type: aType [
 	| var |
 	var := self instantiate: AlcixAttribute.
 	var name: aName.
-	var typeName: aType name.
+	var typeName: (self typeNameReference: aType name).
 	var type: aType.
 	var anchor: self state top anchor / #variables / var name.
 	^ var
@@ -116,8 +126,16 @@ AlceASTCodeImporter >> stringConverter [
 { #category : #'functions - subs - events' }
 AlceASTCodeImporter >> typeName: aTypeOrNil [
 	^ aTypeOrNil
-		ifNil: [ #Undefined ]
-		ifNotNil: [ self nodeToReferenceName: aTypeOrNil ]
+		ifNil: [self referenceNameConverter undefinedTypeReference ]
+		ifNotNil: [ self nodeToTypeReferenceName: aTypeOrNil ]
+]
+
+{ #category : #'as yet unclassified' }
+AlceASTCodeImporter >> typeNameReference: aString [
+	self assert: (aString indexOf: $.) = 0.
+	^ (self instantiate: AlcixTypeReference)
+		names: {aString};
+		yourself
 ]
 
 { #category : #generated }
@@ -189,7 +207,7 @@ AlceASTCodeImporter >> visitDefineType: aDefineType [
 				addMember:
 					((self instantiate: AlcixAttribute)
 						name: (self nodeToString: d name);
-						typeName: (self nodeToString: d type type);
+						typeName: (self nodeToTypeReferenceName:  d type type);
 						visibility: #Public;
 						yourself) ]
 ]
@@ -230,9 +248,9 @@ AlceASTCodeImporter >> visitEquals: anAssignementOrEquals [
 				ifTrue: [ access := self instantiate: AlcixAccessWrite.
 					access isWriting: true.
 					access
-						leftElementName: (self nodeToReferenceName: anAssignementOrEquals left).
+						leftElementName: (self nodeToVariableReferenceName: anAssignementOrEquals left).
 					access
-						rightElementName: (self nodeToReferenceName: anAssignementOrEquals right).
+						rightElementName: (self nodeToVariableReferenceName: anAssignementOrEquals right).
 					self state top addAccess: access ] ].
 	super visitEquals: anAssignementOrEquals
 ]
@@ -256,9 +274,9 @@ AlceASTCodeImporter >> visitExplicitAssignement: anExplicitAssignement [
 		ifFalse: [ access := self instantiate: AlcixAccessWrite.
 			access isWriting: true.
 			access
-				leftElementName: (self nodeToReferenceName: anExplicitAssignement left).
+				leftElementName: (self nodeToVariableReferenceName: anExplicitAssignement left).
 			access
-				rightElementName: (self nodeToReferenceName: anExplicitAssignement right).
+				rightElementName: (self nodeToVariableReferenceName: anExplicitAssignement right).
 			self state top addAccess: access ].
 	super visitExplicitAssignement: anExplicitAssignement
 ]
@@ -424,6 +442,13 @@ AlceASTCodeImporter >> visitRaiseEvent: aRaiseEvent [
 { #category : #'properties - variables' }
 AlceASTCodeImporter >> visitReDimVariable: aReDimVariable [
 	self shouldBeImplemented 
+]
+
+{ #category : #'member access' }
+AlceASTCodeImporter >> visitSimpleIdentifier: aSimpleIdentifier [
+	(self state top isKindOf: AlcixInvocable)
+		ifTrue: [ self state top
+				addAccess: (self instantiateAccess: aSimpleIdentifier) ]
 ]
 
 { #category : #'functions - subs - events' }

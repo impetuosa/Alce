@@ -19,9 +19,9 @@ AlcixClass >> accept: aVisitor [
 
 ]
 
-{ #category : #visiting }
+{ #category : #'as yet unclassified' }
 AlcixClass >> isAlcixClass [
-	^ true
+	^ true 
 ]
 
 { #category : #visiting }

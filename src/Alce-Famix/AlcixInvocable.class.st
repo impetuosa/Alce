@@ -132,6 +132,11 @@ AlcixInvocable >> localVariablesGroup [
 	^ MooseSpecializedGroup withAll: self localVariables asSet
 ]
 
+{ #category : #adding }
+AlcixInvocable >> mooseName [
+	^ selector 
+]
+
 { #category : #accessing }
 AlcixInvocable >> outgoingInvocations [
 	"Relation named: #outgoingInvocations type: #AlcixInvocation opposite: #sender"
