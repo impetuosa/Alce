@@ -63,8 +63,9 @@ DBGHelpLib >> enumerateSymbols: baseDLL callback: aCallback [
 { #category : #'reporting errors' }
 DBGHelpLib >> enumerateTypes: baseDLL callback: aCallback [
 	^ (self
-		ffiDBGHelpEnumerateTypes: self processHandle
+		ffiEnumerateTypes: self processHandle
 		baseDll: baseDLL
+		matching: '*'
 		callback: (DGBEnumerateSymbols on: aCallback))
 		ifFalse: [ self reportError: 0 ] 
 ]
@@ -78,21 +79,6 @@ BOOL IMAGEAPI SymCleanup(
 );"
 
 	^ self ffiCall: #(BOOL SymCleanup #(HANDLE processHandleNumber))
-]
-
-{ #category : #'reporting errors' }
-DBGHelpLib >> ffiDBGHelpEnumerateTypes: hProcess baseDll: baseDll callback: callback [
-
-"
-https://docs.microsoft.com/en-us/windows/win32/api/dbghelp/nf-dbghelp-symenumtypes
-BOOL IMAGEAPI SymEnumTypes(
-  HANDLE                         hProcess,
-  ULONG64                        BaseOfDll,
-  PSYM_ENUMERATESYMBOLS_CALLBACK EnumSymbolsCallback,
-  PVOID                          UserContext
-);"
-
-	^ self ffiCall:  #( BOOL SymEnumTypes #( HANDLE hProcess, ULONG64 baseDll, SYM_ENUMERATESYMBOLS_CALLBACK callback , nil ) )
 ]
 
 { #category : #'reporting errors' }
@@ -188,6 +174,23 @@ BOOL IMAGEAPI SymEnumSymbols(
 	^ self
 		ffiCall:
 			#(BOOL SymEnumSymbols #(HANDLE hProcess , ulonglong baseDLL , LPCSTR aString , SYM_ENUMERATESYMBOLS_CALLBACK aCallback , nil))
+]
+
+{ #category : #'reporting errors' }
+DBGHelpLib >> ffiEnumerateTypes: hProcess baseDll: baseDLL matching: aString callback: aCallback [
+	"
+BOOL IMAGEAPI SymEnumTypesByName(
+  HANDLE                         hProcess,
+  ULONG64                        BaseOfDll,
+  PCSTR                          mask,
+  PSYM_ENUMERATESYMBOLS_CALLBACK EnumSymbolsCallback,
+  PVOID                          UserContext
+);
+"
+
+	^ self
+		ffiCall:
+			#(BOOL SymEnumTypesByName #(HANDLE hProcess, ulonglong baseDLL, LPCSTR aString, SYM_ENUMERATETYPES_CALLBACK aCallback, 0))
 ]
 
 { #category : #'reporting errors' }
