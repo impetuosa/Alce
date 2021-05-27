@@ -9,5 +9,5 @@ Class {
 
 { #category : #'instance creation' }
 DGBEnumerateModules class >> fnSpec [
-	^#(BOOL (PCTSTR  ModuleName, DWORD64 BaseOfDll,  void* userContext))
+	^#(BOOL (char*  ModuleName, DWORD64 BaseOfDll,  void* userContext))
 ]

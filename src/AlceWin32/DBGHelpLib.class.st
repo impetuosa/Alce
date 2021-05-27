@@ -1,3 +1,18 @@
+"
+DBGHelpLib uniqueInstance initLibrary.
+moduleId := DBGHelpLib uniqueInstance loadModule: 'ACEDAO.DLL'.
+DBGHelpLib uniqueInstance unloadModule: moduleId.
+ DBGHelpLib uniqueInstance enumerateSymbols: moduleId callback: [ :pSymbol :size : usc |  self traceCr: 'ada'.    true ]. 
+ DBGHelpLib uniqueInstance enumerateModules: [ : moduleName : baseDll : void |  self traceCr:moduleName. true ]. 
+
+Kernel32Lib uniqueInstance currentProcessHandle 
+DGBEnumerateModules 
+DGBEnumerateSymbols on: [ :moduleN :size : usc | self halt. ]. 
+
+'C:\Program Files (x86)\Common Files\Microsoft Shared\OFFICE16\ACEDAO.DLL'asFileReference exists .
+ 
+'C:\Program Files (x86)\Microsoft Office\root\Office16\ACEDAO.DLL' asFileReference exists .
+"
 Class {
 	#name : #DBGHelpLib,
 	#superclass : #FFILibrary,
@@ -14,7 +29,7 @@ Class {
 
 { #category : #'reporting errors' }
 DBGHelpLib >> defaultInvasive [
-	^ false 
+	^ true 
 ]
 
 { #category : #'reporting errors' }
@@ -24,7 +39,15 @@ DBGHelpLib >> defaultPath [
 
 { #category : #'reporting errors' }
 DBGHelpLib >> defaultProcessHandle [
-	^ 90480 + ((Random seed: DateAndTime now asUnixTime) nextInt: 4000) 
+	^ Kernel32Lib uniqueInstance currentProcessHandle "90480 + ((Random seed: DateAndTime now asUnixTime) nextInt: 4000) "
+]
+
+{ #category : #'reporting errors' }
+DBGHelpLib >> enumerateModules: aCallback [
+	^ (self
+		ffiEnumerateModules: self processHandle
+		callback: (DGBEnumerateModules on: aCallback))
+		ifFalse: [ self reportError: 0 ]
 ]
 
 { #category : #'reporting errors' }
@@ -45,7 +68,7 @@ BOOL IMAGEAPI SymCleanup(
   HANDLE hProcess
 );"
 
-	^ self ffiCall: #(BOOL SymCleanup #(ulong processHandleNumber))
+	^ self ffiCall: #(BOOL SymCleanup #(HANDLE processHandleNumber))
 ]
 
 { #category : #'reporting errors' }
@@ -57,7 +80,7 @@ BOOL IMAGEAPI SymInitialize(
   PCSTR  UserSearchPath,
   BOOL   fInvadeProcess
 );"
-	^ self ffiCall: #(BOOL SymInitialize #(ulong aNumber, LPCSTR aPathString, BOOL aBoolean ))
+	^ self ffiCall: #(BOOL SymInitialize #(HANDLE aNumber, LPCSTR aPathString, BOOL aBoolean ))
 ]
 
 { #category : #'reporting errors' }
@@ -78,7 +101,7 @@ DWORD64 IMAGEAPI SymLoadModuleEx(
 
 	^ self
 		ffiCall:
-			#(DWORD64 SymLoadModuleEx #(ulong hProcess, nil, LPCSTR imageName, LPCSTR moduleName, 0, 0, nil, 0))
+			#(DWORD64 SymLoadModuleEx #(HANDLE hProcess, nil, LPCSTR imageName, LPCSTR moduleName, 0, 0, nil, 0))
 ]
 
 { #category : #'reporting errors' }
@@ -94,7 +117,7 @@ BOOL IMAGEAPI SymUnloadModule(
 
 	^ self
 		ffiCall:
-			#(BOOL SymUnloadModule #(ulong hProcess, DWORD baseDLL))
+			#(BOOL SymUnloadModule #(HANDLE hProcess, DWORD baseDLL))
 ]
 
 { #category : #'reporting errors' }
@@ -110,7 +133,7 @@ BOOL IMAGEAPI SymEnumerateModules64(
 
 	^ self
 		ffiCall:
-			#(BOOL SymEnumerateModules64 #(ulong hProcess, SYM_ENUMMODULES_CALLBACK64 aCallback , nil))
+			#(BOOL SymEnumerateModules64 #(HANDLE hProcess, SYM_ENUMMODULES_CALLBACK64 aCallback , nil))
 ]
 
 { #category : #'reporting errors' }
@@ -140,7 +163,7 @@ BOOL IMAGEAPI SymEnumSymbols(
 
 	^ self
 		ffiCall:
-			#(BOOL SymEnumSymbols #(ulong hProcess , ulonglong baseDLL , LPCSTR aString , SYM_ENUMERATESYMBOLS_CALLBACK aCallback , nil))
+			#(BOOL SymEnumSymbols #(HANDLE hProcess , ulonglong baseDLL , LPCSTR aString , SYM_ENUMERATESYMBOLS_CALLBACK aCallback , nil))
 ]
 
 { #category : #'reporting errors' }
@@ -150,7 +173,7 @@ DBGHelpLib >> initLibrary [
 		ffiDBGHelpInitializeLibraryWithProcessHandle: self processHandle
 		path: self defaultPath
 		invasive: self defaultInvasive)
-		ifFalse: [ self error: 'Error  on library initialization! ' ]
+		ifFalse: [ self reportError: 0]
 ]
 
 { #category : #'reporting errors' }
