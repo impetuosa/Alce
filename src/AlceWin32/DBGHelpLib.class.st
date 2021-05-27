@@ -29,10 +29,12 @@ DBGHelpLib >> defaultProcessHandle [
 
 { #category : #'reporting errors' }
 DBGHelpLib >> enumerateSymbols: baseDLL callback: aCallback [
-	^ self
+	(self
 		ffiEnumerateSymbols: self processHandle
 		baseDll: baseDLL
-		callback: (DGBEnumerateSymbols on: aCallback)
+		matching: '*'
+		callback: (DGBEnumerateSymbols on: aCallback))
+		ifFalse: [ self reportError: 0 ]
 ]
 
 { #category : #'reporting errors' }
@@ -80,7 +82,7 @@ DWORD64 IMAGEAPI SymLoadModuleEx(
 ]
 
 { #category : #'reporting errors' }
-DBGHelpLib >> ffiDBGHelpUnLoadModule: hProcess path: baseDLL [ 
+DBGHelpLib >> ffiDBGHelpUnLoadModule: hProcess baseDll: baseDLL [ 
 	"
 The BaseOfDll is the loading point of the dll. 
 This info can be obtained from the enumeration of the modules
@@ -122,7 +124,24 @@ BOOL IMAGEAPI SymEnumSymbols(
 
 	^ self
 		ffiCall:
-			#(BOOL SymEnumSymbols #(ulong hProcess , DWORD64 baseDLL , nil , SYM_ENUMERATESYMBOLS_CALLBACK aCallback , nil))
+			#(BOOL SymEnumSymbols #(ulong hProcess , DWORD64 baseDLL , '*' , SYM_ENUMERATESYMBOLS_CALLBACK aCallback , nil))
+]
+
+{ #category : #'reporting errors' }
+DBGHelpLib >> ffiEnumerateSymbols: hProcess baseDll: baseDLL matching: aString callback: aCallback [
+	"
+BOOL IMAGEAPI SymEnumSymbols(
+  HANDLE                         hProcess,
+  ULONG64                        BaseOfDll,
+  PCSTR                          Mask,
+  PSYM_ENUMERATESYMBOLS_CALLBACK EnumSymbolsCallback,
+  PVOID                          UserContext
+);
+"
+
+	^ self
+		ffiCall:
+			#(BOOL SymEnumSymbols #(ulong hProcess , DWORD64 baseDLL , LPCSTR aString , SYM_ENUMERATESYMBOLS_CALLBACK aCallback , nil))
 ]
 
 { #category : #'reporting errors' }
@@ -165,6 +184,11 @@ DBGHelpLib >> processHandle [
 DBGHelpLib >> resetLibrary [
 	processHandle ifNotNil: [ self ffiDBGHelpCleanUp: processHandle ].
 	processHandle := nil
+]
+
+{ #category : #'reporting errors' }
+DBGHelpLib >> unloadModule: baseDLL [
+	^ self ffiDBGHelpUnLoadModule: self processHandle baseDll: baseDLL
 ]
 
 { #category : #'reporting errors' }
