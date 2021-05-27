@@ -4,7 +4,8 @@ Class {
 	#classVars : [
 		'DWORD64',
 		'SYMBOLINFO',
-		'SYM_ENUMERATESYMBOLS_CALLBACK'
+		'SYM_ENUMERATESYMBOLS_CALLBACK',
+		'SYM_ENUMMODULES_CALLBACK64'
 	],
 	#pools : [
 		'Win32Types'
@@ -17,4 +18,5 @@ DBGHelpTypes class >> initialize [
 	DWORD64 := #ulonglong.
 	SYMBOLINFO := #DBGSymbolInfo.
 	SYM_ENUMERATESYMBOLS_CALLBACK := #DGBEnumerateSymbols.
+	SYM_ENUMMODULES_CALLBACK64 := #DGBEnumerateModules 
 ]

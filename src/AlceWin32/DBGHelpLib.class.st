@@ -29,12 +29,12 @@ DBGHelpLib >> defaultProcessHandle [
 
 { #category : #'reporting errors' }
 DBGHelpLib >> enumerateSymbols: baseDLL callback: aCallback [
-	(self
+	^ (self
 		ffiEnumerateSymbols: self processHandle
 		baseDll: baseDLL
 		matching: '*'
 		callback: (DGBEnumerateSymbols on: aCallback))
-		ifFalse: [ self reportError: 0 ]
+		ifFalse: [ self reportError: 0 ] 
 ]
 
 { #category : #'reporting errors' }
@@ -98,6 +98,22 @@ BOOL IMAGEAPI SymUnloadModule(
 ]
 
 { #category : #'reporting errors' }
+DBGHelpLib >> ffiEnumerateModules: hProcess  callback: aCallback [
+	"
+	https://docs.microsoft.com/en-us/windows/win32/api/dbghelp/nf-dbghelp-symenumeratemodules64
+BOOL IMAGEAPI SymEnumerateModules64(
+  HANDLE                      hProcess,
+  PSYM_ENUMMODULES_CALLBACK64 EnumModulesCallback,
+  PVOID                       UserContext
+);
+"
+
+	^ self
+		ffiCall:
+			#(BOOL SymEnumerateModules64 #(ulong hProcess, SYM_ENUMMODULES_CALLBACK64 aCallback , nil))
+]
+
+{ #category : #'reporting errors' }
 DBGHelpLib >> ffiEnumerateSymbols [
 	"
 IMAGEAPI SymEnumSymbols(
@@ -108,23 +124,6 @@ IMAGEAPI SymEnumSymbols(
   PVOID                          UserContext
 );
 "
-]
-
-{ #category : #'reporting errors' }
-DBGHelpLib >> ffiEnumerateSymbols: hProcess baseDll: baseDLL callback: aCallback [
-	"
-BOOL IMAGEAPI SymEnumSymbols(
-  HANDLE                         hProcess,
-  ULONG64                        BaseOfDll,
-  PCSTR                          Mask,
-  PSYM_ENUMERATESYMBOLS_CALLBACK EnumSymbolsCallback,
-  PVOID                          UserContext
-);
-"
-
-	^ self
-		ffiCall:
-			#(BOOL SymEnumSymbols #(ulong hProcess , DWORD64 baseDLL , '*' , SYM_ENUMERATESYMBOLS_CALLBACK aCallback , nil))
 ]
 
 { #category : #'reporting errors' }
@@ -141,7 +140,7 @@ BOOL IMAGEAPI SymEnumSymbols(
 
 	^ self
 		ffiCall:
-			#(BOOL SymEnumSymbols #(ulong hProcess , DWORD64 baseDLL , LPCSTR aString , SYM_ENUMERATESYMBOLS_CALLBACK aCallback , nil))
+			#(BOOL SymEnumSymbols #(ulong hProcess , ulonglong baseDLL , LPCSTR aString , SYM_ENUMERATESYMBOLS_CALLBACK aCallback , nil))
 ]
 
 { #category : #'reporting errors' }
