@@ -23,3 +23,9 @@ AlcixClass >> accept: aVisitor [
 AlcixClass >> isAlcixClass [
 	^ true 
 ]
+
+{ #category : #visiting }
+AlcixClass >> me [
+
+	^ self typeds detect: [ :t | t name = #Me ]
+]

@@ -60,6 +60,11 @@ AlcixUserType >> invocablesGroup [
 	^ MooseSpecializedGroup withAll: self invocables asSet
 ]
 
+{ #category : #adding }
+AlcixUserType >> isAlcixClass [
+	^ false
+]
+
 { #category : #accessing }
 AlcixUserType >> members [
 	"Relation named: #members type: #AlcixAttribute opposite: #userType"
