@@ -32,6 +32,11 @@ AlcixTypeReference >> refersToFormNamed: aString [
 		caseSensitive: false) = 2
 ]
 
+{ #category : #'as yet unclassified' }
+AlcixTypeReference >> stringName [
+	^ '.' join: names
+]
+
 { #category : #accessing }
 AlcixTypeReference >> typed [
 	"Relation named: #typed type: #AlcixTTyped opposite: #typeName"

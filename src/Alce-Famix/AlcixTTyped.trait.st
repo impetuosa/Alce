@@ -43,5 +43,6 @@ AlcixTTyped >> typeName [
 AlcixTTyped >> typeName: anObject [
 
 	<generated>
+	anObject ifNil: [ self halt . ].
 	typeName := anObject
 ]

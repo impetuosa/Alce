@@ -29,6 +29,11 @@ AlcixReferenceName >> adaptToAlceAnchorPathFragment [
 ]
 
 { #category : #'as yet unclassified' }
+AlcixReferenceName >> isEmptyOrNil [
+	^ names isEmptyOrNil  
+]
+
+{ #category : #'as yet unclassified' }
 AlcixReferenceName >> isNotEmpty [
 	^ names isEmptyOrNil not 
 ]

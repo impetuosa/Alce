@@ -62,7 +62,7 @@ AlceNorthwindRecordsetWrapperTest >> moveNext [
 
 { #category : #helpers }
 AlceNorthwindRecordsetWrapperTest >> mrs [
-	^ self recordsetWrapper members first
+	^ self recordsetWrapper members detect:[ : a| a name = 'm_rs']
 ]
 
 { #category : #helpers }
@@ -103,18 +103,15 @@ AlceNorthwindRecordsetWrapperTest >> testAttributeTyped [
 ]
 
 { #category : #'test attribute' }
-AlceNorthwindRecordsetWrapperTest >> testClassHasOneAttributeMember [
-	self assert: self recordsetWrapper members size equals: 1
-]
-
-{ #category : #'test attribute' }
 AlceNorthwindRecordsetWrapperTest >> testClassHasOneAttributeMemberNameIsMRS [
-	self assert: self recordsetWrapper members first name equals: 'm_rs'
+	self assert: self recordsetWrapper members second name equals: 'm_rs'
 ]
 
 { #category : #'test attribute' }
 AlceNorthwindRecordsetWrapperTest >> testClassHasOneAttributeMemberNameIsMRSWith17Usages [
-	self assert: self mrs access size equals: 17
+	self
+		assert: (self mrs readingAccesses , self mrs writingAccesses) size
+		equals: 17
 ]
 
 { #category : #'test attribute' }
@@ -126,10 +123,15 @@ AlceNorthwindRecordsetWrapperTest >> testClassHasOneAttributeMemberNameIsMRSWith
 
 { #category : #'test attribute' }
 AlceNorthwindRecordsetWrapperTest >> testClassHasOneAttributeMemberNameIsMRSWithOnlyInClassUsages [
+	self
+		assert:
+			(self mrs readingAccesses , self mrs writingAccesses
+				allSatisfy: [ :a | a invocable userType = self recordsetWrapper ])
+]
 
-	self assert:
-		(self mrs  access allSatisfy: [ :a | 
-			 a invocable userType = self recordsetWrapper ])
+{ #category : #'test attribute' }
+AlceNorthwindRecordsetWrapperTest >> testClassHasOneAttributeMemberNameIsMe [
+	self assert: self recordsetWrapper members first name equals: 'Me'
 ]
 
 { #category : #'test attribute' }
@@ -142,9 +144,14 @@ AlceNorthwindRecordsetWrapperTest >> testClassHasOneAttributeMemberNamedMRSHasOn
 	self assert: self mrs attributeAccessors size equals: 1
 ]
 
+{ #category : #'test attribute' }
+AlceNorthwindRecordsetWrapperTest >> testClassHasTwoAttributeMember [
+	self assert: self recordsetWrapper members size equals: 2
+]
+
 { #category : #'test functions recordset clone' }
 AlceNorthwindRecordsetWrapperTest >> testGetRecordsetCloneAccessesMrs2Times [
-	self assert: (self getRecordsetClone accesses select: [ : a | a attribute = self mrs ])size equals: 1
+	self assert: (self getRecordsetClone accesses select: [ : a | a rightElement = self mrs ])size equals: 1
 ]
 
 { #category : #'test functions recordset clone' }
@@ -171,14 +178,33 @@ AlceNorthwindRecordsetWrapperTest >> testGetRecordsetCloneHas2OutgoingInvocation
 
 { #category : #'test functions recordset clone' }
 AlceNorthwindRecordsetWrapperTest >> testGetRecordsetCloneParameterTypeDAORecordset2Type [
-	self assert: self getRecordsetClone parameters first container name equals: #DAO.
+	self assert: self getRecordsetClone parameters first type container name equals: #DAO.
 	self assert: self getRecordsetClone parameters first type name equals: #Recordset2
+]
+
+{ #category : #'test functions recordset clone' }
+AlceNorthwindRecordsetWrapperTest >> testGetRecordsetCloneReadMrs1Times [
+	self
+		assert:
+			(self getRecordsetClone accesses
+				select: [ :a | a rightElement = self mrs ]) size
+		equals: 1
 ]
 
 { #category : #'test functions recordset clone' }
 AlceNorthwindRecordsetWrapperTest >> testGetRecordsetCloneReturnsDAORecordset2Type [
 	self assert: self getRecordsetClone type container name equals: #DAO.
 	self assert: self getRecordsetClone type name equals: #Recordset2
+]
+
+{ #category : #'test functions recordset clone' }
+AlceNorthwindRecordsetWrapperTest >> testGetRecordsetCloneWriteMrs1Times [
+	self
+		assert:
+			(self getRecordsetClone accesses
+				select: [ :a | a isWriting and: [ a leftElement = self mrs ] ])
+				size
+		equals: 1
 ]
 
 { #category : #'test functions recordset clone' }

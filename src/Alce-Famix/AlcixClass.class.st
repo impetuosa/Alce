@@ -18,3 +18,8 @@ AlcixClass >> accept: aVisitor [
 	^ aVisitor visitClass: self
 
 ]
+
+{ #category : #'as yet unclassified' }
+AlcixClass >> isAlcixClass [
+	^ true 
+]

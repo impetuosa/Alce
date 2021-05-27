@@ -28,10 +28,10 @@ AlceVBVisitorToReferenceName >> noteProcessedElement [
 { #category : #'as yet unclassified' }
 AlceVBVisitorToReferenceName >> toInvocableReferenceName: aNode [
 	| refChain |
-	processedElement := false. 
+	processedElement := false.
 	refChain := aNode acceptVisitor: self.
 	^ refChain
-		ifNil: [ self halt  ]
+		ifNil: [ self error: 'Unexpected ' ]
 		ifNotNil: [ AlcixInvocableReference new
 				names: (aNode acceptVisitor: self);
 				isProcessedElement: processedElement;
@@ -44,7 +44,7 @@ AlceVBVisitorToReferenceName >> toTypeReferenceName: aNode [
 	processedElement := false. 
 	refChain := aNode acceptVisitor: self.
 	^ refChain
-		ifNil: [ self halt. "self undefinedTypeReference "  ]
+		ifNil: [ self error: 'Unexpected ' . "self undefinedTypeReference "  ]
 		ifNotNil: [ AlcixTypeReference new
 				names: (aNode acceptVisitor: self);
 				isProcessedElement: processedElement;
@@ -132,7 +132,8 @@ AlceVBVisitorToReferenceName >> visitMemberAccess: aVBMemberAccessNode [
 	receiver := aVBMemberAccessNode receiver
 		ifNil: [ aVBMemberAccessNode enclosingWith with acceptVisitor: self ]
 		ifNotNil: [ aVBMemberAccessNode receiver acceptVisitor: self ].
-	^ {receiver} ,( aVBMemberAccessNode member acceptVisitor: self)
+	^ (receiver ifNil: [ {} ])
+		, (aVBMemberAccessNode member acceptVisitor: self)
 ]
 
 { #category : #'as yet unclassified' }

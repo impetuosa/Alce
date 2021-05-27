@@ -76,7 +76,12 @@ AlceLinker >> lookupType: aMatch in: aNode [
 
 { #category : #'lookup flavors' }
 AlceLinker >> lookupVariable: aMatch in: aNode [
-	^ AlceLookUp lookFor: AlceLookForVariablesIn matching: aMatch from: aNode
+	aMatch isEmptyOrNil
+		ifTrue: [ ^ nil ].
+	^ AlceLookUp
+		lookFor: AlceLookForVariablesIn
+		matching: aMatch
+		from: aNode
 ]
 
 { #category : #changes }

@@ -42,10 +42,10 @@ AlceASTCodeImporter >> instantiateFlatInvocation: selector for: aCall [
 { #category : #invocations }
 AlceASTCodeImporter >> instantiateInvocation: aCall [
 	| selector |
-	selector := self nodeToInvocableReferenceName:  aCall selector.
-	(selector selectorSeemsToBeMethodInvocation) = 0
-		ifTrue: [ self instantiateFlatInvocation: selector for: aCall ]
-		ifFalse: [ self instantiateMethodInvocation: selector for: aCall ]
+	selector := self nodeToInvocableReferenceName: aCall selector.
+	selector selectorSeemsToBeMethodInvocation
+		ifTrue: [ self instantiateMethodInvocation: selector for: aCall ]
+		ifFalse: [ self instantiateFlatInvocation: selector for: aCall ]
 ]
 
 { #category : #invocations }
@@ -442,6 +442,13 @@ AlceASTCodeImporter >> visitRaiseEvent: aRaiseEvent [
 { #category : #'properties - variables' }
 AlceASTCodeImporter >> visitReDimVariable: aReDimVariable [
 	self shouldBeImplemented 
+]
+
+{ #category : #'member access' }
+AlceASTCodeImporter >> visitSimpleIdentifier: aSimpleIdentifier [
+	(self state top isKindOf: AlcixInvocable)
+		ifTrue: [ self state top
+				addAccess: (self instantiateAccess: aSimpleIdentifier) ]
 ]
 
 { #category : #'functions - subs - events' }

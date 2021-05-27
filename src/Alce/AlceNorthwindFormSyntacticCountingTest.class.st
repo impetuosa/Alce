@@ -801,21 +801,25 @@ AlceNorthwindFormSyntacticCountingTest >> testAllLocalVariablesHaveName [
 AlceNorthwindFormSyntacticCountingTest >> testAllLocalVariablesHaveTypeName [
 	self
 		assert: self functionOrSub localVariables
-		allSatisfy: [ :a | a typeName isString and: [ a typeName isNotEmpty ] ]
+		allSatisfy: [ :a | 
+			(a typeName isKindOf: AlcixTypeReference)
+				and: [ a typeName isNotEmpty ] ]
 ]
 
 { #category : #'as yet unclassified' }
 AlceNorthwindFormSyntacticCountingTest >> testAllTheAccessesHaveAttributeName [
 	self
 		assert: self functionOrSub accesses
-		allSatisfy: [ :a | a rightElementName  isValidName and: [ a rightElementName isNotEmpty ] ]
+		allSatisfy: [ :a | 
+			((a rightElementName isKindOf: AlcixReferenceName)
+				and: [ a rightElementName isNotEmpty ]) or: [ a isWriting ] ]
 ]
 
 { #category : #'as yet unclassified' }
 AlceNorthwindFormSyntacticCountingTest >> testAllTheInvocationsHaveSelector [
 	self
 		assert: self functionOrSub outgoingInvocations
-		allSatisfy: [ :a | a selector isString ]
+		allSatisfy: [ :a | a selector isKindOf: AlcixInvocableReference  ]
 ]
 
 { #category : #'as yet unclassified' }
@@ -834,7 +838,7 @@ AlceNorthwindFormSyntacticCountingTest >> testDefinedFunctionHasNoneIncomingInvo
 AlceNorthwindFormSyntacticCountingTest >> testDefinedFunctionHasParameters [
 	self functionOrSub parameters asOrderedCollection
 		with: (fixture at: #parameters)
-		do: [ :p :pt | self assert: p typeName equals: pt ]
+		do: [ :p :pt | self assert: p typeName stringName equals: pt ]
 ]
 
 { #category : #'as yet unclassified' }
@@ -848,14 +852,16 @@ AlceNorthwindFormSyntacticCountingTest >> testDefinedFunctionParametersHaveName 
 AlceNorthwindFormSyntacticCountingTest >> testDefinedFunctionParametersHaveTypeName [
 	self
 		assert: self functionOrSub parameters
-		allSatisfy: [ :p | p typeName isString and: [ p typeName isNotEmpty ] ]
+		allSatisfy: [ :p | 
+			(p typeName isKindOf: AlcixTypeReference)
+				and: [ p typeName isNotEmpty ] ]
 ]
 
 { #category : #'as yet unclassified' }
 AlceNorthwindFormSyntacticCountingTest >> testDefinedFunctionReturnsBoolean [
 	self
 		assertIfFunction: [ self
-				assert: self functionOrSub typeName
+				assert: self functionOrSub typeName stringName
 				equals: (fixture at: #return).
 			true ]
 		ifFalse: [ (fixture at: #return) = #SubsDoNotReturn ]
@@ -893,7 +899,7 @@ AlceNorthwindFormSyntacticCountingTest >> testDefinesHasVariables [
 { #category : #'as yet unclassified' }
 AlceNorthwindFormSyntacticCountingTest >> testFunctionReturnsType [
 	self
-		assertIfFunction: [ self functionOrSub typeName isString ]
+		assertIfFunction: [ self functionOrSub typeName isKindOf: AlcixTypeReference ]
 		ifFalse: [ (fixture at: #return) = #SubsDoNotReturn ]
 ]
 
@@ -902,8 +908,10 @@ AlceNorthwindFormSyntacticCountingTest >> testIfInvocationExpressionContainsAPoi
 	self functionOrSub outgoingInvocations
 		do: [ :inv | 
 			self
-				assert: inv isVBMessageSend
-				equals: inv selector selectorSeemsToBeMethodInvocation ]
+				assert:
+					(inv isVBMessageSend = inv selector selectorSeemsToBeMethodInvocation
+						or: [ inv isVBMessageSend
+								and: [ inv receiver rightElementName names first = #Me ] ]) ]
 ]
 
 { #category : #'as yet unclassified' }
@@ -911,7 +919,7 @@ AlceNorthwindFormSyntacticCountingTest >> testMessageSendMustReturnReceiverIfNot
 	self functionOrSub outgoingInvocations
 		do: [ :inv | 
 			inv isVBMessageSend
-				ifTrue: [ self assert: inv receiver class equals: AlcixAccess  ]
+				ifTrue: [ self assert: inv receiver class equals: AlcixAccessRead ]
 				ifFalse: [ self should: [ inv receiver ] raise: Error ] ]
 ]
 
@@ -921,8 +929,11 @@ AlceNorthwindFormSyntacticCountingTest >> testMethodInvocationMustHaveAPointAndO
 		do: [ :inv | 
 			inv isVBMessageSend
 				ifTrue: [ self assert: inv receiver rightElementName isNotEmpty.
-					self assert: (inv selector selectorSeemsToBeMethodInvocation ) ]
-				ifFalse: [ self deny: (inv selector selectorSeemsToBeMethodInvocation ) ] ]
+					self
+						assert:
+							(inv selector selectorSeemsToBeMethodInvocation
+								or: [ inv receiver rightElementName names first = #Me ]) ]
+				ifFalse: [ self deny: inv selector selectorSeemsToBeMethodInvocation ] ]
 ]
 
 { #category : #'as yet unclassified' }

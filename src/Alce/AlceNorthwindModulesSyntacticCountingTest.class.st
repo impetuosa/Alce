@@ -546,22 +546,25 @@ AlceNorthwindModulesSyntacticCountingTest >> testAllLocalVariablesHaveName [
 AlceNorthwindModulesSyntacticCountingTest >> testAllLocalVariablesHaveTypeName [
 	self
 		assert: self functionOrSub localVariables
-		allSatisfy: [ :a | a typeName isString and: [ a typeName isNotEmpty ] ]
+		allSatisfy: [ :a | 
+			(a typeName isKindOf: AlcixTypeReference)
+				and: [ a typeName isNotEmpty ] ]
 ]
 
 { #category : #'as yet unclassified' }
 AlceNorthwindModulesSyntacticCountingTest >> testAllTheAccessesHaveAttributeName [
 	self
 		assert: self functionOrSub accesses
-		allSatisfy:
-			[ :a | a rightElementName isValidName and: [ a rightElementName isNotEmpty ] ]
+		allSatisfy: [ :a | 
+			((a rightElementName isKindOf: AlcixReferenceName)
+				and: [ a rightElementName isNotEmpty ]) or: [ a isWriting ] ]
 ]
 
 { #category : #'as yet unclassified' }
 AlceNorthwindModulesSyntacticCountingTest >> testAllTheInvocationsHaveSelector [
 	self
 		assert: self functionOrSub outgoingInvocations
-		allSatisfy: [ :a | a selector isString ]
+		allSatisfy: [ :a | a selector isKindOf: AlcixInvocableReference  ]
 ]
 
 { #category : #'as yet unclassified' }
@@ -581,7 +584,7 @@ AlceNorthwindModulesSyntacticCountingTest >> testDefinedFunctionHasParameters [
 	| comparison |
 	comparison := self functionOrSub parameters asOrderedCollection
 		with: (fixture at: #parameters)
-		collect: [ :p :pt | p typeName = pt ].
+		collect: [ :p :pt | p typeName stringName = pt ].
 	self assert: (comparison allSatisfy: #yourself)
 ]
 
@@ -596,13 +599,15 @@ AlceNorthwindModulesSyntacticCountingTest >> testDefinedFunctionParametersHaveNa
 AlceNorthwindModulesSyntacticCountingTest >> testDefinedFunctionParametersHaveTypeName [
 	self
 		assert: self functionOrSub parameters
-		allSatisfy: [ :p | p typeName isString and: [ p typeName isNotEmpty ] ]
+		allSatisfy: [ :p | 
+			(p typeName isKindOf: AlcixTypeReference)
+				and: [ p typeName isNotEmpty ] ]
 ]
 
 { #category : #'as yet unclassified' }
 AlceNorthwindModulesSyntacticCountingTest >> testDefinedFunctionReturnsBoolean [
 	self
-		assert: self functionOrSub typeName
+		assert: self functionOrSub typeName stringName
 		equals: (fixture at: #return)
 ]
 
@@ -637,7 +642,8 @@ AlceNorthwindModulesSyntacticCountingTest >> testDefinesHasVariables [
 
 { #category : #'as yet unclassified' }
 AlceNorthwindModulesSyntacticCountingTest >> testFunctionReturnsType [
-	self assert: self functionOrSub typeName isString
+	self
+		assert: (self functionOrSub typeName isKindOf: AlcixTypeReference)
 ]
 
 { #category : #'as yet unclassified' }
@@ -645,8 +651,10 @@ AlceNorthwindModulesSyntacticCountingTest >> testIfInvocationExpressionContainsA
 	self functionOrSub outgoingInvocations
 		do: [ :inv | 
 			self
-				assert: inv isVBMessageSend
-				equals: inv selector selectorSeemsToBeMethodInvocation ]
+				assert:
+					(inv isVBMessageSend = inv selector selectorSeemsToBeMethodInvocation
+						or: [ inv isVBMessageSend
+								and: [ inv receiver rightElementName names first = #Me ] ]) ]
 ]
 
 { #category : #'as yet unclassified' }
@@ -654,7 +662,7 @@ AlceNorthwindModulesSyntacticCountingTest >> testMessageSendMustReturnReceiverIf
 	self functionOrSub outgoingInvocations
 		do: [ :inv | 
 			inv isVBMessageSend
-				ifTrue: [ self assert: inv receiver class equals: AlcixAccess ]
+				ifTrue: [ self assert: inv receiver class equals: AlcixAccessRead ]
 				ifFalse: [ self should: [ inv receiver ] raise: Error ] ]
 ]
 
@@ -664,8 +672,11 @@ AlceNorthwindModulesSyntacticCountingTest >> testMethodInvocationMustHaveAPointA
 		do: [ :inv | 
 			inv isVBMessageSend
 				ifTrue: [ self assert: inv receiver rightElementName isNotEmpty.
-					self assert: (inv selector selectorSeemsToBeMethodInvocation ) ]
-				ifFalse: [ self deny: (inv selector selectorSeemsToBeMethodInvocation ) ] ]
+					self
+						assert:
+							(inv selector selectorSeemsToBeMethodInvocation
+								or: [ inv receiver rightElementName names first = #Me ]) ]
+				ifFalse: [ self deny: inv selector selectorSeemsToBeMethodInvocation ] ]
 ]
 
 { #category : #'as yet unclassified' }
