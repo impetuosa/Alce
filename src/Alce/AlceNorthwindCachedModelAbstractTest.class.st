@@ -21906,7 +21906,8 @@ AlceNorthwindCachedModelAbstractTest class >> norwindCachedModel [
 
 { #category : #'building suites' }
 AlceNorthwindCachedModelAbstractTest class >> regenerateCacheModel [
-	<example> 
+
+	<example>
 	| importer model stream |
 	importer := AlceImporter new.
 	importer provider
@@ -21914,19 +21915,17 @@ AlceNorthwindCachedModelAbstractTest class >> regenerateCacheModel [
 		importGUIElements;
 		importGUIControlElements;
 		importCodeElements;
-		importSyntacticElements.
+		importSyntacticElements;
+		importLibraryReferences.
+		
 	model := importer import: self norwind.
 	stream := '' writeStream.
 	model exportToMSEStream: stream.
-	self class
-		compile:
-			('
+	self class compile: ('
 cachedModelMSE
- ^ ''{1}'''
-				format:
-					{(stream contents
-						copyReplaceAll: $' asString
-						with: $' asString , $' asString)}).
+ ^ ''{1}''' format: { (stream contents
+				  copyReplaceAll: $' asString
+				  with: $' asString , $' asString) }).
 	norwindCachedModel := model
 ]
 
