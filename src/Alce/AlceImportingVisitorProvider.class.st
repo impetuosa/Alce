@@ -8,7 +8,9 @@ Class {
 		'controlVisitor',
 		'syntaxVisitor',
 		'projectVisitor',
-		'filter'
+		'filter',
+		'referenceAccessVisitor',
+		'referenceLibraryVisitor'
 	],
 	#category : #'Alce-Importer-Jindao'
 }
@@ -22,6 +24,8 @@ AlceImportingVisitorProvider >> build [
 		control: self controlVisitorInstance;
 		syntax: self syntaxVisitorInstance;
 		project: self projectVisitorInstance;
+		referenceAccess: self referenceAccessVisitorInstance;
+		referenceLibrary: self referenceLibraryVisitorInstance;  
 		yourself
 ]
 
@@ -51,6 +55,11 @@ AlceImportingVisitorProvider >> guiVisitorInstance [
 ]
 
 { #category : #configuration }
+AlceImportingVisitorProvider >> importAccessReferences [
+	referenceAccessVisitor := self error: 'Must implement'
+]
+
+{ #category : #configuration }
 AlceImportingVisitorProvider >> importCodeElements [
 	codeVisitor := AlceCodeImporter
 ]
@@ -63,6 +72,11 @@ AlceImportingVisitorProvider >> importGUIControlElements [
 { #category : #configuration }
 AlceImportingVisitorProvider >> importGUIElements [
 	guiVisitor := AlceGUIImporter
+]
+
+{ #category : #configuration }
+AlceImportingVisitorProvider >> importLibraryReferences [
+	referenceLibraryVisitor := AlceLibraryReferenceImporter 
 ]
 
 { #category : #configuration }
@@ -83,6 +97,16 @@ AlceImportingVisitorProvider >> instantiate: aClassOrNil [
 { #category : #'instantiate parts' }
 AlceImportingVisitorProvider >> projectVisitorInstance [
 	^ self instantiate: projectVisitor
+]
+
+{ #category : #'instantiate parts' }
+AlceImportingVisitorProvider >> referenceAccessVisitorInstance [ 
+	^ self instantiate: referenceAccessVisitor
+]
+
+{ #category : #'instantiate parts' }
+AlceImportingVisitorProvider >> referenceLibraryVisitorInstance [ 
+	^ self instantiate: referenceLibraryVisitor
 ]
 
 { #category : #'instantiate parts' }

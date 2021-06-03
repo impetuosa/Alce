@@ -22,13 +22,24 @@ AlceProjectImporter >> visitProject: aJinAccessProject [
 
 { #category : #'visit-first-objects' }
 AlceProjectImporter >> visitReference: aJinReference [
+
 	| ref |
-	aJinReference path extension asLowercase = 'accdb'
+	aJinReference isAccessProject
 		ifTrue: [ ref := self instantiate: AlcixAccessModule ]
-		ifFalse: [ ref := self instantiate: AlcixLibrary.
+		ifFalse: [ 
+			ref := self instantiate: AlcixLibrary.
 			ref isBuiltIn: aJinReference isBuiltIn ].
 	ref anchor: self state top anchor / #references / aJinReference name.
 	ref path: aJinReference path fullName.
 	ref name: aJinReference name.
-	self state top addReference: ref
+	self state top addReference: ref.
+	self state push: ref.
+	aJinReference isAccessProject
+		ifTrue: [ 
+			self referenceAccess ifNotNil: [ :r | 
+				r visitReference: aJinReference ] ]
+		ifFalse: [ 
+			self referenceLibrary ifNotNil: [ :r | 
+				r visitReference: aJinReference ] ].
+	self state pop
 ]
