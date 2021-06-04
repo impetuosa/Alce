@@ -7,7 +7,7 @@ Class {
 	#classInstVars : [
 		'noneAttribute'
 	],
-	#category : #'Alce-Importer-Jindao'
+	#category : #'Alce-Importer-Helper'
 }
 
 { #category : #'as yet unclassified' }
@@ -166,7 +166,7 @@ AlceVBVisitorToReferenceName >> visitSimpleIdentifier: aVBSimpleIdentifierNode [
 	^ {aVBSimpleIdentifierNode token value}
 ]
 
-{ #category : #'*Alce' }
+{ #category : #'as yet unclassified' }
 AlceVBVisitorToReferenceName >> visitSmaccToken: aSmaCCCaseInsensitiveToken [
 	^ {aSmaCCCaseInsensitiveToken value asSymbol}
 ]

@@ -1,7 +1,7 @@
 Class {
 	#name : #AlceGUIControlImporter,
 	#superclass : #JinGUIControlVisitor,
-	#category : #'Alce-Importer-Jindao'
+	#category : #'Alce-Importer'
 }
 
 { #category : #'entry-point' }

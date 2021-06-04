@@ -12,7 +12,7 @@ Class {
 		'referenceAccessVisitor',
 		'referenceLibraryVisitor'
 	],
-	#category : #'Alce-Importer-Jindao'
+	#category : #'Alce-Importer-Construction'
 }
 
 { #category : #building }

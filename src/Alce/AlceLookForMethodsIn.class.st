@@ -1,7 +1,7 @@
 Class {
 	#name : #AlceLookForMethodsIn,
 	#superclass : #AlceLookIn,
-	#category : #'Alce-Importer-Linker'
+	#category : #'Alce-Linker'
 }
 
 { #category : #visiting }

@@ -6,7 +6,7 @@ Class {
 		'filter',
 		'sdkLibrary'
 	],
-	#category : #'Alce-Importer-Jindao'
+	#category : #'Alce-Importer'
 }
 
 { #category : #'instance creation' }

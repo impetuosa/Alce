@@ -8,7 +8,7 @@ Class {
 		'model',
 		'created'
 	],
-	#category : #'Alce-Importer-Jindao'
+	#category : #'Alce-Importer-Construction'
 }
 
 { #category : #'as yet unclassified' }

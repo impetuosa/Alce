@@ -1,7 +1,7 @@
 Class {
 	#name : #AlceGUIImporter,
 	#superclass : #JinGUIFirstCitizenVisitor,
-	#category : #'Alce-Importer-Jindao'
+	#category : #'Alce-Importer'
 }
 
 { #category : #'entry-point' }

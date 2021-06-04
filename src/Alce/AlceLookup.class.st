@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'lookInClass'
 	],
-	#category : #'Alce-Importer-Linker'
+	#category : #'Alce-Linker'
 }
 
 { #category : #'as yet unclassified' }

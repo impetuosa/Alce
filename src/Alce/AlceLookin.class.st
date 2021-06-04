@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'context'
 	],
-	#category : #'Alce-Importer-Linker'
+	#category : #'Alce-Linker'
 }
 
 { #category : #'as yet unclassified' }

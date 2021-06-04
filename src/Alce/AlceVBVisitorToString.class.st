@@ -1,7 +1,7 @@
 Class {
 	#name : #AlceVBVisitorToString,
 	#superclass : #Object,
-	#category : #'Alce-Importer-Jindao'
+	#category : #'Alce-Importer-Helper'
 }
 
 { #category : #'instance creation' }

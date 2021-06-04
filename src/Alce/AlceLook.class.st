@@ -5,7 +5,7 @@ Class {
 		'match',
 		'findings'
 	],
-	#category : #'Alce-Importer-Linker'
+	#category : #'Alce-Linker'
 }
 
 { #category : #visiting }

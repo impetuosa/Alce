@@ -9,7 +9,7 @@ Class {
 		'maxTries',
 		'tries'
 	],
-	#category : #'Alce-Importer-Linker'
+	#category : #'Alce-Linker'
 }
 
 { #category : #'as yet unclassified' }

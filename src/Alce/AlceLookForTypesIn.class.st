@@ -1,7 +1,7 @@
 Class {
 	#name : #AlceLookForTypesIn,
 	#superclass : #AlceLookIn,
-	#category : #'Alce-Importer-Linker'
+	#category : #'Alce-Linker'
 }
 
 { #category : #'as yet unclassified' }

@@ -1,7 +1,7 @@
 Class {
 	#name : #AlceStats,
 	#superclass : #AlceVisitor,
-	#category : #'Alce-Importer-Linker'
+	#category : #'Alce-Linker'
 }
 
 { #category : #'as yet unclassified' }

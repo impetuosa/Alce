@@ -1,7 +1,7 @@
 Class {
 	#name : #AlceProjectImporter,
 	#superclass : #JinProjectVisitor,
-	#category : #'Alce-Importer-Jindao'
+	#category : #'Alce-Importer'
 }
 
 { #category : #'visit-first-objects' }

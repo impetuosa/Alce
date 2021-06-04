@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'provider'
 	],
-	#category : #'Alce-Importer-Jindao'
+	#category : #'Alce-Importer'
 }
 
 { #category : #accessing }

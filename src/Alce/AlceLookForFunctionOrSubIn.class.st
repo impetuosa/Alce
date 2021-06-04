@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'onlyGlobals'
 	],
-	#category : #'Alce-Importer-Linker'
+	#category : #'Alce-Linker'
 }
 
 { #category : #visiting }

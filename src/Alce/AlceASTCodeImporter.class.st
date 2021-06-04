@@ -5,7 +5,7 @@ Class {
 		'stringConverter',
 		'referenceNameConverter'
 	],
-	#category : #'Alce-Importer-Jindao'
+	#category : #'Alce-Importer'
 }
 
 { #category : #helper }
@@ -412,6 +412,7 @@ AlceASTCodeImporter >> visitParameter: aParameter [
 	param := self instantiate: AlcixParameter.
 	param name: (self nodeToString: aParameter name).
 	param typeName: (self typeName: aParameter type).
+	param isOptional: aParameter isOptional.
 	self state top addParameter: param
 ]
 

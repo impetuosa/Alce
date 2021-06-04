@@ -1,5 +1,5 @@
 Class {
 	#name : #AlceAccessReferenceImporter,
 	#superclass : #JinLibraryReferenceVisitor,
-	#category : #'Alce-Importer-Jindao'
+	#category : #'Alce-Importer'
 }
