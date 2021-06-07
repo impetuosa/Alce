@@ -42,8 +42,9 @@ AlceLibraryReferenceImporter >> instantiateSetterAccessorMethod: aJinLibraryMeth
 { #category : #visiting }
 AlceLibraryReferenceImporter >> visitLibrary: aJinLibrary [
 
-	self visitCollection: aJinLibrary functions.
 	self visitCollection: aJinLibrary types .
+	self visitCollection: aJinLibrary functions.
+	
 ]
 
 { #category : #visiting }
