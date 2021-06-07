@@ -1,6 +1,6 @@
 Class {
 	#name : #AlcixAttributeAccessor,
-	#superclass : #AlcixInvocable,
+	#superclass : #AlcixFunction,
 	#instVars : [
 		'#kind => FMProperty',
 		'#attribute => FMOne type: #AlcixAttribute opposite: #attributeAccessors'

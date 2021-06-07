@@ -126,6 +126,12 @@ AlceVBVisitorToReferenceName >> visitIntegerLiteral: aVBIntegerLiteralNode [
 	^ nil
 ]
 
+{ #category : #visiting }
+AlceVBVisitorToReferenceName >> visitLibraryMethod: aJinLibraryMethod [
+
+	^ aJinLibraryMethod returnTypeName
+]
+
 { #category : #'as yet unclassified' }
 AlceVBVisitorToReferenceName >> visitMemberAccess: aVBMemberAccessNode [
 	| receiver |

@@ -1,10 +1,8 @@
 Class {
 	#name : #AlceASTCodeImporter,
 	#superclass : #JinASTCodeVisitor,
-	#instVars : [
-		'stringConverter',
-		'referenceNameConverter'
-	],
+	#traits : 'AlceTypeConversions',
+	#classTraits : 'AlceTypeConversions classTrait',
 	#category : #'Alce-Importer'
 }
 
@@ -78,34 +76,6 @@ AlceASTCodeImporter >> instantiateVariable: aClass from: aVariable [
 	^ var
 ]
 
-{ #category : #'as yet unclassified' }
-AlceASTCodeImporter >> nodeToInvocableReferenceName: aVBNode [
-	^ self referenceNameConverter toInvocableReferenceName: aVBNode
-]
-
-{ #category : #helper }
-AlceASTCodeImporter >> nodeToString: aNode [
-	| str |
-	str := self stringConverter toString: aNode.
-	^ str
-]
-
-{ #category : #'as yet unclassified' }
-AlceASTCodeImporter >> nodeToTypeReferenceName: aVBNode [
-	^ self referenceNameConverter toTypeReferenceName: aVBNode
-]
-
-{ #category : #'as yet unclassified' }
-AlceASTCodeImporter >> nodeToVariableReferenceName: aVBNode [
-	^ self referenceNameConverter toVariableReferenceName: aVBNode
-]
-
-{ #category : #'as yet unclassified' }
-AlceASTCodeImporter >> referenceNameConverter [
-	^ referenceNameConverter
-		ifNil: [ referenceNameConverter := AlceVBVisitorToReferenceName new ]
-]
-
 { #category : #'properties - variables' }
 AlceASTCodeImporter >> registerSpecialVariable: aName type: aType [
 	| var |
@@ -115,27 +85,6 @@ AlceASTCodeImporter >> registerSpecialVariable: aName type: aType [
 	var type: aType.
 	var anchor: self state top anchor / #variables / var name.
 	^ var
-]
-
-{ #category : #helper }
-AlceASTCodeImporter >> stringConverter [
-	^ stringConverter
-		ifNil: [ stringConverter := AlceVBVisitorToString new ]
-]
-
-{ #category : #'functions - subs - events' }
-AlceASTCodeImporter >> typeName: aTypeOrNil [
-	^ aTypeOrNil
-		ifNil: [self referenceNameConverter undefinedTypeReference ]
-		ifNotNil: [ self nodeToTypeReferenceName: aTypeOrNil ]
-]
-
-{ #category : #'as yet unclassified' }
-AlceASTCodeImporter >> typeNameReference: aString [
-	self assert: (aString indexOf: $.) = 0.
-	^ (self instantiate: AlcixTypeReference)
-		names: {aString};
-		yourself
 ]
 
 { #category : #generated }

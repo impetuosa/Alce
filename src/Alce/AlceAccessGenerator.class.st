@@ -175,7 +175,7 @@ AlceAccessGenerator >> defineHierarchy [
 	parameter --|> typedEntity.
 	primitiveType --|> type.
 	primitiveType --|> accessEntity.
-	attributeAccessor --|> invocable.
+	attributeAccessor --|> function.
 	raiseEvent --|> invocation.
 	reference --|> containerType.
 	report --|> guiClass.
