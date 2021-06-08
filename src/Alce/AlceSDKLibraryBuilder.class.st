@@ -62,9 +62,10 @@ AlceSDKLibraryBuilder >> build [
 	| library |
 
 	library := self instantiate: AlcixLibrary.
-	self types do: [ :t | library addType: t ].
-	self functionsOrSubs do: [ :f | library addInvocable: f ].
-	self globals do: [ :g | g addGlobal: g ].
+	library name:#'VBALang'.
+	self primitiveTypes do: [ :t | library addType: t ].
+"	self functionsOrSubs do: [ :f | library addInvocable: f ].
+	self globals do: [ :g | g addGlobal: g ]."
 	^ library 
 ]
 

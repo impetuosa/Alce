@@ -44,12 +44,20 @@ AlceLibraryReferenceImporter >> visitLibrary: aJinLibrary [
 
 	self visitCollection: aJinLibrary types .
 	self visitCollection: aJinLibrary functions.
+
 	
 ]
 
 { #category : #visiting }
-AlceLibraryReferenceImporter >> visitLibraryAlias: aJinLibraryAlias [ 
-	self shouldBeImplemented.
+AlceLibraryReferenceImporter >> visitLibraryAlias: aJinLibraryAlias [
+
+	| obj |
+	obj := self instantiate: AlcixAlias.
+	self state top addType: obj.
+	obj name: aJinLibraryAlias name.
+	obj anchor: self state top anchor / #alias / aJinLibraryAlias name.
+	obj typeName:
+		(self typeNameReference: aJinLibraryAlias aliaseeTypeName).
 ]
 
 { #category : #visiting }

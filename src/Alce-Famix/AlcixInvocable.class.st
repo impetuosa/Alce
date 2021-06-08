@@ -132,11 +132,6 @@ AlcixInvocable >> localVariablesGroup [
 	^ MooseSpecializedGroup withAll: self localVariables asSet
 ]
 
-{ #category : #adding }
-AlcixInvocable >> mooseName [
-	^ selector 
-]
-
 { #category : #accessing }
 AlcixInvocable >> outgoingInvocations [
 	"Relation named: #outgoingInvocations type: #AlcixInvocation opposite: #sender"
@@ -181,6 +176,17 @@ AlcixInvocable >> parametersGroup [
 	<generated>
 	<navigation: 'Parameters'>
 	^ MooseSpecializedGroup withAll: self parameters asSet
+]
+
+{ #category : #accessing }
+AlcixInvocable >> printOn: aStream [
+
+	aStream
+		nextPutAll: (self class name copyFrom: 6 to: self class name size);
+		space;
+		nextPutAll: selector;
+		nextPutAll:
+			(parameters ifNil: [ '0' ] ifNotNil: [ parameters size asString ])
 ]
 
 { #category : #accessing }
