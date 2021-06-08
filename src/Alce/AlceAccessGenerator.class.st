@@ -153,6 +153,7 @@ AlceAccessGenerator >> defineHierarchy [
 
 	alias --|> typed.
 	alias --|> type.
+	alias  --|> accessEntity.
 	
 	attribute --|> variable.
 	argument --|> codeSegment.
@@ -210,9 +211,9 @@ AlceAccessGenerator >> defineHierarchy [
 AlceAccessGenerator >> defineProperties [
 
 	access property: #isWriting type: #Boolean.
-	
-	referenceName property: #names type: #Object. 
-	referenceName property: #isProcessedElement type:#Boolean.
+
+	referenceName property: #names type: #Object.
+	referenceName property: #isProcessedElement type: #Boolean.
 
 	accessEntity property: #anchor type: #Object.
 	argument property: #value type: #Object.
@@ -230,19 +231,17 @@ AlceAccessGenerator >> defineProperties [
 
 	reference property: #name type: #String.
 	reference property: #path type: #String.
-	
+
 	type property: #name type: #String.
-	
+
 	library property: #isBuiltIn type: #Boolean.
 	invocable property: #selector type: #String.
 
 	methodInvocation property: #receiver type: #Object.
-	
+
 	parameter property: #isOptional type: #Boolean.
-		
-	variable property:#instantiatesObjectOnDefinition type: #Boolean.
 
-
+	variable property: #instantiatesObjectOnDefinition type: #Boolean
 ]
 
 { #category : #definition }

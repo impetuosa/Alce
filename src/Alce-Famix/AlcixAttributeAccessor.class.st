@@ -11,7 +11,7 @@ Class {
 { #category : #meta }
 AlcixAttributeAccessor class >> annotation [
 
-	<FMClass: #AttributeAccessor super: #AlcixInvocable>
+	<FMClass: #AttributeAccessor super: #AlcixFunction>
 	<package: #'Alce-Famix'>
 	<generated>
 	^self

@@ -219,7 +219,7 @@ AlceLibraryReferenceImporter >> visitLibraryProperty: aJinLibraryProperty [
 AlceLibraryReferenceImporter >> visitLibraryStructure: aJinLibraryStructure [
 
 	| obj |
-	obj := self instantiate: AlcixUserType.
+	obj := self instantiate: AlcixStructure.
 	self state top addType: obj.
 	obj name: aJinLibraryStructure name.
 	obj anchor:
