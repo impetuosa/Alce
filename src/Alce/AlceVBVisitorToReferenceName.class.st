@@ -129,7 +129,7 @@ AlceVBVisitorToReferenceName >> visitIntegerLiteral: aVBIntegerLiteralNode [
 { #category : #visiting }
 AlceVBVisitorToReferenceName >> visitLibraryMethod: aJinLibraryMethod [
 
-	^ aJinLibraryMethod returnTypeName
+	^ { aJinLibraryMethod returnTypeName }
 ]
 
 { #category : #'as yet unclassified' }

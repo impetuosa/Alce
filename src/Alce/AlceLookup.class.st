@@ -75,6 +75,11 @@ AlceLookUp >> visitFunction: aFunction [
 ]
 
 { #category : #visiting }
+AlceLookUp >> visitLibrary: anAlcixLibrary [ 
+	self lookIn: anAlcixLibrary or: [ " nothing to do " ]
+]
+
+{ #category : #visiting }
 AlceLookUp >> visitMethodInvocation: anAlcixMethodInvocation [
 	anAlcixMethodInvocation invocable accept: self
 ]
