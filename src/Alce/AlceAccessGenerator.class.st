@@ -50,7 +50,9 @@ Class {
 		'referenceName',
 		'referenceTypeName',
 		'referenceVariableName',
-		'referenceInvocableName'
+		'referenceInvocableName',
+		'alias',
+		'structure'
 	],
 	#category : #'Alce-Generator'
 }
@@ -88,9 +90,11 @@ AlceAccessGenerator >> defineClasses [
 	accessible := builder newClassNamed: #Accessible.
 	accessEntity := builder newClassNamed: #AccessEntity.
 	accessModule := builder newClassNamed: #AccessModule.
+	alias := builder newClassNamed: 'Alias'. 
 	attribute := builder newClassNamed: #Attribute.
 	attributeAccessor := builder newClassNamed: #AttributeAccessor.
 	argument := builder newClassNamed: #Argument.
+	
 	invocable := builder newClassNamed: #Invocable.
 	class := builder newClassNamed: #Class.
 	codeSegment := builder newClassNamed: #CodeSegment.
@@ -102,8 +106,7 @@ AlceAccessGenerator >> defineClasses [
 	referenceName := builder newClassNamed: #ReferenceName.
 	referenceTypeName := builder newClassNamed: #TypeReference.
 	referenceVariableName := builder newClassNamed: #VariableReference.
-	referenceInvocableName := builder
-		newClassNamed: #InvocableReference.
+	referenceInvocableName := builder newClassNamed: #InvocableReference.
 		
 	enum := builder newClassNamed: #Enum.
 	enumValue := builder newClassNamed: #EnumValue.
@@ -126,16 +129,20 @@ AlceAccessGenerator >> defineClasses [
 	reference := builder newClassNamed: #Reference.
 	report := builder newClassNamed: #Report.
 	subProcedure := builder newClassNamed: #SubProcedure.
+	structure := builder newClassNamed: #Structure.
 	externalSubProcedure := builder newClassNamed: #ExternalSubProcedure.
 	table := builder newClassNamed: #Table.
 	typedEntity := builder newClassNamed: #TypedEntity.
 	query := builder newClassNamed: #Query.
 	userType := builder newClassNamed: #UserType.
 	variable := builder newClassNamed: #Variable
+	
+
 ]
 
 { #category : #definition }
 AlceAccessGenerator >> defineHierarchy [
+
 	super defineHierarchy.
 	access --|> accessible.
 	accessRead --|> access.
@@ -143,6 +150,10 @@ AlceAccessGenerator >> defineHierarchy [
 
 	accessible --|> accessEntity.
 	accessModule --|> reference.
+
+	alias --|> typed.
+	alias --|> type.
+	
 	attribute --|> variable.
 	argument --|> codeSegment.
 	invocable --|> accessEntity.
@@ -179,12 +190,13 @@ AlceAccessGenerator >> defineHierarchy [
 	raiseEvent --|> invocation.
 	reference --|> containerType.
 	report --|> guiClass.
-	
+
 	referenceName --|> accessEntity.
 	referenceTypeName --|> referenceName.
 	referenceVariableName --|> referenceName.
 	referenceInvocableName --|> referenceName.
-	
+	structure --|> userType.
+
 	subProcedure --|> invocable.
 	typedEntity --|> accessible.
 	typedEntity --|> typed.
@@ -243,7 +255,7 @@ AlceAccessGenerator >> defineRelations [
 	invocable <>-* parameter.
 	invocable <>-* access.
 	invocable <>-* localVariable.
-	(userType property: #members) <>-* attribute.
+	
 	containerType <>-* type.
 	databaseTypedEntity - databaseType.
 	datasource <>-* field.
@@ -253,7 +265,9 @@ AlceAccessGenerator >> defineRelations [
 	(invocable property: #incomingInvocations)
 		<>-* (invocation property: #candidate).
 	invocation <>-* argument.
+	(userType property: #members) <>-* attribute.
 	userType <>-* invocable.
+	
 	module <>-* globalVariable.
 	attribute <>-* attributeAccessor.
 	query <>-* table.
@@ -263,6 +277,7 @@ AlceAccessGenerator >> defineRelations [
 	(invocation property: #selector) - referenceInvocableName.
 	(typed property: #typeName) - referenceTypeName.
 	
+		
 	
 	typed *- type
 ]

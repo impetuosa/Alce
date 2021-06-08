@@ -48,6 +48,23 @@ AlceLibraryReferenceImporter >> visitLibrary: aJinLibrary [
 ]
 
 { #category : #visiting }
+AlceLibraryReferenceImporter >> visitLibraryAlias: aJinLibraryAlias [ 
+	self shouldBeImplemented.
+]
+
+{ #category : #visiting }
+AlceLibraryReferenceImporter >> visitLibraryAttribute: aJinLibraryAttribute [
+
+	| attr |
+	attr := self instantiate: AlcixAttribute.
+	attr name: aJinLibraryAttribute name.
+	attr typeName: (self typeNameReference: aJinLibraryAttribute typeName).
+	attr isConstant: false. 
+	attr visibility: #Public. 
+	self state top addMember: attr
+]
+
+{ #category : #visiting }
 AlceLibraryReferenceImporter >> visitLibraryCoClass: aJinLibraryCoClass [
 
 	| attr typeName |
@@ -196,6 +213,22 @@ AlceLibraryReferenceImporter >> visitLibraryProperty: aJinLibraryProperty [
 		self
 			instantiateSetterAccessorMethod: aJinLibraryProperty setter
 			into: attribute ]
+]
+
+{ #category : #visiting }
+AlceLibraryReferenceImporter >> visitLibraryStructure: aJinLibraryStructure [
+
+	| obj |
+	obj := self instantiate: AlcixUserType.
+	self state top addType: obj.
+	obj name: aJinLibraryStructure name.
+	obj anchor:
+		self state top anchor / #structures / aJinLibraryStructure name.
+
+	self state push: obj.
+	self visitCollection: aJinLibraryStructure definitions.
+
+	self state pop
 ]
 
 { #category : #'visit-first-objects' }
