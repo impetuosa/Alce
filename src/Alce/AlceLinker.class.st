@@ -49,7 +49,9 @@ AlceLinker >> link: aModel [
 	" 
 		The linking process is iterative. 
 		Some elements cannot be linked before types, or function return type, etc. 
+
 	"
+	
 	[ 
 	self beginIteration.
 	aModel accept: self ] doWhileFalse: [ self isFinished ].
@@ -76,12 +78,14 @@ AlceLinker >> lookupType: aMatch in: aNode [
 
 { #category : #'lookup flavors' }
 AlceLinker >> lookupVariable: aMatch in: aNode [
+	| found |
 	aMatch isEmptyOrNil
 		ifTrue: [ ^ nil ].
 	^ AlceLookUp
 		lookFor: AlceLookForVariablesIn
 		matching: aMatch
-		from: aNode
+		from: aNode.
+	
 ]
 
 { #category : #changes }
@@ -96,7 +100,7 @@ AlceLinker >> visitAccess: anAlcixAccess [
 				lookupVariable: anAlcixAccess rightElementName
 				in: anAlcixAccess invocable)
 				ifNotNil: [ :a | 
-					anAlcixAccess rightElement: a.
+					anAlcixAccess setRightElement: a.
 					self noteChange ] ]
 ]
 
@@ -108,18 +112,25 @@ AlceLinker >> visitAccessRead: anAlcixAccessRead [
 { #category : #'as yet unclassified' }
 AlceLinker >> visitAccessWrite: anAlcixAccessWrite [
 	self visitAccess: anAlcixAccessWrite.
+
 	anAlcixAccessWrite leftElement
 		ifNil: [ (self
 				lookupVariable: anAlcixAccessWrite leftElementName
 				in: anAlcixAccessWrite invocable)
 				ifNotNil: [ :a | 
-					anAlcixAccessWrite leftElement: a.
+					anAlcixAccessWrite setLeftElement: a.
 					self noteChange ] ]
 ]
 
 { #category : #visiting }
 AlceLinker >> visitAttribute: anAttribute [ 
 	self visitTypedEntity: anAttribute 
+]
+
+{ #category : #visiting }
+AlceLinker >> visitAttributeAccessor: anAlcixAttributeAccessor [
+
+	^ self visitFunction: anAlcixAttributeAccessor
 ]
 
 { #category : #visiting }
@@ -183,11 +194,13 @@ AlceLinker >> visitMethodInvocation: anAlcixMethodInvocation [
 	anAlcixMethodInvocation candidate ifNil: [ 
 		anAlcixMethodInvocation receiver rightElement ifNotNil: [ :attr | 
 			attr type ifNotNil: [ :type | 
-				self noteChange.
-				anAlcixMethodInvocation setCandidate:
-					(self
-						 lookupMethod: anAlcixMethodInvocation selector 
-						 in: type) ] ] ]
+				| candidate |
+				candidate := self
+					             lookupMethod: anAlcixMethodInvocation selector
+					             in: type.
+				candidate ifNotNil: [ 
+					self noteChange.
+					anAlcixMethodInvocation setCandidate: candidate ] ] ] ]
 ]
 
 { #category : #visiting }

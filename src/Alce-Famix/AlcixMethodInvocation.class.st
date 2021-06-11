@@ -23,6 +23,13 @@ AlcixMethodInvocation >> accept: aVisitor [
 ]
 
 { #category : #accessing }
+AlcixMethodInvocation >> printOn: aStream [ 
+	receiver printOn: aStream.
+	aStream nextPutAll: '.'.
+	selector printOn: aStream
+]
+
+{ #category : #accessing }
 AlcixMethodInvocation >> receiver [
 
 	<FMProperty: #receiver type: #Object>

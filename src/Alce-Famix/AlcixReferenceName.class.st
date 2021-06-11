@@ -28,6 +28,12 @@ AlcixReferenceName >> adaptToAlceAnchorPathFragment [
 	^ '.' join: names
 ]
 
+{ #category : #enumerating }
+AlcixReferenceName >> do: aFullBlockClosure [
+
+	^ self splitInRefs do: [ :a | aFullBlockClosure value: a ]
+]
+
 { #category : #'as yet unclassified' }
 AlcixReferenceName >> isEmptyOrNil [
 	^ names isEmptyOrNil  
@@ -57,6 +63,11 @@ AlcixReferenceName >> isValidName [
 	^ true
 ]
 
+{ #category : #removing }
+AlcixReferenceName >> keepOnlyLastName [
+	names := {names last}
+]
+
 { #category : #accessing }
 AlcixReferenceName >> names [
 
@@ -72,7 +83,27 @@ AlcixReferenceName >> names: anObject [
 ]
 
 { #category : #'as yet unclassified' }
+AlcixReferenceName >> printOn:aStream [
+	aStream nextPutAll: self adaptToAlceAnchorPathFragment
+]
+
+{ #category : #'as yet unclassified' }
 AlcixReferenceName >> referersTo: aString [
 "	self assert: names size = 1."
 	^ (names last compare: aString caseSensitive: false) = 2
+]
+
+{ #category : #removing }
+AlcixReferenceName >> removeLastName [
+	names := names allButLast
+]
+
+{ #category : #convenience }
+AlcixReferenceName >> splitInRefs [
+
+	names size = 1 ifTrue: [ ^ { self } ].
+	^ names collect: [ :a | 
+		  self class new
+			  names: { a };
+			  yourself ]
 ]

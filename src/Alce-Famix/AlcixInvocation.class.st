@@ -116,3 +116,11 @@ AlcixInvocation >> senderGroup [
 	<navigation: 'Sender'>
 	^ MooseSpecializedGroup with: self sender
 ]
+
+{ #category : #convenience }
+AlcixInvocation >> variableNameReference: aString [
+
+	^ (self mooseModel instantiate: AlcixVariableReference)
+		  names: { aString };
+		  yourself
+]

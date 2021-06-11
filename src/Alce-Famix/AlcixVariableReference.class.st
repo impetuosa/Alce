@@ -54,3 +54,15 @@ AlcixVariableReference >> accessWrite: anObject [
 	<generated>
 	accessWrite := anObject
 ]
+
+{ #category : #accessing }
+AlcixVariableReference >> dropSelectorOutOfReceiver [
+
+	| piece |
+	self assert: names size > 1.
+	piece := (self mooseModel instantiate: AlcixInvocableReference)
+		         names: { names last };
+		         yourself.
+	names := names allButLast.
+	^ piece
+]

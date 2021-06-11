@@ -29,6 +29,10 @@ AlceLookIn >> visitAccessModule: anAccessModule [
 
 ]
 
+{ #category : #visiting }
+AlceLookIn >> visitAttributeAccessor: anAlcixAttributeAccessor [ 
+]
+
 { #category : #'as yet unclassified' }
 AlceLookIn >> visitClass: anAlcixClass [
 	^ self visitModule: anAlcixClass

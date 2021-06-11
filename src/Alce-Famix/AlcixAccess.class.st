@@ -25,6 +25,21 @@ AlcixAccess >> accept: aVisitor [
 
 ]
 
+{ #category : #becoming }
+AlcixAccess >> expandMethodInvocation [
+
+	| n selector sender  |
+	selector := rightElementName dropSelectorOutOfReceiver.
+	sender := invocable.
+
+	n := self mooseModel instantiate: AlcixMethodInvocation.
+	n selector: selector.
+	n sender: sender.
+	n receiver: self.
+	self mooseModel add: n.
+	^ n
+]
+
 { #category : #accessing }
 AlcixAccess >> invocable [
 	"Relation named: #invocable type: #AlcixInvocable opposite: #accesses"
@@ -63,6 +78,14 @@ AlcixAccess >> isWriting: anObject [
 ]
 
 { #category : #accessing }
+AlcixAccess >> printOn: aStream [
+
+	rightElementName printOn: aStream.
+	aStream nextPutAll:
+		(rightElement ifNotNil: [ '(solved)' ] ifNil: [ '(notsolved)' ])
+]
+
+{ #category : #accessing }
 AlcixAccess >> rightElement [
 	"Relation named: #rightElement type: #AlcixAccessible opposite: #readingAccesses"
 
@@ -90,4 +113,20 @@ AlcixAccess >> rightElementName: anObject [
 
 	<generated>
 	rightElementName := anObject
+]
+
+{ #category : #becoming }
+AlcixAccess >> setRightElement: anAccessible [
+
+	(anAccessible isKindOf: AlcixAccessible) ifTrue: [ 
+		^ rightElement := anAccessible ].
+	" So far we only understand this case as the transformation of this access to a method invocation. So the element should be a function / sub and the rightElementName must have at least 2 parts object.message. If not, we may have to do different. "
+	self assert: (anAccessible isKindOf: AlcixInvocable).
+	self assert: rightElementName names size > 1.
+	
+	self expandMethodInvocation setCandidate: anAccessible.
+	
+	
+	
+
 ]

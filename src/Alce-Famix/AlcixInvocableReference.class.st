@@ -22,6 +22,18 @@ AlcixInvocableReference >> accept: aVisitor [
 
 ]
 
+{ #category : #'as yet unclassified' }
+AlcixInvocableReference >> dropReceiverOutOfSelector [
+
+	| piece |
+	self assert: names size > 1.
+	piece := (self mooseModel instantiate: AlcixVariableReference)
+		         names: names allButLast;
+		         yourself.
+	names := { names last }.
+	^ piece
+]
+
 { #category : #accessing }
 AlcixInvocableReference >> invocation [
 	"Relation named: #invocation type: #AlcixInvocation opposite: #selector"

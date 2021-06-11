@@ -23,6 +23,27 @@ AlcixAccessWrite >> accept: aVisitor [
 
 ]
 
+{ #category : #setting }
+AlcixAccessWrite >> expandLeftMethodInvocation [
+
+	| n selector sender  |
+	selector := leftElementName dropSelectorOutOfReceiver.
+	
+	"(self mooseModel instantiate: AlcixInvocableReference)
+		            names: { leftElementName names last };
+		            yourself."
+	sender := invocable.
+
+
+
+	n := self mooseModel instantiate: AlcixMethodInvocation.
+	n selector: selector.
+	n sender: sender.
+	n receiver: self.
+	self mooseModel add: n.
+	^ n
+]
+
 { #category : #accessing }
 AlcixAccessWrite >> leftElement [
 	"Relation named: #leftElement type: #AlcixAccessible opposite: #writingAccesses"
@@ -51,4 +72,25 @@ AlcixAccessWrite >> leftElementName: anObject [
 
 	<generated>
 	leftElementName := anObject
+]
+
+{ #category : #accessing }
+AlcixAccessWrite >> printOn: aStream [
+
+	super printOn: aStream.
+	leftElementName printOn: aStream.
+	aStream nextPutAll:
+		(leftElement ifNil: [ '(solved)' ] ifNotNil: [ '(notsolved)' ])
+]
+
+{ #category : #setting }
+AlcixAccessWrite >> setLeftElement: anAccessible [
+
+	(anAccessible isKindOf: AlcixAccessible) ifTrue: [ 
+		^ leftElement := anAccessible ].
+	" So far we only understand this case as the transformation of this access to a method invocation. So the element should be a function / sub and the rightElementName must have at least 2 parts object.message. If not, we may have to do different. "
+	self assert: (anAccessible isKindOf: AlcixInvocable).
+	self assert: leftElementName names size > 1.
+	self halt.
+	self expandLeftMethodInvocation setCandidate: anAccessible
 ]

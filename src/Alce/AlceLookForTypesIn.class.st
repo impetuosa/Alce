@@ -32,7 +32,8 @@ AlceLookForTypesIn >> visitForm: anAlcixForm [
 ]
 
 { #category : #visiting }
-AlceLookForTypesIn >> visitLibrary: aLibrary [ 
+AlceLookForTypesIn >> visitLibrary: aLibrary [
+
 	aLibrary types do: [ :t | 
 		(self matches: t name) ifTrue: [ ^ self findings: t ] ]
 ]

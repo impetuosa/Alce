@@ -2,7 +2,8 @@ Class {
 	#name : #AlceLookUp,
 	#superclass : #AlceLook,
 	#instVars : [
-		'lookInClass'
+		'lookInClass',
+		'matchingReference'
 	],
 	#category : #'Alce-Linker'
 }
@@ -22,8 +23,9 @@ AlceLookUp class >> lookFor: aLookInClass matching: aMatch from: aNode [
 	aMatch ifNil: [ ^ nil ].
 	instance := self new.
 	instance lookInClass: aLookInClass.
-	instance match: aMatch.
-	aNode accept: instance.
+	instance matchingReference: aMatch.
+	instance lookUpFrom: aNode. 
+
 	^ instance findings
 ]
 
@@ -49,6 +51,48 @@ AlceLookUp >> lookInClass: aClass [
 	lookInClass := aClass
 ]
 
+{ #category : #'as yet unclassified' }
+AlceLookUp >> lookUpFrom: aNode [
+
+	| matchingUnits |
+	matchingUnits := matchingReference splitInRefs.
+
+	match := (matchingReference isKindOf: AlcixInvocableReference)
+		         ifTrue: [ matchingUnits last ]
+		         ifFalse: [ matchingUnits first ].
+
+
+	aNode accept: self.
+
+	findings ifNil: [ 
+		matchingUnits size = 1 ifTrue: [ ^ self ].
+		match := matchingUnits last.
+		aNode accept: self.
+		^ self ].
+
+	self assert: (findings respondsTo: #type).
+	findings type ifNil: [ ^ self ].
+	(matchingReference isKindOf: AlcixInvocableReference) ifTrue: [ 
+		^ self ].
+	findings := matchingUnits allButFirst
+		            inject: findings
+		            into: [ :lastNode :each | 
+
+			            lastNode type members
+				            detect: [ :m | each referersTo: m name ]
+				            ifNone: [ 
+					            lastNode type invocables detect: [ :m | 
+						            each referersTo: m selector ] ifNone:[ self flag: #WeShouldEnsureTheBasicClassAndFormsAttributesAndMethods.
+						^nil					
+						
+						 ] ] ]
+]
+
+{ #category : #'as yet unclassified' }
+AlceLookUp >> matchingReference: anAlcixVariableReference [ 
+	matchingReference := anAlcixVariableReference 
+]
+
 { #category : #visiting }
 AlceLookUp >> visitAccessModule: anAccessModule [
 	self lookIn: anAccessModule or: [ " nothing to do " ]
@@ -57,6 +101,12 @@ AlceLookUp >> visitAccessModule: anAccessModule [
 { #category : #visiting }
 AlceLookUp >> visitAttribute: anAlcixAttribute [ 
 	self shouldBeImplemented.
+]
+
+{ #category : #visiting }
+AlceLookUp >> visitAttributeAccessor: anAlcixAttributeAccessor [
+
+	^ self visitFunction: anAlcixAttributeAccessor
 ]
 
 { #category : #visiting }
@@ -87,6 +137,12 @@ AlceLookUp >> visitMethodInvocation: anAlcixMethodInvocation [
 { #category : #visiting }
 AlceLookUp >> visitModule: anModule [
 	self lookIn: anModule or: [ anModule container accept: self ]
+]
+
+{ #category : #visiting }
+AlceLookUp >> visitParameter: anAlcixParameter [
+
+	anAlcixParameter type ifNotNil: [ :t | t accept: self ]
 ]
 
 { #category : #visiting }

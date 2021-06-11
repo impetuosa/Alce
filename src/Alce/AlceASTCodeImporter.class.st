@@ -50,7 +50,9 @@ AlceASTCodeImporter >> instantiateInvocation: aCall [
 AlceASTCodeImporter >> instantiateMethodInvocation: selector for: aCall [
 
 	| receiver call |
-	receiver := self instantiateAccess: aCall selector.
+	receiver := selector dropReceiverOutOfSelector.
+
+
 	self state top addAccess: receiver.
 	call := self instantiate: AlcixMethodInvocation.
 	call receiver: receiver.

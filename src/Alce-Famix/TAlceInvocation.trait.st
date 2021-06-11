@@ -18,7 +18,7 @@ TAlceInvocation >> becomeMethodInvocation [
 	candidate := self candidate.
 	arguments := self arguments.
 	access := self mooseModel instantiate: AlcixAccessRead.
-	access rightElementName: #Me.
+	access rightElementName: (self variableNameReference: #Me).
 	access rightElement: sender userType me.
 	access isWriting: false.
 	access invocable: sender.
@@ -45,7 +45,7 @@ TAlceInvocation >> isVBMessageSend [
 
 { #category : #testing }
 TAlceInvocation >> setCandidate: aCandidate [
-
+	aCandidate ifNil: [ ^ self ].
 	self candidate: aCandidate.
 	(self isVBMessageSend and: [ aCandidate isMethod not ]) ifTrue: [ 
 		self becomeFunctionInvocation ].
