@@ -14,11 +14,16 @@ AlceASTCodeImporter >> ensureInContextOf: aClass [
 
 { #category : #'member access' }
 AlceASTCodeImporter >> instantiateAccess: aMemberOrDictAccess [
-	| access receiver |
+	^ self instantiateAccessForReference: (self nodeToVariableReferenceName: aMemberOrDictAccess)
+]
+
+{ #category : #'member access' }
+AlceASTCodeImporter >> instantiateAccessForReference: aReference [
+	| access |
 	access := self instantiate: AlcixAccessRead.
 	access isWriting: false.
 	access
-		rightElementName: (self nodeToVariableReferenceName: aMemberOrDictAccess).
+		rightElementName: aReference.
 	^ access
 ]
 
@@ -50,7 +55,7 @@ AlceASTCodeImporter >> instantiateInvocation: aCall [
 AlceASTCodeImporter >> instantiateMethodInvocation: selector for: aCall [
 
 	| receiver call |
-	receiver := selector dropReceiverOutOfSelector.
+	receiver := self instantiateAccessForReference: selector dropReceiverOutOfSelector.
 
 
 	self state top addAccess: receiver.
@@ -190,20 +195,21 @@ AlceASTCodeImporter >> visitDimVariable: aDimVariable [
 
 { #category : #assignments }
 AlceASTCodeImporter >> visitEquals: anAssignementOrEquals [
+
 	| access |
 	"
 	Ensure that is an assignment: 
 	"
-	anAssignementOrEquals isReturn
-		ifFalse: [ anAssignementOrEquals isAssignment
-				ifTrue: [ access := self instantiate: AlcixAccessWrite.
-					access isWriting: true.
-					access
-						leftElementName: (self nodeToVariableReferenceName: anAssignementOrEquals left).
-					access
-						rightElementName: (self nodeToVariableReferenceName: anAssignementOrEquals right).
-					self state top addAccess: access ] ].
-	super visitEquals: anAssignementOrEquals
+	anAssignementOrEquals isReturn ifFalse: [ 
+		anAssignementOrEquals isAssignment ifTrue: [ 
+			access := self instantiate: AlcixAccessWrite.
+			access isWriting: true.
+			access leftElementName:
+				(self nodeToVariableReferenceName: anAssignementOrEquals left).
+			access rightElementName:
+				(self nodeToVariableReferenceName: anAssignementOrEquals right).
+			self state top addAccess: access ].
+		super visitEquals: anAssignementOrEquals ]
 ]
 
 { #category : #'functions - subs - events' }
@@ -220,16 +226,17 @@ AlceASTCodeImporter >> visitEvent: anEvent [
 
 { #category : #assignments }
 AlceASTCodeImporter >> visitExplicitAssignement: anExplicitAssignement [
+
 	| access |
-	anExplicitAssignement isReturn
-		ifFalse: [ access := self instantiate: AlcixAccessWrite.
-			access isWriting: true.
-			access
-				leftElementName: (self nodeToVariableReferenceName: anExplicitAssignement left).
-			access
-				rightElementName: (self nodeToVariableReferenceName: anExplicitAssignement right).
-			self state top addAccess: access ].
-	super visitExplicitAssignement: anExplicitAssignement
+	anExplicitAssignement isReturn ifFalse: [ 
+		access := self instantiate: AlcixAccessWrite.
+		access isWriting: true.
+		access leftElementName:
+			(self nodeToVariableReferenceName: anExplicitAssignement left).
+		access rightElementName:
+			(self nodeToVariableReferenceName: anExplicitAssignement right).
+		self state top addAccess: access.
+		super visitExplicitAssignement: anExplicitAssignement ]
 ]
 
 { #category : #invocations }

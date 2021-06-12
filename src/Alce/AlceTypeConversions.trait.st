@@ -32,8 +32,10 @@ AlceTypeConversions >> nodeToVariableReferenceName: aVBNode [
 { #category : #'as yet unclassified' }
 AlceTypeConversions >> referenceNameConverter [
 
-	^ referenceNameConverter
-		ifNil: [ referenceNameConverter := AlceVBVisitorToReferenceName new ]
+	^ referenceNameConverter ifNil: [ 
+		  referenceNameConverter := AlceVBVisitorToReferenceName new
+			                            importer: self;
+			                            yourself ]
 ]
 
 { #category : #helper }

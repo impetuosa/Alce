@@ -28,6 +28,13 @@ AlcixReferenceName >> adaptToAlceAnchorPathFragment [
 	^ '.' join: names
 ]
 
+{ #category : #'as yet unclassified' }
+AlcixReferenceName >> assertIsSingleName [
+
+	self class = AlcixInvocableReference ifTrue: [ 
+		self assert: names size = 1 ]
+]
+
 { #category : #enumerating }
 AlcixReferenceName >> do: aFullBlockClosure [
 

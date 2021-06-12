@@ -55,37 +55,34 @@ AlceLookUp >> lookInClass: aClass [
 AlceLookUp >> lookUpFrom: aNode [
 
 	| matchingUnits |
+	matchingReference assertIsSingleName.
+	matchingReference printString = 'rs.Clone' ifTrue: [ self halt ].
 	matchingUnits := matchingReference splitInRefs.
 
-	match := (matchingReference isKindOf: AlcixInvocableReference)
-		         ifTrue: [ matchingUnits last ]
-		         ifFalse: [ matchingUnits first ].
+	match := matchingUnits first.
 
 
 	aNode accept: self.
 
-	findings ifNil: [ 
-		matchingUnits size = 1 ifTrue: [ ^ self ].
-		match := matchingUnits last.
-		aNode accept: self.
+	matchingUnits size = 1 ifTrue: [ ^ self ].
+	findings ifNil: [ ^ self ].
+	findings type ifNil: [ 
+		matchingUnits size = 1 ifFalse: [ findings := nil].
 		^ self ].
-
 	self assert: (findings respondsTo: #type).
-	findings type ifNil: [ ^ self ].
-	(matchingReference isKindOf: AlcixInvocableReference) ifTrue: [ 
-		^ self ].
+
 	findings := matchingUnits allButFirst
 		            inject: findings
 		            into: [ :lastNode :each | 
-
 			            lastNode type members
 				            detect: [ :m | each referersTo: m name ]
 				            ifNone: [ 
-					            lastNode type invocables detect: [ :m | 
-						            each referersTo: m selector ] ifNone:[ self flag: #WeShouldEnsureTheBasicClassAndFormsAttributesAndMethods.
-						^nil					
-						
-						 ] ] ]
+					            lastNode type invocables
+						            detect: [ :m | each referersTo: m selector ]
+						            ifNone: [ 
+							            self flag:
+								            #WeShouldEnsureTheBasicClassAndFormsAttributesAndMethods.
+							            ^ nil ] ] ]
 ]
 
 { #category : #'as yet unclassified' }

@@ -7,7 +7,8 @@ Class {
 	#instVars : [
 		'changed',
 		'maxTries',
-		'tries'
+		'tries',
+		'promiscuous'
 	],
 	#category : #'Alce-Linker'
 }
@@ -37,6 +38,7 @@ AlceLinker >> initialize [
 	changed := false.
 	maxTries := self class maxTries.
 	tries := 0.
+	promiscuous := false. 
 ]
 
 { #category : #changes }
@@ -46,34 +48,71 @@ AlceLinker >> isFinished [
 
 { #category : #changes }
 AlceLinker >> link: aModel [
+
 	" 
 		The linking process is iterative. 
 		Some elements cannot be linked before types, or function return type, etc. 
-
 	"
-	
+
 	[ 
 	self beginIteration.
 	aModel accept: self ] doWhileFalse: [ self isFinished ].
+	promiscuous := true.
+	self halt. 
+	[ 
+	self beginIteration.
+	aModel accept: self ] doWhileFalse: [ self isFinished ]
+]
+
+{ #category : #'lookup flavors' }
+AlceLinker >> lookVariableClass [
+	^ promiscuous
+		  ifTrue: [ AlceLookForPromiscuousIn ]
+		  ifFalse: [ AlceLookForVariablesIn ]
+	
+]
+
+{ #category : #'lookup flavors' }
+AlceLinker >> lookupForMethodClass [
+
+	^ promiscuous
+		  ifTrue: [ AlceLookForPromiscuousIn ]
+		  ifFalse: [ AlceLookForMethodsIn ]
+]
+
+{ #category : #'lookup flavors' }
+AlceLinker >> lookupFunctionClass [
+
+	^ promiscuous
+		  ifTrue: [ AlceLookForPromiscuousIn ]
+		  ifFalse: [ AlceLookForFunctionOrSubIn ]
 ]
 
 { #category : #'lookup flavors' }
 AlceLinker >> lookupFunctionOrSub: aMatch in: aNode [
 
 	^ AlceLookUp
-		  lookFor: AlceLookForFunctionOrSubIn
+		  lookFor: self lookupFunctionClass 
 		  matching: aMatch
 		  from: aNode
 ]
 
 { #category : #'lookup flavors' }
 AlceLinker >> lookupMethod: aMatch in: aNode [
-	^ AlceLookUp lookFor: AlceLookForMethodsIn matching: aMatch from: aNode
+	^ AlceLookUp lookFor: self lookupForMethodClass  matching: aMatch from: aNode
 ]
 
 { #category : #'lookup flavors' }
 AlceLinker >> lookupType: aMatch in: aNode [
-	^ AlceLookUp lookFor: AlceLookForTypesIn matching: aMatch from: aNode
+	^ AlceLookUp lookFor: self lookupTypeClass matching: aMatch from: aNode
+]
+
+{ #category : #'lookup flavors' }
+AlceLinker >> lookupTypeClass [
+
+	^ promiscuous
+		  ifTrue: [ AlceLookForPromiscuousIn ]
+		  ifFalse: [ AlceLookForTypesIn ]
 ]
 
 { #category : #'lookup flavors' }
@@ -82,7 +121,7 @@ AlceLinker >> lookupVariable: aMatch in: aNode [
 	aMatch isEmptyOrNil
 		ifTrue: [ ^ nil ].
 	^ AlceLookUp
-		lookFor: AlceLookForVariablesIn
+		lookFor: self lookVariableClass 
 		matching: aMatch
 		from: aNode.
 	

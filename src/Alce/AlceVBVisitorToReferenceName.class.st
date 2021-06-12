@@ -2,7 +2,8 @@ Class {
 	#name : #AlceVBVisitorToReferenceName,
 	#superclass : #Object,
 	#instVars : [
-		'processedElement'
+		'processedElement',
+		'importer'
 	],
 	#classInstVars : [
 		'noneAttribute'
@@ -13,6 +14,11 @@ Class {
 { #category : #'as yet unclassified' }
 AlceVBVisitorToReferenceName class >> noneAttribute [
 	^ noneAttribute ifNil: [ noneAttribute := AlcixVariableReference new ]
+]
+
+{ #category : #accce }
+AlceVBVisitorToReferenceName >> importer: anAlceLibraryReferenceImporter [ 
+	importer := anAlceLibraryReferenceImporter
 ]
 
 { #category : #'as yet unclassified' }
@@ -27,15 +33,15 @@ AlceVBVisitorToReferenceName >> noteProcessedElement [
 
 { #category : #'as yet unclassified' }
 AlceVBVisitorToReferenceName >> toInvocableReferenceName: aNode [
+
 	| refChain |
 	processedElement := false.
 	refChain := aNode acceptVisitor: self.
-	^ refChain
-		ifNil: [ self error: 'Unexpected ' ]
-		ifNotNil: [ AlcixInvocableReference new
-				names: (aNode acceptVisitor: self);
-				isProcessedElement: processedElement;
-				yourself ]
+	^ refChain ifNil: [ self error: 'Unexpected ' ] ifNotNil: [ 
+		  (importer instantiate: AlcixInvocableReference)
+			  names: (aNode acceptVisitor: self);
+			  isProcessedElement: processedElement;
+			  yourself ]
 ]
 
 { #category : #'as yet unclassified' }
@@ -45,7 +51,8 @@ AlceVBVisitorToReferenceName >> toTypeReferenceName: aNode [
 	refChain := aNode acceptVisitor: self.
 	^ refChain
 		ifNil: [ self error: 'Unexpected ' . "self undefinedTypeReference "  ]
-		ifNotNil: [ AlcixTypeReference new
+		ifNotNil: [ 
+			 (importer instantiate: AlcixTypeReference)
 				names: (aNode acceptVisitor: self);
 				isProcessedElement: processedElement;
 				yourself ]
@@ -53,15 +60,15 @@ AlceVBVisitorToReferenceName >> toTypeReferenceName: aNode [
 
 { #category : #'as yet unclassified' }
 AlceVBVisitorToReferenceName >> toVariableReferenceName: aNode [
+
 	| refChain |
-	processedElement := false. 
+	processedElement := false.
 	refChain := aNode acceptVisitor: self.
-	^ refChain
-		ifNil: [ self noneAttribute  ]
-		ifNotNil: [ AlcixVariableReference new
-				names: (aNode acceptVisitor: self);
-				isProcessedElement: processedElement;
-				yourself ]
+	^ refChain ifNil: [ self noneAttribute ] ifNotNil: [ 
+		  (importer instantiate: AlcixVariableReference)
+			  names: (aNode acceptVisitor: self);
+			  isProcessedElement: processedElement;
+			  yourself ]
 ]
 
 { #category : #'as yet unclassified' }
