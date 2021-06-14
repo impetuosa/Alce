@@ -5,8 +5,36 @@ Trait {
 
 { #category : #testing }
 TAlceInvocation >> becomeFunctionInvocation [
-	self traceCr: 'becomeFunctionInvocation'.
-	self error: 'becomeFunctionInvocation'
+
+	| n selector sender candidate arguments |
+	self assert: (self receiver rightElement isKindOf: AlcixModule).
+
+
+	selector := self selector.
+	sender := self sender.
+	candidate := self candidate.
+	arguments := self arguments.
+
+	self receiver rightElement: nil.
+	self receiver rightElementName: nil.
+	self receiver invocable: nil.
+	self mooseModel removeEntity: self receiver.
+
+
+	self selector: nil.
+	self sender: nil.
+	self candidate: nil.
+	self receiver: nil.
+	self arguments asOrderedCollection do: [ :a | a invocation: nil ].
+
+	n := AlcixInvocation new.
+	n selector: selector.
+	n sender: sender.
+	n candidate: candidate.
+	n arguments: arguments.
+
+	self mooseModel add: n.
+	self mooseModel removeEntity: self
 ]
 
 { #category : #testing }

@@ -13,7 +13,8 @@ AlceLookForMethodsIn >> visitClass: anAlcixClass [
 
 { #category : #visiting }
 AlceLookForMethodsIn >> visitModule: anAlcixClass [
-	^ self halt
+	anAlcixClass invocables do: [ :i | 
+		(self matches: i selector) ifTrue: [ ^ self findings: i ] ]
 ]
 
 { #category : #visiting }
