@@ -56,7 +56,7 @@ AlceLookUp >> lookUpFrom: aNode [
 
 	| matchingUnits |
 	matchingReference assertIsSingleName.
-	matchingReference printString = 'rs.Clone' ifTrue: [ self halt ].
+"	matchingReference printString = 'rs.Clone' ifTrue: [ self halt ]."
 	matchingUnits := matchingReference splitInRefs.
 
 	match := matchingUnits first.

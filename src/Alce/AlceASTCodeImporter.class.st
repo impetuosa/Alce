@@ -209,7 +209,7 @@ AlceASTCodeImporter >> visitEquals: anAssignementOrEquals [
 			access rightElementName:
 				(self nodeToVariableReferenceName: anAssignementOrEquals right).
 			self state top addAccess: access ].
-		super visitEquals: anAssignementOrEquals ]
+ ]
 ]
 
 { #category : #'functions - subs - events' }
@@ -235,8 +235,7 @@ AlceASTCodeImporter >> visitExplicitAssignement: anExplicitAssignement [
 			(self nodeToVariableReferenceName: anExplicitAssignement left).
 		access rightElementName:
 			(self nodeToVariableReferenceName: anExplicitAssignement right).
-		self state top addAccess: access.
-		super visitExplicitAssignement: anExplicitAssignement ]
+		self state top addAccess: access ]
 ]
 
 { #category : #invocations }
