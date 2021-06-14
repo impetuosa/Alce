@@ -285,7 +285,8 @@ AlceASTCodeImporter >> visitFunctionDefinition: aDefinition [
 	return typeName: fn typeName.
 	return instantiatesObjectOnDefinition: false.
 	return anchor: self state top anchor / #return / return name.
-
+	fn addLocalVariable: return.
+	
 	self state top addInvocable: fn.
 	self state push: fn.
 	aDefinition parameters acceptVisitor: self.
