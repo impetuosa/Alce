@@ -21,7 +21,6 @@ AlceASTCodeImporter >> instantiateAccess: aMemberOrDictAccess [
 AlceASTCodeImporter >> instantiateAccessForReference: aReference [
 	| access |
 	access := self instantiate: AlcixAccessRead.
-	aReference names first = 'EmployeeHas' ifTrue: [ self halt ].
 	access isWriting: false.
 	access
 		rightElementName: aReference.
@@ -273,14 +272,23 @@ AlceASTCodeImporter >> visitExternalSub: aDefinition [
 
 { #category : #'functions - subs - events' }
 AlceASTCodeImporter >> visitFunctionDefinition: aDefinition [
-	| fn |
+
+	| fn return |
 	fn := self instantiate: AlcixFunction.
 	fn selector: (self nodeToString: aDefinition selector).
 	fn anchor: self state top anchor / #functions / fn selector.
 	fn typeName: (self typeName: aDefinition type).
+	
+	" Addin a local variable with the name of the function to represent the 'returning assignation' "
+	return := self instantiate: AlcixLocalVariable.
+	return name: (self nodeToString: aDefinition selector).
+	return typeName: fn typeName.
+	return instantiatesObjectOnDefinition: false.
+	return anchor: self state top anchor / #return / return name.
+
 	self state top addInvocable: fn.
 	self state push: fn.
-	aDefinition parameters acceptVisitor: self. 
+	aDefinition parameters acceptVisitor: self.
 	aDefinition block acceptVisitor: self.
 	self state pop
 ]
