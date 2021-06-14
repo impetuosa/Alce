@@ -87,3 +87,8 @@ AlcixUserType >> membersGroup [
 	<navigation: 'Members'>
 	^ MooseSpecializedGroup withAll: self members asSet
 ]
+
+{ #category : #generated }
+AlcixUserType >> type [
+	^ self 
+]

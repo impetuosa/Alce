@@ -21,6 +21,7 @@ AlceASTCodeImporter >> instantiateAccess: aMemberOrDictAccess [
 AlceASTCodeImporter >> instantiateAccessForReference: aReference [
 	| access |
 	access := self instantiate: AlcixAccessRead.
+	aReference names first = 'EmployeeHas' ifTrue: [ self halt ].
 	access isWriting: false.
 	access
 		rightElementName: aReference.
@@ -279,7 +280,8 @@ AlceASTCodeImporter >> visitFunctionDefinition: aDefinition [
 	fn typeName: (self typeName: aDefinition type).
 	self state top addInvocable: fn.
 	self state push: fn.
-	super visitFunctionDefinition: aDefinition.
+	aDefinition parameters acceptVisitor: self. 
+	aDefinition block acceptVisitor: self.
 	self state pop
 ]
 
@@ -417,7 +419,8 @@ AlceASTCodeImporter >> visitSubDefinition: aDefinition [
 	fn anchor: self state top anchor / #subprocedures / fn selector.
 	self state top addInvocable: fn.
 	self state push: fn.
-	super visitSubDefinition: aDefinition.
+	aDefinition parameters acceptVisitor: self. 
+	aDefinition block acceptVisitor: self.
 	self state pop
 ]
 
