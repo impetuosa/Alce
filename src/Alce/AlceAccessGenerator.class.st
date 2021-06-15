@@ -186,7 +186,7 @@ AlceAccessGenerator >> defineHierarchy [
 	library --|> reference.
 	parameter --|> typedEntity.
 	primitiveType --|> type.
-	primitiveType --|> accessEntity.
+	primitiveType --|> accessible.
 	attributeAccessor --|> function.
 	raiseEvent --|> invocation.
 	reference --|> containerType.
