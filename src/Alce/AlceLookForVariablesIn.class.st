@@ -40,6 +40,13 @@ AlceLookForVariablesIn >> visitGlobalVariable: anAlcixGlobalVariable [
 ]
 
 { #category : #visiting }
+AlceLookForVariablesIn >> visitLibrary: aLibrary [
+
+	aLibrary members do: [ :t | 
+		(self matches: t name) ifTrue: [ ^ self findings: t ] ]
+]
+
+{ #category : #visiting }
 AlceLookForVariablesIn >> visitLocalVariable: anAlcixLocalVariable [
 	(onlyGlobals not and: [ self matches: anAlcixLocalVariable name ]) 
 		ifTrue: [ self findings: anAlcixLocalVariable ]

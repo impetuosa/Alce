@@ -25,7 +25,7 @@ AlcixReferenceName >> accept: aVisitor [
 
 { #category : #'as yet unclassified' }
 AlcixReferenceName >> adaptToAlceAnchorPathFragment [
-	^ '.' join: names
+	^ '.' join: (names ifNil: [ {} ])
 ]
 
 { #category : #'as yet unclassified' }

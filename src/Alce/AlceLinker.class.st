@@ -58,7 +58,6 @@ AlceLinker >> link: aModel [
 	self beginIteration.
 	aModel accept: self ] doWhileFalse: [ self isFinished ].
 	promiscuous := true.
-	self halt. 
 	[ 
 	self beginIteration.
 	aModel accept: self ] doWhileFalse: [ self isFinished ]
@@ -159,6 +158,12 @@ AlceLinker >> visitAccessWrite: anAlcixAccessWrite [
 				ifNotNil: [ :a | 
 					anAlcixAccessWrite setLeftElement: a.
 					self noteChange ] ]
+]
+
+{ #category : #visiting }
+AlceLinker >> visitAlias: anAlcixAlias [
+
+	^ self visitTypedEntity: anAlcixAlias
 ]
 
 { #category : #visiting }

@@ -21,8 +21,18 @@ AlceLookForFunctionOrSubIn >> visitAccessModule: anAccessModule [
 ]
 
 { #category : #visiting }
+AlceLookForFunctionOrSubIn >> visitAlias: anAlcixAlias [ 
+	anAlcixAlias type ifNotNil: [ self halt. "Should do something " ]
+]
+
+{ #category : #visiting }
 AlceLookForFunctionOrSubIn >> visitClass: aClass [
 	onlyGlobals ifFalse: [ self visitModule: aClass ]
+]
+
+{ #category : #visiting }
+AlceLookForFunctionOrSubIn >> visitEnum: anAlcixEnum [ 
+	
 ]
 
 { #category : #visiting }
@@ -31,6 +41,24 @@ AlceLookForFunctionOrSubIn >> visitFunction: aFunction [
 ]
 
 { #category : #visiting }
+AlceLookForFunctionOrSubIn >> visitLibrary: aLibrary [
+
+	self visitCollection: aLibrary types.
+	self visitCollection: aLibrary invocables.
+	
+]
+
+{ #category : #visiting }
 AlceLookForFunctionOrSubIn >> visitModule: aModule [
 	self visitCollection: aModule invocables.
+]
+
+{ #category : #visiting }
+AlceLookForFunctionOrSubIn >> visitPrimitiveType: anAlcixPrimitiveType [ 
+	
+]
+
+{ #category : #visiting }
+AlceLookForFunctionOrSubIn >> visitStructure: anAlcixStructure [ 
+	
 ]

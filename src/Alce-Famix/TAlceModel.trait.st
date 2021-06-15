@@ -9,6 +9,11 @@ TAlceModel >> accept: aVisitor [
 ]
 
 { #category : #'instance creation' }
+TAlceModel >> classAliases [
+	^ self select: [ :m | m class = AlcixAlias]
+]
+
+{ #category : #'instance creation' }
 TAlceModel >> classes [
 	^ self select: [ :m | m class = AlcixClass ]
 ]
@@ -16,7 +21,7 @@ TAlceModel >> classes [
 { #category : #'instance creation' }
 TAlceModel >> firstClassCitizen [
 	^ self modules , self classes , self forms , self reports
-		, self tables , self queries
+		, self tables , self queries, self classAliases
 ]
 
 { #category : #'instance creation' }

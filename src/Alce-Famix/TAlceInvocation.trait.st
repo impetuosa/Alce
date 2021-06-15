@@ -54,7 +54,7 @@ TAlceInvocation >> becomeMethodInvocation [
 	self selector: nil.
 	self sender: nil.
 	self candidate: nil.
-	self arguments removeAll.
+	self arguments asOrderedCollection do: [ :a | a invocation: nil ].
 
 	n := AlcixMethodInvocation new.
 	n selector: selector.

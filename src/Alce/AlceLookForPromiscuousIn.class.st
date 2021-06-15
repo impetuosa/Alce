@@ -13,6 +13,18 @@ AlceLookForPromiscuousIn >> visitFunction: aFunction [
 ]
 
 { #category : #'as yet unclassified' }
+AlceLookForPromiscuousIn >> visitLibrary: aLibrary [
+
+	(self matches: aLibrary name) ifTrue: [ ^ self findings: aLibrary ].
+	aLibrary members do: [ :t | 
+		(self matches: t name) ifTrue: [ ^ self findings: t ] ].
+	aLibrary types do: [ :t | 
+		(self matches: t name) ifTrue: [ ^ self findings: t ] ].
+	aLibrary invocables do: [ :t | 
+		(self matches: t selector) ifTrue: [ ^ self findings: t ] ]
+]
+
+{ #category : #'as yet unclassified' }
 AlceLookForPromiscuousIn >> visitModule: anAlcixModule [
 
 	(self matches: anAlcixModule name)

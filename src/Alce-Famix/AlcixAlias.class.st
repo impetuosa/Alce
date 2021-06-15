@@ -20,3 +20,8 @@ AlcixAlias >> accept: aVisitor [
 	^ aVisitor visitAlias: self
 
 ]
+
+{ #category : #accessing }
+AlcixAlias >> userType [
+	^ container 
+]

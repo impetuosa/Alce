@@ -41,6 +41,7 @@ AlceLookIn >> visitClass: anAlcixClass [
 { #category : #testing }
 AlceLookIn >> visitCollection: aCollection [
 
+	self hasFinding ifTrue: [ ^ self ].
 	aCollection do: [ :a | 
 		a accept: self.
 		self hasFinding ifTrue: [ ^ self ] ]

@@ -1,6 +1,6 @@
 Class {
 	#name : #AlcixPrimitiveType,
-	#superclass : #AlcixAccessEntity,
+	#superclass : #AlcixAccessible,
 	#traits : 'AlcixTType',
 	#classTraits : 'AlcixTType classTrait',
 	#category : #'Alce-Famix-Entities'

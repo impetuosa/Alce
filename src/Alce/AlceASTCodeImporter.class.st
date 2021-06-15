@@ -14,7 +14,13 @@ AlceASTCodeImporter >> ensureInContextOf: aClass [
 
 { #category : #'member access' }
 AlceASTCodeImporter >> instantiateAccess: aMemberOrDictAccess [
-	^ self instantiateAccessForReference: (self nodeToVariableReferenceName: aMemberOrDictAccess)
+
+	| read |
+	read := self instantiateAccessForReference:
+		        (self nodeToVariableReferenceName: aMemberOrDictAccess).
+	read anchor:
+		(self codeAnchor: read printString for: aMemberOrDictAccess).
+	^ read
 ]
 
 { #category : #'member access' }
@@ -29,16 +35,17 @@ AlceASTCodeImporter >> instantiateAccessForReference: aReference [
 
 { #category : #invocations }
 AlceASTCodeImporter >> instantiateFlatInvocation: selector for: aCall [
+
 	| call |
 	call := self instantiate: AlcixInvocation.
 	call selector: selector.
-	call anchor: self state top anchor / #invocation / call selector.
-	aCall arguments arguments
-		do: [ :a | 
-			| arg |
-			arg := self instantiate: AlcixArgument.
-			arg value: (self nodeToString: a).
-			call addArgument: arg ].
+	call anchor:
+		(self codeAnchor: (self nodeToString: aCall selector) for: aCall).
+	aCall arguments arguments do: [ :a | 
+		| arg |
+		arg := self instantiate: AlcixArgument.
+		arg value: (self nodeToString: a).
+		call addArgument: arg ].
 	self state top addOutgoingInvocation: call
 ]
 
@@ -55,14 +62,16 @@ AlceASTCodeImporter >> instantiateInvocation: aCall [
 AlceASTCodeImporter >> instantiateMethodInvocation: selector for: aCall [
 
 	| receiver call |
-	receiver := self instantiateAccessForReference: selector dropReceiverOutOfSelector.
+	receiver := self instantiateAccessForReference:
+		            selector dropReceiverOutOfSelector.
 
-
+	receiver anchor: (self codeAnchor: receiver printString for: aCall).
 	self state top addAccess: receiver.
 	call := self instantiate: AlcixMethodInvocation.
 	call receiver: receiver.
 	call selector: selector.
-	call anchor: self state top anchor / #invocation / call selector.
+	call anchor: (self codeAnchor: selector printString for: aCall).
+
 	aCall arguments arguments do: [ :a | 
 		| arg |
 		arg := self instantiate: AlcixArgument.
@@ -73,13 +82,15 @@ AlceASTCodeImporter >> instantiateMethodInvocation: selector for: aCall [
 
 { #category : #'properties - variables' }
 AlceASTCodeImporter >> instantiateVariable: aClass from: aVariable [
+
 	| var |
 	var := self instantiate: aClass.
 	var name: (self nodeToString: aVariable name).
 	var typeName: (self typeName: aVariable type).
-	var
-		instantiatesObjectOnDefinition: aVariable type class = VBAsTypeAndNewNode.
-	var anchor: self state top anchor / #variables / var name.
+	var instantiatesObjectOnDefinition:
+		aVariable type class = VBAsTypeAndNewNode.
+	var anchor: (self codeAnchor: var name for: aVariable).
+
 	^ var
 ]
 
@@ -108,9 +119,7 @@ AlceASTCodeImporter >> visitConstant: aConstant [
 	fn name: (self nodeToString: aConstant constant).
 	fn isConstant: true.
 	fn
-		anchor:
-			self state top anchor / #attributes
-				/ fn name.
+		anchor: (self codeAnchor: fn name for: aConstant). 
 	self state top addMember: fn.
 	self state push: fn.
 	super visitSubDefinition: aConstant.
@@ -131,41 +140,42 @@ AlceASTCodeImporter >> visitDefType: aDefType [
 
 { #category : #'type definition' }
 AlceASTCodeImporter >> visitDefineEnum: aDefineEnum [
+
 	| en i |
 	en := self instantiate: AlcixEnum.
 	en name: (self nodeToString: aDefineEnum name).
-	en anchor: self state top anchor / #src / #types / en name.
+	en anchor: self state top anchor / #types / en name.
 	self state top addType: en.
 	i := 0.
-	aDefineEnum fields
-		do: [ :d | 
-			i := d value ifNil: [ i + 1 ] ifNotNil: [ :v | v token value asNumber ].
-			en
-				addEnumValue:
-					((self instantiate: AlcixEnumValue)
-						name: (self nodeToString: d name);
-						Value: i;
-						yourself) ]
+	aDefineEnum fields do: [ :d | 
+		i := d value
+			     ifNil: [ i + 1 ]
+			     ifNotNil: [ :v | v token value asNumber ].
+		en addEnumValue: ((self instantiate: AlcixEnumValue)
+				 name: (self nodeToString: d name);
+				 Value: i;
+				 yourself) ]
 ]
 
 { #category : #'type definition' }
 AlceASTCodeImporter >> visitDefineType: aDefineType [
+
 	| en |
 	en := self instantiate: AlcixUserType.
 	en name: (self nodeToString: aDefineType name).
-	en anchor: self state top anchor / #src / #types / en name.
+	en anchor: self state top anchor / #types / en name.
 	self state top addType: en.
-	aDefineType fields
-		doWithIndex: [ :d :i | 
-			self assert: d type class = VBTypedThingNode.
-			self assert: d type sizes isEmpty.
-			en
-				addMember:
-					((self instantiate: AlcixAttribute)
-						name: (self nodeToString: d name);
-						typeName: (self nodeToTypeReferenceName:  d type type);
-						visibility: #Public;
-						yourself) ]
+	aDefineType fields doWithIndex: [ :d :i | 
+		| name |
+		name := self nodeToString: d name.
+		self assert: d type class = VBTypedThingNode.
+		self assert: d type sizes isEmpty.
+		en addMember: ((self instantiate: AlcixAttribute)
+				 anchor: (self codeAnchor: name for: d);
+				 name: name;
+				 typeName: (self nodeToTypeReferenceName: d type type);
+				 visibility: #Public;
+				 yourself) ]
 ]
 
 { #category : #'member access' }
@@ -203,13 +213,15 @@ AlceASTCodeImporter >> visitEquals: anAssignementOrEquals [
 	anAssignementOrEquals isReturn ifFalse: [ 
 		anAssignementOrEquals isAssignment ifTrue: [ 
 			access := self instantiate: AlcixAccessWrite.
+			access anchor: (self
+					 codeAnchor: (self writeStringSelector: anAssignementOrEquals)
+					 for: anAssignementOrEquals).
 			access isWriting: true.
 			access leftElementName:
 				(self nodeToVariableReferenceName: anAssignementOrEquals left).
 			access rightElementName:
 				(self nodeToVariableReferenceName: anAssignementOrEquals right).
-			self state top addAccess: access ].
- ]
+			self state top addAccess: access ] ]
 ]
 
 { #category : #'functions - subs - events' }
@@ -230,6 +242,9 @@ AlceASTCodeImporter >> visitExplicitAssignement: anExplicitAssignement [
 	| access |
 	anExplicitAssignement isReturn ifFalse: [ 
 		access := self instantiate: AlcixAccessWrite.
+		access anchor: (self
+				 codeAnchor: (self writeStringSelector: anExplicitAssignement)
+				 for: anExplicitAssignement).
 		access isWriting: true.
 		access leftElementName:
 			(self nodeToVariableReferenceName: anExplicitAssignement left).
@@ -317,7 +332,7 @@ AlceASTCodeImporter >> visitMemberAccess: aMemberAccess [
 	self state top addAccess: (self instantiateAccess: aMemberAccess)
 ]
 
-{ #category : #generated }
+{ #category : #'type definition' }
 AlceASTCodeImporter >> visitModule: aModule [
 
 	(self state top isKindOf: AlcixClass) ifTrue: [ 
@@ -347,10 +362,11 @@ AlceASTCodeImporter >> visitModuleProperty: aModuleProperty [
 	fn typeName: (self typeName: aModuleProperty variable type).
 	fn visibility: (aModuleProperty visibility
 			 ifNil: [ #Private ]
-			 ifNotNil: [ self nodeToString: aModuleProperty visibility ]) asSymbol.
+			 ifNotNil: [ self nodeToString: aModuleProperty visibility ])
+			asSymbol.
 	fn isConstant: false.
-	fn anchor: self state top anchor / #attributes / fn name.
 
+	fn anchor: (self codeAnchor: fn name for: aModuleProperty).
 	self state top addMember: fn
 ]
 
@@ -361,7 +377,7 @@ AlceASTCodeImporter >> visitModulePropertyGet: aModulePropertyGet [
 	acc kind: aModulePropertyGet getToken value asSymbol.
 	acc selector: (self nodeToString: aModulePropertyGet selector).
 	self assert: acc kind = #Get.
-
+	acc anchor: self state top anchor / #accessors / acc selector.
 	"Obtain property name from the body of the accessor "
 	statement := (aModulePropertyGet block statements
 		select: [ :s | 
@@ -376,11 +392,13 @@ AlceASTCodeImporter >> visitModulePropertyGet: aModulePropertyGet [
 
 { #category : #'functions - subs - events' }
 AlceASTCodeImporter >> visitParameter: aParameter [
+
 	| param |
 	param := self instantiate: AlcixParameter.
 	param name: (self nodeToString: aParameter name).
 	param typeName: (self typeName: aParameter type).
 	param isOptional: aParameter isOptional.
+	param anchor: (self codeAnchor: param name for: aParameter ).
 	self state top addParameter: param
 ]
 
@@ -398,14 +416,14 @@ AlceASTCodeImporter >> visitRaiseError: aRaiseError [
 
 { #category : #invocations }
 AlceASTCodeImporter >> visitRaiseEvent: aRaiseEvent [
+
 	| call |
 	call := self instantiate: AlcixRaiseEvent.
 	call selector: (self nodeToString: aRaiseEvent selector).
-	call anchor: self state top anchor / #invocation / call selector.
+	call anchor: (self codeAnchor: call selector for: aRaiseEvent).
 
 	self state top addOutgoingInvocation: call.
-	super visitRaiseEvent: aRaiseEvent.
-
+	super visitRaiseEvent: aRaiseEvent
 ]
 
 { #category : #'properties - variables' }
@@ -443,4 +461,11 @@ AlceASTCodeImporter >> visitVariable: aVariable [
 AlceASTCodeImporter >> visitVariableList: aVariableList [
 	^ self visitProgram: aVariableList.
 
+]
+
+{ #category : #assignments }
+AlceASTCodeImporter >> writeStringSelector: anExplicitAssignement [
+
+	^ (self nodeToString: anExplicitAssignement right) , '='
+	, (self nodeToString: anExplicitAssignement left)
 ]

@@ -6,7 +6,6 @@ Class {
 
 { #category : #visiting }
 AlceLookForMethodsIn >> visitClass: anAlcixClass [
-
 	anAlcixClass invocables do: [ :i | 
 		(self matches: i selector) ifTrue: [ ^ self findings: i ] ]
 ]

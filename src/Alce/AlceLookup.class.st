@@ -80,9 +80,11 @@ AlceLookUp >> lookUpFrom: aNode [
 					            lastNode type invocables
 						            detect: [ :m | each referersTo: m selector ]
 						            ifNone: [ 
+											lastNode type types  detect: [ :m | each referersTo: m name ]
+						            ifNone: [ 
 							            self flag:
 								            #WeShouldEnsureTheBasicClassAndFormsAttributesAndMethods.
-							            ^ nil ] ] ]
+							            ^ nil] ] ] ]
 ]
 
 { #category : #'as yet unclassified' }

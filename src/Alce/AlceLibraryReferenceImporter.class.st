@@ -66,9 +66,11 @@ AlceLibraryReferenceImporter >> visitLibraryAttribute: aJinLibraryAttribute [
 	| attr |
 	attr := self instantiate: AlcixAttribute.
 	attr name: aJinLibraryAttribute name.
-	attr typeName: (self typeNameReference: aJinLibraryAttribute typeName).
-	attr isConstant: false. 
-	attr visibility: #Public. 
+	attr typeName:
+		(self typeNameReference: aJinLibraryAttribute typeName).
+	attr isConstant: false.
+	attr visibility: #Public.
+	attr anchor: (self dllAnchor: attr name for: aJinLibraryAttribute).
 	self state top addMember: attr
 ]
 
@@ -79,6 +81,7 @@ AlceLibraryReferenceImporter >> visitLibraryCoClass: aJinLibraryCoClass [
 	attr := self instantiate: AlcixAttribute.
 	attr visibility: #Public.
 	attr name: aJinLibraryCoClass name.
+	attr anchor: (self dllAnchor: attr name for: aJinLibraryCoClass).
 	attr isConstant: true.
 	typeName := aJinLibraryCoClass linkedType
 		            ifNil: [ self undefinedTypeReference ]
@@ -98,6 +101,7 @@ AlceLibraryReferenceImporter >> visitLibraryConstant: aJinLibraryConstant [
 	fn := self instantiate: AlcixAttribute.
 	fn visibility: #Public.
 	fn name: aJinLibraryConstant name.
+	fn anchor: (self dllAnchor: fn name for: aJinLibraryConstant).
 	aJinLibraryConstant type
 		ifNil: [ fn typeName: self undefinedTypeReference ]
 		ifNotNil: [ :t | fn typeName: (self typeNameReference: t) ].
@@ -199,7 +203,8 @@ AlceLibraryReferenceImporter >> visitLibraryProperty: aJinLibraryProperty [
 	| attribute acc |
 	attribute := self instantiate: AlcixAttribute.
 	attribute name: aJinLibraryProperty name.
-
+	attribute anchor:
+		(self dllAnchor: attribute name for: aJinLibraryProperty).
 
 	attribute visibility: (aJinLibraryProperty name first = $_
 			 ifTrue: [ #Private ]
