@@ -22,7 +22,7 @@ AlceLookForVariablesIn >> visitAccessModule: anAccessModule [
 
 { #category : #visiting }
 AlceLookForVariablesIn >> visitAttribute: anAttribute [
-	((anAttribute visibility = #Public or: onlyGlobals) and: [ 
+	((anAttribute visibility = #Public or: onlyGlobals not) and: [ 
 		 self matches: anAttribute name ]) ifTrue: [ 
 		self findings: anAttribute ]
 ]

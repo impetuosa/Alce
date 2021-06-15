@@ -6,6 +6,12 @@ Class {
 	#category : #'Alce-Importer'
 }
 
+{ #category : #anchor }
+AlceLibraryReferenceImporter >> dllAnchor: aString for: aJinLibraryConstant [
+
+	^ self state top anchor / aString
+]
+
 { #category : #'visiting accessor' }
 AlceLibraryReferenceImporter >> instantiateGetterAccessorMethod: aJinLibraryMethod into: anAttribute [
 

@@ -149,6 +149,12 @@ AlceVBVisitorToReferenceName >> visitMemberAccess: aVBMemberAccessNode [
 		, (aVBMemberAccessNode member acceptVisitor: self)
 ]
 
+{ #category : #visiting }
+AlceVBVisitorToReferenceName >> visitNewClause: aVBNewClauseNode [
+
+	^ aVBNewClauseNode typeName acceptVisitor: self
+]
+
 { #category : #'as yet unclassified' }
 AlceVBVisitorToReferenceName >> visitNotOperation: aVBNotOperationNode [
 	self noteProcessedElement.

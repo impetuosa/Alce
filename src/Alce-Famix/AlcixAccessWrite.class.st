@@ -3,7 +3,9 @@ Class {
 	#superclass : #AlcixAccess,
 	#instVars : [
 		'#leftElement => FMOne type: #AlcixAccessible opposite: #writingAccesses',
-		'#leftElementName => FMOne type: #AlcixVariableReference opposite: #accessWrite'
+		'#leftElementName => FMOne type: #AlcixVariableReference opposite: #accessWrite',
+		'#isReturn => FMProperty',
+		'#isNewObject => FMProperty'
 	],
 	#category : #'Alce-Famix-Entities'
 }
@@ -42,6 +44,34 @@ AlcixAccessWrite >> expandLeftMethodInvocation [
 	n receiver: self.
 	self mooseModel add: n.
 	^ n
+]
+
+{ #category : #accessing }
+AlcixAccessWrite >> isNewObject [
+
+	<FMProperty: #isNewObject type: #Boolean>
+	<generated>
+	^ isNewObject
+]
+
+{ #category : #accessing }
+AlcixAccessWrite >> isNewObject: aBool [
+
+	isNewObject := aBool
+]
+
+{ #category : #accessing }
+AlcixAccessWrite >> isReturn [
+
+	<FMProperty: #isReturn type: #Boolean>
+	<generated>
+	^ isReturn
+]
+
+{ #category : #accessing }
+AlcixAccessWrite >> isReturn: aBool [
+
+	isReturn := aBool
 ]
 
 { #category : #accessing }

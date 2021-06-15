@@ -6,6 +6,14 @@ Class {
 	#category : #'Alce-Importer'
 }
 
+{ #category : #anchor }
+AlceASTCodeImporter >> codeAnchor: aString for: aVBModulePropertyNode [
+
+	^ self state top anchor / aString / #'@src'
+	  / aVBModulePropertyNode startPosition asString / #to
+	  / aVBModulePropertyNode stopPosition asString
+]
+
 { #category : #helper }
 AlceASTCodeImporter >> ensureInContextOf: aClass [
 	(self state top isKindOf: AlcixInvocable)
@@ -210,9 +218,10 @@ AlceASTCodeImporter >> visitEquals: anAssignementOrEquals [
 	"
 	Ensure that is an assignment: 
 	"
-	anAssignementOrEquals isReturn ifFalse: [ 
-		anAssignementOrEquals isAssignment ifTrue: [ 
+	anAssignementOrEquals isAssignment
+		ifTrue: [ 
 			access := self instantiate: AlcixAccessWrite.
+			access isReturn: anAssignementOrEquals isReturn.
 			access anchor: (self
 					 codeAnchor: (self writeStringSelector: anAssignementOrEquals)
 					 for: anAssignementOrEquals).
@@ -221,7 +230,9 @@ AlceASTCodeImporter >> visitEquals: anAssignementOrEquals [
 				(self nodeToVariableReferenceName: anAssignementOrEquals left).
 			access rightElementName:
 				(self nodeToVariableReferenceName: anAssignementOrEquals right).
-			self state top addAccess: access ] ]
+			self state top addAccess: access ]
+		ifFalse: [ anAssignementOrEquals left acceptVisitor: self ].
+	anAssignementOrEquals right acceptVisitor: self
 ]
 
 { #category : #'functions - subs - events' }
@@ -240,17 +251,19 @@ AlceASTCodeImporter >> visitEvent: anEvent [
 AlceASTCodeImporter >> visitExplicitAssignement: anExplicitAssignement [
 
 	| access |
-	anExplicitAssignement isReturn ifFalse: [ 
-		access := self instantiate: AlcixAccessWrite.
-		access anchor: (self
-				 codeAnchor: (self writeStringSelector: anExplicitAssignement)
-				 for: anExplicitAssignement).
-		access isWriting: true.
-		access leftElementName:
-			(self nodeToVariableReferenceName: anExplicitAssignement left).
-		access rightElementName:
-			(self nodeToVariableReferenceName: anExplicitAssignement right).
-		self state top addAccess: access ]
+	access := self instantiate: AlcixAccessWrite.
+	access isReturn: (anExplicitAssignement isReturn).
+	access anchor: (self
+			 codeAnchor: (self writeStringSelector: anExplicitAssignement)
+			 for: anExplicitAssignement).
+	access isWriting: true.
+	access leftElementName:
+		(self nodeToVariableReferenceName: anExplicitAssignement left).
+	access rightElementName:
+		(self nodeToVariableReferenceName: anExplicitAssignement right).
+	access isNewObject: (anExplicitAssignement right isKindOf: VBNewClauseNode).
+	self state top addAccess: access.
+	anExplicitAssignement right acceptVisitor: self
 ]
 
 { #category : #invocations }
@@ -466,6 +479,6 @@ AlceASTCodeImporter >> visitVariableList: aVariableList [
 { #category : #assignments }
 AlceASTCodeImporter >> writeStringSelector: anExplicitAssignement [
 
-	^ (self nodeToString: anExplicitAssignement right) , '='
-	, (self nodeToString: anExplicitAssignement left)
+	^ (self nodeToString: anExplicitAssignement left) , '='
+	  , (self nodeToString: anExplicitAssignement right)
 ]

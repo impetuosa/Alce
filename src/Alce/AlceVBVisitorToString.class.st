@@ -20,9 +20,25 @@ AlceVBVisitorToString >> visitArgumentList: aVBArgumentListNode [
 		join: (aVBArgumentListNode arguments collect: [ :a | a acceptVisitor: self ])
 ]
 
+{ #category : #visiting }
+AlceVBVisitorToString >> visitArithmeticOperation: aVBArithmeticOperationNode [
+
+	^ aVBArithmeticOperationNode source
+]
+
 { #category : #'as yet unclassified' }
 AlceVBVisitorToString >> visitBaseType: aVBBaseTypeNode [
 	^ aVBBaseTypeNode variantToken acceptVisitor: self
+]
+
+{ #category : #visiting }
+AlceVBVisitorToString >> visitBooleanLiteral: aVBBooleanLiteralNode [ 
+	^ aVBBooleanLiteralNode token acceptVisitor: self 
+]
+
+{ #category : #visiting }
+AlceVBVisitorToString >> visitComparisonOperation: aVBComparisonOperationNode [ 
+	^ aVBComparisonOperationNode source 
 ]
 
 { #category : #'as yet unclassified' }
@@ -34,9 +50,24 @@ AlceVBVisitorToString >> visitComplexType: aVBComplexTypeNode [
 		into: [ :acc :each | acc , (each acceptVisitor: self) ]
 ]
 
+{ #category : #visiting }
+AlceVBVisitorToString >> visitConcatenationOperation: aVBConcatenationOperationNode [ 
+	^ ''
+]
+
 { #category : #'as yet unclassified' }
 AlceVBVisitorToString >> visitDictionaryAccess: aVBDictionaryAccessNode [ 
 	^ aVBDictionaryAccessNode source 
+]
+
+{ #category : #visiting }
+AlceVBVisitorToString >> visitEquals: aVBEqualsNode [ 
+	^ aVBEqualsNode source 
+]
+
+{ #category : #visiting }
+AlceVBVisitorToString >> visitIntegerLiteral: aVBIntegerLiteralNode [ 
+	^ aVBIntegerLiteralNode token acceptVisitor: self 
 ]
 
 { #category : #'as yet unclassified' }
@@ -48,12 +79,36 @@ AlceVBVisitorToString >> visitMemberAccess: aVBMemberAccessNode [
 	^ str , '.' , (aVBMemberAccessNode member acceptVisitor: self)
 ]
 
+{ #category : #visiting }
+AlceVBVisitorToString >> visitNewClause: aVBNewClauseNode [
+
+	^ aVBNewClauseNode source
+]
+
+{ #category : #visiting }
+AlceVBVisitorToString >> visitNotOperation: aVBNotOperationNode [
+
+	^ aVBNotOperationNode source
+]
+
+{ #category : #visiting }
+AlceVBVisitorToString >> visitNull: aVBNullNode [
+
+	^ aVBNullNode token acceptVisitor: self
+]
+
 { #category : #'as yet unclassified' }
 AlceVBVisitorToString >> visitParameter: aVBParameterNode [
 	aVBParameterNode type ifNil: [ ^ 'Undefined' ].
 	aVBParameterNode paramarrayToken
 		ifNil: [ ^ aVBParameterNode type acceptVisitor: self ].
 	^ 'ParamArray' , (aVBParameterNode type acceptVisitor: self)
+]
+
+{ #category : #visiting }
+AlceVBVisitorToString >> visitParentheseesExpression: aVBParentheseesExpressionNode [
+
+	^ aVBParentheseesExpressionNode source
 ]
 
 { #category : #'as yet unclassified' }
@@ -79,6 +134,11 @@ AlceVBVisitorToString >> visitSquareBracketIdentifier: aVBSquareBracketIdentifie
 	| str |
 	str := aVBSquareBracketIdentifierNode token value.
 	^ str copyFrom: 2 to: str size - 1
+]
+
+{ #category : #visiting }
+AlceVBVisitorToString >> visitStringLiteral: aVBStringLiteralNode [ 
+	^ aVBStringLiteralNode token acceptVisitor: self 
 ]
 
 { #category : #'as yet unclassified' }
