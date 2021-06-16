@@ -177,7 +177,7 @@ AlceAccessGenerator >> defineHierarchy [
 	function --|> typed.
 	globalVariable --|> variable.
 	guiClass --|> class.
-	invocation --|> accessEntity.
+	invocation --|> accessible.
 	methodInvocation --|> invocation.
 	localVariable --|> variable.
 	externalFunction --|> function.
@@ -211,7 +211,8 @@ AlceAccessGenerator >> defineHierarchy [
 AlceAccessGenerator >> defineProperties [
 
 	access property: #isWriting type: #Boolean.
-
+	access property: #isReturn type: #Boolean. 
+	accessWrite property: #isNewObject type: #Boolean.
 	referenceName property: #names type: #Object.
 	referenceName property: #isProcessedElement type: #Boolean.
 

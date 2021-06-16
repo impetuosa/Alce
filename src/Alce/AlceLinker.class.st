@@ -150,7 +150,6 @@ AlceLinker >> visitAccessRead: anAlcixAccessRead [
 { #category : #'as yet unclassified' }
 AlceLinker >> visitAccessWrite: anAlcixAccessWrite [
 	self visitAccess: anAlcixAccessWrite.
-(   anAlcixAccessWrite leftElementName printString = 'Me.lstSalesPeriod' or: [ anAlcixAccessWrite rightElementName printString = 'Me.lstSalesPeriod' ]) ifTrue: [ self halt ].
 	anAlcixAccessWrite leftElement
 		ifNil: [ (self
 				lookupVariable: anAlcixAccessWrite leftElementName

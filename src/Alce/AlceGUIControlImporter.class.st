@@ -7,7 +7,7 @@ Class {
 { #category : #'entry-point' }
 AlceGUIControlImporter >> visitFormControl: anObject [
 	| attribute |
-	self halt .
+	
 	attribute := self instantiate: AlcixAttribute.
 	attribute visibility: #Private.
 	attribute name: anObject name.
