@@ -56,7 +56,7 @@ AlceLookUp >> lookUpFrom: aNode [
 
 	| matchingUnits |
 	matchingReference assertIsSingleName.
-"	matchingReference printString = 'rs.Clone' ifTrue: [ self halt ]."
+	"	matchingReference printString = 'rs.Clone' ifTrue: [ self halt ]."
 	matchingUnits := matchingReference splitInRefs.
 
 	match := matchingUnits first.
@@ -65,26 +65,25 @@ AlceLookUp >> lookUpFrom: aNode [
 	aNode accept: self.
 
 	matchingUnits size = 1 ifTrue: [ ^ self ].
-	findings ifNil: [ ^ self ].
-	findings type ifNil: [ 
-		matchingUnits size = 1 ifFalse: [ findings := nil].
-		^ self ].
-	self assert: (findings respondsTo: #type).
 
 	findings := matchingUnits allButFirst
 		            inject: findings
 		            into: [ :lastNode :each | 
+			            (lastNode isNil or: [ lastNode type isNil ]) ifTrue: [ 
+				            findings := nil.
+				            ^ self ].
 			            lastNode type members
 				            detect: [ :m | each referersTo: m name ]
 				            ifNone: [ 
 					            lastNode type invocables
 						            detect: [ :m | each referersTo: m selector ]
 						            ifNone: [ 
-											lastNode type types  detect: [ :m | each referersTo: m name ]
-						            ifNone: [ 
-							            self flag:
-								            #WeShouldEnsureTheBasicClassAndFormsAttributesAndMethods.
-							            ^ nil] ] ] ]
+							            lastNode type types
+								            detect: [ :m | each referersTo: m name ]
+								            ifNone: [ 
+									            self flag:
+										            #WeShouldEnsureTheBasicClassAndFormsAttributesAndMethods.
+									            ^ nil ] ] ] ]
 ]
 
 { #category : #'as yet unclassified' }
