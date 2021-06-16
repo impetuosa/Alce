@@ -9,7 +9,7 @@ Class {
 { #category : #meta }
 AlcixPrimitiveType class >> annotation [
 
-	<FMClass: #PrimitiveType super: #AlcixAccessEntity>
+	<FMClass: #PrimitiveType super: #AlcixAccessible>
 	<package: #'Alce-Famix'>
 	<generated>
 	^self

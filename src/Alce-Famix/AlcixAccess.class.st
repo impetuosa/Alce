@@ -3,6 +3,7 @@ Class {
 	#superclass : #AlcixAccessible,
 	#instVars : [
 		'#isWriting => FMProperty',
+		'#isReturn => FMProperty',
 		'#rightElement => FMOne type: #AlcixAccessible opposite: #readingAccesses',
 		'#invocable => FMOne type: #AlcixInvocable opposite: #accesses',
 		'#rightElementName => FMOne type: #AlcixVariableReference opposite: #access'
@@ -70,6 +71,20 @@ AlcixAccess >> invocableGroup [
 	<generated>
 	<navigation: 'Invocable'>
 	^ MooseSpecializedGroup with: self invocable
+]
+
+{ #category : #accessing }
+AlcixAccess >> isReturn [
+
+	<FMProperty: #isReturn type: #Boolean>
+	<generated>
+	^ isReturn
+]
+
+{ #category : #accessing }
+AlcixAccess >> isReturn: anObject [
+	<generated>
+	isReturn := anObject
 ]
 
 { #category : #accessing }

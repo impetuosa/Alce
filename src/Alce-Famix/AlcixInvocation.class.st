@@ -1,8 +1,6 @@
 Class {
 	#name : #AlcixInvocation,
 	#superclass : #AlcixAccessible,
-	#traits : 'TAlceInvocation',
-	#classTraits : 'TAlceInvocation classTrait',
 	#instVars : [
 		'#sender => FMOne type: #AlcixInvocable opposite: #outgoingInvocations',
 		'#candidate => FMOne type: #AlcixInvocable opposite: #incomingInvocations',
@@ -15,7 +13,7 @@ Class {
 { #category : #meta }
 AlcixInvocation class >> annotation [
 
-	<FMClass: #Invocation super: #AlcixAccessEntity>
+	<FMClass: #Invocation super: #AlcixAccessible>
 	<package: #'Alce-Famix'>
 	<generated>
 	^self

@@ -2,10 +2,9 @@ Class {
 	#name : #AlcixAccessWrite,
 	#superclass : #AlcixAccess,
 	#instVars : [
+		'#isNewObject => FMProperty',
 		'#leftElement => FMOne type: #AlcixAccessible opposite: #writingAccesses',
-		'#leftElementName => FMOne type: #AlcixVariableReference opposite: #accessWrite',
-		'#isReturn => FMProperty',
-		'#isNewObject => FMProperty'
+		'#leftElementName => FMOne type: #AlcixVariableReference opposite: #accessWrite'
 	],
 	#category : #'Alce-Famix-Entities'
 }
@@ -56,9 +55,9 @@ AlcixAccessWrite >> isNewObject [
 ]
 
 { #category : #accessing }
-AlcixAccessWrite >> isNewObject: aBool [
-
-	isNewObject := aBool
+AlcixAccessWrite >> isNewObject: anObject [
+	<generated>
+	isNewObject := anObject
 ]
 
 { #category : #accessing }
