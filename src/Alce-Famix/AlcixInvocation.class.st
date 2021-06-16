@@ -1,6 +1,6 @@
 Class {
 	#name : #AlcixInvocation,
-	#superclass : #AlcixAccessEntity,
+	#superclass : #AlcixAccessible,
 	#traits : 'TAlceInvocation',
 	#classTraits : 'TAlceInvocation classTrait',
 	#instVars : [
