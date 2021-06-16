@@ -29,6 +29,7 @@ AlcixAccessWrite >> accept: aVisitor [
 AlcixAccessWrite >> expandLeftMethodInvocation [
 
 	| n selector sender  |
+	self halt. 
 	selector := leftElementName dropSelectorOutOfReceiver.
 	
 	"(self mooseModel instantiate: AlcixInvocableReference)

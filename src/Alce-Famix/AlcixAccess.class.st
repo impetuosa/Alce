@@ -28,14 +28,23 @@ AlcixAccess >> accept: aVisitor [
 { #category : #becoming }
 AlcixAccess >> expandMethodInvocation [
 
-	| n selector sender  |
+	| n selector sender rightNewElement |
 	selector := rightElementName dropSelectorOutOfReceiver.
 	sender := invocable.
-
+	
+	rightNewElement := self mooseModel instantiate: AlcixAccessRead.
+	rightNewElement rightElement: rightElement.
+	rightNewElement rightElementName: rightElementName .
+	rightNewElement invocable: invocable. 
+	
 	n := self mooseModel instantiate: AlcixMethodInvocation.
+	rightElement := n.
+	rightElementName := nil.
 	n selector: selector.
 	n sender: sender.
-	n receiver: self.
+	n receiver: rightNewElement.
+	
+	
 	self mooseModel add: n.
 	^ n
 ]
