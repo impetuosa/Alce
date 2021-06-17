@@ -1,6 +1,8 @@
 Class {
 	#name : #AlcixInvocation,
 	#superclass : #AlcixAccessible,
+	#traits : 'TAlceInvocation',
+	#classTraits : 'TAlceInvocation classTrait',
 	#instVars : [
 		'#sender => FMOne type: #AlcixInvocable opposite: #outgoingInvocations',
 		'#candidate => FMOne type: #AlcixInvocable opposite: #incomingInvocations',
@@ -113,6 +115,11 @@ AlcixInvocation >> senderGroup [
 	<generated>
 	<navigation: 'Sender'>
 	^ MooseSpecializedGroup with: self sender
+]
+
+{ #category : #generated }
+AlcixInvocation >> type [
+	^ candidate type 
 ]
 
 { #category : #convenience }

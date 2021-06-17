@@ -19,7 +19,7 @@ TAlceInvocation >> becomeFunctionInvocation [
 	self receiver rightElementName: nil.
 	self receiver invocable: nil.
 	self mooseModel removeEntity: self receiver.
-
+	self sender outgoingInvocations remove: self . 
 
 	self selector: nil.
 	self sender: nil.
@@ -50,7 +50,8 @@ TAlceInvocation >> becomeMethodInvocation [
 	access rightElement: sender userType me.
 	access isWriting: false.
 	access invocable: sender.
-
+	self sender outgoingInvocations remove: self . 
+	
 	self selector: nil.
 	self sender: nil.
 	self candidate: nil.
