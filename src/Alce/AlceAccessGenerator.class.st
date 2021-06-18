@@ -211,7 +211,7 @@ AlceAccessGenerator >> defineHierarchy [
 AlceAccessGenerator >> defineProperties [
 
 	access property: #isWriting type: #Boolean.
-	access property: #isReturn type: #Boolean. 
+	access property: #isReturn type: #Boolean.
 	accessWrite property: #isNewObject type: #Boolean.
 	referenceName property: #names type: #Object.
 	referenceName property: #isProcessedElement type: #Boolean.
@@ -242,7 +242,15 @@ AlceAccessGenerator >> defineProperties [
 
 	parameter property: #isOptional type: #Boolean.
 
-	variable property: #instantiatesObjectOnDefinition type: #Boolean
+	variable property: #instantiatesObjectOnDefinition type: #Boolean.
+
+
+	externalFunction property: #alias type: #String.
+	externalFunction property: #libraryName type: #String.
+
+	invocable property: #visibility type: #String.
+	localVariable property: #isConstant type: #Boolean.
+	variable property: #redim type: #Boolean
 ]
 
 { #category : #definition }

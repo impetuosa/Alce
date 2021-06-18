@@ -150,6 +150,13 @@ AlceVBVisitorToReferenceName >> visitMemberAccess: aVBMemberAccessNode [
 ]
 
 { #category : #visiting }
+AlceVBVisitorToReferenceName >> visitNegatedOperation: aVBNegatedOperationNode [
+
+	self noteProcessedElement.
+	^ aVBNegatedOperationNode value acceptVisitor: self
+]
+
+{ #category : #visiting }
 AlceVBVisitorToReferenceName >> visitNewClause: aVBNewClauseNode [
 
 	^ aVBNewClauseNode typeName acceptVisitor: self

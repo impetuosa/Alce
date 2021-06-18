@@ -2,7 +2,8 @@ Class {
 	#name : #AlcixVariable,
 	#superclass : #AlcixTypedEntity,
 	#instVars : [
-		'#instantiatesObjectOnDefinition => FMProperty'
+		'#instantiatesObjectOnDefinition => FMProperty',
+		'#redim'
 	],
 	#category : #'Alce-Famix-Entities'
 }
@@ -34,4 +35,18 @@ AlcixVariable >> instantiatesObjectOnDefinition [
 AlcixVariable >> instantiatesObjectOnDefinition: anObject [
 	<generated>
 	instantiatesObjectOnDefinition := anObject
+]
+
+{ #category : #redim }
+AlcixVariable >> redim [
+
+	<FMProperty: #redim type: #String>
+	<generated>
+	^ redim
+]
+
+{ #category : #redim }
+AlcixVariable >> redim: aString [ 
+	redim ifNotNil:[ self halt.  ] .
+	redim := aString
 ]

@@ -122,14 +122,27 @@ AlceASTCodeImporter >> visitComparisonOperation: aComparisonOperation [
 
 { #category : #'type definition' }
 AlceASTCodeImporter >> visitConstant: aConstant [
+
 	| fn |
-	fn := self instantiate: AlcixAttribute.
-	fn visibility: #Public.
+	(self state top isKindOf: AlcixModule)
+		ifTrue: [ 
+			fn := self instantiate: AlcixAttribute.
+			fn visibility: #Public.
+			self state top addMember: fn ]
+		ifFalse: [ 
+			(self state top isKindOf: AlcixInvocable)
+				ifTrue: [ 
+					fn := self instantiate: AlcixLocalVariable.
+					self state top addLocalVariable: fn ]
+				ifFalse: [ ^ self error: 'un expected ' ] ].
+
+
 	fn name: (self nodeToString: aConstant constant).
+	fn anchor: (self codeAnchor: fn name for: aConstant).
+
 	fn isConstant: true.
-	fn
-		anchor: (self codeAnchor: fn name for: aConstant). 
-	self state top addMember: fn.
+
+
 	self state push: fn.
 	super visitConstant: aConstant.
 	self state pop
@@ -199,7 +212,7 @@ AlceASTCodeImporter >> visitDictionaryAccess: aDictionaryAccess [
 AlceASTCodeImporter >> visitDimMultipleVariables: aDimMultipleVariables [
 	| var |
 	self ensureInContextOf: AlcixInvocable.
-	aDimMultipleVariables variables
+	aDimMultipleVariables variables variables 
 		do: [ :v | 
 			var := self instantiateVariable: AlcixLocalVariable from: v.
 			self state top addLocalVariable: var ]
@@ -215,7 +228,7 @@ AlceASTCodeImporter >> visitDimVariable: aDimVariable [
 			       from: aDimVariable variable.
 		self state top addLocalVariable: var.
 		^ self ].
-	(self state top isKindOf: AlcixClass) ifTrue: [ 
+	(self state top isKindOf: AlcixModule ) ifTrue: [ 
 		var := self
 			       instantiateVariable: AlcixAttribute
 			       from: aDimVariable variable.
@@ -294,14 +307,23 @@ AlceASTCodeImporter >> visitExplicitCall: anExplicitCall [
 
 { #category : #'functions - subs - events' }
 AlceASTCodeImporter >> visitExternalFunction: aDefinition [
+
 	| fn |
 	fn := self instantiate: AlcixExternalFunction.
 	fn selector: (self nodeToString: aDefinition selector).
 	fn anchor: self state top anchor / #functions / fn selector.
-	self shouldBeImplemented.
+	fn libraryName: (self nodeToString: aDefinition library).
+
+	aDefinition alias ifNotNil: [ 
+		fn alias: (self nodeToString: aDefinition alias) ].
+	aDefinition visibility
+		ifNil: [ fn visibility: #Public ]
+		ifNotNil: [ 
+		fn visibility: (self nodeToString: aDefinition visibility) ].
+
 	self state top addInvocable: fn.
 	self state push: fn.
-	super visitExternalFunction: aDefinition.
+	aDefinition parameters acceptVisitor: self.
 	self state pop
 ]
 
@@ -479,7 +501,10 @@ AlceASTCodeImporter >> visitRaiseEvent: aRaiseEvent [
 
 { #category : #'properties - variables' }
 AlceASTCodeImporter >> visitReDimVariable: aReDimVariable [
-	self shouldBeImplemented 
+
+	(self state top localVariables detect: [ :a | 
+		 a name = aReDimVariable variable name token value ]) redim:
+		(self nodeToString: aReDimVariable variable type)
 ]
 
 { #category : #'member access' }

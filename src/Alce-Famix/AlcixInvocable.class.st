@@ -8,7 +8,8 @@ Class {
 		'#localVariables => FMMany type: #AlcixLocalVariable opposite: #invocable',
 		'#outgoingInvocations => FMMany type: #AlcixInvocation opposite: #sender',
 		'#incomingInvocations => FMMany type: #AlcixInvocation opposite: #candidate',
-		'#userType => FMOne type: #AlcixUserType opposite: #invocables'
+		'#userType => FMOne type: #AlcixUserType opposite: #invocables',
+		'#visibility => FMProperty'
 	],
 	#category : #'Alce-Famix-Entities'
 }
@@ -226,4 +227,18 @@ AlcixInvocable >> userTypeGroup [
 	<generated>
 	<navigation: 'UserType'>
 	^ MooseSpecializedGroup with: self userType
+]
+
+{ #category : #adding }
+AlcixInvocable >> visibility [
+
+	<FMProperty: #visibility type: #String>
+	<generated>
+	^ visibility
+]
+
+{ #category : #adding }
+AlcixInvocable >> visibility: aValue [
+
+	^ visibility := aValue 
 ]
