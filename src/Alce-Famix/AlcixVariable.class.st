@@ -3,7 +3,7 @@ Class {
 	#superclass : #AlcixTypedEntity,
 	#instVars : [
 		'#instantiatesObjectOnDefinition => FMProperty',
-		'#redim'
+		'#redim => FMProperty'
 	],
 	#category : #'Alce-Famix-Entities'
 }
@@ -37,16 +37,16 @@ AlcixVariable >> instantiatesObjectOnDefinition: anObject [
 	instantiatesObjectOnDefinition := anObject
 ]
 
-{ #category : #redim }
+{ #category : #accessing }
 AlcixVariable >> redim [
 
-	<FMProperty: #redim type: #String>
+	<FMProperty: #redim type: #Boolean>
 	<generated>
 	^ redim
 ]
 
-{ #category : #redim }
-AlcixVariable >> redim: aString [ 
-	redim ifNotNil:[ self halt.  ] .
-	redim := aString
+{ #category : #accessing }
+AlcixVariable >> redim: anObject [
+	<generated>
+	redim := anObject
 ]

@@ -3,13 +3,13 @@ Class {
 	#superclass : #AlcixAccessEntity,
 	#instVars : [
 		'#selector => FMProperty',
+		'#visibility => FMProperty',
 		'#parameters => FMMany type: #AlcixParameter opposite: #invocable',
 		'#accesses => FMMany type: #AlcixAccess opposite: #invocable',
 		'#localVariables => FMMany type: #AlcixLocalVariable opposite: #invocable',
 		'#outgoingInvocations => FMMany type: #AlcixInvocation opposite: #sender',
 		'#incomingInvocations => FMMany type: #AlcixInvocation opposite: #candidate',
-		'#userType => FMOne type: #AlcixUserType opposite: #invocables',
-		'#visibility => FMProperty'
+		'#userType => FMOne type: #AlcixUserType opposite: #invocables'
 	],
 	#category : #'Alce-Famix-Entities'
 }
@@ -229,7 +229,7 @@ AlcixInvocable >> userTypeGroup [
 	^ MooseSpecializedGroup with: self userType
 ]
 
-{ #category : #adding }
+{ #category : #accessing }
 AlcixInvocable >> visibility [
 
 	<FMProperty: #visibility type: #String>
@@ -237,8 +237,8 @@ AlcixInvocable >> visibility [
 	^ visibility
 ]
 
-{ #category : #adding }
-AlcixInvocable >> visibility: aValue [
-
-	^ visibility := aValue 
+{ #category : #accessing }
+AlcixInvocable >> visibility: anObject [
+	<generated>
+	visibility := anObject
 ]

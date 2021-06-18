@@ -2,8 +2,8 @@ Class {
 	#name : #AlcixLocalVariable,
 	#superclass : #AlcixVariable,
 	#instVars : [
-		'#invocable => FMOne type: #AlcixInvocable opposite: #localVariables',
-		'#isConstant'
+		'#isConstant => FMProperty',
+		'#invocable => FMOne type: #AlcixInvocable opposite: #localVariables'
 	],
 	#category : #'Alce-Famix-Entities'
 }

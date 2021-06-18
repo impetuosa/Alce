@@ -2,8 +2,7 @@ Class {
 	#name : #AlcixModule,
 	#superclass : #AlcixContainer,
 	#instVars : [
-		'#globalVariables => FMMany type: #AlcixGlobalVariable opposite: #module',
-		'#astCannotLoad'
+		'#globalVariables => FMMany type: #AlcixGlobalVariable opposite: #module'
 	],
 	#category : #'Alce-Famix-Entities'
 }

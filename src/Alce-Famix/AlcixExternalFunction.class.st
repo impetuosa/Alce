@@ -2,8 +2,8 @@ Class {
 	#name : #AlcixExternalFunction,
 	#superclass : #AlcixFunction,
 	#instVars : [
-		'libraryName',
-		'alias'
+		'#alias => FMProperty',
+		'#libraryName => FMProperty'
 	],
 	#category : #'Alce-Famix-Entities'
 }
@@ -23,7 +23,7 @@ AlcixExternalFunction >> accept: aVisitor [
 
 ]
 
-{ #category : #visiting }
+{ #category : #accessing }
 AlcixExternalFunction >> alias [
 
 	<FMProperty: #alias type: #String>
@@ -31,13 +31,13 @@ AlcixExternalFunction >> alias [
 	^ alias
 ]
 
-{ #category : #visiting }
-AlcixExternalFunction >> alias: aName [
-
-	^ alias := aName
+{ #category : #accessing }
+AlcixExternalFunction >> alias: anObject [
+	<generated>
+	alias := anObject
 ]
 
-{ #category : #visiting }
+{ #category : #accessing }
 AlcixExternalFunction >> libraryName [
 
 	<FMProperty: #libraryName type: #String>
@@ -45,8 +45,8 @@ AlcixExternalFunction >> libraryName [
 	^ libraryName
 ]
 
-{ #category : #visiting }
-AlcixExternalFunction >> libraryName: aName [
-
-	^ libraryName := aName
+{ #category : #accessing }
+AlcixExternalFunction >> libraryName: anObject [
+	<generated>
+	libraryName := anObject
 ]
