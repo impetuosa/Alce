@@ -88,6 +88,16 @@ AlcixUserType >> membersGroup [
 	^ MooseSpecializedGroup withAll: self members asSet
 ]
 
+{ #category : #navigation }
+AlcixUserType >> printOn: aStream [
+
+	aStream
+		nextPutAll: (self class name copyReplaceAll: 'Alcix' with: '');
+		nextPutAll: '(';
+		nextPutAll: name;
+		nextPutAll: ')'
+]
+
 { #category : #generated }
 AlcixUserType >> type [
 	^ self 

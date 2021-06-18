@@ -37,3 +37,21 @@ AlcixTypedEntity >> name: anObject [
 	<generated>
 	name := anObject
 ]
+
+{ #category : #accessing }
+AlcixTypedEntity >> printOn: aStream [
+
+	aStream
+		nextPutAll: self class name;
+		nextPutAll: '('.
+
+	typeName printOn: aStream.
+
+	type
+		ifNil: [ aStream nextPutAll: '(notsolved)' ]
+		ifNotNil: [ aStream nextPutAll: '(solved)' ].
+	aStream nextPutAll: ' '.
+	aStream
+		nextPutAll: name;
+		nextPutAll: ')'
+]

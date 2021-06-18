@@ -46,6 +46,14 @@ AlcixArgument >> invocationGroup [
 	^ MooseSpecializedGroup with: self invocation
 ]
 
+{ #category : #navigation }
+AlcixArgument >> printOn: aStream [
+
+	aStream nextPutAll: 'Arg('.
+	value printOn: aStream.
+	aStream nextPutAll: ')'
+]
+
 { #category : #accessing }
 AlcixArgument >> value [
 

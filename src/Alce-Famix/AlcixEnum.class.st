@@ -52,3 +52,15 @@ AlcixEnum >> enumValuesGroup [
 	<navigation: 'EnumValues'>
 	^ MooseSpecializedGroup withAll: self enumValues asSet
 ]
+
+{ #category : #accessing }
+AlcixEnum >> printOn: aStream [
+
+	aStream
+		nextPutAll: 'Enum';
+		nextPutAll: '(';
+		nextPutAll: name;
+		nextPutAll: '-#';
+		nextPutAll: enumValues size asString;
+		nextPutAll: ')'
+]

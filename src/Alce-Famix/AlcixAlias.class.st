@@ -22,6 +22,17 @@ AlcixAlias >> accept: aVisitor [
 ]
 
 { #category : #accessing }
+AlcixAlias >> printOn: aStream [
+
+	aStream
+		nextPutAll: 'Alias(';
+		nextPutAll: name;
+		nextPutAll: '=>'.
+	typeName printOn: aStream.
+	aStream nextPutAll: ')'
+]
+
+{ #category : #accessing }
 AlcixAlias >> userType [
 	^ container 
 ]

@@ -35,3 +35,13 @@ AlcixLibrary >> isBuiltIn: anObject [
 	<generated>
 	isBuiltIn := anObject
 ]
+
+{ #category : #accessing }
+AlcixLibrary >> printOn: aStream [
+
+	aStream
+		nextPutAll: 'Library';
+		nextPutAll: '(';
+		nextPutAll: name;
+		nextPutAll: ')'
+]
