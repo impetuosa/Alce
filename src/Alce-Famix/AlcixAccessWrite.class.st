@@ -107,10 +107,11 @@ AlcixAccessWrite >> leftElementName: anObject [
 { #category : #accessing }
 AlcixAccessWrite >> printOn: aStream [
 
-	super printOn: aStream.
 	leftElementName printOn: aStream.
 	aStream nextPutAll:
-		(leftElement ifNil: [ '(solved)' ] ifNotNil: [ '(notsolved)' ])
+		(leftElement ifNil: [ '(solved)' ] ifNotNil: [ '(notsolved)' ]).
+	aStream nextPutAll: '='.
+	super printOn: aStream
 ]
 
 { #category : #setting }

@@ -23,10 +23,16 @@ AlcixMethodInvocation >> accept: aVisitor [
 ]
 
 { #category : #accessing }
-AlcixMethodInvocation >> printOn: aStream [ 
+AlcixMethodInvocation >> printOn: aStream [
+
+	aStream nextPutAll: 'call '.
 	receiver printOn: aStream.
 	aStream nextPutAll: '.'.
-	selector printOn: aStream
+	selector printOn: aStream.
+	aStream
+		nextPutAll: '(';
+		nextPutAll: (',' join: (arguments collect: [ :a | a printString ]));
+		nextPutAll: ')'
 ]
 
 { #category : #accessing }

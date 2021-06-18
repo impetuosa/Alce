@@ -185,8 +185,10 @@ AlcixInvocable >> printOn: aStream [
 		nextPutAll: (self class name copyFrom: 6 to: self class name size);
 		space;
 		nextPutAll: selector;
+		nextPutAll: '(#';
 		nextPutAll:
-			(parameters ifNil: [ '0' ] ifNotNil: [ parameters size asString ])
+			(parameters ifNil: [ '0' ] ifNotNil: [ parameters size asString ]);
+		nextPutAll: ')'
 ]
 
 { #category : #accessing }

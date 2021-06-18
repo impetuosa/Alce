@@ -80,6 +80,17 @@ AlcixInvocation >> candidateGroup [
 ]
 
 { #category : #accessing }
+AlcixInvocation >> printOn: aStream [
+
+	aStream nextPutAll: 'call '.
+	selector printOn: aStream.
+	aStream
+		nextPutAll: '(';
+		nextPutAll: (',' join: (arguments collect: [ :a | a printString ]));
+		nextPutAll: ')'
+]
+
+{ #category : #accessing }
 AlcixInvocation >> selector [
 	"Relation named: #selector type: #AlcixInvocableReference opposite: #invocation"
 

@@ -104,11 +104,12 @@ AlcixAccess >> isWriting: anObject [
 { #category : #accessing }
 AlcixAccess >> printOn: aStream [
 
-	rightElementName ifNil: [ 
-		rightElement ifNotNil: [ rightElement selector printOn: aStream ] ] ifNotNil: [
-		rightElementName printOn: aStream. 
-		
-		].
+	rightElementName
+		ifNil: [ 
+			rightElement
+				ifNil: [ aStream nextPutAll: 'UninterpretedExpression' ]
+				ifNotNil: [ rightElement selector printOn: aStream ] ]
+		ifNotNil: [ rightElementName printOn: aStream ].
 	aStream nextPutAll:
 		(rightElement ifNotNil: [ '(solved)' ] ifNil: [ '(notsolved)' ])
 ]

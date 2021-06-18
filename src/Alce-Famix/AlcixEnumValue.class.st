@@ -74,3 +74,13 @@ AlcixEnumValue >> name: anObject [
 	<generated>
 	name := anObject
 ]
+
+{ #category : #navigation }
+AlcixEnumValue >> printOn: aStream [
+
+	aStream
+		nextPutAll: 'Enum ';
+		nextPutAll: enum name;
+		nextPutAll: '.';
+		nextPutAll: name
+]
