@@ -2,7 +2,8 @@ Class {
 	#name : #AlcixModule,
 	#superclass : #AlcixContainer,
 	#instVars : [
-		'#globalVariables => FMMany type: #AlcixGlobalVariable opposite: #module'
+		'#globalVariables => FMMany type: #AlcixGlobalVariable opposite: #module',
+		'#astCannotLoad'
 	],
 	#category : #'Alce-Famix-Entities'
 }
@@ -26,6 +27,11 @@ AlcixModule >> accept: aVisitor [
 AlcixModule >> addGlobalVariable: anObject [
 	<generated>
 	^ self globalVariables add: anObject
+]
+
+{ #category : #testing }
+AlcixModule >> astCannotLoad [
+	 astCannotLoad := true. 
 ]
 
 { #category : #accessing }

@@ -49,11 +49,12 @@ AlceASTCodeImporter >> instantiateFlatInvocation: selector for: aCall [
 	call selector: selector.
 	call anchor:
 		(self codeAnchor: (self nodeToString: aCall selector) for: aCall).
-	aCall arguments arguments do: [ :a | 
-		| arg |
-		arg := self instantiate: AlcixArgument.
-		arg value: (self nodeToString: a).
-		call addArgument: arg ].
+	aCall arguments ifNotNil: [ :r | 
+		r arguments do: [ :a | 
+			| arg |
+			arg := self instantiate: AlcixArgument.
+			arg value: (self nodeToString: a).
+			call addArgument: arg ] ].
 	self state top addOutgoingInvocation: call
 ]
 
@@ -80,11 +81,11 @@ AlceASTCodeImporter >> instantiateMethodInvocation: selector for: aCall [
 	call selector: selector.
 	call anchor: (self codeAnchor: selector printString for: aCall).
 
-	aCall arguments arguments do: [ :a | 
+	aCall arguments ifNotNil: [ :col | col arguments do: [ :a | 
 		| arg |
 		arg := self instantiate: AlcixArgument.
 		arg value: (self nodeToString: a).
-		call addArgument: arg ].
+		call addArgument: arg ].].
 	self state top addOutgoingInvocation: call
 ]
 
@@ -130,7 +131,7 @@ AlceASTCodeImporter >> visitConstant: aConstant [
 		anchor: (self codeAnchor: fn name for: aConstant). 
 	self state top addMember: fn.
 	self state push: fn.
-	super visitSubDefinition: aConstant.
+	super visitConstant: aConstant.
 	self state pop
 ]
 
@@ -156,9 +157,12 @@ AlceASTCodeImporter >> visitDefineEnum: aDefineEnum [
 	self state top addType: en.
 	i := 0.
 	aDefineEnum fields do: [ :d | 
-		i := d value
-			     ifNil: [ i + 1 ]
-			     ifNotNil: [ :v | v token value asNumber ].
+		i := d value ifNil: [ i + 1 ] ifNotNil: [ :v | 
+			     (v isKindOf: VBNegatedOperationNode)
+				     ifTrue: [ -1 * v value token value asNumber ]
+				     ifFalse: [ v token value asNumber ] ].
+
+
 		en addEnumValue: ((self instantiate: AlcixEnumValue)
 				 name: (self nodeToString: d name);
 				 Value: i;
@@ -203,12 +207,22 @@ AlceASTCodeImporter >> visitDimMultipleVariables: aDimMultipleVariables [
 
 { #category : #'properties - variables' }
 AlceASTCodeImporter >> visitDimVariable: aDimVariable [
+
 	| var |
-	self ensureInContextOf: AlcixInvocable.
-	var := self
-		instantiateVariable: AlcixLocalVariable
-		from: aDimVariable variable.
-	self state top addLocalVariable: var
+	(self state top isKindOf: AlcixInvocable) ifTrue: [ 
+		var := self
+			       instantiateVariable: AlcixLocalVariable
+			       from: aDimVariable variable.
+		self state top addLocalVariable: var.
+		^ self ].
+	(self state top isKindOf: AlcixClass) ifTrue: [ 
+		var := self
+			       instantiateVariable: AlcixAttribute
+			       from: aDimVariable variable.
+		var visibility: #Public.
+		self state top addMember: var.
+		^ self ].
+	self error: 'Unexpected case .'
 ]
 
 { #category : #assignments }
@@ -238,9 +252,10 @@ AlceASTCodeImporter >> visitEquals: anAssignementOrEquals [
 { #category : #'functions - subs - events' }
 AlceASTCodeImporter >> visitEvent: anEvent [
 	| fn |
+	
 	fn := self instantiate: AlcixEvent.
-	fn selector: anEvent name.
-	fn anchor: self state top anchor / #events / anEvent name.
+	fn selector: (self nodeToString: anEvent selector).
+	fn anchor: self state top anchor / #events / fn selector.
 	self state top addInvocable: fn.
 	self state push: fn.
 	super visitEvent: anEvent.
@@ -268,8 +283,13 @@ AlceASTCodeImporter >> visitExplicitAssignement: anExplicitAssignement [
 
 { #category : #invocations }
 AlceASTCodeImporter >> visitExplicitCall: anExplicitCall [
-	self instantiateInvocation: anExplicitCall.
-	anExplicitCall arguments acceptVisitor: self
+
+	| param |
+	param := anExplicitCall selector isIdentifier
+		         ifTrue: [ anExplicitCall ]
+		         ifFalse: [ anExplicitCall selector ].
+	self instantiateInvocation: param.
+	anExplicitCall arguments ifNotNil: [ :a | a acceptVisitor: self ]
 ]
 
 { #category : #'functions - subs - events' }
@@ -385,22 +405,40 @@ AlceASTCodeImporter >> visitModuleProperty: aModuleProperty [
 
 { #category : #'properties - variables' }
 AlceASTCodeImporter >> visitModulePropertyGet: aModulePropertyGet [
-	| acc statement |
+
+	| acc statement kindSymbol attributeName |
 	acc := self instantiate: AlcixAttributeAccessor.
-	acc kind: aModulePropertyGet getToken value asSymbol.
+	kindSymbol := aModulePropertyGet getToken ifNil: [ 
+		              aModulePropertyGet setToken ].
+	kindSymbol := kindSymbol ifNil: [ aModulePropertyGet letToken ].
+	acc kind: kindSymbol value asSymbol.
 	acc selector: (self nodeToString: aModulePropertyGet selector).
-	self assert: acc kind = #Get.
+
 	acc anchor: self state top anchor / #accessors / acc selector.
 	"Obtain property name from the body of the accessor "
-	statement := (aModulePropertyGet block statements
-		select: [ :s | 
-			{VBExplicitAssignementNode.
-			VBEqualsNode} includes: s class ])
-		detect: [ :s | (self nodeToString: s left) = acc selector ].
-	acc
-		attribute:
-			(self state top members
-				detect: [ :p | p name = (self nodeToString: statement right) ])
+
+	acc kind = #Get
+		ifTrue: [ 
+			statement := (aModulePropertyGet block statements select: [ :s | 
+				              {  VBExplicitAssignementNode.
+					              VBEqualsNode } includes: s class ]) detect: [ :s | 
+				             (self nodeToString: s left) = acc selector ].
+			attributeName := self nodeToString: statement right ]
+		ifFalse: [ 	
+			statement := (aModulePropertyGet block allNodesSelect: [ :s | 
+				              {  VBExplicitAssignementNode.
+					              VBEqualsNode } includes: s class ]) detect: [ :s | 
+				             (self nodeToString: s right) =  (self nodeToString: aModulePropertyGet parameters parameters first name ) ].
+			attributeName := self nodeToString: statement left ].
+			
+		
+	acc attribute:
+		(self state top members detect: [ :p | p name = attributeName ]).
+	self state push: acc. 
+	aModulePropertyGet parameters acceptVisitor: self .
+	self state pop. 
+	
+
 ]
 
 { #category : #'functions - subs - events' }
