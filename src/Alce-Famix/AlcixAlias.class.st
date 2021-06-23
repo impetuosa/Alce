@@ -23,7 +23,6 @@ AlcixAlias >> accept: aVisitor [
 
 { #category : #accessing }
 AlcixAlias >> printOn: aStream [
-
 	aStream
 		nextPutAll: 'Alias(';
 		nextPutAll: name;

@@ -14,8 +14,36 @@ AlcixEntity class >> annotation [
 ]
 
 { #category : #meta }
+AlcixEntity class >> entryName [
+
+	^ self name copyReplaceAll: 'Alcix' with: ''
+]
+
+{ #category : #meta }
 AlcixEntity class >> metamodel [
 
 	<generated>
 	^ AlcixModel metamodel
+]
+
+{ #category : #accessing }
+AlcixEntity >> allChildren [ 
+]
+
+{ #category : #accessing }
+AlcixEntity >> color [
+
+	^ self colorIfAbsent: [ Color transparent ]
+]
+
+{ #category : #accessing }
+AlcixEntity >> color: aColor [
+
+	self attributeAt: #Color put: aColor
+]
+
+{ #category : #accessing }
+AlcixEntity >> colorIfAbsent: aBlock [
+
+	^ self attributeAt: #Color ifAbsent: [ aBlock value ]
 ]

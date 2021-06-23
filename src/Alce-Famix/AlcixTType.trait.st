@@ -46,6 +46,11 @@ AlcixTType >> containerGroup [
 	^ MooseSpecializedGroup with: self container
 ]
 
+{ #category : #navigation }
+AlcixTType >> containerName [
+ 	^ container ifNotNil: [ container name ] ifNil: [ 'None' ]
+]
+
 { #category : #accessing }
 AlcixTType >> name [
 

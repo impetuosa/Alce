@@ -53,6 +53,11 @@ TAlceModel >> queries [
 ]
 
 { #category : #'instance creation' }
+TAlceModel >> references [
+	^ self select: [ :m | m isKindOf: AlcixReference ]
+]
+
+{ #category : #'instance creation' }
 TAlceModel >> reports [
 	^ self select: [ :m | m class = AlcixReport ]
 ]

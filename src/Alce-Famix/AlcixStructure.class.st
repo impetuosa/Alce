@@ -18,3 +18,9 @@ AlcixStructure >> accept: aVisitor [
 	^ aVisitor visitStructure: self
 
 ]
+
+{ #category : #visiting }
+AlcixStructure >> types [
+
+	^ {  }
+]
