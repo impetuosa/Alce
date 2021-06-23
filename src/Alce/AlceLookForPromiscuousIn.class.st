@@ -4,6 +4,12 @@ Class {
 	#category : #'Alce-Linker'
 }
 
+{ #category : #visiting }
+AlceLookForPromiscuousIn >> visitExternalFunction: anAlcixExternalFunction [
+
+	^ self visitFunction: anAlcixExternalFunction
+]
+
 { #category : #'as yet unclassified' }
 AlceLookForPromiscuousIn >> visitFunction: aFunction [
 
@@ -30,4 +36,13 @@ AlceLookForPromiscuousIn >> visitModule: anAlcixModule [
 	(self matches: anAlcixModule name)
 		ifTrue: [ self findings: anAlcixModule ]
 		ifFalse: [ super visitModule: anAlcixModule ]
+]
+
+{ #category : #visiting }
+AlceLookForPromiscuousIn >> visitPrimitiveType: anAlcixPrimitiveType [ 
+
+
+	(self matches: anAlcixPrimitiveType name)
+		ifTrue: [ self findings: anAlcixPrimitiveType ]
+		ifFalse: [  ]
 ]

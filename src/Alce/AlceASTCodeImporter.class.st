@@ -61,6 +61,7 @@ AlceASTCodeImporter >> instantiateFlatInvocation: selector for: aCall [
 { #category : #invocations }
 AlceASTCodeImporter >> instantiateInvocation: aCall [
 	| selector |
+	aCall selector ifNil: [ self flag: #ShouldManageArrayAccessInHere . ^ self ].
 	selector := self nodeToInvocableReferenceName: aCall selector.
 	selector selectorSeemsToBeMethodInvocation
 		ifTrue: [ self instantiateMethodInvocation: selector for: aCall ]
@@ -389,7 +390,6 @@ AlceASTCodeImporter >> visitMemberAccess: aMemberAccess [
 
 { #category : #'type definition' }
 AlceASTCodeImporter >> visitModule: aModule [
-
 	(self state top isKindOf: AlcixClass) ifTrue: [ 
 		self state top addMember:
 			(self registerSpecialVariable: #Me type: self state top) ].
@@ -442,25 +442,27 @@ AlceASTCodeImporter >> visitModulePropertyGet: aModulePropertyGet [
 	acc kind = #Get
 		ifTrue: [ 
 			statement := (aModulePropertyGet block statements select: [ :s | 
-				              {  VBExplicitAssignementNode.
+				              { 
+					              VBExplicitAssignementNode.
 					              VBEqualsNode } includes: s class ]) detect: [ :s | 
-				             (self nodeToString: s left) = acc selector ].
-			attributeName := self nodeToString: statement right ]
-		ifFalse: [ 	
+				             (self nodeToString: s left) = acc selector ] ifNone: [nil].
+			attributeName := statement ifNotNil: [ self nodeToString: statement right] ]
+		ifFalse: [ 
 			statement := (aModulePropertyGet block allNodesSelect: [ :s | 
-				              {  VBExplicitAssignementNode.
+				              { 
+					              VBExplicitAssignementNode.
 					              VBEqualsNode } includes: s class ]) detect: [ :s | 
-				             (self nodeToString: s right) =  (self nodeToString: aModulePropertyGet parameters parameters first name ) ].
-			attributeName := self nodeToString: statement left ].
-			
-		
-	acc attribute:
-		(self state top members detect: [ :p | p name = attributeName ]).
-	self state push: acc. 
-	aModulePropertyGet parameters acceptVisitor: self .
-	self state pop. 
-	
+				             (self nodeToString: s right) = (self nodeToString:
+					              aModulePropertyGet parameters parameters first name) ] ifNone: [nil] .
+			attributeName := statement ifNotNil: [ 
+				                 self nodeToString: statement left ] ].
 
+
+	acc attribute: (attributeName ifNotNil: [ 
+			 self state top members detect: [ :p | p name = attributeName ]ifNone: [ nil ] ] ).
+	self state push: acc.
+	aModulePropertyGet parameters acceptVisitor: self.
+	self state pop
 ]
 
 { #category : #'functions - subs - events' }
@@ -490,11 +492,24 @@ AlceASTCodeImporter >> visitRaiseError: aRaiseError [
 { #category : #invocations }
 AlceASTCodeImporter >> visitRaiseEvent: aRaiseEvent [
 
-	| call |
+	| call args sel |
+	args := (aRaiseEvent selector class name asLowercase includesSubstring: 
+		         'identifier')
+		        ifTrue: [ 
+			        sel := aRaiseEvent selector.
+			        args := #(  ) ]
+		        ifFalse: [ 
+			        sel := aRaiseEvent selector selector.
+			        args := aRaiseEvent selector arguments arguments ].
 	call := self instantiate: AlcixRaiseEvent.
-	call selector: (self nodeToString: aRaiseEvent selector).
+	call selector: (self nodeToInvocableReferenceName: sel).
 	call anchor: (self codeAnchor: call selector for: aRaiseEvent).
 
+	args do: [ :a | 
+		| arg |
+		arg := self instantiate: AlcixArgument.
+		arg value: (self nodeToString: a).
+		call addArgument: arg ].
 	self state top addOutgoingInvocation: call.
 	super visitRaiseEvent: aRaiseEvent
 ]
@@ -502,9 +517,9 @@ AlceASTCodeImporter >> visitRaiseEvent: aRaiseEvent [
 { #category : #'properties - variables' }
 AlceASTCodeImporter >> visitReDimVariable: aReDimVariable [
 
-	(self state top localVariables detect: [ :a | 
-		 a name = aReDimVariable variable name token value ]) redim:
-		(self nodeToString: aReDimVariable variable type)
+self state top localVariables detect: [ :a | 
+		 a name = aReDimVariable variable name token value ] ifFound: [ : e | e redim:
+		(self nodeToString: aReDimVariable variable type)] ifNone: [  ]
 ]
 
 { #category : #'member access' }

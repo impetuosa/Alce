@@ -113,6 +113,17 @@ AlceLookUp >> visitClass: anAlcixClass [
 ]
 
 { #category : #visiting }
+AlceLookUp >> visitEvent: anAlcixEvent [ 
+	self visitFunction: anAlcixEvent 
+]
+
+{ #category : #visiting }
+AlceLookUp >> visitExternalFunction: anAlcixExternalFunction [
+
+	^ self visitFunction: anAlcixExternalFunction
+]
+
+{ #category : #visiting }
 AlceLookUp >> visitForm: anAlcixForm [ 
 	self visitClass: anAlcixForm 
 ]
@@ -141,6 +152,14 @@ AlceLookUp >> visitModule: anModule [
 AlceLookUp >> visitParameter: anAlcixParameter [
 
 	anAlcixParameter type ifNotNil: [ :t | t accept: self ]
+]
+
+{ #category : #visiting }
+AlceLookUp >> visitPrimitiveType: anAlcixPrimitiveType [
+
+	self
+		lookIn: anAlcixPrimitiveType
+		or: [ anAlcixPrimitiveType container accept: self ]
 ]
 
 { #category : #visiting }

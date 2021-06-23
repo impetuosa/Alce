@@ -23,6 +23,12 @@ AlceLookForTypesIn >> visitClass: anAlcixClass [
 ]
 
 { #category : #visiting }
+AlceLookForTypesIn >> visitExternalFunction: anAlcixExternalFunction [
+
+	self visitFunction: anAlcixExternalFunction
+]
+
+{ #category : #visiting }
 AlceLookForTypesIn >> visitForm: anAlcixForm [
 	super visitForm: anAlcixForm.
 	self hasFinding

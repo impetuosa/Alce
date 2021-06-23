@@ -31,6 +31,13 @@ AlcixAttribute >> addAttributeAccessor: anObject [
 	^ self attributeAccessors add: anObject
 ]
 
+{ #category : #converting }
+AlcixAttribute >> asType [
+
+	self assert: typeName names size = 1.
+	^ userType types detect: [ :t | t name = typeName names first ]
+]
+
 { #category : #accessing }
 AlcixAttribute >> attributeAccessors [
 	"Relation named: #attributeAccessors type: #AlcixAttributeAccessor opposite: #attribute"

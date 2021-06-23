@@ -36,6 +36,12 @@ AlceLookForFunctionOrSubIn >> visitEnum: anAlcixEnum [
 ]
 
 { #category : #visiting }
+AlceLookForFunctionOrSubIn >> visitExternalFunction: anAlcixExternalFunction [
+
+	^ self visitFunction: anAlcixExternalFunction
+]
+
+{ #category : #visiting }
 AlceLookForFunctionOrSubIn >> visitFunction: aFunction [
 	(self matches: aFunction selector) ifTrue: [ self findings: aFunction ]
 ]

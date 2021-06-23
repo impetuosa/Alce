@@ -48,6 +48,11 @@ AlceLookIn >> visitCollection: aCollection [
 ]
 
 { #category : #'as yet unclassified' }
+AlceLookIn >> visitEvent: anAlcixSubProcedure [
+	^ self visitFunction: anAlcixSubProcedure
+]
+
+{ #category : #'as yet unclassified' }
 AlceLookIn >> visitForm: anAlcixForm [
 	^ self visitClass: anAlcixForm
 ]

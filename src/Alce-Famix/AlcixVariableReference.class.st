@@ -66,3 +66,8 @@ AlcixVariableReference >> dropSelectorOutOfReceiver [
 	names := names allButLast.
 	^ piece
 ]
+
+{ #category : #accessing }
+AlcixVariableReference >> invocation: anAlcixInvocation [ 
+
+]
