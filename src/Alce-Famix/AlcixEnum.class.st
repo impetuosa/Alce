@@ -54,6 +54,18 @@ AlcixEnum >> enumValuesGroup [
 ]
 
 { #category : #accessing }
+AlcixEnum >> invocables [
+
+	^ {  }
+]
+
+{ #category : #accessing }
+AlcixEnum >> members [
+
+	^ enumValues
+]
+
+{ #category : #accessing }
 AlcixEnum >> printOn: aStream [
 
 	aStream
@@ -63,4 +75,10 @@ AlcixEnum >> printOn: aStream [
 		nextPutAll: '-#';
 		nextPutAll: enumValues size asString;
 		nextPutAll: ')'
+]
+
+{ #category : #visiting }
+AlcixEnum >> types [
+
+	^ {  }
 ]

@@ -3,7 +3,8 @@ Class {
 	#superclass : #AlcixContainer,
 	#instVars : [
 		'#globalVariables => FMMany type: #AlcixGlobalVariable opposite: #module',
-		'#astCannotLoad'
+		'#astCannotLoad',
+		'#ast'
 	],
 	#category : #'Alce-Famix-Entities'
 }
@@ -27,6 +28,21 @@ AlcixModule >> accept: aVisitor [
 AlcixModule >> addGlobalVariable: anObject [
 	<generated>
 	^ self globalVariables add: anObject
+]
+
+{ #category : #navigation }
+AlcixModule >> asText [
+
+	^ AlceASTTextComposer new
+		  ast: self ast;
+		  text
+]
+
+{ #category : #navigation }
+AlcixModule >> ast [
+
+	^ ast ifNil: [ ast := self anchor readEntity ast ]
+	
 ]
 
 { #category : #testing }

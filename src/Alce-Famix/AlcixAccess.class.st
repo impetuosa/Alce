@@ -26,6 +26,12 @@ AlcixAccess >> accept: aVisitor [
 
 ]
 
+{ #category : #accessing }
+AlcixAccess >> color [
+
+	^ self colorIfAbsent: [ invocable color ]
+]
+
 { #category : #becoming }
 AlcixAccess >> expandMethodInvocation [
 
