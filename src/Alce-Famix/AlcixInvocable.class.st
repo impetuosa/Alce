@@ -3,6 +3,7 @@ Class {
 	#superclass : #AlcixAccessEntity,
 	#instVars : [
 		'#selector => FMProperty',
+		'#visibility => FMProperty',
 		'#parameters => FMMany type: #AlcixParameter opposite: #invocable',
 		'#accesses => FMMany type: #AlcixAccess opposite: #invocable',
 		'#localVariables => FMMany type: #AlcixLocalVariable opposite: #invocable',
@@ -226,4 +227,18 @@ AlcixInvocable >> userTypeGroup [
 	<generated>
 	<navigation: 'UserType'>
 	^ MooseSpecializedGroup with: self userType
+]
+
+{ #category : #accessing }
+AlcixInvocable >> visibility [
+
+	<FMProperty: #visibility type: #String>
+	<generated>
+	^ visibility
+]
+
+{ #category : #accessing }
+AlcixInvocable >> visibility: anObject [
+	<generated>
+	visibility := anObject
 ]

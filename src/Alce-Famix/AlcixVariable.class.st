@@ -2,7 +2,8 @@ Class {
 	#name : #AlcixVariable,
 	#superclass : #AlcixTypedEntity,
 	#instVars : [
-		'#instantiatesObjectOnDefinition => FMProperty'
+		'#instantiatesObjectOnDefinition => FMProperty',
+		'#redim => FMProperty'
 	],
 	#category : #'Alce-Famix-Entities'
 }
@@ -34,4 +35,18 @@ AlcixVariable >> instantiatesObjectOnDefinition [
 AlcixVariable >> instantiatesObjectOnDefinition: anObject [
 	<generated>
 	instantiatesObjectOnDefinition := anObject
+]
+
+{ #category : #accessing }
+AlcixVariable >> redim [
+
+	<FMProperty: #redim type: #Boolean>
+	<generated>
+	^ redim
+]
+
+{ #category : #accessing }
+AlcixVariable >> redim: anObject [
+	<generated>
+	redim := anObject
 ]

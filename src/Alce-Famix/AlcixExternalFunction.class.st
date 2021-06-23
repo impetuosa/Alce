@@ -1,6 +1,10 @@
 Class {
 	#name : #AlcixExternalFunction,
 	#superclass : #AlcixFunction,
+	#instVars : [
+		'#alias => FMProperty',
+		'#libraryName => FMProperty'
+	],
 	#category : #'Alce-Famix-Entities'
 }
 
@@ -17,4 +21,32 @@ AlcixExternalFunction class >> annotation [
 AlcixExternalFunction >> accept: aVisitor [
 	^ aVisitor visitExternalFunction: self
 
+]
+
+{ #category : #accessing }
+AlcixExternalFunction >> alias [
+
+	<FMProperty: #alias type: #String>
+	<generated>
+	^ alias
+]
+
+{ #category : #accessing }
+AlcixExternalFunction >> alias: anObject [
+	<generated>
+	alias := anObject
+]
+
+{ #category : #accessing }
+AlcixExternalFunction >> libraryName [
+
+	<FMProperty: #libraryName type: #String>
+	<generated>
+	^ libraryName
+]
+
+{ #category : #accessing }
+AlcixExternalFunction >> libraryName: anObject [
+	<generated>
+	libraryName := anObject
 ]

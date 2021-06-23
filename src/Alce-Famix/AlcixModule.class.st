@@ -44,6 +44,11 @@ AlcixModule >> ast [
 	
 ]
 
+{ #category : #testing }
+AlcixModule >> astCannotLoad [
+	 astCannotLoad := true. 
+]
+
 { #category : #accessing }
 AlcixModule >> globalVariables [
 	"Relation named: #globalVariables type: #AlcixGlobalVariable opposite: #module"

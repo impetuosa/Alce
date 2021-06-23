@@ -61,20 +61,6 @@ AlcixAccessWrite >> isNewObject: anObject [
 ]
 
 { #category : #accessing }
-AlcixAccessWrite >> isReturn [
-
-	<FMProperty: #isReturn type: #Boolean>
-	<generated>
-	^ isReturn
-]
-
-{ #category : #accessing }
-AlcixAccessWrite >> isReturn: aBool [
-
-	isReturn := aBool
-]
-
-{ #category : #accessing }
 AlcixAccessWrite >> leftElement [
 	"Relation named: #leftElement type: #AlcixAccessible opposite: #writingAccesses"
 

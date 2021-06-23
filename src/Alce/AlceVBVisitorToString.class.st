@@ -70,6 +70,12 @@ AlceVBVisitorToString >> visitIntegerLiteral: aVBIntegerLiteralNode [
 	^ aVBIntegerLiteralNode token acceptVisitor: self 
 ]
 
+{ #category : #visiting }
+AlceVBVisitorToString >> visitInterval: aVBIntervalNode [
+
+	^ aVBIntervalNode source
+]
+
 { #category : #'as yet unclassified' }
 AlceVBVisitorToString >> visitMemberAccess: aVBMemberAccessNode [
 	| str |
@@ -77,6 +83,11 @@ AlceVBVisitorToString >> visitMemberAccess: aVBMemberAccessNode [
 		ifNil: [ '' ]
 		ifNotNil: [ :a | a acceptVisitor: self ].
 	^ str , '.' , (aVBMemberAccessNode member acceptVisitor: self)
+]
+
+{ #category : #visiting }
+AlceVBVisitorToString >> visitNegatedOperation: aVBNegatedOperationNode [ 
+	^ '-' , (aVBNegatedOperationNode value acceptVisitor: self )
 ]
 
 { #category : #visiting }
@@ -143,8 +154,8 @@ AlceVBVisitorToString >> visitStringLiteral: aVBStringLiteralNode [
 
 { #category : #'as yet unclassified' }
 AlceVBVisitorToString >> visitTypeSize: aVBTypeSizeNode [ 
-	self assert: aVBTypeSizeNode sizes isEmpty.
-	^ '()'
+
+	^ '({1})' format: { ',' join: (aVBTypeSizeNode sizes collect: [  :s  | s acceptVisitor: self ]) }
 ]
 
 { #category : #'as yet unclassified' }
