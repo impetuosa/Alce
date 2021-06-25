@@ -91,9 +91,9 @@ MiAlceTypeBrowser >> newInvocablesTable [
 		  addColumn: ((SpImageTableColumn new
 				    title: 'Resolved';
 				    evaluated: [ :each | 
-					    (each isKindOf: AlcixSubProcedure)
-						    ifTrue: [ self iconNamed: #uncommentedClass ]
-						    ifFalse: [ 
+					    (each isKindOf: AlcixFunction)
+						    ifFalse: [ self iconNamed: #uncommentedClass ]
+						    ifTrue: [ 
 							    each type
 								    ifNil: [ self iconNamed: #smallQuestion ]
 								    ifNotNil: [ self iconNamed: #glamorousAccept ] ] ])
@@ -102,9 +102,9 @@ MiAlceTypeBrowser >> newInvocablesTable [
 		  addColumn: (SpStringTableColumn new
 				   title: 'Type';
 				   evaluated: [ :each | 
-					   (each isKindOf: AlcixSubProcedure)
-						   ifTrue: [ 'void' ]
-						   ifFalse: [ 
+					   (each isKindOf: AlcixFunction)
+						    ifFalse: [ 'void' ]
+						    ifTrue:[ 
 							   each typeName
 								   ifNil: [ 'Unknown' ]
 								   ifNotNil: [ :ref | ref adaptToAlceAnchorPathFragment ] ] ];
