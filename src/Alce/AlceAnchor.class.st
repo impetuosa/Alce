@@ -53,6 +53,25 @@ AlceAnchor >> privateSetPath: aPath [
 	path := aPath
 ]
 
+{ #category : #'as yet unclassified' }
+AlceAnchor >> projectSelector [
+
+	^ path at: 1
+]
+
+{ #category : #enumerating }
+AlceAnchor >> readEntityFrom: aProject andCollect: aFullBlockClosure [
+
+	| val entity |
+	self assert: path size = 3.
+	self assert: ({'modules' . 'forms' . 'reports' } includes: (path at: 2)).
+	entity := (aProject perform: (path at: 2) asSymbol) detect: [ :m | 
+		          m name = (path at: 3) ].
+	val := aFullBlockClosure value: entity.
+	entity ensureUnload.
+	^ val
+]
+
 { #category : #resolving }
 AlceAnchor >> resolve: aProject [
 	self shouldBeImplemented

@@ -1,11 +1,19 @@
 Trait {
 	#name : #TAlceModel,
+	#instVars : [
+		'anchorSolver'
+	],
 	#category : #'Alce-Famix-Model'
 }
 
 { #category : #'as yet unclassified' }
 TAlceModel >> accept: aVisitor [
 	^ aVisitor visitModel: self
+]
+
+{ #category : #'instance creation' }
+TAlceModel >> anchorSolver [
+	 ^ anchorSolver ifNil: [  anchorSolver := AlceAnchorSolver new  ]
 ]
 
 { #category : #'instance creation' }

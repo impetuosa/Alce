@@ -31,17 +31,12 @@ AlcixModule >> addGlobalVariable: anObject [
 ]
 
 { #category : #navigation }
-AlcixModule >> asText [
-
-	^ AlceASTTextComposer new
-		  ast: self ast;
-		  text
-]
-
-{ #category : #navigation }
 AlcixModule >> ast [
-	^ ast ifNil: [ ast := self anchor readEntity ast ]
-	
+
+	^ ast ifNil: [ 
+		  ast := self mooseModel anchorSolver
+			         readEntity: self anchor
+			         andCollect: [ :jin | jin ast ] ]
 ]
 
 { #category : #testing }

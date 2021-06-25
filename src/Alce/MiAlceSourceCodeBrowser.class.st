@@ -47,7 +47,7 @@ MiAlceSourceCodeBrowser >> accept: aModel [
 { #category : #initialization }
 MiAlceSourceCodeBrowser >> followAction [
 
-	viewport text: (AlceTextComposer new compose: toSelect ast)
+	viewport text: (AlceTextComposer new compose: toSelect ast model: toSelect style: self vbaStyle)
 ]
 
 { #category : #initialization }
@@ -55,4 +55,9 @@ MiAlceSourceCodeBrowser >> initializePresenters [
 
 	super initializePresenters.
 	viewport := self newText
+]
+
+{ #category : #initialization }
+MiAlceSourceCodeBrowser >> vbaStyle [
+	 ^ AlceVBAStyle new
 ]
