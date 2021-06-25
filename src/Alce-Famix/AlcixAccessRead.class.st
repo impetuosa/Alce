@@ -18,3 +18,9 @@ AlcixAccessRead >> accept: aVisitor [
 	^ aVisitor visitAccessRead: self
 
 ]
+
+{ #category : #visiting }
+AlcixAccessRead >> isWriting [
+
+	^ false
+]

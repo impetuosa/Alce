@@ -353,7 +353,7 @@ AlceASTCodeImporter >> visitFunctionDefinition: aDefinition [
 	" Addin a local variable with the name of the function to represent the 'returning assignation' "
 	return := self instantiate: AlcixLocalVariable.
 	return name: (self nodeToString: aDefinition selector).
-	return typeName: fn typeName.
+	return typeName: (self typeName: aDefinition type).
 	return instantiatesObjectOnDefinition: false.
 	return anchor: self state top anchor / #return / return name.
 	fn addLocalVariable: return.

@@ -40,7 +40,6 @@ AlcixModule >> asText [
 
 { #category : #navigation }
 AlcixModule >> ast [
-
 	^ ast ifNil: [ ast := self anchor readEntity ast ]
 	
 ]

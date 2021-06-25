@@ -61,6 +61,12 @@ AlcixAccessWrite >> isNewObject: anObject [
 ]
 
 { #category : #accessing }
+AlcixAccessWrite >> isWriting [
+
+	^ true
+]
+
+{ #category : #accessing }
 AlcixAccessWrite >> leftElement [
 	"Relation named: #leftElement type: #AlcixAccessible opposite: #writingAccesses"
 

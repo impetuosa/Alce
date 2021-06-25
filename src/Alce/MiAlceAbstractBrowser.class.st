@@ -22,5 +22,6 @@ MiAlceAbstractBrowser >> selectEntity: anEntity [
 { #category : #accessing }
 MiAlceAbstractBrowser >> selection: aSelection [ 
 	selection := aSelection selectedItem.
+
 	self propagate. 
 ]
