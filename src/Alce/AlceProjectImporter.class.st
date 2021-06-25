@@ -1,8 +1,23 @@
 Class {
 	#name : #AlceProjectImporter,
 	#superclass : #JinProjectVisitor,
+	#instVars : [
+		'project',
+		'phase'
+	],
 	#category : #'Alce-Importer'
 }
+
+{ #category : #'visit-first-objects' }
+AlceProjectImporter >> phaseFinished [
+
+	phase := phase + 1.
+	self savingPhases ifTrue: [ 
+		Smalltalk saveAs:
+			Smalltalk changesFile basenameWithoutExtension , '.'
+			, phase asString.
+		project reopen ]
+]
 
 { #category : #'visit-first-objects' }
 AlceProjectImporter >> visitCollectionBlock: aCollectionBlock reseting: aProject [ 
@@ -19,33 +34,28 @@ AlceProjectImporter >> visitCollectionBlock: aCollectionBlock reseting: aProject
 
 { #category : #'visit-first-objects' }
 AlceProjectImporter >> visitProject: aJinAccessProject [
-
+	project := aJinAccessProject.
+	phase := 0. 
+	
 	self state push: (self instantiate: AlcixAccessModule).
 	self state top name: aJinAccessProject name.
 	self state top anchor: (AlceAnchor on: #/).
 	self state top addReference: self sdkLibrary.
 
 	self visitCollection: aJinAccessProject modules.
-	self halt.
-	aJinAccessProject reopen.
+	self phaseFinished.
 	self visitCollection: aJinAccessProject reports.
-	self halt.
-	aJinAccessProject reopen.
+	self phaseFinished.
 	self visitCollection: aJinAccessProject forms.
-	self halt.
-	aJinAccessProject reopen.
+	self phaseFinished.
 	self visitCollection: aJinAccessProject references.
-	self halt.
-	aJinAccessProject reopen.
+	self phaseFinished.
 	self visitCollection: aJinAccessProject tables.
-	self halt.
-	aJinAccessProject reopen.
+	self phaseFinished.
 	self visitCollection: aJinAccessProject queries.
-	self halt.
-	aJinAccessProject reopen.
+	self phaseFinished.
 	self visitCollection: aJinAccessProject relations.
-	self halt.
-	aJinAccessProject reopen.
+	self phaseFinished.
 	self visitCollection: aJinAccessProject macros
 ]
 

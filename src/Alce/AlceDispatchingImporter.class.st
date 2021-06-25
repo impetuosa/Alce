@@ -4,7 +4,8 @@ Class {
 	#instVars : [
 		'model',
 		'filter',
-		'sdkLibrary'
+		'sdkLibrary',
+		'savingPhases'
 	],
 	#category : #'Alce-Importer'
 }
@@ -29,6 +30,17 @@ AlceDispatchingImporter >> instantiate: aClass [
 { #category : #'instance creation' }
 AlceDispatchingImporter >> model: aModel [
 	model := aModel
+]
+
+{ #category : #'instance creation' }
+AlceDispatchingImporter >> savingPhases [
+
+	^ savingPhases ifNil: [ false ]
+]
+
+{ #category : #'instance creation' }
+AlceDispatchingImporter >> savingPhases: aBool [ 
+	savingPhases := aBool
 ]
 
 { #category : #'instance creation' }

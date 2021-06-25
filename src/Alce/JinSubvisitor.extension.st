@@ -11,6 +11,12 @@ JinSubvisitor >> parent: aParent [
 ]
 
 { #category : #'*Alce' }
+JinSubvisitor >> savingPhases [
+
+	^ parent savingPhases
+]
+
+{ #category : #'*Alce' }
 JinSubvisitor >> sdkLibrary [
 	^ parent sdkLibrary
 ]
