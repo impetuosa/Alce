@@ -22,14 +22,26 @@ AlceCodeImporter >> visitMacro: aMacro [
 
 { #category : #'visit-first-objects' }
 AlceCodeImporter >> visitModule: anObject [
+
 	| obj |
 	obj := anObject isClassModule
-		ifTrue: [ self instantiate: AlcixClass ]
-		ifFalse: [ self instantiate: AlcixModule ].
+		       ifTrue: [ self instantiate: AlcixClass ]
+		       ifFalse: [ self instantiate: AlcixModule ].
 	self state top addType: obj.
 	obj name: anObject name.
 	obj anchor: self state top anchor / #modules / anObject name.
 	self state push: obj.
+
+	" EGRC BUGS!! :( "
+
+	({ 'CBeanOEC'. 'CBeanDeclarants'. 'FactLieuCelebMariageUsuelFiche'.
+	 'Form_FactLieuCelebMariageUsuelFiche'.
+	 'FactLieuDecesUsuelFiche'. 'Form_FactLieuDecesUsuelFiche'.
+	 'FactLieuTribunalFiche'. 'Form_FactLieuTribunalFiche'.
+	 'FactLieuAccouchementUsuelFiche'. 'Form_FactLieuAccouchementUsuelFiche' } 
+		 includes: anObject name) ifTrue: [ ^ self state top astCannotLoad ].
+	" ): EGRC BUGS!!  "
+
 	super visitModule: anObject.
 	anObject ensureUnload.
 	self state pop
