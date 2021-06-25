@@ -23,6 +23,18 @@ AlcixInvocableReference >> accept: aVisitor [
 ]
 
 { #category : #'as yet unclassified' }
+AlcixInvocableReference >> becomeVariableAccessReference [
+
+	| newRef |
+	newRef := self mooseModel instantiate: AlcixVariableReference.
+	newRef names: names.
+	newRef isProcessedElement: self isProcessedElement.
+	self invocation: nil.
+	self mooseModel removeEntity: self.
+	^ newRef
+]
+
+{ #category : #'as yet unclassified' }
 AlcixInvocableReference >> dropReceiverOutOfSelector [
 
 	| piece |

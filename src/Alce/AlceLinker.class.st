@@ -193,6 +193,18 @@ AlceLinker >> visitEnumValue: anAlcixEnumValue [
 ]
 
 { #category : #visiting }
+AlceLinker >> visitEvent: anAlcixEvent [
+
+	self visitInvocable: anAlcixEvent
+]
+
+{ #category : #visiting }
+AlceLinker >> visitExternalFunction: anAlcixExternalFunction [
+
+	self visitFunction: anAlcixExternalFunction
+]
+
+{ #category : #visiting }
 AlceLinker >> visitForm: anAlcixForm [
 	self visitClass: anAlcixForm
 ]
@@ -267,6 +279,12 @@ AlceLinker >> visitParameter: anAlcixParameter [
 			 in: anAlcixParameter invocable) ifNotNil: [ :t | 
 			self noteChange.
 			anAlcixParameter type: t ] ]
+]
+
+{ #category : #visiting }
+AlceLinker >> visitRaiseEvent: anAlcixRaiseEvent [
+
+	^ self visitInvocation: anAlcixRaiseEvent
 ]
 
 { #category : #visiting }

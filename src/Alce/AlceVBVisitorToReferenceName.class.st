@@ -100,6 +100,11 @@ AlceVBVisitorToReferenceName >> visitBooleanLiteral: aVBBooleanLiteralNode [
 	^ nil
 ]
 
+{ #category : #visiting }
+AlceVBVisitorToReferenceName >> visitColorLiteral: aVBColorLiteralNode [ 
+	^ nil
+]
+
 { #category : #'as yet unclassified' }
 AlceVBVisitorToReferenceName >> visitComparisonOperation: aVBComparisonOperationNode [
 	^ nil
@@ -125,6 +130,11 @@ AlceVBVisitorToReferenceName >> visitDictionaryAccess: aVBDictionaryAccessNode [
 
 { #category : #'as yet unclassified' }
 AlceVBVisitorToReferenceName >> visitEquals: aVBEqualsNode [ 
+	^ nil
+]
+
+{ #category : #visiting }
+AlceVBVisitorToReferenceName >> visitFloatLiteral: aVBFloatLiteralNode [ 
 	^ nil
 ]
 
@@ -208,6 +218,12 @@ AlceVBVisitorToReferenceName >> visitSquareBracketIdentifier: aVBSquareBracketId
 { #category : #'as yet unclassified' }
 AlceVBVisitorToReferenceName >> visitStringLiteral: aVBStringLiteralNode [ 
 	^ nil
+]
+
+{ #category : #visiting }
+AlceVBVisitorToReferenceName >> visitTypeOf: aVBTypeOfNode [ 
+
+	^ nil.
 ]
 
 { #category : #'as yet unclassified' }

@@ -74,11 +74,20 @@ TAlceInvocation >> isVBMessageSend [
 
 { #category : #testing }
 TAlceInvocation >> setCandidate: aCandidate [
+
 	aCandidate ifNil: [ ^ self ].
+
+	((aCandidate isKindOf: AlcixClass) or: [ 
+		 aCandidate isKindOf: AlcixParameter ]) ifTrue: [ ^ self ].
+	(aCandidate isKindOf: AlcixVariable) ifTrue: [ 
+		^ self becomeReadingAccessWithCandidate: aCandidate ].
+
 	self candidate: aCandidate.
+
+
 	(self isVBMessageSend and: [ aCandidate isMethod not ]) ifTrue: [ 
+		self receiver rightElement ifNil: [ ^ self candidate: nil ].
 		self becomeFunctionInvocation ].
 	(self isVBMessageSend not and: [ aCandidate isMethod ]) ifTrue: [ 
 		self becomeMethodInvocation ]
-	
 ]

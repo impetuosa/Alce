@@ -37,6 +37,11 @@ AlceVBVisitorToString >> visitBooleanLiteral: aVBBooleanLiteralNode [
 ]
 
 { #category : #visiting }
+AlceVBVisitorToString >> visitColorLiteral: aVBColorLiteralNode [ 
+	^ aVBColorLiteralNode token acceptVisitor: self 
+]
+
+{ #category : #visiting }
 AlceVBVisitorToString >> visitComparisonOperation: aVBComparisonOperationNode [ 
 	^ aVBComparisonOperationNode source 
 ]
@@ -63,6 +68,11 @@ AlceVBVisitorToString >> visitDictionaryAccess: aVBDictionaryAccessNode [
 { #category : #visiting }
 AlceVBVisitorToString >> visitEquals: aVBEqualsNode [ 
 	^ aVBEqualsNode source 
+]
+
+{ #category : #visiting }
+AlceVBVisitorToString >> visitFloatLiteral: aVBFloatLiteralNode [ 
+	^ aVBFloatLiteralNode token acceptVisitor: self 
 ]
 
 { #category : #visiting }
@@ -124,10 +134,13 @@ AlceVBVisitorToString >> visitParentheseesExpression: aVBParentheseesExpressionN
 
 { #category : #'as yet unclassified' }
 AlceVBVisitorToString >> visitProcedureCallOrArrayAccess: aVBProcedureCallOrArrayAccessNode [
-	^ (aVBProcedureCallOrArrayAccessNode selector acceptVisitor: self)
+		
+	^
+	aVBProcedureCallOrArrayAccessNode source
+	" (aVBProcedureCallOrArrayAccessNode selector ifNotNil:  acceptVisitor: self)
 		, ' ('
 		, (aVBProcedureCallOrArrayAccessNode arguments acceptVisitor: self)
-		, ')'
+		, ')'"
 ]
 
 { #category : #'as yet unclassified' }
@@ -150,6 +163,11 @@ AlceVBVisitorToString >> visitSquareBracketIdentifier: aVBSquareBracketIdentifie
 { #category : #visiting }
 AlceVBVisitorToString >> visitStringLiteral: aVBStringLiteralNode [ 
 	^ aVBStringLiteralNode token acceptVisitor: self 
+]
+
+{ #category : #visiting }
+AlceVBVisitorToString >> visitTypeOf: aVBTypeOfNode [
+	^ 'Must Implement visitTypeOf '
 ]
 
 { #category : #'as yet unclassified' }

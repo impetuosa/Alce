@@ -1,6 +1,8 @@
 Class {
 	#name : #AlcixInvocation,
 	#superclass : #AlcixAccessible,
+	#traits : 'TAlceInvocation',
+	#classTraits : 'TAlceInvocation classTrait',
 	#instVars : [
 		'#sender => FMOne type: #AlcixInvocable opposite: #outgoingInvocations',
 		'#candidate => FMOne type: #AlcixInvocable opposite: #incomingInvocations',
@@ -52,6 +54,38 @@ AlcixInvocation >> argumentsGroup [
 	<generated>
 	<navigation: 'Arguments'>
 	^ MooseSpecializedGroup withAll: self arguments asSet
+]
+
+{ #category : #'as yet unclassified' }
+AlcixInvocation >> becomeReadingAccessWithCandidate: aRightElement [
+
+	|  rightElementName invocable rightNewElement |
+
+	self arguments ifNotEmpty: [ ^ self ].
+	self assert: self arguments isEmpty.
+	self assert: self readingAccesses isEmpty.
+	self assert: self writingAccesses isEmpty.
+	self assert: self candidate isNil. 
+	
+	rightElementName := self selector becomeVariableAccessReference.
+	invocable := self sender.
+
+	self sender: nil.
+	self selector: nil.
+	self mooseModel removeEntity: self .
+
+	rightNewElement := self mooseModel instantiate: AlcixAccessRead.
+	rightNewElement isReturn: false.
+	rightNewElement isWriting: false.
+	rightNewElement rightElement: aRightElement.
+	rightNewElement rightElementName: rightElementName.
+	rightNewElement invocable: invocable.
+
+
+
+
+	self mooseModel add: rightNewElement.
+	^ rightNewElement
 ]
 
 { #category : #accessing }

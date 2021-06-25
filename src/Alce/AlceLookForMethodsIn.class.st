@@ -17,6 +17,11 @@ AlceLookForMethodsIn >> visitModule: anAlcixClass [
 ]
 
 { #category : #visiting }
+AlceLookForMethodsIn >> visitPrimitiveType: anAlcixPrimitiveType [ 
+	^ self visitModule: anAlcixPrimitiveType 
+]
+
+{ #category : #visiting }
 AlceLookForMethodsIn >> visitUserType: anAlcixClass [
 	^ self halt
 ]
