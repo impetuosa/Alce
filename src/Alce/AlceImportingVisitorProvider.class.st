@@ -10,23 +10,26 @@ Class {
 		'projectVisitor',
 		'filter',
 		'referenceAccessVisitor',
-		'referenceLibraryVisitor'
+		'referenceLibraryVisitor',
+		'savingPhases'
 	],
 	#category : #'Alce-Importer-Construction'
 }
 
 { #category : #building }
 AlceImportingVisitorProvider >> build [
+
 	^ AlceDispatchingImporter new
-		code: self codeVisitorInstance;
-		database: self databaseVisitorInstance;
-		gui: self guiVisitorInstance;
-		control: self controlVisitorInstance;
-		syntax: self syntaxVisitorInstance;
-		project: self projectVisitorInstance;
-		referenceAccess: self referenceAccessVisitorInstance;
-		referenceLibrary: self referenceLibraryVisitorInstance;  
-		yourself
+		  savingPhases: self savingPhases;
+		  code: self codeVisitorInstance;
+		  database: self databaseVisitorInstance;
+		  gui: self guiVisitorInstance;
+		  control: self controlVisitorInstance;
+		  syntax: self syntaxVisitorInstance;
+		  project: self projectVisitorInstance;
+		  referenceAccess: self referenceAccessVisitorInstance;
+		  referenceLibrary: self referenceLibraryVisitorInstance;
+		  yourself
 ]
 
 { #category : #'instantiate parts' }
@@ -107,6 +110,18 @@ AlceImportingVisitorProvider >> referenceAccessVisitorInstance [
 { #category : #'instantiate parts' }
 AlceImportingVisitorProvider >> referenceLibraryVisitorInstance [ 
 	^ self instantiate: referenceLibraryVisitor
+]
+
+{ #category : #'instantiate parts' }
+AlceImportingVisitorProvider >> savingPhases [
+
+	^ savingPhases ifNil: [ false ]
+]
+
+{ #category : #'instantiate parts' }
+AlceImportingVisitorProvider >> savingPhases: aBool [
+
+	savingPhases := aBool
 ]
 
 { #category : #'instantiate parts' }

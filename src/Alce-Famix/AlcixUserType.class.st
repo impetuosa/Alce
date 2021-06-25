@@ -37,6 +37,11 @@ AlcixUserType >> addMember: anObject [
 	^ self members add: anObject
 ]
 
+{ #category : #converting }
+AlcixUserType >> asType [
+	^ self 
+]
+
 { #category : #accessing }
 AlcixUserType >> invocables [
 	"Relation named: #invocables type: #AlcixInvocable opposite: #userType"

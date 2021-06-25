@@ -260,7 +260,9 @@ AlceLinker >> visitMethodInvocation: anAlcixMethodInvocation [
 
 { #category : #visiting }
 AlceLinker >> visitModel: aModel [
-	aModel firstClassCitizen do: [ :fs | fs accept: self ]
+
+	aModel firstClassCitizen do: [ :fs | fs accept: self ].
+	aModel references do: [ :fs | fs accept: self ]
 ]
 
 { #category : #visiting }

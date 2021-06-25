@@ -22,6 +22,11 @@ AlcixPrimitiveType >> accept: aVisitor [
 ]
 
 { #category : #accessing }
+AlcixPrimitiveType >> asType [ 
+	^ self
+]
+
+{ #category : #accessing }
 AlcixPrimitiveType >> invocables [
 	^ {  }
 ]

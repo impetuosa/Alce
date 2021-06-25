@@ -34,9 +34,10 @@ AlceProjectImporter >> visitCollectionBlock: aCollectionBlock reseting: aProject
 
 { #category : #'visit-first-objects' }
 AlceProjectImporter >> visitProject: aJinAccessProject [
+
 	project := aJinAccessProject.
-	phase := 0. 
-	
+	phase := 0.
+
 	self state push: (self instantiate: AlcixAccessModule).
 	self state top name: aJinAccessProject name.
 	self state top anchor: (AlceAnchor on: #/).
@@ -46,8 +47,6 @@ AlceProjectImporter >> visitProject: aJinAccessProject [
 	self phaseFinished.
 	self visitCollection: aJinAccessProject reports.
 	self phaseFinished.
-	self visitCollection: aJinAccessProject forms.
-	self phaseFinished.
 	self visitCollection: aJinAccessProject references.
 	self phaseFinished.
 	self visitCollection: aJinAccessProject tables.
@@ -56,7 +55,9 @@ AlceProjectImporter >> visitProject: aJinAccessProject [
 	self phaseFinished.
 	self visitCollection: aJinAccessProject relations.
 	self phaseFinished.
-	self visitCollection: aJinAccessProject macros
+	self visitCollection: aJinAccessProject macros.
+	self phaseFinished.
+	self visitCollection: aJinAccessProject forms
 ]
 
 { #category : #'visit-first-objects' }

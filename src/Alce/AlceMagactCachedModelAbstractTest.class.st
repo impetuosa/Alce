@@ -61,13 +61,14 @@ AlceMagactCachedModelAbstractTest class >> regenerateCacheModel [
 	| importer model stream |
 	importer := AlceImporter new.
 	importer provider
+		savingPhases: true;
 		importProjectElements;
 		importGUIElements;
 		importGUIControlElements;
 		importCodeElements;
 		importSyntacticElements;
 		importLibraryReferences.
-		
+
 	model := importer import: self magact.
 	stream := '' writeStream.
 	model exportToMSEStream: stream.

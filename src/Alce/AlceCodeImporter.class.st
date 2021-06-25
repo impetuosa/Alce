@@ -30,9 +30,9 @@ AlceCodeImporter >> visitModule: anObject [
 	self state top addType: obj.
 	obj name: anObject name.
 	obj anchor: self state top anchor / #modules / anObject name.
-	self state push: obj.
-
-	" EGRC BUGS!! :( "
+	
+	
+		" EGRC BUGS!! :( "
 
 	({ 'CBeanOEC'. 'CBeanDeclarants'. 'FactLieuCelebMariageUsuelFiche'.
 	 'Form_FactLieuCelebMariageUsuelFiche'.
@@ -41,6 +41,10 @@ AlceCodeImporter >> visitModule: anObject [
 	 'FactLieuAccouchementUsuelFiche'. 'Form_FactLieuAccouchementUsuelFiche' } 
 		 includes: anObject name) ifTrue: [ ^ self state top astCannotLoad ].
 	" ): EGRC BUGS!!  "
+
+	
+	self state push: obj.
+
 
 	super visitModule: anObject.
 	anObject ensureUnload.
