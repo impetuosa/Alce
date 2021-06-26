@@ -46,7 +46,6 @@ MiAlceSourceCodeBrowser >> accept: aModel [
 
 { #category : #initialization }
 MiAlceSourceCodeBrowser >> followAction [
-
 	viewport text: (AlceTextComposer new compose: toSelect ast model: toSelect style: self vbaStyle)
 ]
 
