@@ -11,8 +11,18 @@ AlceCodeImporter >> registerClassVariables: anAlcixClass [
 
 { #category : #'visit-first-objects' }
 AlceCodeImporter >> visitFormModule: anObject [
-	super visitModule: anObject.
 
+	" EGRC BUGS!! :( "
+
+	({ 'CBeanOEC'. 'CBeanDeclarants'. 'FactLieuCelebMariageUsuelFiche'.
+	 'Form_FactLieuCelebMariageUsuelFiche'.
+	 'FactLieuDecesUsuelFiche'. 'Form_FactLieuDecesUsuelFiche'.
+	 'FactLieuTribunalFiche'. 'Form_FactLieuTribunalFiche'.
+	 'FactLieuAccouchementUsuelFiche'. 'Form_FactLieuAccouchementUsuelFiche' } 
+		 includes: anObject name) ifTrue: [ ^ self state top astCannotLoad ].
+	" ): EGRC BUGS!!  "
+
+	super visitModule: anObject
 ]
 
 { #category : #'visit-first-objects' }
@@ -39,7 +49,7 @@ AlceCodeImporter >> visitModule: anObject [
 	 'FactLieuDecesUsuelFiche'. 'Form_FactLieuDecesUsuelFiche'.
 	 'FactLieuTribunalFiche'. 'Form_FactLieuTribunalFiche'.
 	 'FactLieuAccouchementUsuelFiche'. 'Form_FactLieuAccouchementUsuelFiche' } 
-		 includes: anObject name) ifTrue: [ ^ self state top astCannotLoad ].
+		 includes: anObject name) ifTrue: [ ^ obj astCannotLoad ].
 	" ): EGRC BUGS!!  "
 
 	
