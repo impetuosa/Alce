@@ -31,6 +31,12 @@ AlcixPrimitiveType >> invocables [
 	^ {  }
 ]
 
+{ #category : #testing }
+AlcixPrimitiveType >> isAstLoaded [
+
+	^ false
+]
+
 { #category : #accessing }
 AlcixPrimitiveType >> members [
 

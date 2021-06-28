@@ -142,6 +142,11 @@ AlceLinker >> visitAccess: anAlcixAccess [
 					self noteChange ] ]
 ]
 
+{ #category : #'\\' }
+AlceLinker >> visitAccessModule: anAlcixAccessModule [ 
+	" Should load the dependancies no? "
+]
+
 { #category : #'as yet unclassified' }
 AlceLinker >> visitAccessRead: anAlcixAccessRead [
 	self visitAccess: anAlcixAccessRead
@@ -236,6 +241,11 @@ AlceLinker >> visitInvocation: anAlcixInvocation [
 			 in: anAlcixInvocation sender) ifNotNil: [ :c | 
 			self noteChange.
 			anAlcixInvocation setCandidate: c ] ]
+]
+
+{ #category : #visiting }
+AlceLinker >> visitLibrary: anAlcixLibrary [ 
+" something here? "
 ]
 
 { #category : #visiting }

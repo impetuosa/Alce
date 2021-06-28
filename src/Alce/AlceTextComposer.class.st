@@ -41,6 +41,12 @@ AlceTextComposer >> addAttributeCase: aSmaCCCaseInsensitiveToken [
 ]
 
 { #category : #adding }
+AlceTextComposer >> addAttributeColor: aVBToken [
+
+	^ self addStyle: (style colorForToken: aVBToken) forToken: aVBToken
+]
+
+{ #category : #adding }
 AlceTextComposer >> addAttributeCompare: aSmaCCCaseInsensitiveToken [ 
 	^ self
 		  addStyle: style compare
@@ -246,8 +252,8 @@ AlceTextComposer >> addStyle: aStyleArray forToken: aToken [
 	aStyleArray do: [ :aStyle | 
 		text
 			addAttribute: aStyle
-			from: aToken startPosition
-			to: aToken stopPosition ]
+			from: (aToken startPosition min: text size)
+			to: (aToken stopPosition min: text size) ]
 ]
 
 { #category : #'as yet unclassified' }
@@ -286,8 +292,9 @@ AlceTextComposer >> visitCase: aCase [
 
 { #category : #generated }
 AlceTextComposer >> visitColorLiteral: aColorLiteral [
-self halt.
-	
+
+	self addAttributeColor: aColorLiteral token.
+
 	^ self visitProgram: aColorLiteral
 ]
 
@@ -360,8 +367,11 @@ AlceTextComposer >> visitDoUntilTrue: aDoUntilTrue [
 
 { #category : #generated }
 AlceTextComposer >> visitDoWhileTrue: aDoWhileTrue [
-self halt.
-	
+
+	self addAttributeKeyword: aDoWhileTrue doToken.
+	self addAttributeKeyword: aDoWhileTrue loopToken.
+	self addAttributeKeyword: aDoWhileTrue whileToken.
+
 	^ self visitProgram: aDoWhileTrue
 ]
 
@@ -389,8 +399,9 @@ AlceTextComposer >> visitEquals: anEquals [
 
 { #category : #generated }
 AlceTextComposer >> visitEvent: anEvent [
-self halt.
-	
+
+	self addAttributeFunction: anEvent eventToken.
+
 	^ self visitProgram: anEvent
 ]
 
@@ -414,15 +425,16 @@ AlceTextComposer >> visitExplicitAssignement: anExplicitAssignement [
 
 { #category : #generated }
 AlceTextComposer >> visitExplicitCall: anExplicitCall [
-self halt.
-	
+
+	self addAttributeKeyword: anExplicitCall callToken.
 	^ self visitProgram: anExplicitCall
 ]
 
 { #category : #generated }
 AlceTextComposer >> visitExternalFunction: anExternalFunction [
-self halt.
-	
+	self addAttributeKeyword: anExternalFunction libToken .
+	self addAttributeVisibility: anExternalFunction visibility .
+	self addAttributeKeyword: anExternalFunction aliasToken.
 	^ self visitProgram: anExternalFunction
 ]
 
@@ -443,14 +455,21 @@ AlceTextComposer >> visitFloatLiteral: aFloatLiteral [
 
 { #category : #generated }
 AlceTextComposer >> visitForEach: aForEach [
-self halt.
-	
+
+	self addAttributeKeyword: aForEach fORToken.
+	self addAttributeKeyword: aForEach eachToken.
+	self addAttributeKeyword: aForEach inToken.
+	self addAttributeNext: aForEach nextToken.
 	^ self visitProgram: aForEach
 ]
 
 { #category : #generated }
 AlceTextComposer >> visitForNext: aForNext [
-self halt.
+
+	self addAttributeKeyword: aForNext fORToken.
+	self addAttributeKeyword: aForNext toToken.
+	self addAttributeNext: aForNext nextToken.
+	self addAttributeOperator: aForNext equalToken .
 	^ self visitProgram: aForNext
 ]
 
@@ -478,7 +497,7 @@ AlceTextComposer >> visitFunctionDefinition: aFunctionDefinition [
 
 { #category : #generated }
 AlceTextComposer >> visitGoSub: aGoSub [
-self halt.
+	self addAttributeKeyword: aGoSub gosubToken .
 	
 	^ self visitProgram: aGoSub
 ]
@@ -528,8 +547,9 @@ AlceTextComposer >> visitLabelTag: aLabelTag [
 AlceTextComposer >> visitModule: aModule [
 
 	(aModule attributes at: #comments) do: [ :pair | 
-		style comment do: [ :cs | 
-			text addAttribute: cs from: pair first to: pair second ] ].
+		pair second < text size ifTrue: [ 
+			style comment do: [ :cs | 
+				text addAttribute: cs from: pair first to: pair second ] ] ].
 
 	^ self visitProgram: aModule
 ]
@@ -684,8 +704,8 @@ self halt.
 
 { #category : #generated }
 AlceTextComposer >> visitRaiseEvent: aRaiseEvent [
-self halt.
-	
+
+	self addAttributeKeyword: aRaiseEvent raiseEventToken.
 	^ self visitProgram: aRaiseEvent
 ]
 
@@ -698,8 +718,10 @@ self halt.
 
 { #category : #generated }
 AlceTextComposer >> visitReDimVariable: aReDimVariable [
-self halt.
-	
+
+	self addAttributeKeyword: aReDimVariable redimToken.
+	self addAttributeKeyword: aReDimVariable preserveToken.
+
 	^ self visitProgram: aReDimVariable
 ]
 
@@ -719,8 +741,10 @@ AlceTextComposer >> visitResumeLabel: aResumeLabel [
 
 { #category : #generated }
 AlceTextComposer >> visitResumeNext: aResumeNext [
-self halt.
-	
+
+	self addAttributeResume: aResumeNext resumeToken.
+	self addAttributeNext: aResumeNext nextToken.
+
 	^ self visitProgram: aResumeNext
 ]
 
@@ -745,8 +769,9 @@ self halt.
 
 { #category : #generated }
 AlceTextComposer >> visitStaticVariable: aStaticVariable [
-self halt.
-	
+
+	self addAttributeKeyword: aStaticVariable staticToken.
+
 	^ self visitProgram: aStaticVariable
 ]
 
@@ -771,17 +796,19 @@ AlceTextComposer >> visitSubDefinition: aSubDefinition [
 
 { #category : #generated }
 AlceTextComposer >> visitTypedThing: aTypedThing [
-	self addAttributeAs: aTypedThing aSToken  .
-	self assert: aTypedThing timesToken isNil.
-	self assert: aTypedThing fixedSize isNil.
+
+	self addAttributeAs: aTypedThing aSToken.
+	self addAttributeOperator: aTypedThing timesToken.
 	^ self visitProgram: aTypedThing
 ]
 
 { #category : #generated }
 AlceTextComposer >> visitUntilTrue: anUntilTrue [
 
-self halt.
-	
+	self addAttributeKeyword: anUntilTrue doToken.
+	self addAttributeKeyword: anUntilTrue untilToken.
+	self addAttributeKeyword: anUntilTrue loopToken.
+
 
 	^ self visitProgram: anUntilTrue
 ]
@@ -795,8 +822,7 @@ AlceTextComposer >> visitVariable: aVariable [
 { #category : #generated }
 AlceTextComposer >> visitVariableList: aVariableList [
 
-self halt.
-	
+
 
 	^ self visitProgram: aVariableList
 ]
@@ -804,9 +830,11 @@ self halt.
 { #category : #generated }
 AlceTextComposer >> visitWhileTrue: aWhileTrue [
 
-self halt.
+	self addAttributeKeyword: aWhileTrue doToken.
+	self addAttributeKeyword: aWhileTrue whileToken.
+	self addAttributeKeyword: aWhileTrue loopToken.
 
-	
+
 	^ self visitProgram: aWhileTrue
 ]
 

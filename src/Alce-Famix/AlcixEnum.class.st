@@ -30,6 +30,12 @@ AlcixEnum >> addEnumValue: anObject [
 	^ self enumValues add: anObject
 ]
 
+{ #category : #converting }
+AlcixEnum >> asType [
+
+	^ self
+]
+
 { #category : #accessing }
 AlcixEnum >> enumValues [
 	"Relation named: #enumValues type: #AlcixEnumValue opposite: #enum"
@@ -57,6 +63,11 @@ AlcixEnum >> enumValuesGroup [
 AlcixEnum >> invocables [
 
 	^ {  }
+]
+
+{ #category : #testing }
+AlcixEnum >> isAstLoaded [
+	^ true
 ]
 
 { #category : #accessing }

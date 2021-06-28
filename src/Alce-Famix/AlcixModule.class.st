@@ -67,3 +67,9 @@ AlcixModule >> globalVariablesGroup [
 	<navigation: 'GlobalVariables'>
 	^ MooseSpecializedGroup withAll: self globalVariables asSet
 ]
+
+{ #category : #testing }
+AlcixModule >> isAstLoaded [
+
+	^ (astCannotLoad ifNil: [ astCannotLoad := false ]) not
+]

@@ -11,7 +11,9 @@ Class {
 { #category : #accessing }
 AlceAnchorSolver class >> paths [
 
-	^ { ('Northwind.accdb' -> 'c:\Northwind.accdb' asFileReference) }
+	^ { 
+		  ('Northwind.accdb' -> 'c:\Northwind.accdb' asFileReference).
+		  ('magact.accdb' -> 'C:\WMagnus\magact.accdb' asFileReference) }
 		  asDictionary
 ]
 
@@ -36,5 +38,6 @@ AlceAnchorSolver >> readEntity: anAlceAnchor andCollect: aFullBlockClosure [
 
 	| project |
 	project := self projectFor: anAlceAnchor projectSelector.
+	project ensureIsOpen. 
 	^ anAlceAnchor readEntityFrom: project andCollect: aFullBlockClosure
 ]

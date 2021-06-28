@@ -21,6 +21,11 @@ AlcixAlias >> accept: aVisitor [
 
 ]
 
+{ #category : #testing }
+AlcixAlias >> isAstLoaded [
+	 ^ true 
+]
+
 { #category : #accessing }
 AlcixAlias >> printOn: aStream [
 	aStream

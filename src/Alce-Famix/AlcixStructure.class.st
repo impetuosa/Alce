@@ -19,6 +19,12 @@ AlcixStructure >> accept: aVisitor [
 
 ]
 
+{ #category : #testing }
+AlcixStructure >> isAstLoaded [
+
+	^ true
+]
+
 { #category : #visiting }
 AlcixStructure >> types [
 

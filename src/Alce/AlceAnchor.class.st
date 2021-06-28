@@ -63,7 +63,9 @@ AlceAnchor >> projectSelector [
 AlceAnchor >> readEntityFrom: aProject andCollect: aFullBlockClosure [
 
 	| val entity |
-	self assert: path size = 3.
+	
+	
+	 path size = 3 ifFalse: [ ^ nil  ].
 	self assert: ({'modules' . 'forms' . 'reports' } includes: (path at: 2)).
 	entity := (aProject perform: (path at: 2) asSymbol) detect: [ :m | 
 		          m name = (path at: 3) ].

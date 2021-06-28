@@ -75,7 +75,8 @@ MiAlceReferenceBrowser >> tableNamed: aTableName [
 	table := tables at: aTableName ifAbsentPut: [ 
 		         | instance |
 		         instance := self newTable
-			                     whenSelectionChangedDo: [ :sel | self selection: sel ];
+			                     whenSelectionChangedDo: [ :sel | 
+				                     self selection: sel ];
 			                     addColumn: (SpIndexTableColumn new
 					                      title: 'Index';
 					                      sortFunction: #yourself ascending;
@@ -92,6 +93,14 @@ MiAlceReferenceBrowser >> tableNamed: aTableName [
 					                      title: 'Name';
 					                      evaluated: [ :each | each name ];
 					                      sortFunction: #printString ascending;
+					                      beExpandable;
+					                      yourself);
+			                     addColumn: (SpStringTableColumn new
+					                      title: 'ASTLoad';
+					                      evaluated: [ :each | each isAstLoaded ];
+					                      sortFunction:
+						                      [ :each | each isAstLoaded asString ]
+							                      ascending;
 					                      beExpandable;
 					                      yourself) ].
 

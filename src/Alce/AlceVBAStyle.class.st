@@ -37,6 +37,11 @@ AlceVBAStyle >> color: aColor [
 ]
 
 { #category : #'as yet unclassified' }
+AlceVBAStyle >> colorForToken: aSmaCCCaseInsensitiveToken [ 
+	^ { (self color: Color orange darker ) }
+]
+
+{ #category : #'as yet unclassified' }
 AlceVBAStyle >> comment [
 
 	^ { (self color: Color green muchDarker) }
