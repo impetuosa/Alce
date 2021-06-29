@@ -34,7 +34,7 @@ AlcixTTyped >> type [
 AlcixTTyped >> type: anObject [
 
 	<generated>
-	type := anObject asType 
+	type := anObject
 ]
 
 { #category : #accessing }

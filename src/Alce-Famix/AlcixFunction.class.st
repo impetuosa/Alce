@@ -1,7 +1,7 @@
 Class {
 	#name : #AlcixFunction,
 	#superclass : #AlcixInvocable,
-	#traits : 'AlcixTTyped - {#color}',
+	#traits : 'AlcixTTyped',
 	#classTraits : 'AlcixTTyped classTrait',
 	#instVars : [
 		'#typeAnchor => FMProperty'
@@ -24,7 +24,7 @@ AlcixFunction >> accept: aVisitor [
 
 ]
 
-{ #category : #visiting }
+{ #category : #accessing }
 AlcixFunction >> typeAnchor [
 
 	<FMProperty: #typeAnchor type: #Object>
@@ -32,8 +32,8 @@ AlcixFunction >> typeAnchor [
 	^ typeAnchor
 ]
 
-{ #category : #visiting }
-AlcixFunction >> typeAnchor: anAnchor [
-
-	typeAnchor := anAnchor
+{ #category : #accessing }
+AlcixFunction >> typeAnchor: anObject [
+	<generated>
+	typeAnchor := anObject
 ]
