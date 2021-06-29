@@ -75,6 +75,8 @@ MiAlceReferenceBrowser >> tableNamed: aTableName [
 	table := tables at: aTableName ifAbsentPut: [ 
 		         | instance |
 		         instance := self newTable
+			                     contextMenu: [ 
+				                     self rootCommandsGroup asMenuPresenter ];
 			                     whenSelectionChangedDo: [ :sel | 
 				                     self selection: sel ];
 			                     addColumn: (SpIndexTableColumn new
@@ -102,6 +104,12 @@ MiAlceReferenceBrowser >> tableNamed: aTableName [
 						                      [ :each | each isAstLoaded asString ]
 							                      ascending;
 					                      beExpandable;
+					                      yourself);
+			                     addColumn:
+				                     ((SpImageTableColumn evaluated: [ :each | 
+						                       (Morph new color: each color) asForm ])
+					                      width: 10;
+					                      sortFunction: #className ascending;
 					                      yourself) ].
 
 	viewport addPage: ((SpNotebookPage

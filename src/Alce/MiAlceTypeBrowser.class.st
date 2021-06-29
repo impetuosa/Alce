@@ -79,6 +79,7 @@ MiAlceTypeBrowser >> newInvocablesTable [
 	"Smalltalk ui icons"
 
 	^ self newTable
+		  contextMenu: [ self rootCommandsGroup asMenuPresenter ];
 		  whenSelectionChangedDo: [ :e | 
 			  self selection: e.
 			  self selectParameters ];
@@ -103,8 +104,8 @@ MiAlceTypeBrowser >> newInvocablesTable [
 				   title: 'Type';
 				   evaluated: [ :each | 
 					   (each isKindOf: AlcixFunction)
-						    ifFalse: [ 'void' ]
-						    ifTrue:[ 
+						   ifFalse: [ 'void' ]
+						   ifTrue: [ 
 							   each typeName
 								   ifNil: [ 'Unknown' ]
 								   ifNotNil: [ :ref | ref adaptToAlceAnchorPathFragment ] ] ];
@@ -135,6 +136,7 @@ MiAlceTypeBrowser >> newMembersTable [
 	"Smalltalk ui icons"
 
 	^ self newTable
+		  contextMenu: [ self rootCommandsGroup asMenuPresenter ];
 		  whenSelectionChangedDo: [ :e | self selection: e ];
 		  whenActivatedDo: [ :entry | 
 			  self selection: entry.
@@ -176,6 +178,7 @@ MiAlceTypeBrowser >> newMembersTable [
 MiAlceTypeBrowser >> newTypesTable [
 
 	^ self newTable
+		  contextMenu: [ self rootCommandsGroup asMenuPresenter ];
 		  whenSelectionChangedDo: [ :e | self selection: e ];
 		  whenActivatedDo: [ :entry | 
 			  self selection: entry.
@@ -186,8 +189,8 @@ MiAlceTypeBrowser >> newTypesTable [
 				   beNotExpandable;
 				   width: 20;
 				   yourself);
-		  addColumn:
-			  ((SpImageTableColumn evaluated: [ :each | MiAlceIdeIcons iconFor: each ])
+		  addColumn: ((SpImageTableColumn evaluated: [ :each | 
+					    MiAlceIdeIcons iconFor: each ])
 				   width: 10;
 				   sortFunction: #className ascending;
 				   yourself);

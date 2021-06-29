@@ -99,6 +99,7 @@ MiAlceInvocableBrowser >> initializePresenters [
 MiAlceInvocableBrowser >> newIncomingTable [
 
 	^ self newTable
+		  contextMenu: [ self rootCommandsGroup asMenuPresenter ];
 		  whenSelectionChangedDo: [ :e | self selection: e ];
 		  addColumn: (SpIndexTableColumn new
 				   title: 'Index';
@@ -144,6 +145,7 @@ MiAlceInvocableBrowser >> newReadingsTable [
 	"Smalltalk ui icons"
 
 	^ self newTable
+		  contextMenu: [ self rootCommandsGroup asMenuPresenter ];
 		  whenSelectionChangedDo: [ :e | self selection: e ];
 		  whenActivatedDo: [ :entry | 
 			  self selection: entry.
@@ -190,6 +192,7 @@ MiAlceInvocableBrowser >> newWritingsTable [
 	"Smalltalk ui icons"
 
 	^ self newTable
+		  contextMenu: [ self rootCommandsGroup asMenuPresenter ];
 		  whenSelectionChangedDo: [ :e | self selection: e ];
 		  whenActivatedDo: [ :entry | 
 			  self selection: entry.

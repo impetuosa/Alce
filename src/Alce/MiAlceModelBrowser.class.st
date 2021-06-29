@@ -56,6 +56,7 @@ MiAlceModelBrowser >> initializePresenters [
 
 	super initializePresenters.
 	properties := self newTable
+		              contextMenu: [ self rootCommandsGroup asMenuPresenter ];
 		              addColumn: (SpStringTableColumn new
 				               title: 'Name';
 				               evaluated: [ :each | each key ];
@@ -70,6 +71,7 @@ MiAlceModelBrowser >> initializePresenters [
 				               yourself);
 		              yourself.
 	table := self newTable
+		         contextMenu: [ self rootCommandsGroup asMenuPresenter ];
 		         whenSelectionChangedDo: [ :e | 
 			         self selection: e.
 			         self updateProperties ];
@@ -80,8 +82,7 @@ MiAlceModelBrowser >> initializePresenters [
 				          beNotExpandable;
 				          width: 20;
 				          yourself);
-		         addColumn:
-			         ((SpImageTableColumn evaluated: [ :each | 
+		         addColumn: ((SpImageTableColumn evaluated: [ :each | 
 					           MiAlceIdeIcons iconFor: each ])
 				          width: 10;
 				          sortFunction: #className ascending;

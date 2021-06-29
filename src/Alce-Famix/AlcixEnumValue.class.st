@@ -84,3 +84,15 @@ AlcixEnumValue >> printOn: aStream [
 		nextPutAll: '.';
 		nextPutAll: name
 ]
+
+{ #category : #accessing }
+AlcixEnumValue >> type [
+
+	^ enum
+]
+
+{ #category : #accessing }
+AlcixEnumValue >> typeName [ 
+
+	^ enum name 
+]

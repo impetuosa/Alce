@@ -7,6 +7,16 @@ Class {
 	#category : #'Alce-MidasBrowsers'
 }
 
+{ #category : #commands }
+MiAlceAbstractBrowser class >> buildCommandsGroupWith: presenterInstance forRoot: rootCommandGroup [
+
+	super
+		buildCommandsGroupWith: presenterInstance
+		forRoot: rootCommandGroup.
+	rootCommandGroup register:
+		(MiColouringCommand forSpecContext: presenterInstance)
+]
+
 { #category : #accessing }
 MiAlceAbstractBrowser >> miSelectedItem [
 	^ selection

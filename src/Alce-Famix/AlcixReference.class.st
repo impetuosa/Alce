@@ -47,6 +47,15 @@ AlcixReference >> accessModuleGroup [
 ]
 
 { #category : #accessing }
+AlcixReference >> color [
+
+	^ self colorIfAbsent: [ 
+		  accessModule
+			  ifNil: [ super color ]
+			  ifNotNil: [ accessModule color ] ]
+]
+
+{ #category : #accessing }
 AlcixReference >> name [
 
 	<FMProperty: #name type: #String>

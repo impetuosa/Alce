@@ -24,6 +24,13 @@ AlcixTType >> addTyped: anObject [
 ]
 
 { #category : #accessing }
+AlcixTType >> color [
+
+	^ self colorIfAbsent: [ 
+		  container ifNil: [ super color ] ifNotNil: [ container color ] ]
+]
+
+{ #category : #accessing }
 AlcixTType >> container [
 	"Relation named: #container type: #AlcixContainer opposite: #types"
 
