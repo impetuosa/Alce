@@ -33,6 +33,12 @@ AlceAnchor >> basename [
 	^ path basename
 ]
 
+{ #category : #'as yet unclassified' }
+AlceAnchor >> containsSource [
+
+	^ path segments includes: '@src'
+]
+
 { #category : #arithmetic }
 AlceAnchor >> fullName [
 	^ path fullName
@@ -77,4 +83,16 @@ AlceAnchor >> readEntityFrom: aProject andCollect: aFullBlockClosure [
 { #category : #resolving }
 AlceAnchor >> resolve: aProject [
 	self shouldBeImplemented
+]
+
+{ #category : #'as yet unclassified' }
+AlceAnchor >> srcFrom [
+
+	^ (path segments at: (path segments indexOf: '@src') + 1) asNumber
+]
+
+{ #category : #'as yet unclassified' }
+AlceAnchor >> srcTo [
+
+	^ (path segments at: (path segments indexOf: #to) + 1) asNumber
 ]

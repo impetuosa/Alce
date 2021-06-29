@@ -15,11 +15,11 @@ AlceLibraryReferenceImporter >> dllAnchor: aString for: aJinLibraryConstant [
 { #category : #'visiting accessor' }
 AlceLibraryReferenceImporter >> instantiateGetterAccessorMethod: aJinLibraryMethod into: anAttribute [
 
-	| acc |
-
+	| acc selector |
 	acc := self instantiate: AlcixAttributeAccessor.
 	acc kind: #Get.
-	acc selector: aJinLibraryMethod selector.
+	selector := ('_' split: aJinLibraryMethod selector) last.
+	acc selector: selector.
 	acc typeName: (self typeName: aJinLibraryMethod).
 
 	self state top addInvocable: acc.
@@ -30,12 +30,14 @@ AlceLibraryReferenceImporter >> instantiateGetterAccessorMethod: aJinLibraryMeth
 ]
 
 { #category : #'instantiate accessors' }
-AlceLibraryReferenceImporter >> instantiateSetterAccessorMethod: aJinLibraryMethod into: anAttribute [ 
+AlceLibraryReferenceImporter >> instantiateSetterAccessorMethod: aJinLibraryMethod into: anAttribute [
 
-	| acc |
+	| acc selector |
 	acc := self instantiate: AlcixAttributeAccessor.
 	acc kind: #Set.
-	acc selector: aJinLibraryMethod selector.
+
+	selector := ('_' split: aJinLibraryMethod selector) last.
+	acc selector: selector.
 	acc typeName: (self typeName: aJinLibraryMethod).
 
 	self state top addInvocable: acc.
@@ -69,6 +71,18 @@ AlceLibraryReferenceImporter >> visitLibraryAlias: aJinLibraryAlias [
 { #category : #visiting }
 AlceLibraryReferenceImporter >> visitLibraryAttribute: aJinLibraryAttribute [
 
+	| obj |
+	obj := self instantiate: AlcixAlias.
+	self state top addType: obj.
+	obj name: aJinLibraryAttribute name.
+	obj anchor:
+		self state top anchor / #attributes / aJinLibraryAttribute name.
+	obj typeName: (self typeNameReference: aJinLibraryAttribute typeName)
+	
+
+
+"visitLibraryAttribute: aJinLibraryAttribute
+
 	| attr |
 	attr := self instantiate: AlcixAttribute.
 	attr name: aJinLibraryAttribute name.
@@ -77,11 +91,27 @@ AlceLibraryReferenceImporter >> visitLibraryAttribute: aJinLibraryAttribute [
 	attr isConstant: false.
 	attr visibility: #Public.
 	attr anchor: (self dllAnchor: attr name for: aJinLibraryAttribute).
-	self state top addMember: attr
+	self state top addMember: attr"
 ]
 
 { #category : #visiting }
 AlceLibraryReferenceImporter >> visitLibraryCoClass: aJinLibraryCoClass [
+
+	| obj typeName |
+	typeName := aJinLibraryCoClass linkedType
+		            ifNil: [ self undefinedTypeReference ]
+		            ifNotNil: [ 
+		            self typeNameReference:
+			            aJinLibraryCoClass linkedType name ].
+	obj := self instantiate: AlcixAlias.
+	self state top addType: obj.
+	obj name: aJinLibraryCoClass name.
+	obj anchor:
+		self state top anchor / #coclass / aJinLibraryCoClass name.
+	obj typeName: typeName.
+	
+
+"visitLibraryCoClass: aJinLibraryCoClass
 
 	| attr typeName |
 	attr := self instantiate: AlcixAttribute.
@@ -97,7 +127,7 @@ AlceLibraryReferenceImporter >> visitLibraryCoClass: aJinLibraryCoClass [
 	attr typeName: typeName.
 
 	attr anchor: self state top anchor / #attributes / attr name.
-	self state top addMember: attr
+	self state top addMember: attr"
 ]
 
 { #category : #accessing }
@@ -139,9 +169,10 @@ AlceLibraryReferenceImporter >> visitLibraryEnum: aJinLibraryEnum [
 { #category : #visiting }
 AlceLibraryReferenceImporter >> visitLibraryFunction: aJinLibraryFunction [
 
-	| fn |
+	| fn selector |
 	fn := self instantiate: AlcixFunction.
-	fn selector: aJinLibraryFunction selector.
+	selector := ('_' split: aJinLibraryFunction selector) last.
+	fn selector: selector.
 	fn anchor: self state top anchor / #functions / fn selector.
 	fn typeName: self undefinedTypeReference.
 	self state top addInvocable: fn
@@ -164,10 +195,11 @@ AlceLibraryReferenceImporter >> visitLibraryInterface: aJinLibraryInterface [
 
 { #category : #visiting }
 AlceLibraryReferenceImporter >> visitLibraryMethod: aJinLibraryMethod [ 
-	| fn |
+	| fn  selector |
 	 
 	fn := self instantiate: AlcixFunction.
-	fn selector: aJinLibraryMethod selector.
+	selector :=( '_' split: aJinLibraryMethod selector) last.  
+	fn selector: selector.
 	fn anchor: self state top anchor / #functions / fn selector.
 	fn typeName: (self typeName: aJinLibraryMethod) .
 	

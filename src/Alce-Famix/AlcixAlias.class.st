@@ -21,6 +21,12 @@ AlcixAlias >> accept: aVisitor [
 
 ]
 
+{ #category : #visiting }
+AlcixAlias >> color [
+
+	^ type ifNotNil: [ type color ] ifNil: [ super color ]
+]
+
 { #category : #testing }
 AlcixAlias >> isAstLoaded [
 	 ^ true 

@@ -17,6 +17,12 @@ AlcixTTyped classSide >> annotation [
 ]
 
 { #category : #accessing }
+AlcixTTyped >> color [
+
+	^ type ifNotNil: [ type color ] ifNil: [ super color ]
+]
+
+{ #category : #accessing }
 AlcixTTyped >> type [
 	"Relation named: #type type: #AlcixTType opposite: #typeds"
 

@@ -244,7 +244,7 @@ AlceAccessGenerator >> defineProperties [
 
 	variable property: #instantiatesObjectOnDefinition type: #Boolean.
 
-
+	function property: #typeAnchor type: #Object.
 	externalFunction property: #alias type: #String.
 	externalFunction property: #libraryName type: #String.
 

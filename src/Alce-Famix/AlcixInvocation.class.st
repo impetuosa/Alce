@@ -111,6 +111,12 @@ AlcixInvocation >> candidateGroup [
 	^ MooseSpecializedGroup with: self candidate
 ]
 
+{ #category : #generated }
+AlcixInvocation >> color [
+
+	^ candidate ifNotNil: [ candidate color ] ifNil: [ super color ]
+]
+
 { #category : #accessing }
 AlcixInvocation >> printOn: aStream [
 

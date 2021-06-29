@@ -81,8 +81,8 @@ MiAlceTypeBrowser >> newInvocablesTable [
 	^ self newTable
 		  contextMenu: [ self rootCommandsGroup asMenuPresenter ];
 		  whenSelectionChangedDo: [ :e | 
-			  self selection: e.
-			  self selectParameters ];
+			  self selectParameters: e selectedItem.
+			  self selection: e ];
 		  addColumn: (SpIndexTableColumn new
 				   title: 'Index';
 				   sortFunction: #yourself ascending;
@@ -211,4 +211,11 @@ MiAlceTypeBrowser >> selectParameters [
 
 	selection ifNotNil: [ 
 		parametersTable items: selection parameters asOrderedCollection ]
+]
+
+{ #category : #visiting }
+MiAlceTypeBrowser >> selectParameters: item [ 
+	
+	selection ifNotNil: [ 
+		parametersTable items: item parameters asOrderedCollection ]
 ]

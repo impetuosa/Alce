@@ -27,6 +27,24 @@ AlceSDKLibraryBuilder >> abs [
 		  parametersFromString: 'number required variant'
 ]
 
+{ #category : #building }
+AlceSDKLibraryBuilder >> aliasTypes [
+
+	^ { 
+		  self int32.
+		  self int16.
+		  self int.
+		  self ubyte.
+		  self winVariant.
+		  self bstring.
+		  self dispatchInstance.
+		  self bool.
+		  self userDefined.
+		  self uint.
+		  self uint32.
+		  self uint16 }
+]
+
 { #category : #'sdk functions' }
 AlceSDKLibraryBuilder >> array [
 	^ self
@@ -51,10 +69,22 @@ AlceSDKLibraryBuilder >> atn [
 		  parametersFromString: 'number required variant'
 ]
 
+{ #category : #alias }
+AlceSDKLibraryBuilder >> bool [
+
+	^ self newAlias: #BOOL to: self boolean
+]
+
 { #category : #'primitive types' }
 AlceSDKLibraryBuilder >> boolean [
 
 	^ self primitiveTypeNamed: #Boolean
+]
+
+{ #category : #alias }
+AlceSDKLibraryBuilder >> bstring [
+
+	^ self newAlias: #BSTRString to: self string
 ]
 
 { #category : #building }
@@ -64,6 +94,7 @@ AlceSDKLibraryBuilder >> build [
 	library := self instantiate: AlcixLibrary.
 	library name:#'VBALang'.
 	self primitiveTypes do: [ :t | library addType: t ].
+	self aliasTypes do: [ :t | library addType: t ].
 "	self functionsOrSubs do: [ :f | library addInvocable: f ].
 	self globals do: [ :g | g addGlobal: g ]."
 	^ library 
@@ -368,6 +399,12 @@ vbDirectory 	16 	Directory or folder
 vbArchive 	32 	File has changed since last backup
 vbAlias 	64 	On the Macintosh, identifier is an alias' 	
 
+]
+
+{ #category : #alias }
+AlceSDKLibraryBuilder >> dispatchInstance [
+
+	^ self newAlias: #COMDispatchInterface to: self object
 ]
 
 { #category : #'sdk functions' }
@@ -817,12 +854,22 @@ AlceSDKLibraryBuilder >> instantiate: aClass [
  	^ model instantiate: aClass
 ]
 
-{ #category : #'sdk functions math' }
+{ #category : #alias }
 AlceSDKLibraryBuilder >> int [
-	^ self
-		  functionNamed: #Int
-		  returns: self variant
-		  parametersFromString: 'number required double'
+
+	^ self newAlias: #int to: self integer
+]
+
+{ #category : #alias }
+AlceSDKLibraryBuilder >> int16 [
+
+	^ self newAlias: #int16 to: self integer
+]
+
+{ #category : #alias }
+AlceSDKLibraryBuilder >> int32 [
+
+	^ self newAlias: #int32 to: self integer
 ]
 
 { #category : #'primitive types' }
@@ -1269,6 +1316,18 @@ AlceSDKLibraryBuilder >> nPer [
 		  parametersFromString: 'rate 	Required. Double specifying interest rate per period. For example, if you get a car loan at an annual percentage rate (APR) of 10 percent and make monthly payments, the rate per period is 0.1/12, or 0.0083.
 pmt 	Required. Double specifying payment to be made each period. Payments usually contain principal and interest that doesn''t change over the life of the annuity.
 pv 	Required. Double specifying present value, or value today, of a series of future payments or receipts. For example, when you borrow money to buy a car, the loan amount is the present value to the lender of the monthly car payments you will make.'
+]
+
+{ #category : #alias }
+AlceSDKLibraryBuilder >> newAlias: aName to: aType [
+
+	^ created at: aName , 'Alias' ifAbsentPut: [ 
+		  | t |
+		  t := self instantiate: AlcixAlias.
+		  t name: aName.
+		  t type: aType.
+		  t typeName: (self typeNameReference: aType name).
+		  t ]
 ]
 
 { #category : #'sdk functions' }
@@ -2016,6 +2075,36 @@ AlceSDKLibraryBuilder >> uCase [
 		  parametersFromString: 'expr required string'
 ]
 
+{ #category : #alias }
+AlceSDKLibraryBuilder >> ubyte [
+
+	^ self newAlias: #ubyte to: self byte
+]
+
+{ #category : #alias }
+AlceSDKLibraryBuilder >> uint [
+
+	^ self newAlias: #uint to: self integer
+]
+
+{ #category : #alias }
+AlceSDKLibraryBuilder >> uint16 [
+
+	^ self newAlias: #uint16 to: self integer
+]
+
+{ #category : #alias }
+AlceSDKLibraryBuilder >> uint32 [
+
+	^ self newAlias: #uint32 to: self integer
+]
+
+{ #category : #alias }
+AlceSDKLibraryBuilder >> userDefined [
+
+	^ self newAlias: #USERDEFINED to: self object
+]
+
 { #category : #'sdk functions conversion' }
 AlceSDKLibraryBuilder >> val [
 	^ self
@@ -2056,6 +2145,12 @@ AlceSDKLibraryBuilder >> weekdayName [
 		  parametersFromString: 'weekday 	Required. The numeric designation for the day of the week. Numeric value of each day depends on setting of the firstdayofweek setting.
 abbreviate 	Optional. Boolean value that indicates if the weekday name is to be abbreviated. If omitted, the default is False, which means that the weekday name is not abbreviated.
 firstdayofweek 	Optional. DateEnum Numeric value indicating the first day of the week. See Settings section for values.'
+]
+
+{ #category : #alias }
+AlceSDKLibraryBuilder >> winVariant [
+
+	^ self newAlias: #Win32Variant to: self object
 ]
 
 { #category : #'sdk functions' }

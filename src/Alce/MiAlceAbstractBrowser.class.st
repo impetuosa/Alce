@@ -14,6 +14,9 @@ MiAlceAbstractBrowser class >> buildCommandsGroupWith: presenterInstance forRoot
 		buildCommandsGroupWith: presenterInstance
 		forRoot: rootCommandGroup.
 	rootCommandGroup register:
+		(MiAlceInspectCommand forSpecContext: presenterInstance).
+
+	rootCommandGroup register:
 		(MiColouringCommand forSpecContext: presenterInstance)
 ]
 

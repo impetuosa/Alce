@@ -82,6 +82,11 @@ AlcixInvocable >> addParameter: anObject [
 	^ self parameters add: anObject
 ]
 
+{ #category : #adding }
+AlcixInvocable >> color [ 
+	^ userType color
+]
+
 { #category : #accessing }
 AlcixInvocable >> incomingInvocations [
 	"Relation named: #incomingInvocations type: #AlcixInvocation opposite: #candidate"

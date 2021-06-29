@@ -347,9 +347,12 @@ AlceASTCodeImporter >> visitFunctionDefinition: aDefinition [
 	| fn return |
 	fn := self instantiate: AlcixFunction.
 	fn selector: (self nodeToString: aDefinition selector).
-	fn anchor: self state top anchor / #functions / fn selector.
+	fn anchor:
+		self state top anchor / #functions / fn selector / #'@src'
+		/ aDefinition startPosition asString / #to
+		/ aDefinition stopPosition asString.
 	fn typeName: (self typeName: aDefinition type).
-	
+
 	" Addin a local variable with the name of the function to represent the 'returning assignation' "
 	return := self instantiate: AlcixLocalVariable.
 	return name: (self nodeToString: aDefinition selector).
@@ -357,7 +360,7 @@ AlceASTCodeImporter >> visitFunctionDefinition: aDefinition [
 	return instantiatesObjectOnDefinition: false.
 	return anchor: self state top anchor / #return / return name.
 	fn addLocalVariable: return.
-	
+
 	self state top addInvocable: fn.
 	self state push: fn.
 	aDefinition parameters acceptVisitor: self.
@@ -534,7 +537,9 @@ AlceASTCodeImporter >> visitSubDefinition: aDefinition [
 	| fn |
 	fn := self instantiate: AlcixSubProcedure.
 	fn selector: (self nodeToString: aDefinition selector).
-	fn anchor: self state top anchor / #subprocedures / fn selector.
+	fn anchor: self state top anchor / #subprocedures / fn selector / #'@src'
+		/ aDefinition startPosition asString / #to
+		/ aDefinition stopPosition asString..
 	self state top addInvocable: fn.
 	self state push: fn.
 	aDefinition parameters acceptVisitor: self. 

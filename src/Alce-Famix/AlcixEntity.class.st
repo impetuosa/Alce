@@ -44,6 +44,7 @@ AlcixEntity >> color: aColor [
 
 { #category : #accessing }
 AlcixEntity >> colorIfAbsent: aBlock [
-
-	^ self attributeAt: #Color ifAbsent: [ aBlock value ]
+	| val |
+	val := self attributeAt: #Color ifAbsent: [ nil ].
+	^ val ifNil: [ aBlock value  ]
 ]
