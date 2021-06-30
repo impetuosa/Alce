@@ -42,7 +42,10 @@ AlceSDKLibraryBuilder >> aliasTypes [
 		  self userDefined.
 		  self uint.
 		  self uint32.
-		  self uint16 }
+		  self uint16 . 
+		  self currentDb.
+		  self err. 
+		}
 ]
 
 { #category : #'sdk functions' }

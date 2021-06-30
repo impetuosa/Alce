@@ -166,8 +166,22 @@ AlceLinker >> visitAccessWrite: anAlcixAccessWrite [
 
 { #category : #visiting }
 AlceLinker >> visitAlias: anAlcixAlias [
-
-	^ self visitTypedEntity: anAlcixAlias
+	
+	anAlcixAlias type ifNil: [ 
+		| type references | 
+		type := (self lookupType: anAlcixAlias typeName in: anAlcixAlias userType).
+		
+		type ifNil: [ 
+			references := (anAlcixAlias mooseModel references reject: [: r |r  =anAlcixAlias  userType ]) readStream .
+			self assert: (anAlcixAlias userType isKindOf: AlcixLibrary). 
+			[ type isNil and: [ references atEnd not  ] ]	whileTrue: [ 
+				type := (self lookupType: anAlcixAlias typeName in: references next).	
+			 ]
+		 ].
+		type  ifNotNil: [ 
+			:t | 
+			anAlcixAlias type: t.
+			self noteChange ] ]
 ]
 
 { #category : #visiting }
