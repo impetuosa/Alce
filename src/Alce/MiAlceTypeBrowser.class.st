@@ -52,7 +52,8 @@ MiAlceTypeBrowser >> accept: aModel [
 
 	^ { 
 		  AlcixEnum.
-		  AlcixUserType } anySatisfy: [ :a | aModel isKindOf: a ]
+		  AlcixUserType.
+		  AlcixAlias } anySatisfy: [ :a | aModel isKindOf: a ]
 ]
 
 { #category : #visiting }

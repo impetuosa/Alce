@@ -20,6 +20,14 @@ AlcixAccessRead >> accept: aVisitor [
 ]
 
 { #category : #visiting }
+AlcixAccessRead >> color [
+
+	^ rightElement
+		  ifNil: [ super color ]
+		  ifNotNil: [ rightElement color ]
+]
+
+{ #category : #visiting }
 AlcixAccessRead >> isWriting [
 
 	^ false

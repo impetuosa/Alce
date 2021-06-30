@@ -27,10 +27,6 @@ AlcixEntity class >> metamodel [
 ]
 
 { #category : #accessing }
-AlcixEntity >> allChildren [ 
-]
-
-{ #category : #accessing }
 AlcixEntity >> color [
 
 	^ self colorIfAbsent: [ Color transparent ]
@@ -47,4 +43,19 @@ AlcixEntity >> colorIfAbsent: aBlock [
 	| val |
 	val := self attributeAt: #Color ifAbsent: [ nil ].
 	^ val ifNil: [ aBlock value  ]
+]
+
+{ #category : #accessing }
+AlcixEntity >> includedColors [
+
+	| colors |
+	colors := OrderedCollection new.
+	self includedColorsInto: colors.
+	^ colors
+]
+
+{ #category : #accessing }
+AlcixEntity >> includedColorsInto: colors [
+
+	(colors includes: self color) ifFalse: [ colors add: self color ]
 ]

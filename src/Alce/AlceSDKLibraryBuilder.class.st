@@ -250,6 +250,18 @@ AlceSDKLibraryBuilder >> currency [
 	
 ]
 
+{ #category : #alias }
+AlceSDKLibraryBuilder >> currentDb [
+
+	^ self newAlias: #CurrentDB toName: self database.
+]
+
+{ #category : #alias }
+AlceSDKLibraryBuilder >> database [
+
+	^ #'Database'
+]
+
 { #category : #'primitive types' }
 AlceSDKLibraryBuilder >> date [
 	^ self primitiveTypeNamed: #Date
@@ -470,6 +482,18 @@ AlceSDKLibraryBuilder >> eof [
 		  functionNamed: #EOF
 		  returns: self boolean
 		  parametersFromString: 'filenumber required integer'
+]
+
+{ #category : #alias }
+AlceSDKLibraryBuilder >> err [
+
+	^ self newAlias: #Err toName: self errObject.
+]
+
+{ #category : #alias }
+AlceSDKLibraryBuilder >> errObject [
+
+	^ #'ErrObject'
 ]
 
 { #category : #'sdk functions' }
@@ -1327,6 +1351,17 @@ AlceSDKLibraryBuilder >> newAlias: aName to: aType [
 		  t name: aName.
 		  t type: aType.
 		  t typeName: (self typeNameReference: aType name).
+		  t ]
+]
+
+{ #category : #alias }
+AlceSDKLibraryBuilder >> newAlias: aName toName: anOtherName [
+
+	^ created at: aName , 'Alias' ifAbsentPut: [ 
+		  | t |
+		  t := self instantiate: AlcixAlias.
+		  t name: aName.
+		  t typeName: (self typeNameReference: anOtherName).
 		  t ]
 ]
 

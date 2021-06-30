@@ -1,7 +1,7 @@
 Class {
 	#name : #AlcixFunction,
 	#superclass : #AlcixInvocable,
-	#traits : 'AlcixTTyped',
+	#traits : 'AlcixTTyped - {#color}',
 	#classTraits : 'AlcixTTyped classTrait',
 	#instVars : [
 		'#typeAnchor => FMProperty'

@@ -24,6 +24,14 @@ AlcixAccessWrite >> accept: aVisitor [
 
 ]
 
+{ #category : #accessing }
+AlcixAccessWrite >> color [
+
+	^ leftElement
+		  ifNil: [ super color ]
+		  ifNotNil: [ leftElement color ]
+]
+
 { #category : #setting }
 AlcixAccessWrite >> expandLeftMethodInvocation [
 
@@ -44,6 +52,13 @@ AlcixAccessWrite >> expandLeftMethodInvocation [
 	n receiver: self.
 	self mooseModel add: n.
 	^ n
+]
+
+{ #category : #setting }
+AlcixAccessWrite >> includedColorsInto: colors [
+
+	super includedColorsInto: colors.
+	leftElement ifNotNil: [ colors add: leftElement color ]
 ]
 
 { #category : #accessing }

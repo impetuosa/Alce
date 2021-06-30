@@ -27,9 +27,19 @@ AlcixAlias >> color [
 	^ type ifNotNil: [ type color ] ifNil: [ super color ]
 ]
 
+{ #category : #accessing }
+AlcixAlias >> invocables [  
+	^ type ifNil: [ {  } ] ifNotNil: [ type invocables ]
+]
+
 { #category : #testing }
 AlcixAlias >> isAstLoaded [
 	 ^ true 
+]
+
+{ #category : #accessing }
+AlcixAlias >> members [ 
+	^ type ifNil: [ {  } ] ifNotNil: [ type members ]
 ]
 
 { #category : #accessing }
@@ -40,6 +50,11 @@ AlcixAlias >> printOn: aStream [
 		nextPutAll: '=>'.
 	typeName printOn: aStream.
 	aStream nextPutAll: ')'
+]
+
+{ #category : #accessing }
+AlcixAlias >> types [  
+	^ type ifNil: [ {  } ] ifNotNil: [ type types ]
 ]
 
 { #category : #accessing }

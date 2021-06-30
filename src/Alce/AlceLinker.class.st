@@ -228,6 +228,7 @@ AlceLinker >> visitFunction: aFunction [
 { #category : #visiting }
 AlceLinker >> visitInvocable: anInvocable [
 	anInvocable parameters do: [ :p | p accept: self ].
+	anInvocable localVariables do: [ :p | p accept: self ].
 	anInvocable outgoingInvocations do: [ :i | i accept: self ].
 	anInvocable accesses do: [ :a | a accept: self ]
 ]
@@ -246,6 +247,17 @@ AlceLinker >> visitInvocation: anAlcixInvocation [
 { #category : #visiting }
 AlceLinker >> visitLibrary: anAlcixLibrary [ 
 " something here? "
+]
+
+{ #category : #visiting }
+AlceLinker >> visitLocalVariable: anAlcixLocalVariable [
+
+	anAlcixLocalVariable type ifNil: [ 
+		(self
+			 lookupType: anAlcixLocalVariable typeName
+			 in: anAlcixLocalVariable invocable) ifNotNil: [ :t | 
+			anAlcixLocalVariable type: t.
+			self noteChange ] ]
 ]
 
 { #category : #visiting }

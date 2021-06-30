@@ -19,7 +19,8 @@ AlcixTTyped classSide >> annotation [
 { #category : #accessing }
 AlcixTTyped >> color [
 
-	^ type ifNotNil: [ type color ] ifNil: [ super color ]
+	^ self colorIfAbsent: [ 
+		  type ifNotNil: [ type color ] ifNil: [ super color ] ]
 ]
 
 { #category : #accessing }
