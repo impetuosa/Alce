@@ -250,7 +250,9 @@ AlceAccessGenerator >> defineProperties [
 
 	invocable property: #visibility type: #String.
 	localVariable property: #isConstant type: #Boolean.
-	variable property: #redim type: #Boolean
+	variable property: #redim type: #Boolean.
+	module property: #astCannotLoad type: #Boolean.
+	module property: #ast type: #Object
 ]
 
 { #category : #definition }
