@@ -71,18 +71,6 @@ AlceLibraryReferenceImporter >> visitLibraryAlias: aJinLibraryAlias [
 { #category : #visiting }
 AlceLibraryReferenceImporter >> visitLibraryAttribute: aJinLibraryAttribute [
 
-	| obj |
-	obj := self instantiate: AlcixAlias.
-	self state top addType: obj.
-	obj name: aJinLibraryAttribute name.
-	obj anchor:
-		self state top anchor / #attributes / aJinLibraryAttribute name.
-	obj typeName: (self typeNameReference: aJinLibraryAttribute typeName)
-	
-
-
-"visitLibraryAttribute: aJinLibraryAttribute
-
 	| attr |
 	attr := self instantiate: AlcixAttribute.
 	attr name: aJinLibraryAttribute name.
@@ -91,7 +79,7 @@ AlceLibraryReferenceImporter >> visitLibraryAttribute: aJinLibraryAttribute [
 	attr isConstant: false.
 	attr visibility: #Public.
 	attr anchor: (self dllAnchor: attr name for: aJinLibraryAttribute).
-	self state top addMember: attr"
+	self state top addMember: attr
 ]
 
 { #category : #visiting }

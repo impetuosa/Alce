@@ -84,7 +84,7 @@ AlcixAccess >> isReturn [
 
 	<FMProperty: #isReturn type: #Boolean>
 	<generated>
-	^ isReturn ifNil: [ false  ]
+	^ isReturn
 ]
 
 { #category : #accessing }

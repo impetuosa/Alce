@@ -21,8 +21,9 @@ AlceLookForFunctionOrSubIn >> visitAccessModule: anAccessModule [
 ]
 
 { #category : #visiting }
-AlceLookForFunctionOrSubIn >> visitAlias: anAlcixAlias [ 
-	anAlcixAlias type ifNotNil: [ self halt. "Should do something " ]
+AlceLookForFunctionOrSubIn >> visitAlias: anAlcixAlias [
+
+	anAlcixAlias type ifNotNil: [ anAlcixAlias type accept: self ]
 ]
 
 { #category : #visiting }

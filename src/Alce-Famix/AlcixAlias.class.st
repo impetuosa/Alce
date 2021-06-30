@@ -1,6 +1,6 @@
 Class {
 	#name : #AlcixAlias,
-	#superclass : #AlcixAccessEntity,
+	#superclass : #AlcixAccessible,
 	#traits : 'AlcixTType + AlcixTTyped',
 	#classTraits : 'AlcixTType classTrait + AlcixTTyped classTrait',
 	#category : #'Alce-Famix-Entities'
@@ -9,7 +9,7 @@ Class {
 { #category : #meta }
 AlcixAlias class >> annotation [
 
-	<FMClass: #Alias super: #AlcixAccessEntity>
+	<FMClass: #Alias super: #AlcixAccessible>
 	<package: #'Alce-Famix'>
 	<generated>
 	^self

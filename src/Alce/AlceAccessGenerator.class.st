@@ -153,7 +153,7 @@ AlceAccessGenerator >> defineHierarchy [
 
 	alias --|> typed.
 	alias --|> type.
-	alias  --|> accessEntity.
+	alias  --|> accessible.
 	
 	attribute --|> variable.
 	argument --|> codeSegment.
