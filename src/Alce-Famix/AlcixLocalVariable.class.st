@@ -59,3 +59,9 @@ AlcixLocalVariable >> isConstant: anObject [
 	<generated>
 	isConstant := anObject
 ]
+
+{ #category : #accessing }
+AlcixLocalVariable >> userType [
+
+	^ invocable userType
+]

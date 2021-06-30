@@ -23,6 +23,13 @@ AlcixMethodInvocation >> accept: aVisitor [
 ]
 
 { #category : #accessing }
+AlcixMethodInvocation >> includedColorsInto: colors [
+
+	super includedColorsInto: colors.
+	receiver ifNotNil: [ colors add: receiver color ]
+]
+
+{ #category : #accessing }
 AlcixMethodInvocation >> printOn: aStream [
 
 	aStream nextPutAll: 'call '.

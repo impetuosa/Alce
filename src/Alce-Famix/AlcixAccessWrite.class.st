@@ -58,7 +58,9 @@ AlcixAccessWrite >> expandLeftMethodInvocation [
 AlcixAccessWrite >> includedColorsInto: colors [
 
 	super includedColorsInto: colors.
-	leftElement ifNotNil: [ colors add: leftElement color ]
+	leftElement ifNotNil: [ 
+		colors add: leftElement color.
+		colors add: leftElement userType color ]
 ]
 
 { #category : #accessing }

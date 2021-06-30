@@ -27,6 +27,19 @@ AlcixAlias >> color [
 	^ type ifNotNil: [ type color ] ifNil: [ super color ]
 ]
 
+{ #category : #visiting }
+AlcixAlias >> color: aColor [
+
+	^ type
+		  ifNotNil: [ type color: aColor ]
+		  ifNil: [ super color: aColor ]
+]
+
+{ #category : #accessing }
+AlcixAlias >> includedColorsInto: arg1 [ 
+	self traitConflict
+]
+
 { #category : #accessing }
 AlcixAlias >> invocables [  
 	^ type ifNil: [ {  } ] ifNotNil: [ type invocables ]

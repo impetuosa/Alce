@@ -105,7 +105,7 @@ MiAlceModelBrowser >> updateProperties [
 			(#Path -> self miSelectedItem path).
 			(#'#Types' -> self miSelectedItem types size asString).
 			(#'#Globals' -> self miSelectedItem members size asString).
-			(#'#Color' -> self miSelectedItem color) }
+			(#'#Color' -> self miSelectedItem colorOrPopularColor) }
 ]
 
 { #category : #initialization }

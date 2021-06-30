@@ -68,6 +68,14 @@ AlcixModule >> globalVariablesGroup [
 	^ MooseSpecializedGroup withAll: self globalVariables asSet
 ]
 
+{ #category : #accessing }
+AlcixModule >> includedColorsInto: colors [
+
+	super includedColorsInto: colors.
+
+	colors addAll: (globalVariables collect: [ :f | f color ])
+]
+
 { #category : #testing }
 AlcixModule >> isAstLoaded [
 

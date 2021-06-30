@@ -30,6 +30,12 @@ AlceLookIn >> visitAccessModule: anAccessModule [
 ]
 
 { #category : #visiting }
+AlceLookIn >> visitAlias: anAlcixAlias [
+
+	anAlcixAlias type ifNotNil: [ anAlcixAlias type accept: self ]
+]
+
+{ #category : #visiting }
 AlceLookIn >> visitAttributeAccessor: anAlcixAttributeAccessor [ 
 ]
 

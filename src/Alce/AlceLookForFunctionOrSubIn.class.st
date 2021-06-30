@@ -21,12 +21,6 @@ AlceLookForFunctionOrSubIn >> visitAccessModule: anAccessModule [
 ]
 
 { #category : #visiting }
-AlceLookForFunctionOrSubIn >> visitAlias: anAlcixAlias [
-
-	anAlcixAlias type ifNotNil: [ anAlcixAlias type accept: self ]
-]
-
-{ #category : #visiting }
 AlceLookForFunctionOrSubIn >> visitClass: aClass [
 	onlyGlobals ifFalse: [ self visitModule: aClass ]
 ]

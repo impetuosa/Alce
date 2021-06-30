@@ -29,6 +29,13 @@ AlcixContainer >> addType: anObject [
 ]
 
 { #category : #accessing }
+AlcixContainer >> includedColorsInto: colors [
+
+	super includedColorsInto: colors.
+	types do: [ :f | f includedColorsInto: colors ]
+]
+
+{ #category : #accessing }
 AlcixContainer >> name [
 
 	<FMProperty: #name type: #String>

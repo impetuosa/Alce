@@ -59,3 +59,9 @@ AlcixParameter >> isOptional: anObject [
 	<generated>
 	isOptional := anObject
 ]
+
+{ #category : #accessing }
+AlcixParameter >> userType [
+
+	^ type
+]

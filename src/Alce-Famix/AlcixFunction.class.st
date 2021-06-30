@@ -25,6 +25,13 @@ AlcixFunction >> accept: aVisitor [
 ]
 
 { #category : #accessing }
+AlcixFunction >> includedColorsInto: colors [
+
+	super includedColorsInto: colors.
+	type ifNotNil: [ colors add: type color ]
+]
+
+{ #category : #accessing }
 AlcixFunction >> typeAnchor [
 
 	<FMProperty: #typeAnchor type: #Object>

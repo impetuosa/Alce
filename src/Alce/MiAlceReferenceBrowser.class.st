@@ -103,11 +103,12 @@ MiAlceReferenceBrowser >> tableNamed: aTableName [
 					                      sortFunction:
 						                      [ :each | each isAstLoaded asString ]
 							                      ascending;
+												width: 40;
 					                      beExpandable;
 					                      yourself);
 			                     addColumn:
 				                     ((SpImageTableColumn evaluated: [ :each | 
-						                       (Morph new color: each color) asForm ])
+						                       (Morph new color: each colorOrPopularColor) asForm ])
 					                      width: 10;
 					                      sortFunction: #className ascending;
 					                      yourself) ].

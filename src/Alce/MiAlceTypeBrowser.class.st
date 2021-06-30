@@ -125,7 +125,7 @@ MiAlceTypeBrowser >> newInvocablesTable [
 				   beExpandable;
 				   yourself);
 		  addColumn: ((SpImageTableColumn evaluated: [ :each | 
-					    (Morph new color: each color) asForm ])
+					    (Morph new color: each colorOrPopularColor) asForm ])
 				   width: 10;
 				   yourself);
 		  yourself
@@ -169,7 +169,7 @@ MiAlceTypeBrowser >> newMembersTable [
 				   beExpandable;
 				   yourself);
 		  addColumn: ((SpImageTableColumn evaluated: [ :each | 
-					    (Morph new color: each color) asForm ])
+					    (Morph new color: each colorOrPopularColor) asForm ])
 				   width: 10;
 				   yourself);
 		  yourself
@@ -202,7 +202,7 @@ MiAlceTypeBrowser >> newTypesTable [
 				   beExpandable;
 				   yourself);
 		  addColumn: ((SpImageTableColumn evaluated: [ :each | 
-					    (Morph new color: each color) asForm ])
+					    (Morph new color: each colorOrPopularColor) asForm ])
 				   width: 10;
 				   yourself) yourself
 ]
