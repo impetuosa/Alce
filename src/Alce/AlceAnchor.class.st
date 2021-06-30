@@ -88,11 +88,12 @@ AlceAnchor >> resolve: aProject [
 { #category : #'as yet unclassified' }
 AlceAnchor >> srcFrom [
 
-	^ (path segments at: (path segments indexOf: '@src') + 1) asNumber
+	^ (path segments reverse at:
+		   (path segments reverse indexOf: '@src') - 1) asNumber
 ]
 
 { #category : #'as yet unclassified' }
 AlceAnchor >> srcTo [
 
-	^ (path segments at: (path segments indexOf: #to) + 1) asNumber
+	^ (path segments reverse at: (path segments reverse  indexOf: #to) - 1) asNumber
 ]

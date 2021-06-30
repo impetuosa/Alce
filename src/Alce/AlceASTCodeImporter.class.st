@@ -312,7 +312,9 @@ AlceASTCodeImporter >> visitExternalFunction: aDefinition [
 	| fn |
 	fn := self instantiate: AlcixExternalFunction.
 	fn selector: (self nodeToString: aDefinition selector).
-	fn anchor: self state top anchor / #functions / fn selector.
+	fn anchor: self state top anchor / #functions / fn selector / #'@src'
+		/ aDefinition startPosition asString / #to
+		/ aDefinition stopPosition asString.
 	fn libraryName: (self nodeToString: aDefinition library).
 
 	aDefinition alias ifNotNil: [ 
@@ -351,15 +353,22 @@ AlceASTCodeImporter >> visitFunctionDefinition: aDefinition [
 		self state top anchor / #functions / fn selector / #'@src'
 		/ aDefinition startPosition asString / #to
 		/ aDefinition stopPosition asString.
-	fn typeName: (self typeName: aDefinition type).
-
 	" Addin a local variable with the name of the function to represent the 'returning assignation' "
 	return := self instantiate: AlcixLocalVariable.
 	return name: (self nodeToString: aDefinition selector).
-	return typeName: (self typeName: aDefinition type).
 	return instantiatesObjectOnDefinition: false.
 	return anchor: self state top anchor / #return / return name.
 	fn addLocalVariable: return.
+	aDefinition type ifNotNil: [ 
+		fn typeName: (self typeName: aDefinition type).
+		fn typeAnchor: self state top anchor / #functions
+			/ fn typeName adaptToAlceAnchorPathFragment / #'@src'
+			/ aDefinition type startPosition asString / #to
+			/ aDefinition type stopPosition asString.
+
+		return typeName: (self typeName: aDefinition type) ].
+
+
 
 	self state top addInvocable: fn.
 	self state push: fn.
@@ -439,30 +448,54 @@ AlceASTCodeImporter >> visitModulePropertyGet: aModulePropertyGet [
 	acc kind: kindSymbol value asSymbol.
 	acc selector: (self nodeToString: aModulePropertyGet selector).
 
-	acc anchor: self state top anchor / #accessors / acc selector.
+	acc anchor:
+		self state top anchor / #accessors / acc selector / #'@src'
+		/ aModulePropertyGet startPosition asString / #to
+		/ aModulePropertyGet stopPosition asString.
+
+	acc typeName: (self typeName: aModulePropertyGet type).
+	acc typeAnchor: self state top anchor / #accessors
+		/ acc typeName adaptToAlceAnchorPathFragment / #'@src'
+		/ aModulePropertyGet type startPosition asString / #to
+		/ aModulePropertyGet type stopPosition asString.
+
+
+
 	"Obtain property name from the body of the accessor "
+
+
+
+
 
 	acc kind = #Get
 		ifTrue: [ 
 			statement := (aModulePropertyGet block statements select: [ :s | 
 				              { 
 					              VBExplicitAssignementNode.
-					              VBEqualsNode } includes: s class ]) detect: [ :s | 
-				             (self nodeToString: s left) = acc selector ] ifNone: [nil].
-			attributeName := statement ifNotNil: [ self nodeToString: statement right] ]
+					              VBEqualsNode } includes: s class ])
+				             detect: [ :s | 
+				             (self nodeToString: s left) = acc selector ]
+				             ifNone: [ nil ].
+			attributeName := statement ifNotNil: [ 
+				                 self nodeToString: statement right ] ]
 		ifFalse: [ 
 			statement := (aModulePropertyGet block allNodesSelect: [ :s | 
 				              { 
 					              VBExplicitAssignementNode.
-					              VBEqualsNode } includes: s class ]) detect: [ :s | 
-				             (self nodeToString: s right) = (self nodeToString:
-					              aModulePropertyGet parameters parameters first name) ] ifNone: [nil] .
+					              VBEqualsNode } includes: s class ])
+				             detect: [ :s | 
+					             (self nodeToString: s right) = (self nodeToString:
+						              aModulePropertyGet parameters parameters first
+							              name) ]
+				             ifNone: [ nil ].
 			attributeName := statement ifNotNil: [ 
 				                 self nodeToString: statement left ] ].
 
 
 	acc attribute: (attributeName ifNotNil: [ 
-			 self state top members detect: [ :p | p name = attributeName ]ifNone: [ nil ] ] ).
+			 self state top members
+				 detect: [ :p | p name = attributeName ]
+				 ifNone: [ nil ] ]).
 	self state push: acc.
 	aModulePropertyGet parameters acceptVisitor: self.
 	self state pop
