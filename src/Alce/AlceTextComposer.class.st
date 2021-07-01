@@ -257,22 +257,26 @@ AlceTextComposer >> addStyle: aStyleArray forToken: aToken [
 ]
 
 { #category : #'as yet unclassified' }
-AlceTextComposer >> compose: anAst model: aModel style: aStyle [
+AlceTextComposer >> compose: anAst model: aModel style: aStyle browsingWith: aBrowsingObject [
 
 	anAst ifNil: [ ^ Text fromString: '' ].
 	text := Text fromString: anAst source.
+
+	AlceTextModelComposer new
+		compose: anAst
+		model: aModel
+		style: aStyle
+		into: text
+		browsingWith: aBrowsingObject.
 
 	AlceTextAstComposer new
 		compose: anAst
 		model: aModel
 		style: aStyle
-		into: text.
-		
-	AlceTextModelComposer new
-		compose: anAst
-		model: aModel
-		style: aStyle
-		into: text.
+		into: text
+		browsingWith: aBrowsingObject.
+
+
 
 	^ text
 ]

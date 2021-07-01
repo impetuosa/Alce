@@ -36,11 +36,6 @@ AlcixAlias >> color: aColor [
 ]
 
 { #category : #accessing }
-AlcixAlias >> includedColorsInto: arg1 [ 
-	self traitConflict
-]
-
-{ #category : #accessing }
 AlcixAlias >> invocables [  
 	^ type ifNil: [ {  } ] ifNotNil: [ type invocables ]
 ]

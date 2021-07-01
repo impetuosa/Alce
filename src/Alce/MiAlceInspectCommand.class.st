@@ -11,7 +11,8 @@ MiAlceInspectCommand class >> defaultDescription [
 
 { #category : #default }
 MiAlceInspectCommand class >> defaultName [
-	^ 'Pharo Inspector'
+
+	^ 'Inspect'
 ]
 
 { #category : #default }

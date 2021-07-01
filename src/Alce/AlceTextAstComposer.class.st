@@ -7,8 +7,7 @@ Class {
 }
 
 { #category : #'as yet unclassified' }
-AlceTextAstComposer >> compose: anAst model: aModel style: aStyle into: aText [  
-
+AlceTextAstComposer >> compose: anAst model: aModel style: aStyle into: aText browsingWith: aBrowsingObject [ 
 
 	ast := anAst.
 	text := aText. 

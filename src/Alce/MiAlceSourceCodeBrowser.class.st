@@ -40,13 +40,24 @@ MiAlceSourceCodeBrowser class >> title [
 ]
 
 { #category : #visiting }
-MiAlceSourceCodeBrowser >> accept: aModel [ 
-	^ aModel isKindOf: AlcixModule   
+MiAlceSourceCodeBrowser >> accept: aModel [
+
+	^ (aModel isKindOf: AlcixModule) or: (aModel isKindOf: AlceAnchor)
 ]
 
 { #category : #initialization }
 MiAlceSourceCodeBrowser >> followAction [
-	viewport text: (AlceTextComposer new compose: toSelect ast model: toSelect style: self vbaStyle)
+
+	(toSelect isKindOf: AlcixModule) ifTrue: [ 
+		viewport text: (AlceTextComposer new
+				 compose: toSelect ast
+				 model: toSelect
+				 style: self vbaStyle
+				 browsingWith: self) ].
+
+	(toSelect isKindOf: AlceAnchor) ifTrue: [ 
+		toSelect containsSource ifTrue: [ 
+			viewport editor selectFrom: toSelect srcFrom to: toSelect srcTo ] ]
 ]
 
 { #category : #initialization }

@@ -7,7 +7,8 @@ Class {
 		'whenColorAccepted',
 		'window',
 		'ok',
-		'cancel'
+		'cancel',
+		'setNil'
 	],
 	#category : #'Alce-MidasBrowsers'
 }
@@ -15,11 +16,14 @@ Class {
 { #category : #specs }
 SpColorPicker class >> defaultSpec [
 
-	^ SpBoxLayout newTopToBottom add: (SpBoxLayout newLeftToRight
-		  add: #colorList;
-		  add: #ok width: 50;
-		  add: #cancel width: 50;
-		  yourself) height: 70
+	^ SpBoxLayout newTopToBottom
+		  add: (SpBoxLayout newLeftToRight
+				   add: #colorList;
+				   add: #ok width: 50;
+				   add: #setNil width: 50;
+				   add: #cancel width: 50;
+				   yourself)
+		  height: 70
 ]
 
 { #category : #actions }
@@ -42,14 +46,20 @@ SpColorPicker >> initializePresenters [
 
 
 	colorList := self newDropList.
-	ok := self newButton icon:( self iconNamed: #smallOk) ; action: [ self acceptColor ]. 
-	cancel := self newButton icon:( self iconNamed: #smallCancel); action: [ self cancelColor ]. 
+	ok := self newButton
+		      icon: (self iconNamed: #smallOk);
+		      action: [ self acceptColor ].
+	setNil := self newButton
+		           label:'Nil';
+		           action: [ self setNilColor ].
+	cancel := self newButton
+		          icon: (self iconNamed: #smallCancel);
+		          action: [ self cancelColor ].
 	colorList
 		display: [ :m | m color name capitalized ];
 		iconBlock: [ :e | e asForm ];
 		items:
-			((Color indexedColors reject: [ :i | i name = 'unnamed' ]) 
-				 collect: [ :c | 
+			((Color colors reject: [ :i | i name = 'unnamed' ]) collect: [ :c | 
 					 Morph new
 						 color: c;
 						 yourself ]).
@@ -68,6 +78,13 @@ SpColorPicker >> selectedColor: aColor [
 	colorList items
 		detect: [ :c | c color = aColor ]
 		ifFound: [ :m | colorList selectItem: m ]
+]
+
+{ #category : #actions }
+SpColorPicker >> setNilColor [
+
+	whenColorAccepted ifNotNil: [ whenColorAccepted value: nil ].
+	window close
 ]
 
 { #category : #actions }

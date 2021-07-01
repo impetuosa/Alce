@@ -40,8 +40,15 @@ MiAlceReferenceBrowser class >> title [
 ]
 
 { #category : #actions }
-MiAlceReferenceBrowser >> accept: aModel [ 
-	^ aModel isKindOf: AlcixReference  
+MiAlceReferenceBrowser >> accept: aModel [
+	tables at: aModel class entryName ifPresent: [ :t | 
+		(t items includes: aModel) ifTrue: [ 
+			viewport pages
+				detect: [ :p | p presenterProvider  = t ]
+				ifFound: [ :p | viewport selectPage: p ].
+			t selectItem: aModel ] ].
+
+	^ aModel isKindOf: AlcixReference
 ]
 
 { #category : #actions }

@@ -10,14 +10,35 @@ Class {
 { #category : #commands }
 MiAlceAbstractBrowser class >> buildCommandsGroupWith: presenterInstance forRoot: rootCommandGroup [
 
-	super
-		buildCommandsGroupWith: presenterInstance
-		forRoot: rootCommandGroup.
+
 	rootCommandGroup register:
 		(MiAlceInspectCommand forSpecContext: presenterInstance).
 
 	rootCommandGroup register:
 		(MiColouringCommand forSpecContext: presenterInstance)
+]
+
+{ #category : #opening }
+MiAlceAbstractBrowser >> browse: anAlcixLocalVariable [
+
+	(anAlcixLocalVariable respondsTo: #invocable)
+		ifTrue: [ 
+			selection := anAlcixLocalVariable invocable userType container.
+			self propagate.
+			selection := anAlcixLocalVariable invocable userType.
+			self propagate.
+			selection := anAlcixLocalVariable invocable.
+			self propagate.
+			selection := anAlcixLocalVariable anchor.
+			self propagate ]
+		ifFalse: [ 
+			selection := anAlcixLocalVariable userType container.
+			self propagate.
+			selection := anAlcixLocalVariable userType.
+			self propagate.
+			selection := anAlcixLocalVariable.
+			self propagate.
+			selection := anAlcixLocalVariable anchor ]
 ]
 
 { #category : #accessing }

@@ -1,6 +1,9 @@
 Class {
 	#name : #AlceTextModelComposer,
 	#superclass : #AlceTextComposer,
+	#instVars : [
+		'browsing'
+	],
 	#category : #'Alce-MidasBrowsers'
 }
 
@@ -16,13 +19,32 @@ AlceTextModelComposer >> addAttributeTypePaint: aColor from: aFrom to: anInteger
 		to: (anInteger min: text size)
 ]
 
+{ #category : #adding }
+AlceTextModelComposer >> addInspectAction: anAlcixAttribute info: printString from: aFrom to: aTo [
+
+	aFrom > text size ifTrue: [ ^ self ].
+
+	text
+		addAttribute: (AlceTextAction
+				 block: [ browsing browse: anAlcixAttribute ]
+				 info: printString)
+		from: aFrom
+		to: (aTo min: text size).
+	text
+		addAttribute: (TextColor color: Color black)
+		from: aFrom
+		to: (aTo min: text size)
+]
+
 { #category : #'as yet unclassified' }
-AlceTextModelComposer >> compose: aVBModuleNode model: anAlcixClass style: anAlceVBAStyle into: aCollection [ 
-	 text := aCollection.
+AlceTextModelComposer >> compose: aVBModuleNode model: anAlcixClass style: anAlceVBAStyle into: aCollection browsingWith: aBrowsingObject [
+
+	browsing := aBrowsingObject.
+	text := aCollection.
 	ast := aVBModuleNode.
 	model := anAlcixClass.
 	style := anAlceVBAStyle.
-	anAlcixClass accept: self. 
+	anAlcixClass accept: self
 ]
 
 { #category : #'as yet unclassified' }
@@ -33,7 +55,9 @@ AlceTextModelComposer >> paintWithType: anAlcixAttribute [
 	self
 		addAttributeTypePaint: anAlcixAttribute colorOrPopularColor
 		from: anAlcixAttribute anchor srcFrom
-		to: anAlcixAttribute anchor srcTo
+		to: anAlcixAttribute anchor srcTo.
+
+	
 ]
 
 { #category : #visiting }
@@ -55,7 +79,7 @@ AlceTextModelComposer >> splitting: aSideSelector colors: anAlcixAccessRead gap:
 	gap = 0 ifTrue: [ ^ self paintWithType: anAlcixAccessRead ].
 	leftTo := from + gap - 1.
 	rightFrom := leftTo + 1.
-
+	
 	self
 		addAttributeTypePaint:
 			((anAlcixAccessRead perform: aSideSelector asSymbol)
@@ -66,6 +90,7 @@ AlceTextModelComposer >> splitting: aSideSelector colors: anAlcixAccessRead gap:
 				 ifNil: [ anAlcixAccessRead colorOrPopularColor ])
 		from: from
 		to: leftTo.
+
 	self
 		addAttributeTypePaint:
 			((anAlcixAccessRead perform: aSideSelector asSymbol)
@@ -85,6 +110,12 @@ AlceTextModelComposer >> visitAccessRead: anAlcixAccessRead [
 	         anAlcixAccessRead anchor srcTo) collect: [ :i | text at: i ]) 
 		       lastIndexOf: $..
 
+	self
+		addInspectAction: anAlcixAccessRead rightElement
+		info: ''
+		from: anAlcixAccessRead anchor srcFrom
+		to: anAlcixAccessRead anchor srcTo.
+
 	self splitting: #rightElement colors: anAlcixAccessRead gap: gap
 ]
 
@@ -99,6 +130,20 @@ AlceTextModelComposer >> visitAccessWrite: anAlcixAccessWrite [
 	gap := chain indexOf: $=.
 	chain := '=' split: chain.
 
+
+	self
+		addInspectAction: anAlcixAccessWrite leftElement
+		info: ''
+		from: anAlcixAccessWrite anchor srcFrom
+		to: anAlcixAccessWrite anchor srcFrom + gap.
+
+	self
+		addInspectAction: anAlcixAccessWrite rightElement
+		info: ''
+		from: anAlcixAccessWrite anchor srcFrom + gap + 1
+		to: anAlcixAccessWrite anchor srcTo.
+
+
 	self
 		splitting: #leftElement
 		colors: anAlcixAccessWrite
@@ -111,23 +156,6 @@ AlceTextModelComposer >> visitAccessWrite: anAlcixAccessWrite [
 		gap: (chain second lastIndexOf: $.)
 		from: anAlcixAccessWrite anchor srcFrom + gap + 1
 		to: anAlcixAccessWrite anchor srcTo
-
-	"	leftTo := anAlcixAccessWrite anchor srcFrom + gap.
-	rightFrom := leftTo + 1.
-
-	self
-		addAttributeTypePaint: (anAlcixAccessWrite leftElement
-				 ifNotNil: [ :n | n color ]
-				 ifNil: [ anAlcixAccessWrite color ])
-		from: anAlcixAccessWrite anchor srcFrom
-		to: leftTo.
-
-	self
-		addAttributeTypePaint: (anAlcixAccessWrite rightElement
-				 ifNotNil: [ :n | n color ]
-				 ifNil: [ anAlcixAccessWrite color ])
-		from: rightFrom
-		to: anAlcixAccessWrite anchor srcTo"
 ]
 
 { #category : #visiting }
@@ -165,21 +193,42 @@ AlceTextModelComposer >> visitFunction: anAlcixFunction [
 	anAlcixFunction type ifNotNil: [ 
 		(anAlcixFunction typeAnchor isNotNil and: [ 
 			 anAlcixFunction typeAnchor containsSource ]) ifFalse: [ ^ self ].
+
+
+		self
+			addInspectAction: anAlcixFunction type
+			info: anAlcixFunction type printString
+			from: anAlcixFunction typeAnchor srcFrom
+			to: anAlcixFunction typeAnchor srcTo.
 		self
 			addAttributeTypePaint: anAlcixFunction type colorOrPopularColor
 			from: anAlcixFunction typeAnchor srcFrom
-			to: anAlcixFunction typeAnchor srcTo ].
+			to: anAlcixFunction typeAnchor srcTo ]
 ]
 
 { #category : #visiting }
 AlceTextModelComposer >> visitInvocation: anAlcixInvocation [
 
 	anAlcixInvocation anchor ifNil: [ ^ self ].
+
+	self
+		addInspectAction: anAlcixInvocation candidate
+		info: anAlcixInvocation printString
+		from: anAlcixInvocation anchor srcFrom
+		to: anAlcixInvocation anchor srcFrom
+			+ anAlcixInvocation selector adaptToAlceAnchorPathFragment size.
+
 	self
 		addAttributeTypePaint: anAlcixInvocation colorOrPopularColor
 		from: anAlcixInvocation anchor srcFrom
 		to: anAlcixInvocation anchor srcFrom
 			+ anAlcixInvocation selector adaptToAlceAnchorPathFragment size
+]
+
+{ #category : #visiting }
+AlceTextModelComposer >> visitLocalVariable: anAlcixLocalVariable [
+
+	self paintWithType: anAlcixLocalVariable
 ]
 
 { #category : #visiting }
@@ -213,6 +262,7 @@ AlceTextModelComposer >> visitSubProcedure: anAlcixSubProcedure [
 
 
 	self visitCollection: anAlcixSubProcedure parameters.
+	self visitCollection: anAlcixSubProcedure localVariables.
 	self visitCollection: anAlcixSubProcedure accesses.
 	self visitCollection: anAlcixSubProcedure outgoingInvocations.
 	self visitCollection: anAlcixSubProcedure incomingInvocations
