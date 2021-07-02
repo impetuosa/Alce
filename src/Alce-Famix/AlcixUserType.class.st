@@ -42,15 +42,6 @@ AlcixUserType >> asType [
 	^ self 
 ]
 
-{ #category : #adding }
-AlcixUserType >> includedColorsInto: colors [
-
-	super includedColorsInto: colors.
-
-	colors addAll: (members collect: [ :f | f color ]).
-	invocables do: [ :f | f includedColorsInto: colors ]
-]
-
 { #category : #accessing }
 AlcixUserType >> invocables [
 	"Relation named: #invocables type: #AlcixInvocable opposite: #userType"

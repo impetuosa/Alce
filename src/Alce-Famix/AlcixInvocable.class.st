@@ -87,16 +87,6 @@ AlcixInvocable >> color [
 	^ userType color
 ]
 
-{ #category : #adding }
-AlcixInvocable >> includedColorsInto: colors [
-
-	super includedColorsInto: colors.
-	colors addAll: (localVariables collect: [ :f | f colorOrPopularColor ]).
-	colors addAll: (parameters collect: [ :f | f colorOrPopularColor ]).
-	accesses  do: [ :f | f includedColorsInto: colors ].
-	colors addAll: (outgoingInvocations collect: [ :f | f colorOrPopularColor ])
-]
-
 { #category : #accessing }
 AlcixInvocable >> incomingInvocations [
 	"Relation named: #incomingInvocations type: #AlcixInvocation opposite: #candidate"

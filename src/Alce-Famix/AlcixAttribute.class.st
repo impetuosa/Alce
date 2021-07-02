@@ -61,12 +61,6 @@ AlcixAttribute >> attributeAccessorsGroup [
 	^ MooseSpecializedGroup withAll: self attributeAccessors asSet
 ]
 
-{ #category : #converting }
-AlcixAttribute >> includedColorsInto: colors [
-
-	userType ifNotNil: [ colors add: userType color ]
-]
-
 { #category : #accessing }
 AlcixAttribute >> isConstant [
 

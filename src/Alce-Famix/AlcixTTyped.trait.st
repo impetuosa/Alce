@@ -24,12 +24,6 @@ AlcixTTyped >> color [
 ]
 
 { #category : #accessing }
-AlcixTTyped >> includedColorsInto: colors [
-
-	type ifNotNil: [ colors add: type color ]
-]
-
-{ #category : #accessing }
 AlcixTTyped >> type [
 	"Relation named: #type type: #AlcixTType opposite: #typeds"
 

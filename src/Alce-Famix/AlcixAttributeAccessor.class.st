@@ -47,13 +47,6 @@ AlcixAttributeAccessor >> attributeGroup [
 ]
 
 { #category : #accessing }
-AlcixAttributeAccessor >> includedColorsInto: colors [
-
-	super includedColorsInto: colors.
-	attribute ifNotNil: [ colors add: attribute color ]
-]
-
-{ #category : #accessing }
 AlcixAttributeAccessor >> kind [
 
 	<FMProperty: #kind type: #String>

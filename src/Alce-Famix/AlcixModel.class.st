@@ -12,3 +12,9 @@ AlcixModel class >> annotation [
 	<package: #'Alce-Famix'>
 	<generated>
 ]
+
+{ #category : #accessing }
+AlcixModel class >> entryName [
+
+	^ 'Alce'
+]

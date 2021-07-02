@@ -45,16 +45,6 @@ AlcixEntity >> colorIfAbsent: aBlock [
 	^ val ifNil: [ aBlock value  ]
 ]
 
-{ #category : #'as yet unclassified' }
-AlcixEntity >> colorOrPopularColor [
-
-	| color |
-	color := self color.
-	^ color = Color transparent
-		  ifTrue: [ self popularColor ]
-		  ifFalse: [ color ]
-]
-
 { #category : #accessing }
 AlcixEntity >> includedColors [
 
@@ -62,20 +52,4 @@ AlcixEntity >> includedColors [
 	colors := OrderedCollection new.
 	self includedColorsInto: colors.
 	^ colors
-]
-
-{ #category : #accessing }
-AlcixEntity >> includedColorsInto: colors [
-
-	
-]
-
-{ #category : #'as yet unclassified' }
-AlcixEntity >> popularColor [
-
-	| colors |
-	colors := self includedColors reject: [ :c | c = Color transparent ].
-	colors := (colors groupedBy: #yourself) associations sort: [ :a :b | 
-		          a value size > b value size ].
-	^ colors ifEmpty: [ self color ] ifNotEmpty: [ colors first key ]
 ]

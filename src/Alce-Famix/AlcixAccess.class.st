@@ -56,15 +56,6 @@ AlcixAccess >> expandMethodInvocation [
 	^ n
 ]
 
-{ #category : #becoming }
-AlcixAccess >> includedColorsInto: colors [
-
-	super includedColorsInto: colors.
-	rightElement ifNotNil: [ 
-		colors add: rightElement color.
-		rightElement includedColorsInto: colors ]
-]
-
 { #category : #accessing }
 AlcixAccess >> invocable [
 	"Relation named: #invocable type: #AlcixInvocable opposite: #accesses"
