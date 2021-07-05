@@ -139,6 +139,11 @@ AlcixInvocable >> localVariablesGroup [
 ]
 
 { #category : #accessing }
+AlcixInvocable >> name [ 
+	 ^ selector 
+]
+
+{ #category : #accessing }
 AlcixInvocable >> outgoingInvocations [
 	"Relation named: #outgoingInvocations type: #AlcixInvocation opposite: #sender"
 
