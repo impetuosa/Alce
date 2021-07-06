@@ -27,6 +27,11 @@ AlceDispatchingImporter >> instantiate: aClass [
 	^ model instantiate: aClass
 ]
 
+{ #category : #accessing }
+AlceDispatchingImporter >> model [
+	^ model
+]
+
 { #category : #'instance creation' }
 AlceDispatchingImporter >> model: aModel [
 	model := aModel

@@ -4,16 +4,23 @@ Class {
 	#instVars : [
 		'project',
 		'phase',
-		'processedReferences'
+		'processedReferences',
+		'projects'
 	],
 	#category : #'Alce-Importer'
 }
 
 { #category : #'visit-first-objects' }
+AlceProjectImporter >> assertIf: abool [ 
+	self assert: abool
+]
+
+{ #category : #'visit-first-objects' }
 AlceProjectImporter >> initialize [
 
 	super initialize.
-	processedReferences := OrderedCollection new
+	processedReferences := Dictionary new.
+	projects := Stack new.
 ]
 
 { #category : #'visit-first-objects' }
@@ -24,7 +31,7 @@ AlceProjectImporter >> phaseFinished [
 		Smalltalk saveAs:
 			Smalltalk changesFile basenameWithoutExtension , '.'
 			, phase asString.
-		project reopen ]
+		projects top reopen ]
 ]
 
 { #category : #'visit-first-objects' }
@@ -43,14 +50,17 @@ AlceProjectImporter >> visitCollectionBlock: aCollectionBlock reseting: aProject
 { #category : #'visit-first-objects' }
 AlceProjectImporter >> visitProject: aJinAccessProject [
 
-	project := aJinAccessProject.
+	|ret | 
+	projects push: aJinAccessProject.
+	
 	phase := 0.
-
+	
 	self state push: (self instantiate: AlcixAccessModule).
+	ret := self state top. 
 	self state top name: aJinAccessProject name.
 	self state top anchor: (AlceAnchor on: #/) / aJinAccessProject name.
 	self state top addReference: self sdkLibrary.
-
+	
 	self visitCollection: aJinAccessProject modules.
 	self phaseFinished.
 	self visitCollection: aJinAccessProject reports.
@@ -65,20 +75,36 @@ AlceProjectImporter >> visitProject: aJinAccessProject [
 	self phaseFinished.
 	self visitCollection: aJinAccessProject macros.
 	self phaseFinished.
-	self visitCollection: aJinAccessProject forms
+	self visitCollection: aJinAccessProject forms.
+	
+	projects pop. 	
+	self assertIf: ret = self state top. 
+	^ self state top 
 ]
 
 { #category : #'visit-first-objects' }
 AlceProjectImporter >> visitReference: aJinReference [
 
 	| ref |
-	(processedReferences includes: aJinReference path fullName) ifTrue: [ 
-		^ self ].
+	processedReferences
+		at: aJinReference path fullName asLowercase
+		ifPresent: [ :a | 
+			self state top addSecondary: a.
+			^ self ].
+
 	aJinReference isAccessProject
 		ifTrue: [ ref := self instantiate: AlcixAccessModule ]
 		ifFalse: [ 
 			ref := self instantiate: AlcixLibrary.
 			ref isBuiltIn: aJinReference isBuiltIn ].
+
+
+	processedReferences
+		at: aJinReference path fullName asLowercase
+		put: ref.
+		
+		
+		
 	ref anchor: self state top anchor / #references / aJinReference name.
 	ref path: aJinReference path fullName.
 	ref name: aJinReference name.
@@ -91,6 +117,5 @@ AlceProjectImporter >> visitReference: aJinReference [
 		ifFalse: [ 
 			self referenceLibrary ifNotNil: [ :r | 
 				r visitReference: aJinReference ] ].
-	self state pop.
-	processedReferences add: aJinReference path fullName
+	self state pop
 ]

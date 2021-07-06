@@ -2,7 +2,8 @@ Class {
 	#name : #AlcixAccessModule,
 	#superclass : #AlcixReference,
 	#instVars : [
-		'#references => FMMany type: #AlcixReference opposite: #accessModule'
+		'#references => FMMany type: #AlcixReference opposite: #accessModule',
+		'#secondary'
 	],
 	#category : #'Alce-Famix-Entities'
 }
@@ -28,6 +29,18 @@ AlcixAccessModule >> addReference: anObject [
 	^ self references add: anObject
 ]
 
+{ #category : #navigation }
+AlcixAccessModule >> addSecondary: aRef [
+	secondary add: aRef. 
+]
+
+{ #category : #navigation }
+AlcixAccessModule >> initialize [
+
+	super initialize.
+	secondary := OrderedCollection new
+]
+
 { #category : #accessing }
 AlcixAccessModule >> references [
 	"Relation named: #references type: #AlcixReference opposite: #accessModule"
@@ -49,4 +62,10 @@ AlcixAccessModule >> referencesGroup [
 	<generated>
 	<navigation: 'References'>
 	^ MooseSpecializedGroup withAll: self references asSet
+]
+
+{ #category : #adding }
+AlcixAccessModule >> registerReference: anObject [
+
+	^ secondary add: anObject
 ]

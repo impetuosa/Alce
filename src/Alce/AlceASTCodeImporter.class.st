@@ -172,9 +172,15 @@ AlceASTCodeImporter >> visitDefineEnum: aDefineEnum [
 	i := 0.
 	aDefineEnum fields do: [ :d | 
 		i := d value ifNil: [ i + 1 ] ifNotNil: [ :v | 
-			     (v isKindOf: VBNegatedOperationNode)
-				     ifTrue: [ -1 * v value token value asNumber ]
-				     ifFalse: [ v token value asNumber ] ].
+			     (v isKindOf: VBMemberAccessNode)
+				     ifTrue: [ self nodeToString: v ]
+				     ifFalse: [ 
+					     (v isKindOf: VBNegatedOperationNode)
+						     ifTrue: [ -1 * v value token value asNumber ]
+						     ifFalse: [ 
+							     [ v token value asNumber ]
+								     on: Error
+								     do: [  v source  ] ] ] ].
 
 
 		en addEnumValue: ((self instantiate: AlcixEnumValue)
@@ -194,8 +200,12 @@ AlceASTCodeImporter >> visitDefineType: aDefineType [
 	aDefineType fields doWithIndex: [ :d :i | 
 		| name |
 		name := self nodeToString: d name.
+		d type sizes ifNotEmpty: [ 
+			name := name
+			        ,
+			        ('-' join:
+				         (d type sizes collect: [ :d2 | self nodeToString: d2 ])) ].
 		self assert: d type class = VBTypedThingNode.
-		self assert: d type sizes isEmpty.
 		en addMember: ((self instantiate: AlcixAttribute)
 				 anchor: (self codeAnchor: name for: d);
 				 name: name;
@@ -332,14 +342,28 @@ AlceASTCodeImporter >> visitExternalFunction: aDefinition [
 
 { #category : #'functions - subs - events' }
 AlceASTCodeImporter >> visitExternalSub: aDefinition [
+
 	| fn |
-	fn := self instantiate: AlcixExternalSubProcedure.
+	fn := self instantiate: AlcixExternalFunction.
 	fn selector: (self nodeToString: aDefinition selector).
-	fn anchor: self state top anchor / #subprocedures / fn selector.
-	self shouldBeImplemented.
+	fn anchor:
+		self state top anchor / #functions / fn selector / #'@src'
+		/ aDefinition startPosition asString / #to
+		/ aDefinition stopPosition asString.
+
+	fn libraryName: (self nodeToString: aDefinition library).
+	aDefinition alias ifNotNil: [ 
+		fn alias: (self nodeToString: aDefinition alias) ].
+
+	aDefinition visibility
+		ifNil: [ fn visibility: #Public ]
+		ifNotNil: [ 
+		fn visibility: (self nodeToString: aDefinition visibility) ].
+
+
 	self state top addInvocable: fn.
 	self state push: fn.
-	super visitExternalSub: aDefinition.
+	aDefinition parameters acceptVisitor: self.
 	self state pop
 ]
 

@@ -9,5 +9,6 @@ AlceAccessReferenceImporter >> visitReference: anAccessModule [
 
 	project := JinAccessApplication default open:
 		           anAccessModule path asFileReference.
-	project accept: self.
+	project acceptVisitor: self.
+	project closeAndQuit
 ]

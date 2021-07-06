@@ -123,6 +123,12 @@ AlceVBVisitorToReferenceName >> visitConcatenationOperation: aVBConcatenationOpe
 	^ nil
 ]
 
+{ #category : #visiting }
+AlceVBVisitorToReferenceName >> visitDateLiteral: aVBDateLiteralNode [
+
+	^ nil
+]
+
 { #category : #'as yet unclassified' }
 AlceVBVisitorToReferenceName >> visitDictionaryAccess: aVBDictionaryAccessNode [
 	^ self visitMemberAccess: aVBDictionaryAccessNode

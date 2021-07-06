@@ -60,6 +60,12 @@ AlceVBVisitorToString >> visitConcatenationOperation: aVBConcatenationOperationN
 	^ ''
 ]
 
+{ #category : #visiting }
+AlceVBVisitorToString >> visitDateLiteral: aVBDateLiteralNode [
+
+	^ aVBDateLiteralNode token acceptVisitor: self
+]
+
 { #category : #'as yet unclassified' }
 AlceVBVisitorToString >> visitDictionaryAccess: aVBDictionaryAccessNode [ 
 	^ aVBDictionaryAccessNode source 
