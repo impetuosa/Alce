@@ -72,7 +72,7 @@ AlceProjectImporter >> visitProject: aJinAccessProject [
 AlceProjectImporter >> visitReference: aJinReference [
 
 	| ref |
-	(processedReferences includes: aJinReference path fullName) ifFalse: [ 
+	(processedReferences includes: aJinReference path fullName) ifTrue: [ 
 		^ self ].
 	aJinReference isAccessProject
 		ifTrue: [ ref := self instantiate: AlcixAccessModule ]
