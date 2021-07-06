@@ -102,13 +102,14 @@ AlceProjectImporter >> visitReference: aJinReference [
 	processedReferences
 		at: aJinReference path fullName asLowercase
 		put: ref.
-		
-		
-		
+
+
+
 	ref anchor: self state top anchor / #references / aJinReference name.
 	ref path: aJinReference path fullName.
 	ref name: aJinReference name.
 	self state top addReference: ref.
+	self state top addSecondary: ref.
 	self state push: ref.
 	aJinReference isAccessProject
 		ifTrue: [ 
