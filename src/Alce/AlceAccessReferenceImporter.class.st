@@ -1,5 +1,13 @@
 Class {
 	#name : #AlceAccessReferenceImporter,
-	#superclass : #JinLibraryReferenceVisitor,
+	#superclass : #JinAccessReferenceVisitor,
 	#category : #'Alce-Importer'
 }
+
+{ #category : #visiting }
+AlceAccessReferenceImporter >> visitReference: anAccessModule [
+
+	project := JinAccessApplication default open:
+		           anAccessModule path asFileReference.
+	project accept: self.
+]

@@ -59,7 +59,8 @@ AlceImportingVisitorProvider >> guiVisitorInstance [
 
 { #category : #configuration }
 AlceImportingVisitorProvider >> importAccessReferences [
-	referenceAccessVisitor := self error: 'Must implement'
+
+	referenceAccessVisitor := AlceAccessReferenceImporter
 ]
 
 { #category : #configuration }

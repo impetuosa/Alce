@@ -67,7 +67,8 @@ AlceMagactCachedModelAbstractTest class >> regenerateCacheModel [
 		importGUIControlElements;
 		importCodeElements;
 		importSyntacticElements;
-		importLibraryReferences.
+		importLibraryReferences;
+		importAccessReferences.
 
 	model := importer import: self magact.
 	stream := '' writeStream.

@@ -3,10 +3,18 @@ Class {
 	#superclass : #JinProjectVisitor,
 	#instVars : [
 		'project',
-		'phase'
+		'phase',
+		'processedReferences'
 	],
 	#category : #'Alce-Importer'
 }
+
+{ #category : #'visit-first-objects' }
+AlceProjectImporter >> initialize [
+
+	super initialize.
+	processedReferences := OrderedCollection new
+]
 
 { #category : #'visit-first-objects' }
 AlceProjectImporter >> phaseFinished [
@@ -64,6 +72,8 @@ AlceProjectImporter >> visitProject: aJinAccessProject [
 AlceProjectImporter >> visitReference: aJinReference [
 
 	| ref |
+	(processedReferences includes: aJinReference path fullName) ifFalse: [ 
+		^ self ].
 	aJinReference isAccessProject
 		ifTrue: [ ref := self instantiate: AlcixAccessModule ]
 		ifFalse: [ 
@@ -81,5 +91,6 @@ AlceProjectImporter >> visitReference: aJinReference [
 		ifFalse: [ 
 			self referenceLibrary ifNotNil: [ :r | 
 				r visitReference: aJinReference ] ].
-	self state pop
+	self state pop.
+	processedReferences add: aJinReference path fullName
 ]

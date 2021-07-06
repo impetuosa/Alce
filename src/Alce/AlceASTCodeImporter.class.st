@@ -453,11 +453,7 @@ AlceASTCodeImporter >> visitModulePropertyGet: aModulePropertyGet [
 		/ aModulePropertyGet startPosition asString / #to
 		/ aModulePropertyGet stopPosition asString.
 
-	acc typeName: (self typeName: aModulePropertyGet type).
-	acc typeAnchor: self state top anchor / #accessors
-		/ acc typeName adaptToAlceAnchorPathFragment / #'@src'
-		/ aModulePropertyGet type startPosition asString / #to
-		/ aModulePropertyGet type stopPosition asString.
+
 
 
 
@@ -469,6 +465,11 @@ AlceASTCodeImporter >> visitModulePropertyGet: aModulePropertyGet [
 
 	acc kind = #Get
 		ifTrue: [ 
+			acc typeName: (self typeName: aModulePropertyGet type).
+			acc typeAnchor: self state top anchor / #accessors
+				/ acc typeName adaptToAlceAnchorPathFragment / #'@src'
+				/ aModulePropertyGet type startPosition asString / #to
+				/ aModulePropertyGet type stopPosition asString.
 			statement := (aModulePropertyGet block statements select: [ :s | 
 				              { 
 					              VBExplicitAssignementNode.
