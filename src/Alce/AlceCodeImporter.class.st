@@ -7,6 +7,8 @@ Class {
 { #category : #'visit-first-objects' }
 AlceCodeImporter >> avoidingEntities [
 
+	^ {  }
+	"
 	^ { 'CBeanOEC'. 'CBeanDeclarants'. 'FactLieuCelebMariageUsuelFiche'.
 	  'Form_FactLieuCelebMariageUsuelFiche'.
 	  'FactLieuDecesUsuelFiche'. 'Form_FactLieuDecesUsuelFiche'.
@@ -21,7 +23,7 @@ AlceCodeImporter >> avoidingEntities [
 				'Form_CPanelIdentite' . 'CPanelIdentite' . 
 		'Form_CBeanMention' . 'CBeanMention' .
 		'CBeanCommission' . 'Form_CBeanCommission' . 'CDemESV'
-	 }
+	 }"
 ]
 
 { #category : #'visit-first-objects' }

@@ -40,51 +40,63 @@ AlceProjectImporter >> projects [
 ]
 
 { #category : #'visit-first-objects' }
-AlceProjectImporter >> visitCollectionBlock: aCollectionBlock reseting: aProject [ 
+AlceProjectImporter >> visitCollection: aCollectionBlock [
 
-	| batch |
-	batch := aCollectionBlock value size / 5.
-
-	1 to: batch do: [ :i | 
-		aProject reopen.
-		i to: (i + 5 min: aCollectionBlock value size) do: [ :e | 
-		(aCollectionBlock value at: e) acceptVisitor: self ].
-	 ]
+	| size |
+	size := aCollectionBlock value size.
+	1 to: size do: [ :i | (aCollectionBlock value at: i) acceptVisitor: self ].
 ]
 
 { #category : #'visit-first-objects' }
 AlceProjectImporter >> visitProject: aJinAccessProject [
 
-	|ret | 
+	| ret |
 	projects push: aJinAccessProject.
-	
+
 	phase := 0.
-	
-	self state push: (self instantiate: AlcixAccessModule).
-	ret := self state top. 
+
+
+	self state ifEmpty: [ 
+		self state push: (self instantiate: AlcixAccessModule) ].
+	ret := self state top.
 	self state top name: aJinAccessProject name.
 	self state top anchor: (AlceAnchor on: #/) / aJinAccessProject name.
 	self state top addReference: self sdkLibrary.
-	
-	self visitCollection: aJinAccessProject modules.
+
+	self visitCollection: [ 
+		aJinAccessProject
+			ensureIsOpen;
+			modules ].
 	self phaseFinished.
-	self visitCollection: aJinAccessProject reports.
-	self phaseFinished.
-	self visitCollection: aJinAccessProject references.
-	self phaseFinished.
+	self visitCollection: [ 
+		aJinAccessProject
+			ensureIsOpen;
+			reports ].
+	"self phaseFinished.
 	self visitCollection: aJinAccessProject tables.
 	self phaseFinished.
 	self visitCollection: aJinAccessProject queries.
 	self phaseFinished.
 	self visitCollection: aJinAccessProject relations.
 	self phaseFinished.
-	self visitCollection: aJinAccessProject macros.
+	self visitCollection: aJinAccessProject macros."
 	self phaseFinished.
-	self visitCollection: aJinAccessProject forms.
-	
-	projects pop. 	
-	self assertIf: ret = self state top. 
-	^ self state top 
+	self visitCollection: [ 
+		aJinAccessProject
+			ensureIsOpen;
+			forms ].
+	self phaseFinished.
+	self visitCollection: [ 
+		aJinAccessProject
+			ensureIsOpen;
+			references ].
+	self phaseFinished.
+	projects pop.
+	self assertIf: ret = self state top.
+
+
+
+	^ ret
 ]
 
 { #category : #'visit-first-objects' }
