@@ -20,6 +20,15 @@ AlceASTCodeImporter >> ensureInContextOf: aClass [
 		ifFalse: [ self error: 'Unexpected context' ]
 ]
 
+{ #category : #'as yet unclassified' }
+AlceASTCodeImporter >> ensureInContextOf: aClass or: aClass2 [
+
+	({ 
+		 aClass.
+		 aClass2 } anySatisfy: [ :c | self state top isKindOf: c ]) 
+		ifFalse: [ self error: 'Unexpected context' ]
+]
+
 { #category : #'member access' }
 AlceASTCodeImporter >> instantiateAccess: aMemberOrDictAccess [
 
@@ -221,12 +230,19 @@ AlceASTCodeImporter >> visitDictionaryAccess: aDictionaryAccess [
 
 { #category : #'properties - variables' }
 AlceASTCodeImporter >> visitDimMultipleVariables: aDimMultipleVariables [
+
 	| var |
-	self ensureInContextOf: AlcixInvocable.
-	aDimMultipleVariables variables variables 
-		do: [ :v | 
+	self ensureInContextOf: AlcixInvocable or: AlcixModule .
+	(self state top isKindOf: AlcixInvocable) ifTrue: [ 
+		aDimMultipleVariables variables variables do: [ :v | 
 			var := self instantiateVariable: AlcixLocalVariable from: v.
-			self state top addLocalVariable: var ]
+			self state top addLocalVariable: var ] ].
+	(self state top isKindOf: AlcixModule) ifTrue: [ 
+		aDimMultipleVariables variables variables do: [ :v | 
+			var := self instantiateVariable: AlcixAttribute from: v.
+			var visibility: #Public.
+			self state top addMember: var ].
+		^ self ]
 ]
 
 { #category : #'properties - variables' }
@@ -489,11 +505,15 @@ AlceASTCodeImporter >> visitModulePropertyGet: aModulePropertyGet [
 
 	acc kind = #Get
 		ifTrue: [ 
-			acc typeName: (self typeName: aModulePropertyGet type).
-			acc typeAnchor: self state top anchor / #accessors
-				/ acc typeName adaptToAlceAnchorPathFragment / #'@src'
-				/ aModulePropertyGet type startPosition asString / #to
-				/ aModulePropertyGet type stopPosition asString.
+			aModulePropertyGet type ifNotNil: [ 
+				acc typeName: (self typeName: aModulePropertyGet type).
+				acc typeAnchor: self state top anchor / #accessors
+					/ acc typeName adaptToAlceAnchorPathFragment / #'@src'
+					/ aModulePropertyGet type startPosition asString / #to
+					/ aModulePropertyGet type stopPosition asString ].
+
+
+
 			statement := (aModulePropertyGet block statements select: [ :s | 
 				              { 
 					              VBExplicitAssignementNode.

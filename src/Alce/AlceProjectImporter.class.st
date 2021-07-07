@@ -34,6 +34,11 @@ AlceProjectImporter >> phaseFinished [
 		projects top reopen ]
 ]
 
+{ #category : #accessing }
+AlceProjectImporter >> projects [
+	^ projects
+]
+
 { #category : #'visit-first-objects' }
 AlceProjectImporter >> visitCollectionBlock: aCollectionBlock reseting: aProject [ 
 

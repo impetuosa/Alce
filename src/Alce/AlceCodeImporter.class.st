@@ -5,8 +5,23 @@ Class {
 }
 
 { #category : #'visit-first-objects' }
-AlceCodeImporter >> registerClassVariables: anAlcixClass [ 
-	
+AlceCodeImporter >> avoidingEntities [
+
+	^ { 'CBeanOEC'. 'CBeanDeclarants'. 'FactLieuCelebMariageUsuelFiche'.
+	  'Form_FactLieuCelebMariageUsuelFiche'.
+	  'FactLieuDecesUsuelFiche'. 'Form_FactLieuDecesUsuelFiche'.
+	  'FactLieuTribunalFiche'. 'Form_FactLieuTribunalFiche'.
+	  'FactLieuAccouchementUsuelFiche'. 'Form_FactLieuAccouchementUsuelFiche'.
+	  'CMVCFicheControler'. 'CMetrologyModel'. 'CPieceJointeModel'.
+	  'FNavigateurWeb'. 'Form_CMVCFicheControler'.
+	  'Form_CMetrologyModel'. 'Form_CPieceJointeModel'.
+	  'Form_FNavigateurWeb' . 'FGedMetadataSF' . 'Form_FGedMetadataSF' .
+		'Form_FgpeCollectiviteFiche' . 'FgpeCollectiviteFiche' .
+		'Form_CPanelEvenement' . 'CPanelEvenement' . 
+				'Form_CPanelIdentite' . 'CPanelIdentite' . 
+		'Form_CBeanMention' . 'CBeanMention' .
+		'CBeanCommission' . 'Form_CBeanCommission' . 'CDemESV'
+	 }
 ]
 
 { #category : #'visit-first-objects' }
@@ -14,12 +29,8 @@ AlceCodeImporter >> visitFormModule: anObject [
 
 	" EGRC BUGS!! :( "
 
-	({ 'CBeanOEC'. 'CBeanDeclarants'. 'FactLieuCelebMariageUsuelFiche'.
-	 'Form_FactLieuCelebMariageUsuelFiche'.
-	 'FactLieuDecesUsuelFiche'. 'Form_FactLieuDecesUsuelFiche'.
-	 'FactLieuTribunalFiche'. 'Form_FactLieuTribunalFiche'.
-	 'FactLieuAccouchementUsuelFiche'. 'Form_FactLieuAccouchementUsuelFiche' } 
-		 includes: anObject name) ifTrue: [ ^ self state top astCannotLoad ].
+	(self avoidingEntities includes: anObject name) ifTrue: [ 
+		^ self state top astCannotLoad ].
 	" ): EGRC BUGS!!  "
 
 	super visitModule: anObject
@@ -40,19 +51,15 @@ AlceCodeImporter >> visitModule: anObject [
 	self state top addType: obj.
 	obj name: anObject name.
 	obj anchor: self state top anchor / #modules / anObject name.
-	
-	
-		" EGRC BUGS!! :( "
 
-	({ 'CBeanOEC'. 'CBeanDeclarants'. 'FactLieuCelebMariageUsuelFiche'.
-	 'Form_FactLieuCelebMariageUsuelFiche'.
-	 'FactLieuDecesUsuelFiche'. 'Form_FactLieuDecesUsuelFiche'.
-	 'FactLieuTribunalFiche'. 'Form_FactLieuTribunalFiche'.
-	 'FactLieuAccouchementUsuelFiche'. 'Form_FactLieuAccouchementUsuelFiche' } 
-		 includes: anObject name) ifTrue: [ ^ obj astCannotLoad ].
+
+	" EGRC BUGS!! :( "
+
+	(self avoidingEntities includes: anObject name) ifTrue: [ 
+		^ obj astCannotLoad ].
 	" ): EGRC BUGS!!  "
 
-	
+
 	self state push: obj.
 
 

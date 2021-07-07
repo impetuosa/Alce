@@ -184,6 +184,7 @@ AlceVBVisitorToString >> visitTypeSize: aVBTypeSizeNode [
 
 { #category : #'as yet unclassified' }
 AlceVBVisitorToString >> visitTypedThing: aVBTypedThingNode [
-	self assert: aVBTypedThingNode sizes size = 0.
-	^ aVBTypedThingNode type acceptVisitor: self
+
+	^ (aVBTypedThingNode type acceptVisitor: self) , ('' join:
+		   (aVBTypedThingNode sizes collect: [ :s | s acceptVisitor: self ]))
 ]
