@@ -58,7 +58,7 @@ AlceMagactCachedModelAbstractTest class >> magactCachedModel [
 AlceMagactCachedModelAbstractTest class >> regenerateCacheModel [
 
 	<example>
-	| importer model stream |
+	| importer |
 	importer := AlceImporter new.
 	importer provider
 		savingPhases: true;
@@ -70,21 +70,29 @@ AlceMagactCachedModelAbstractTest class >> regenerateCacheModel [
 		importLibraryReferences;
 		importAccessReferences.
 
-	model := importer import: self magact.
-	stream := '' writeStream.
-	model exportToMSEStream: stream.
-	self class compile: ('
-cachedModelMSE
- ^ ''{1}''' format: { (stream contents
-				  copyReplaceAll: $' asString
-				  with: $' asString , $' asString) }).
-	magactCachedModel := model
+	magactCachedModel := importer import: self magact.
+	self writeModelIntoFile: magactCachedModel
 ]
 
 { #category : #'building suites' }
 AlceMagactCachedModelAbstractTest class >> resetMagactCachedModel [
  	<example>
  	magactCachedModel := nil.
+]
+
+{ #category : #'building suites' }
+AlceMagactCachedModelAbstractTest class >> writeModelIntoFile: model [
+
+	| stream |
+	stream := 'egrc.mse' asFileReference writeStream.
+	model exportToMSEStream: stream.
+	stream close.
+	stream := 'egrc.json' asFileReference writeStream.
+	model exportToJSONStream: stream.
+	stream close.
+	stream := 'egrc.fl' asFileReference writeStream.
+	FLSerializer serialize: model on: stream.
+	stream close. 
 ]
 
 { #category : #'as yet unclassified' }

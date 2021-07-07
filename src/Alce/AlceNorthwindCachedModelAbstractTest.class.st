@@ -58,7 +58,7 @@ AlceNorthwindCachedModelAbstractTest class >> norwindCachedModel [
 AlceNorthwindCachedModelAbstractTest class >> regenerateCacheModel [
 
 	<example>
-	| importer model stream |
+	| importer |
 	importer := AlceImporter new.
 	importer provider
 		importProjectElements;
@@ -67,22 +67,31 @@ AlceNorthwindCachedModelAbstractTest class >> regenerateCacheModel [
 		importCodeElements;
 		importSyntacticElements;
 		importLibraryReferences.
-		
-	model := importer import: self norwind.
-	stream := '' writeStream.
-	model exportToMSEStream: stream.
-	self class compile: ('
-cachedModelMSE
- ^ ''{1}''' format: { (stream contents
-				  copyReplaceAll: $' asString
-				  with: $' asString , $' asString) }).
-	norwindCachedModel := model
+
+	norwindCachedModel := importer import: self norwind.
+
+	self writeModelIntoFile: norwindCachedModel
 ]
 
 { #category : #'building suites' }
 AlceNorthwindCachedModelAbstractTest class >> resetNorwindCachedModel [
  	<example>
  	norwindCachedModel := nil.
+]
+
+{ #category : #'building suites' }
+AlceNorthwindCachedModelAbstractTest class >> writeModelIntoFile: model [
+
+	| stream |
+	stream := 'norwindmodel.mse' asFileReference writeStream.
+	model exportToMSEStream: stream.
+	stream close.
+	stream := 'norwindmodel.json' asFileReference writeStream.
+	model exportToJSONStream: stream.
+	stream close.
+	stream := 'norwindmodel.fl' asFileReference writeStream.
+	FLSerializer serialize: model on: stream.
+	stream close. 
 ]
 
 { #category : #'as yet unclassified' }
