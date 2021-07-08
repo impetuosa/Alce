@@ -55,6 +55,12 @@ AlcixReference >> color [
 			  ifNotNil: [ accessModule color ] ]
 ]
 
+{ #category : #testing }
+AlcixReference >> isAccessModule [
+
+	^ false 
+]
+
 { #category : #accessing }
 AlcixReference >> name [
 

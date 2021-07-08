@@ -158,7 +158,9 @@ AlcixAccess >> setRightElement: anAccessible [
 	" So far we only understand this case as the transformation of this access to a method invocation. So the element should be a function / sub and the rightElementName must have at least 2 parts object.message. If not, we may have to do different. "
 	self assert: (anAccessible isKindOf: AlcixInvocable).
 	(anAccessible isKindOf: AlcixEvent) ifTrue: [ ^ self ].
-	self assert: rightElementName names size > 1.
+	rightElementName names size > 1 ifTrue: [ 
+		self error:
+			'un expected setting. we should be finding a message send' ].
 
 	self expandMethodInvocation setCandidate: anAccessible
 ]

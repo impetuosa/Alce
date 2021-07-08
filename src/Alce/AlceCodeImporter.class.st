@@ -7,9 +7,8 @@ Class {
 { #category : #'visit-first-objects' }
 AlceCodeImporter >> avoidingEntities [
 
-	^ {  }
-	"
-	^ { 'CBeanOEC'. 'CBeanDeclarants'. 'FactLieuCelebMariageUsuelFiche'.
+	^{} 
+	"|^ { 'CBeanOEC'. 'CBeanDeclarants'. 'FactLieuCelebMariageUsuelFiche'.
 	  'Form_FactLieuCelebMariageUsuelFiche'.
 	  'FactLieuDecesUsuelFiche'. 'Form_FactLieuDecesUsuelFiche'.
 	  'FactLieuTribunalFiche'. 'Form_FactLieuTribunalFiche'.
@@ -23,7 +22,7 @@ AlceCodeImporter >> avoidingEntities [
 				'Form_CPanelIdentite' . 'CPanelIdentite' . 
 		'Form_CBeanMention' . 'CBeanMention' .
 		'CBeanCommission' . 'Form_CBeanCommission' . 'CDemESV'
-	 }"
+	 }|"
 ]
 
 { #category : #'visit-first-objects' }
@@ -31,7 +30,8 @@ AlceCodeImporter >> visitFormModule: anObject [
 
 	" EGRC BUGS!! :( "
 
-	(self avoidingEntities includes: anObject name) ifTrue: [ 
+	(self avoidingEntities includes: anObject name) ifTrue: [ .
+		self halt.
 		^ self state top astCannotLoad ].
 	" ): EGRC BUGS!!  "
 
@@ -58,6 +58,7 @@ AlceCodeImporter >> visitModule: anObject [
 	" EGRC BUGS!! :( "
 
 	(self avoidingEntities includes: anObject name) ifTrue: [ 
+				self halt.
 		^ obj astCannotLoad ].
 	" ): EGRC BUGS!!  "
 

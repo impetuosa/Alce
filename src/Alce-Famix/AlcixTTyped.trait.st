@@ -35,6 +35,7 @@ AlcixTTyped >> type [
 AlcixTTyped >> type: anObject [
 
 	<generated>
+	anObject isType ifFalse: [ ^ self halt ].
 	type := anObject
 ]
 

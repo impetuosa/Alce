@@ -482,6 +482,7 @@ AlceASTCodeImporter >> visitModulePropertyGet: aModulePropertyGet [
 
 	| acc statement kindSymbol attributeName |
 	acc := self instantiate: AlcixAttributeAccessor.
+	self state top addInvocable: acc.
 	kindSymbol := aModulePropertyGet getToken ifNil: [ 
 		              aModulePropertyGet setToken ].
 	kindSymbol := kindSymbol ifNil: [ aModulePropertyGet letToken ].
@@ -498,11 +499,6 @@ AlceASTCodeImporter >> visitModulePropertyGet: aModulePropertyGet [
 
 
 	"Obtain property name from the body of the accessor "
-
-
-
-
-
 	acc kind = #Get
 		ifTrue: [ 
 			aModulePropertyGet type ifNotNil: [ 

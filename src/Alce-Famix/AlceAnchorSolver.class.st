@@ -3,7 +3,8 @@ Class {
 	#superclass : #Object,
 	#instVars : [
 		'projects',
-		'anchors'
+		'anchors',
+		'model'
 	],
 	#category : #'Alce-Famix-Model'
 }
@@ -24,13 +25,23 @@ AlceAnchorSolver >> initialize [
 	projects := Dictionary new
 ]
 
+{ #category : #accessing }
+AlceAnchorSolver >> model: anAlcixModel [ 
+	model := anAlcixModel
+]
+
 { #category : #'as yet unclassified' }
 AlceAnchorSolver >> projectFor: aString [
 
-	^ projects
-		  at: aString
-		  ifAbsentPut: [ 
-		  JinAccessApplication default open: (self class paths at: aString) ]
+	^ projects at: aString asLowercase ifAbsentPut: [ 
+		  | reference |
+		  reference := model references detect: [ :r | 
+			               r name asLowercase = aString asLowercase ].
+		  self
+			  assert: reference isAccessModule
+			  description: 'Trying to open a non access project'.
+
+		  JinAccessApplication default open: reference path asFileReference ]
 ]
 
 { #category : #solver }

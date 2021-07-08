@@ -107,7 +107,7 @@ AlcixReferenceName >> removeLastName [
 
 { #category : #convenience }
 AlcixReferenceName >> splitInRefs [
-
+	names isString ifTrue: [ names := { names } ].
 	names size = 1 ifTrue: [ ^ { self } ].
 	^ names collect: [ :a | 
 		  self class new

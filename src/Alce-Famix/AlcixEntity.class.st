@@ -53,3 +53,8 @@ AlcixEntity >> includedColors [
 	self includedColorsInto: colors.
 	^ colors
 ]
+
+{ #category : #accessing }
+AlcixEntity >> isType [ 
+	 ^ false 
+]

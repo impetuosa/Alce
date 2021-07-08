@@ -133,13 +133,15 @@ AlceLinker >> noteChange [
 
 { #category : #visiting }
 AlceLinker >> visitAccess: anAlcixAccess [
-	anAlcixAccess rightElement
-		ifNil: [ (self
-				lookupVariable: anAlcixAccess rightElementName
-				in: anAlcixAccess invocable)
-				ifNotNil: [ :a | 
-					anAlcixAccess setRightElement: a.
-					self noteChange ] ]
+
+	anAlcixAccess rightElement ifNil: [ 
+		(self
+			 lookupVariable: anAlcixAccess rightElementName
+			 in: anAlcixAccess invocable) ifNotNil: [ :a | 
+			[ anAlcixAccess setRightElement: a ]
+				on: Error
+				do: [ ^ self ].
+			self noteChange ] ]
 ]
 
 { #category : #'\\' }
@@ -241,10 +243,10 @@ AlceLinker >> visitFunction: aFunction [
 
 { #category : #visiting }
 AlceLinker >> visitInvocable: anInvocable [
-	anInvocable parameters do: [ :p | p accept: self ].
-	anInvocable localVariables do: [ :p | p accept: self ].
-	anInvocable outgoingInvocations do: [ :i | i accept: self ].
-	anInvocable accesses do: [ :a | a accept: self ]
+	anInvocable parameters do: [ :p | p ifNotNil: [: a | a accept: self ] ].
+	anInvocable localVariables do: [ :p | p ifNotNil: [: a | a accept: self ] ].
+	anInvocable outgoingInvocations do: [ :p | p ifNotNil: [: a | a accept: self ] ].
+	anInvocable accesses do: [ :p | p ifNotNil: [: a | a accept: self ] ].
 ]
 
 { #category : #visiting }
@@ -254,6 +256,7 @@ AlceLinker >> visitInvocation: anAlcixInvocation [
 		(self
 			 lookupFunctionOrSub: anAlcixInvocation selector
 			 in: anAlcixInvocation sender) ifNotNil: [ :c | 
+			c isType ifTrue: [ ^ self ].
 			self noteChange.
 			anAlcixInvocation setCandidate: c ] ]
 ]
@@ -270,6 +273,7 @@ AlceLinker >> visitLocalVariable: anAlcixLocalVariable [
 		(self
 			 lookupType: anAlcixLocalVariable typeName
 			 in: anAlcixLocalVariable invocable) ifNotNil: [ :t | 
+			t isType ifFalse: [ ^ self ].
 			anAlcixLocalVariable type: t.
 			self noteChange ] ]
 ]
@@ -315,6 +319,7 @@ AlceLinker >> visitParameter: anAlcixParameter [
 		(self
 			 lookupType: anAlcixParameter typeName
 			 in: anAlcixParameter invocable) ifNotNil: [ :t | 
+			t isType ifFalse: [ ^ self ].
 			self noteChange.
 			anAlcixParameter type: t ] ]
 ]
@@ -341,6 +346,7 @@ AlceLinker >> visitTypedEntity: aTyped [
 	aTyped type ifNil: [ 
 		(self lookupType: aTyped typeName in: aTyped userType) ifNotNil: [ 
 			:t | 
+			t isType ifFalse: [ ^ self ].
 			aTyped type: t.
 			self noteChange ] ]
 ]

@@ -97,6 +97,11 @@ AlceLookUp >> visitAccessModule: anAccessModule [
 ]
 
 { #category : #visiting }
+AlceLookUp >> visitAlias: anAlcixAlias [ 
+	anAlcixAlias type ifNotNil: [  	anAlcixAlias type  accept: self]
+]
+
+{ #category : #visiting }
 AlceLookUp >> visitAttribute: anAlcixAttribute [ 
 	self shouldBeImplemented.
 ]

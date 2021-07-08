@@ -109,6 +109,12 @@ AlcixUserType >> type [
 ]
 
 { #category : #accessing }
+AlcixUserType >> types [
+
+	^ {  }
+]
+
+{ #category : #accessing }
 AlcixUserType >> userType [
 	^ self 
 ]

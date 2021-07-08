@@ -13,7 +13,11 @@ TAlceModel >> accept: aVisitor [
 
 { #category : #'instance creation' }
 TAlceModel >> anchorSolver [
-	 ^ anchorSolver ifNil: [  anchorSolver := AlceAnchorSolver new  ]
+
+	^ anchorSolver ifNil: [ 
+		  anchorSolver := AlceAnchorSolver new.
+		  anchorSolver model: self.
+		  anchorSolver ]
 ]
 
 { #category : #'instance creation' }

@@ -49,6 +49,12 @@ AlceAnchor >> hash [
 	^ path hash
 ]
 
+{ #category : #enumerating }
+AlceAnchor >> isMooseObject [
+
+	^ true
+]
+
 { #category : #arithmetic }
 AlceAnchor >> privateGetPath [
 	^ path
@@ -88,8 +94,11 @@ AlceAnchor >> resolve: aProject [
 { #category : #'as yet unclassified' }
 AlceAnchor >> srcFrom [
 
-	^ (path segments reverse at:
-		   (path segments reverse indexOf: '@src') - 1) asNumber
+	^ self containsSource
+		  ifTrue: [ 
+			  (path segments reverse at:
+				   (path segments reverse indexOf: '@src') - 1) asNumber ]
+		  ifFalse: [ -1 ]
 ]
 
 { #category : #'as yet unclassified' }

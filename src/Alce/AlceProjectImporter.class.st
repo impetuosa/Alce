@@ -51,6 +51,10 @@ AlceProjectImporter >> visitCollection: aCollectionBlock [
 AlceProjectImporter >> visitProject: aJinAccessProject [
 
 	| ret |
+	
+	
+	
+	
 	projects push: aJinAccessProject.
 
 	phase := 0.
@@ -59,10 +63,16 @@ AlceProjectImporter >> visitProject: aJinAccessProject [
 	self state ifEmpty: [ 
 		self state push: (self instantiate: AlcixAccessModule) ].
 	ret := self state top.
+	
+	
 	self state top name: aJinAccessProject name.
 	self state top anchor: (AlceAnchor on: #/) / aJinAccessProject name.
 	self state top addReference: self sdkLibrary.
-
+	self state top path: aJinAccessProject projectPath fullName. 
+	
+	processedReferences
+		at:aJinAccessProject projectPath fullName asLowercase ifAbsentPut: [ self state top ].
+	
 	self visitCollection: [ 
 		aJinAccessProject
 			ensureIsOpen;

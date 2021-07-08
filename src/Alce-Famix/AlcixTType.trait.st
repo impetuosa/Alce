@@ -58,6 +58,11 @@ AlcixTType >> containerName [
  	^ container ifNotNil: [ container name ] ifNil: [ 'None' ]
 ]
 
+{ #category : #navigation }
+AlcixTType >> isType [ 
+	 ^ true 
+]
+
 { #category : #accessing }
 AlcixTType >> name [
 

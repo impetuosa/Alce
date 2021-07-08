@@ -10,10 +10,10 @@ Class {
 
 { #category : #accessing }
 AlceColoringPopularComposingColor >> colorFor: anEntity [
-
+	anEntity ifNil: [ ^ Color transparent ].
 	colors := OrderedCollection new.
 	visited := OrderedCollection new.
-
+	
 	anEntity accept: self.
 	colors := colors reject: [ :c | c = anEntity color ].
 	^ self popularEntry: colors or: anEntity color
@@ -90,6 +90,17 @@ AlceColoringPopularComposingColor >> visitContainer: anAlcixClass [
 AlceColoringPopularComposingColor >> visitEnum: anAlcixEnum [
 
 	
+]
+
+{ #category : #visiting }
+AlceColoringPopularComposingColor >> visitEvent: anAlcixEvent [
+
+	self visitInvocable: anAlcixEvent
+]
+
+{ #category : #visiting }
+AlceColoringPopularComposingColor >> visitExternalFunction: anAlcixExternalFunction [ 
+	 self visitFunction: anAlcixExternalFunction 
 ]
 
 { #category : #visiting }

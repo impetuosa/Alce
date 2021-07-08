@@ -41,6 +41,12 @@ AlcixAccessModule >> initialize [
 	secondary := OrderedCollection new
 ]
 
+{ #category : #adding }
+AlcixAccessModule >> isAccessModule [
+
+	^ true
+]
+
 { #category : #accessing }
 AlcixAccessModule >> references [
 	"Relation named: #references type: #AlcixReference opposite: #accessModule"
