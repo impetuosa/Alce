@@ -85,6 +85,16 @@ AlcixEnumValue >> printOn: aStream [
 		nextPutAll: name
 ]
 
+{ #category : #'as yet unclassified' }
+AlcixEnumValue >> threeWayCompareTo: anAlcixEnumValue [
+
+	anAlcixEnumValue class = self class ifFalse: [ 
+		^ super threeWayCompareTo: anAlcixEnumValue ].
+
+	^ self Value asString threeWayCompareTo:
+		  anAlcixEnumValue Value asString
+]
+
 { #category : #accessing }
 AlcixEnumValue >> type [
 

@@ -32,7 +32,7 @@ AlceCodeImporter >> visitFormModule: anObject [
 
 	(self avoidingEntities includes: anObject name) ifTrue: [ .
 		self halt.
-		^ self state top astCannotLoad ].
+		^ self state top astCannotLoad:true  ].
 	" ): EGRC BUGS!!  "
 
 	super visitModule: anObject
@@ -59,7 +59,7 @@ AlceCodeImporter >> visitModule: anObject [
 
 	(self avoidingEntities includes: anObject name) ifTrue: [ 
 				self halt.
-		^ obj astCannotLoad ].
+		^ obj astCannotLoad: true  ].
 	" ): EGRC BUGS!!  "
 
 

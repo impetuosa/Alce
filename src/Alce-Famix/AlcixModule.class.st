@@ -4,7 +4,8 @@ Class {
 	#instVars : [
 		'#globalVariables => FMMany type: #AlcixGlobalVariable opposite: #module',
 		'#astCannotLoad',
-		'#ast'
+		'#ast',
+		'#stringContent'
 	],
 	#category : #'Alce-Famix-Entities'
 }
@@ -41,7 +42,13 @@ AlcixModule >> ast [
 
 { #category : #testing }
 AlcixModule >> astCannotLoad [
-	 astCannotLoad := true. 
+	 ^ astCannotLoad ifNil: [ false  ]
+	
+]
+
+{ #category : #testing }
+AlcixModule >> astCannotLoad: aValue [
+	 astCannotLoad := aValue 
 	
 ]
 
@@ -72,4 +79,13 @@ AlcixModule >> globalVariablesGroup [
 AlcixModule >> isAstLoaded [
 
 	^ (astCannotLoad ifNil: [ astCannotLoad := false ]) not
+]
+
+{ #category : #'as yet unclassified' }
+AlcixModule >> stringContent [
+
+	^ stringContent ifNil: [ 
+		  stringContent := self mooseModel anchorSolver
+			                   readEntity: self anchor
+			                   andCollect: [ :jin | jin code contents ] ]
 ]

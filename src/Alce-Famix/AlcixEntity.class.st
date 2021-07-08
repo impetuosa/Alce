@@ -58,3 +58,9 @@ AlcixEntity >> includedColors [
 AlcixEntity >> isType [ 
 	 ^ false 
 ]
+
+{ #category : #'as yet unclassified' }
+AlcixEntity >> threeWayCompareTo: anAlcixAttributeAccessor [
+
+	^ self name threeWayCompareTo: anAlcixAttributeAccessor name
+]

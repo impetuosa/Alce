@@ -88,3 +88,9 @@ AlcixReference >> path: anObject [
 	<generated>
 	path := anObject
 ]
+
+{ #category : #accessing }
+AlcixReference >> shortName [
+
+	^ ('.' split: name) first
+]

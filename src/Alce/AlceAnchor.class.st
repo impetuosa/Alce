@@ -39,6 +39,27 @@ AlceAnchor >> containsSource [
 	^ path segments includes: '@src'
 ]
 
+{ #category : #enumerating }
+AlceAnchor >> elementKind [
+
+	self ensureWellformed.
+	^ path at: 2
+]
+
+{ #category : #enumerating }
+AlceAnchor >> elementName [
+
+	self ensureWellformed.
+	^ path at: 3
+]
+
+{ #category : #enumerating }
+AlceAnchor >> ensureWellformed [
+
+	self assert:
+		({ 'modules'. 'forms'. 'reports' } includes: (path at: 2))
+]
+
 { #category : #arithmetic }
 AlceAnchor >> fullName [
 	^ path fullName
@@ -75,12 +96,10 @@ AlceAnchor >> projectSelector [
 AlceAnchor >> readEntityFrom: aProject andCollect: aFullBlockClosure [
 
 	| val entity |
-	
-	
-	 path size = 3 ifFalse: [ ^ nil  ].
-	self assert: ({'modules' . 'forms' . 'reports' } includes: (path at: 2)).
-	entity := (aProject perform: (path at: 2) asSymbol) detect: [ :m | 
-		          m name = (path at: 3) ].
+	path size = 3 ifFalse: [ ^ nil ].
+
+	entity := (aProject perform: self elementKind asSymbol) detect: [ :m | 
+		          m name = self elementName ].
 	val := aFullBlockClosure value: entity.
 	entity ensureUnload.
 	^ val
