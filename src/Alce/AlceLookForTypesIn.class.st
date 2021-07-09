@@ -12,7 +12,7 @@ AlceLookForTypesIn >> matchesFormNamed: aString [
 { #category : #visiting }
 AlceLookForTypesIn >> visitAccessModule: anAccessModule [
 	self visitCollection: anAccessModule types.
-	self visitCollection: anAccessModule references
+	self visitCollection: anAccessModule allReferences. 
 ]
 
 { #category : #visiting }

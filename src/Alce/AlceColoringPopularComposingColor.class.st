@@ -8,20 +8,37 @@ Class {
 	#category : #'Alce-Coloring'
 }
 
+{ #category : #visiting }
+AlceColoringPopularComposingColor >> askForAcceptTo: a [
+
+	(visited includes: a) ifFalse: [ 
+		visited add: a.
+		a accept: self ]
+]
+
 { #category : #accessing }
 AlceColoringPopularComposingColor >> colorFor: anEntity [
+
 	anEntity ifNil: [ ^ Color transparent ].
 	colors := OrderedCollection new.
 	visited := OrderedCollection new.
-	
-	anEntity accept: self.
+
+	self askForAcceptTo: anEntity.
+
 	colors := colors reject: [ :c | c = anEntity color ].
 	^ self popularEntry: colors or: anEntity color
 ]
 
 { #category : #'as yet unclassified' }
-AlceColoringPopularComposingColor >> popularEntry: aCollection [ 
-	self shouldBeImplemented.
+AlceColoringPopularComposingColor >> colorsFor: anEntity [
+
+	anEntity ifNil: [ ^ { Color transparent } ].
+	colors := OrderedCollection new.
+	visited := OrderedCollection new.
+
+	self askForAcceptTo: anEntity.
+
+	^ (colors reject: [ :c | c = anEntity color ]) removeDuplicates
 ]
 
 { #category : #'as yet unclassified' }
@@ -35,14 +52,14 @@ AlceColoringPopularComposingColor >> popularEntry: source or: aColor [
 { #category : #visiting }
 AlceColoringPopularComposingColor >> visitAccessRead: anAlcixAccessRead [
 
-	anAlcixAccessRead rightElement ifNotNil: [ :e | e accept: self ]
+	anAlcixAccessRead rightElement ifNotNil: [ :e | self askForAcceptTo: e]
 ]
 
 { #category : #visiting }
 AlceColoringPopularComposingColor >> visitAccessWrite: anAlcixAccessWrite [
 
-	anAlcixAccessWrite rightElement ifNotNil: [ :e | e accept: self ].
-	anAlcixAccessWrite leftElement ifNotNil: [ :e | e accept: self ]
+	anAlcixAccessWrite rightElement ifNotNil: [ :e | self askForAcceptTo: e ].
+	anAlcixAccessWrite leftElement ifNotNil: [ :e |self askForAcceptTo: e]
 ]
 
 { #category : #visiting }
@@ -76,7 +93,7 @@ AlceColoringPopularComposingColor >> visitClass: anAlcixClass [
 { #category : #visiting }
 AlceColoringPopularComposingColor >> visitCollection: aCollection [
 
-	aCollection do: [ :a | a accept: self ]
+	aCollection do: [ :a | self askForAcceptTo: a ]
 ]
 
 { #category : #visiting }
@@ -150,7 +167,7 @@ AlceColoringPopularComposingColor >> visitLocalVariable: anAlcixLocalVariable [
 AlceColoringPopularComposingColor >> visitMethodInvocation: anAlcixMethodInvocation [
 
 	self visitInvocation: anAlcixMethodInvocation.
-	anAlcixMethodInvocation receiver accept: self
+	self askForAcceptTo: anAlcixMethodInvocation receiver
 ]
 
 { #category : #visiting }
@@ -175,6 +192,11 @@ AlceColoringPopularComposingColor >> visitPrimitiveType: anAlcixPrimitiveType [
 AlceColoringPopularComposingColor >> visitReport: anAlcixReport [
 
 	self visitClass: anAlcixReport
+]
+
+{ #category : #visiting }
+AlceColoringPopularComposingColor >> visitStructure: anAlcixStructure [ 
+	self visitUserType: anAlcixStructure 
 ]
 
 { #category : #visiting }

@@ -118,3 +118,10 @@ AlcixUserType >> types [
 AlcixUserType >> userType [
 	^ self 
 ]
+
+{ #category : #accessing }
+AlcixUserType >> weight [
+
+	^ (members collect: [ :m | m weight ]) sum
+	  + (invocables collect: [ :m | m weight ]) sum
+]

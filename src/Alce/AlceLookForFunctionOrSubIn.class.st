@@ -17,7 +17,7 @@ AlceLookForFunctionOrSubIn >> initialize [
 AlceLookForFunctionOrSubIn >> visitAccessModule: anAccessModule [
 	onlyGlobals := true.
 	self visitCollection: anAccessModule types.
-	self visitCollection: anAccessModule references
+	self visitCollection: anAccessModule allReferences
 ]
 
 { #category : #visiting }

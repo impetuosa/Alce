@@ -83,8 +83,9 @@ AlcixInvocable >> addParameter: anObject [
 ]
 
 { #category : #adding }
-AlcixInvocable >> color [ 
-	^ userType color
+AlcixInvocable >> color [
+
+	^ userType ifNil: [ Color transparent ] ifNotNil: [ userType color ]
 ]
 
 { #category : #accessing }
@@ -251,4 +252,13 @@ AlcixInvocable >> visibility [
 AlcixInvocable >> visibility: anObject [
 	<generated>
 	visibility := anObject
+]
+
+{ #category : #accessing }
+AlcixInvocable >> weight [
+
+	^ parameters size 
+	  + (outgoingInvocations collect: [ :a | a weight ]) sum
+	  + (localVariables collect: [ :a | a weight ]) sum
+	  + (accesses collect: [ :a | a weight ]) sum
 ]

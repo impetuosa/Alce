@@ -34,6 +34,12 @@ AlcixAccessModule >> addSecondary: aRef [
 	secondary add: aRef. 
 ]
 
+{ #category : #visiting }
+AlcixAccessModule >> allReferences [
+
+	^ secondary , references
+]
+
 { #category : #navigation }
 AlcixAccessModule >> initialize [
 

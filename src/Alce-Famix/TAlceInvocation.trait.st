@@ -76,9 +76,9 @@ TAlceInvocation >> isVBMessageSend [
 TAlceInvocation >> setCandidate: aCandidate [
 
 	aCandidate ifNil: [ ^ self ].
-
-	((aCandidate isKindOf: AlcixClass) or: [ 
-		 aCandidate isKindOf: AlcixParameter ]) ifTrue: [ ^ self ].
+	((aCandidate isKindOf: AlcixAlias) or: [ 
+		 (aCandidate isKindOf: AlcixClass) or: [ 
+			 aCandidate isKindOf: AlcixParameter ] ]) ifTrue: [ ^ self ].
 	(aCandidate isKindOf: AlcixVariable) ifTrue: [ 
 		^ self becomeReadingAccessWithCandidate: aCandidate ].
 

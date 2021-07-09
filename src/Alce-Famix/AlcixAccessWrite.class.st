@@ -36,7 +36,7 @@ AlcixAccessWrite >> color [
 AlcixAccessWrite >> expandLeftMethodInvocation [
 
 	| n selector sender  |
-	self halt. 
+
 	selector := leftElementName dropSelectorOutOfReceiver.
 	
 	"(self mooseModel instantiate: AlcixInvocableReference)
@@ -122,6 +122,6 @@ AlcixAccessWrite >> setLeftElement: anAccessible [
 	" So far we only understand this case as the transformation of this access to a method invocation. So the element should be a function / sub and the rightElementName must have at least 2 parts object.message. If not, we may have to do different. "
 	self assert: (anAccessible isKindOf: AlcixInvocable).
 	self assert: leftElementName names size > 1.
-	self halt.
+
 	self expandLeftMethodInvocation setCandidate: anAccessible
 ]

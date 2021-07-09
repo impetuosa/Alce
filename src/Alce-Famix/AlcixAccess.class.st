@@ -164,3 +164,9 @@ AlcixAccess >> setRightElement: anAccessible [
 
 	self expandMethodInvocation setCandidate: anAccessible
 ]
+
+{ #category : #'api - accessing' }
+AlcixAccess >> weight [
+
+	^ 2 
+]

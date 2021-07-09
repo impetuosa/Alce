@@ -14,11 +14,18 @@ Class {
 }
 
 { #category : #'as yet unclassified' }
-AlceLinker class >> link: anAlcixModel [ 
-	| linker | 
+AlceLinker class >> link: anAlcixModel [
+
+	^ self link: anAlcixModel tries: self maxTries
+]
+
+{ #category : #'as yet unclassified' }
+AlceLinker class >> link: anAlcixModel tries: tries [
+
+	| linker |
 	linker := self new.
-	linker link: anAlcixModel .
-	^ linker.
+	linker link: anAlcixModel tries: tries.
+	^ linker
 ]
 
 { #category : #'as yet unclassified' }
@@ -36,7 +43,6 @@ AlceLinker >> beginIteration [
 AlceLinker >> initialize [
 	super initialize.
 	changed := false.
-	maxTries := self class maxTries.
 	tries := 0.
 	promiscuous := false. 
 ]
@@ -47,7 +53,8 @@ AlceLinker >> isFinished [
 ]
 
 { #category : #changes }
-AlceLinker >> link: aModel [
+AlceLinker >> link: aModel tries: anAmount [ 
+	 maxTries := anAmount. 
 
 	" 
 		The linking process is iterative. 
@@ -145,8 +152,10 @@ AlceLinker >> visitAccess: anAlcixAccess [
 ]
 
 { #category : #'\\' }
-AlceLinker >> visitAccessModule: anAlcixAccessModule [ 
-	" Should load the dependancies no? "
+AlceLinker >> visitAccessModule: anAlcixAccessModule [
+
+	anAlcixAccessModule types do: [ :p | 
+		p ifNotNil: [ :a | a accept: self ] ]
 ]
 
 { #category : #'as yet unclassified' }

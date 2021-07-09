@@ -64,3 +64,9 @@ AlcixContainer >> typesGroup [
 	<navigation: 'Types'>
 	^ MooseSpecializedGroup withAll: self types asSet
 ]
+
+{ #category : #accessing }
+AlcixContainer >> weight [
+
+	^ super weight + (types collect: [ :m | m weight ] )sum 
+]

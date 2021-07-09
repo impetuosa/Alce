@@ -88,8 +88,20 @@ AlcixEnum >> printOn: aStream [
 		nextPutAll: ')'
 ]
 
+{ #category : #generated }
+AlcixEnum >> type [
+
+	^ self
+]
+
 { #category : #visiting }
 AlcixEnum >> types [
 
 	^ {  }
+]
+
+{ #category : #accessing }
+AlcixEnum >> weight [
+
+	^ enumValues size
 ]

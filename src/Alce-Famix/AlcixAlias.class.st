@@ -69,3 +69,9 @@ AlcixAlias >> types [
 AlcixAlias >> userType [
 	^ container 
 ]
+
+{ #category : #visiting }
+AlcixAlias >> weight [
+
+	^ type ifNil: [ 1 ] ifNotNil: [ type weight ]
+]
