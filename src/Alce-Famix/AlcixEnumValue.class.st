@@ -1,6 +1,6 @@
 Class {
 	#name : #AlcixEnumValue,
-	#superclass : #AlcixAccessEntity,
+	#superclass : #AlcixAccessible,
 	#instVars : [
 		'#name => FMProperty',
 		'#Value => FMProperty',

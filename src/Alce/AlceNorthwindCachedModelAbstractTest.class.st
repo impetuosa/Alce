@@ -89,7 +89,7 @@ AlceNorthwindCachedModelAbstractTest class >> writeModelIntoFile: model [
 	stream := 'norwindmodel.json' asFileReference writeStream.
 	model exportToJSONStream: stream.
 	stream close.
-	stream := 'norwindmodel.fl' asFileReference writeStream.
+	stream := 'norwindmodel.fl' asFileReference binaryWriteStream.
 	FLSerializer serialize: model on: stream.
 	stream close. 
 ]

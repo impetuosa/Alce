@@ -109,7 +109,7 @@ AlcixAccessWrite >> printOn: aStream [
 
 	leftElementName printOn: aStream.
 	aStream nextPutAll:
-		(leftElement ifNil: [ '(solved)' ] ifNotNil: [ '(notsolved)' ]).
+		(leftElement ifNil: [ '(notsolved)' ] ifNotNil: [ '(solved)' ]).
 	aStream nextPutAll: '='.
 	super printOn: aStream
 ]

@@ -7,6 +7,12 @@ Class {
 	#category : #Alce
 }
 
+{ #category : #accessing }
+AlceAnchor class >> entryName [
+
+	^ #Anchor
+]
+
 { #category : #'as yet unclassified' }
 AlceAnchor class >> on: aString [
 	^ self new privateSetPath: (AbsolutePath from: aString)

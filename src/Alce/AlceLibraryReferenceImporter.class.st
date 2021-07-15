@@ -16,9 +16,11 @@ AlceLibraryReferenceImporter >> dllAnchor: aString for: aJinLibraryConstant [
 AlceLibraryReferenceImporter >> instantiateGetterAccessorMethod: aJinLibraryMethod into: anAttribute [
 
 	| acc selector |
+	selector := ('_' split: aJinLibraryMethod selector) last.
 	acc := self instantiate: AlcixAttributeAccessor.
 	acc kind: #Get.
-	selector := ('_' split: aJinLibraryMethod selector) last.
+
+
 	acc selector: selector.
 	acc typeName: (self typeName: aJinLibraryMethod).
 
@@ -33,10 +35,12 @@ AlceLibraryReferenceImporter >> instantiateGetterAccessorMethod: aJinLibraryMeth
 AlceLibraryReferenceImporter >> instantiateSetterAccessorMethod: aJinLibraryMethod into: anAttribute [
 
 	| acc selector |
+	selector := ('_' split: aJinLibraryMethod selector) last.
+	selector = 'Recordset' ifTrue: [ self halt ].
 	acc := self instantiate: AlcixAttributeAccessor.
 	acc kind: #Set.
 
-	selector := ('_' split: aJinLibraryMethod selector) last.
+
 	acc selector: selector.
 	acc typeName: (self typeName: aJinLibraryMethod).
 

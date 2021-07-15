@@ -169,7 +169,7 @@ AlceAccessGenerator >> defineHierarchy [
 	datasource --|> containerType.
 	enum --|> type.
 	enum --|> accessEntity.
-	enumValue --|> accessEntity.
+	enumValue --|> accessible.
 	event --|> invocable.
 	field --|> typedEntity.
 	form --|> guiClass.

@@ -165,6 +165,7 @@ AlceLinker >> visitAccessRead: anAlcixAccessRead [
 
 { #category : #'as yet unclassified' }
 AlceLinker >> visitAccessWrite: anAlcixAccessWrite [
+
 	self visitAccess: anAlcixAccessWrite.
 	anAlcixAccessWrite leftElement
 		ifNil: [ (self

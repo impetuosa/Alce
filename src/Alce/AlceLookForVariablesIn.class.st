@@ -22,9 +22,23 @@ AlceLookForVariablesIn >> visitAccessModule: anAccessModule [
 
 { #category : #visiting }
 AlceLookForVariablesIn >> visitAttribute: anAttribute [
+(	anAttribute name = 'vbCrLf' and: [ match names first ='vbCrLf'  ]) ifTrue: [ self halt  ].
 	((anAttribute visibility = #Public or: onlyGlobals not) and: [ 
 		 self matches: anAttribute name ]) ifTrue: [ 
 		self findings: anAttribute ]
+]
+
+{ #category : #visiting }
+AlceLookForVariablesIn >> visitEnum: anAlcixEnum [
+
+	self visitCollection: anAlcixEnum enumValues
+]
+
+{ #category : #visiting }
+AlceLookForVariablesIn >> visitEnumValue: anAlcixEnumValue [
+
+	(self matches: anAlcixEnumValue name) ifTrue: [ 
+		self findings: anAlcixEnumValue ]
 ]
 
 { #category : #visiting }
@@ -41,9 +55,10 @@ AlceLookForVariablesIn >> visitGlobalVariable: anAlcixGlobalVariable [
 
 { #category : #visiting }
 AlceLookForVariablesIn >> visitLibrary: aLibrary [
-
 	aLibrary members do: [ :t | 
-		(self matches: t name) ifTrue: [ ^ self findings: t ] ]
+		(self matches: t name) ifTrue: [ ^ self findings: t ] ].
+	aLibrary types do: [ :t | 
+		t accept: self ]
 ]
 
 { #category : #visiting }
@@ -61,4 +76,14 @@ AlceLookForVariablesIn >> visitModule: aModule [
 AlceLookForVariablesIn >> visitParameter: anAlcixParameter [
 	(onlyGlobals not and: [ self matches: anAlcixParameter name ]) 
 		ifTrue: [ self findings: anAlcixParameter ]
+]
+
+{ #category : #visiting }
+AlceLookForVariablesIn >> visitPrimitiveType: anAlcixPrimitiveType [ 
+
+]
+
+{ #category : #visiting }
+AlceLookForVariablesIn >> visitStructure: anAlcixStructure [ 
+
 ]

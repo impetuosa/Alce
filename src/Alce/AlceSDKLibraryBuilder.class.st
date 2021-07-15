@@ -98,6 +98,7 @@ AlceSDKLibraryBuilder >> build [
 	library name:#'VBALang'.
 	self primitiveTypes do: [ :t | library addType: t ].
 	self aliasTypes do: [ :t | library addType: t ].
+	self sdkClasses do: [ :t | library addType: t ].
 "	self functionsOrSubs do: [ :f | library addInvocable: f ].
 	self globals do: [ :g | g addGlobal: g ]."
 	^ library 
@@ -383,6 +384,27 @@ salvage 	Required. Double specifying the value of the asset at the end of its us
 life 	Required. Double specifying the length of useful life of the asset.
 period 	Required. Double specifying the period for which asset depreciation is calculated.
 factor 	Optional. Variant specifying the rate at which the balance declines. If omitted, 2 (double-declining method) is assumed.'
+]
+
+{ #category : #'sdk classes' }
+AlceSDKLibraryBuilder >> debugClass [
+
+	| class assert print |
+	class := self sdkClassNamed: #Debug.
+	assert := self
+		          subProcedureNamed: #Assert
+		          parametersFromString:
+			          'object 	Required. Always the Debug object.
+boolean 	Required. An expression that evaluates to either True or False.'.
+	print := self
+		         subProcedureNamed: #Print
+		         parametersFromString:
+			         'object 	Optional. An object expression that evaluates to an object in the Applies To list.
+outputlist 	Optional. Expression or list of expressions to print. If omitted, a blank line is printed.
+'.
+	class addInvocable: assert.
+	class addInvocable: print.
+	^ class
 ]
 
 { #category : #'primitive types' }
@@ -672,15 +694,17 @@ AlceSDKLibraryBuilder >> functionNamed: aName returns: aType parametersFromStrin
 					[ :l | l trimBoth copyReplaceAll: String tab with: '' ].
 			defLines
 				do: [ :l | 
+					|typeName | 
 					param := self instantiate: AlcixParameter.
 					func addParameter: param.
 					stream := l readStream.
 					param name: (stream upToAll: ' ') trimBoth.
 					param
 						isOptional: (self isOptionalOrNot: (stream upToAll: ' ') trimBoth).
-					type := self typeNamed: (stream upToAll: ' ') trimBoth.
+					typeName := (stream upToAll: ' ') trimBoth.
+					type := self typeNamed: typeName.
 					param type: type.
-					param typeName:( self typeNameReference: aType name). ].
+					param typeName:( self typeNameReference: typeName). ].
 			func ]
 ]
 
@@ -1607,9 +1631,20 @@ life 	Required. Double specifying length of the useful life of the asset.
 period 	Required. Double specifying period for which asset depreciation is calculated.'
 ]
 
+{ #category : #'sdk classes' }
+AlceSDKLibraryBuilder >> sdkClassNamed: aName [
+
+	^ created at: aName, 'classType' ifAbsentPut: [ 
+		  | t |
+		  t := self instantiate: AlcixClass.
+		  t name: aName.
+		  t ]
+]
+
 { #category : #building }
 AlceSDKLibraryBuilder >> sdkClasses [
-	^{ "Yet to define " }
+
+	^ { self debugClass }
 ]
 
 { #category : #building }
@@ -1932,6 +1967,32 @@ AlceSDKLibraryBuilder >> stringFunction [
 		  returns: self string
 		  parametersFromString: 'number 	Required; Long. Length of the returned string. If number contains Null, Null is returned.
 character 	Required; Variant. Character code specifying the character or string expression whose first character is used to build the return string. If character contains Null, Null is returned.'
+]
+
+{ #category : #'sdk statements' }
+AlceSDKLibraryBuilder >> subProcedureNamed: aName parametersFromString: aStringDefinition [
+	| func param defLines stream type |
+	^ created
+		at: aName , 'function'
+		ifAbsentPut: [ func := self instantiate: AlcixSubProcedure.
+			func selector: aName.
+			defLines := aStringDefinition lines
+				collect:
+					[ :l | l trimBoth copyReplaceAll: String tab with: '' ].
+			defLines
+				do: [ :l | 
+					|typeName | 
+					param := self instantiate: AlcixParameter.
+					func addParameter: param.
+					stream := l readStream.
+					param name: (stream upToAll: ' ') trimBoth.
+					param
+						isOptional: (self isOptionalOrNot: (stream upToAll: ' ') trimBoth).
+					typeName := (stream upToAll: ' ') trimBoth.
+					type := self typeNamed: typeName.
+					param type: type.
+					param typeName:( self typeNameReference: typeName). ].
+			func ]
 ]
 
 { #category : #'sdk functions' }

@@ -417,6 +417,21 @@ AlceASTCodeImporter >> visitFunctionDefinition: aDefinition [
 	self state pop
 ]
 
+{ #category : #'avoiding visit' }
+AlceASTCodeImporter >> visitGoSub: aSubLabel [
+	
+]
+
+{ #category : #'avoiding visit' }
+AlceASTCodeImporter >> visitGoSubLabel: aSubLabel [
+	
+]
+
+{ #category : #'avoiding visit' }
+AlceASTCodeImporter >> visitGoToStatement: aStatement [
+	
+]
+
 { #category : #generated }
 AlceASTCodeImporter >> visitHeader: aHeader [
 	^ self visitProgram: aHeader.
@@ -433,6 +448,16 @@ AlceASTCodeImporter >> visitImplements: anImplements [
 AlceASTCodeImporter >> visitImplicitParenthesesLessCall: anImplicitParenthesesLessCall [
 	self instantiateInvocation: anImplicitParenthesesLessCall.
 	anImplicitParenthesesLessCall arguments acceptVisitor: self
+]
+
+{ #category : #'avoiding visit' }
+AlceASTCodeImporter >> visitLabel: aLabel [ 	
+	
+]
+
+{ #category : #'avoiding visit' }
+AlceASTCodeImporter >> visitLabelTag: aLabel [ 	
+	
 ]
 
 { #category : #'member access' }
@@ -542,6 +567,21 @@ AlceASTCodeImporter >> visitModulePropertyGet: aModulePropertyGet [
 	self state pop
 ]
 
+{ #category : #'avoiding visit' }
+AlceASTCodeImporter >> visitOnErrorGoTo: aStatement [
+	
+]
+
+{ #category : #'avoiding visit' }
+AlceASTCodeImporter >> visitOnErrorResumeNext: aStatement [
+	
+]
+
+{ #category : #'avoiding visit' }
+AlceASTCodeImporter >> visitOnExpressionGo: aStatement [
+	
+]
+
 { #category : #'functions - subs - events' }
 AlceASTCodeImporter >> visitParameter: aParameter [
 
@@ -597,6 +637,21 @@ AlceASTCodeImporter >> visitReDimVariable: aReDimVariable [
 self state top localVariables detect: [ :a | 
 		 a name = aReDimVariable variable name token value ] ifFound: [ : e | e redim:
 		(self nodeToString: aReDimVariable variable type)] ifNone: [  ]
+]
+
+{ #category : #'avoiding visit' }
+AlceASTCodeImporter >> visitResumeEmpty: aStatement [
+	
+]
+
+{ #category : #'avoiding visit' }
+AlceASTCodeImporter >> visitResumeLabel: aResomeNext [ 	
+	
+]
+
+{ #category : #'avoiding visit' }
+AlceASTCodeImporter >> visitResumeNext: aResomeNext [ 	
+	
 ]
 
 { #category : #'member access' }
