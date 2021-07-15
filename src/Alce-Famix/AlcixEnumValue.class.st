@@ -12,7 +12,7 @@ Class {
 { #category : #meta }
 AlcixEnumValue class >> annotation [
 
-	<FMClass: #EnumValue super: #AlcixAccessEntity>
+	<FMClass: #EnumValue super: #AlcixAccessible>
 	<package: #'Alce-Famix'>
 	<generated>
 	^self
