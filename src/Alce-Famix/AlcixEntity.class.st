@@ -66,6 +66,12 @@ AlcixEntity >> isType [
 	 ^ false 
 ]
 
+{ #category : #accessing }
+AlcixEntity >> name [
+
+	^ self printString
+]
+
 { #category : #query }
 AlcixEntity >> query [
 

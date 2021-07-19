@@ -67,7 +67,11 @@ AlceLinker >> link: aModel tries: anAmount [
 	promiscuous := true.
 	[ 
 	self beginIteration.
-	aModel accept: self ] doWhileFalse: [ self isFinished ]
+	aModel accept: self ] doWhileFalse: [ self isFinished ].
+
+
+
+
 ]
 
 { #category : #'lookup flavors' }

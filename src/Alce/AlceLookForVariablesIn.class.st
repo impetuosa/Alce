@@ -22,7 +22,6 @@ AlceLookForVariablesIn >> visitAccessModule: anAccessModule [
 
 { #category : #visiting }
 AlceLookForVariablesIn >> visitAttribute: anAttribute [
-(	anAttribute name = 'vbCrLf' and: [ match names first ='vbCrLf'  ]) ifTrue: [ self halt  ].
 	((anAttribute visibility = #Public or: onlyGlobals not) and: [ 
 		 self matches: anAttribute name ]) ifTrue: [ 
 		self findings: anAttribute ]

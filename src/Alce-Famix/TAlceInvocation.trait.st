@@ -79,7 +79,8 @@ TAlceInvocation >> setCandidate: aCandidate [
 	((aCandidate isKindOf: AlcixAlias) or: [ 
 		 (aCandidate isKindOf: AlcixClass) or: [ 
 			 aCandidate isKindOf: AlcixParameter ] ]) ifTrue: [ ^ self ].
-	(aCandidate isKindOf: AlcixVariable) ifTrue: [ 
+	((aCandidate isKindOf: AlcixVariable) or: [ 
+		 aCandidate isKindOf: AlcixEnumValue ]) ifTrue: [ 
 		^ self becomeReadingAccessWithCandidate: aCandidate ].
 
 	self candidate: aCandidate.
@@ -88,6 +89,8 @@ TAlceInvocation >> setCandidate: aCandidate [
 	(self isVBMessageSend and: [ aCandidate isMethod not ]) ifTrue: [ 
 		self receiver rightElement ifNil: [ ^ self candidate: nil ].
 		self becomeFunctionInvocation ].
-	(self isVBMessageSend not and: [ aCandidate isMethod ]) ifTrue: [ 
+	(self isVBMessageSend not and: [ 
+		 aCandidate isMethod and: [ 
+			 aCandidate userType = self sender userType ] ]) ifTrue: [ 
 		self becomeMethodInvocation ]
 ]

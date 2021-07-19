@@ -81,11 +81,16 @@ AlcixModule >> isAstLoaded [
 	^ (astCannotLoad ifNil: [ astCannotLoad := false ]) not
 ]
 
+{ #category : #testing }
+AlcixModule >> me [
+	 self halt .
+]
+
 { #category : #'as yet unclassified' }
 AlcixModule >> stringContent [
 
 	^ stringContent ifNil: [ 
 		  stringContent := self mooseModel anchorSolver
 			                   readEntity: self anchor
-			                   andCollect: [ :jin | jin code contents ] ]
+			                   andCollect: [ :jin | jin src ] ]
 ]

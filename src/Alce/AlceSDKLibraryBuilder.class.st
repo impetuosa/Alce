@@ -42,10 +42,10 @@ AlceSDKLibraryBuilder >> aliasTypes [
 		  self userDefined.
 		  self uint.
 		  self uint32.
-		  self uint16 . 
+		  self uint16.
 		  self currentDb.
-		  self err. 
-		}
+		  self err.
+		  self voidAlias }
 ]
 
 { #category : #'sdk functions' }
@@ -99,6 +99,7 @@ AlceSDKLibraryBuilder >> build [
 	self primitiveTypes do: [ :t | library addType: t ].
 	self aliasTypes do: [ :t | library addType: t ].
 	self sdkClasses do: [ :t | library addType: t ].
+	self globals do: [ :g | g addGlobal: g ].
 "	self functionsOrSubs do: [ :f | library addInvocable: f ].
 	self globals do: [ :g | g addGlobal: g ]."
 	^ library 
@@ -472,6 +473,12 @@ RAMDisk 	5 	Drive is a block of random access memory (RAM) on the local computer
 
 ]
 
+{ #category : #building }
+AlceSDKLibraryBuilder >> emptyObject [
+
+	^ self newAttribute: #Empty typeName: 'NULL'
+]
+
 { #category : #'enum constants' }
 AlceSDKLibraryBuilder >> enumNamed: aName definedWith: aStringDefinition [
 
@@ -768,10 +775,11 @@ default 	Optional. Expression containing the value to return if no value is set 
 AlceSDKLibraryBuilder >> globals [
 	"Yet to define"
 	^ { 
-		"  self errObject.
+		
 		  self nullObject.
 		  self nothingObject.
 		  self emptyObject.
+	"	 self errObject.
 		  self errorObject "
 	}
 ]
@@ -925,7 +933,7 @@ AlceSDKLibraryBuilder >> int32 [
 
 { #category : #'primitive types' }
 AlceSDKLibraryBuilder >> integer [
-	^ self primitiveTypeNamed: #Integer
+	^ self primitiveTypeNamed: #VOID
 		
 	
 ]
@@ -1392,12 +1400,36 @@ AlceSDKLibraryBuilder >> newAlias: aName toName: anOtherName [
 		  t ]
 ]
 
+{ #category : #building }
+AlceSDKLibraryBuilder >> newAttribute: aName typeName: aTypeName [
+
+	^ created at: aName , 'Attr' ifAbsentPut: [ 
+		  | t |
+		  t := self instantiate: AlcixAttribute.
+		  t visibility: #Public.
+		  t name: aName.
+		  t typeName: (self typeNameReference: aTypeName).
+		  t ]
+]
+
+{ #category : #building }
+AlceSDKLibraryBuilder >> nothingObject [
+
+	^ self newAttribute: #Nothing typeName: 'NULL'
+]
+
 { #category : #'sdk functions' }
 AlceSDKLibraryBuilder >> now [
 	^ self
 		  functionNamed: #Now
 		  returns: self date
 		  parametersFromString: ''
+]
+
+{ #category : #building }
+AlceSDKLibraryBuilder >> nullObject [
+
+	^ self newAttribute: #Null typeName: 'NULL'
 ]
 
 { #category : #'primitive types' }
@@ -1491,7 +1523,8 @@ AlceSDKLibraryBuilder >> primitiveTypes [
 		self object. 
 		self single.
 		self string.
-		self variant 
+		self variant .
+		self void 
 	}
 ]
 
@@ -2225,6 +2258,19 @@ AlceSDKLibraryBuilder >> variant [
 	^ self primitiveTypeNamed: #Variant
 		
 	
+]
+
+{ #category : #'primitive types' }
+AlceSDKLibraryBuilder >> void [
+	^ self primitiveTypeNamed: #Void
+		
+	
+]
+
+{ #category : #alias }
+AlceSDKLibraryBuilder >> voidAlias [
+
+	^ self newAlias: #VOID to: self void
 ]
 
 { #category : #'sdk functions' }

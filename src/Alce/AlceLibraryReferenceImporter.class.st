@@ -36,7 +36,6 @@ AlceLibraryReferenceImporter >> instantiateSetterAccessorMethod: aJinLibraryMeth
 
 	| acc selector |
 	selector := ('_' split: aJinLibraryMethod selector) last.
-	selector = 'Recordset' ifTrue: [ self halt ].
 	acc := self instantiate: AlcixAttributeAccessor.
 	acc kind: #Set.
 
@@ -81,7 +80,9 @@ AlceLibraryReferenceImporter >> visitLibraryAttribute: aJinLibraryAttribute [
 	attr typeName:
 		(self typeNameReference: aJinLibraryAttribute typeName).
 	attr isConstant: false.
-	attr visibility: #Public.
+	attr visibility: ((self state top isKindOf: AlcixClass)
+			 ifTrue: [ #Private ]
+			 ifFalse: [ #Public ]).
 	attr anchor: (self dllAnchor: attr name for: aJinLibraryAttribute).
 	self state top addMember: attr
 ]

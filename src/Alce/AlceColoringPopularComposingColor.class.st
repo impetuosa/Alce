@@ -110,6 +110,11 @@ AlceColoringPopularComposingColor >> visitEnum: anAlcixEnum [
 ]
 
 { #category : #visiting }
+AlceColoringPopularComposingColor >> visitEnumValue: anAlcixEnumValue [ 
+
+]
+
+{ #category : #visiting }
 AlceColoringPopularComposingColor >> visitEvent: anAlcixEvent [
 
 	self visitInvocable: anAlcixEvent
