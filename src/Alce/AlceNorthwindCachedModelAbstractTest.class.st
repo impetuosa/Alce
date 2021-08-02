@@ -68,7 +68,9 @@ AlceNorthwindCachedModelAbstractTest class >> regenerateCacheModel [
 		importSyntacticElements;
 		importLibraryReferences.
 
-	norwindCachedModel := importer import: self norwind.
+	norwindCachedModel := importer
+		                      import: self norwind
+		                      symbolTableAt: 'norwind.symbol.ston'.
 
 	self writeModelIntoFile: norwindCachedModel
 ]

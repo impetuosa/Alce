@@ -2,7 +2,8 @@ Class {
 	#name : #AlceImporter,
 	#superclass : #Object,
 	#instVars : [
-		'provider'
+		'provider',
+		'symbolTable'
 	],
 	#category : #'Alce-Importer'
 }
@@ -28,6 +29,22 @@ AlceImporter >> import: aProjectPath into: aModel [
 ]
 
 { #category : #accessing }
+AlceImporter >> import: aProjectPath symbolTableAt: aString [
+
+	| symbolTableBuilder project |
+	aString asFileReference exists
+		ifTrue: [ 
+		symbolTable := JinNSSymbolTable loadFrom: aString asFileReference ]
+		ifFalse: [ 
+			project := JinAccessApplication default open: aProjectPath.
+			symbolTableBuilder := JinNSBuilder new.
+			symbolTable := symbolTableBuilder buildFor: project.
+			symbolTable saveAs: aString asFileReference.
+			project closeAndQuit ].
+	self import: aProjectPath
+]
+
+{ #category : #accessing }
 AlceImporter >> initialize [
 	super initialize.
 	provider := AlceImportingVisitorProvider new 
@@ -40,7 +57,9 @@ AlceImporter >> provider [
 
 { #category : #accessing }
 AlceImporter >> visitorFor: aModel [
+
 	^ self createDefaultVisitor
-		model: aModel;
-		yourself
+		  model: aModel;
+		  symbolTable: symbolTable;
+		  yourself
 ]

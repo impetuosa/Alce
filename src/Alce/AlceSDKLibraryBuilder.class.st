@@ -99,7 +99,7 @@ AlceSDKLibraryBuilder >> build [
 	self primitiveTypes do: [ :t | library addType: t ].
 	self aliasTypes do: [ :t | library addType: t ].
 	self sdkClasses do: [ :t | library addType: t ].
-	self globals do: [ :g | g addGlobal: g ].
+	self globals do: [ :g | library addGlobal: g ].
 "	self functionsOrSubs do: [ :f | library addInvocable: f ].
 	self globals do: [ :g | g addGlobal: g ]."
 	^ library 

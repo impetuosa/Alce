@@ -70,7 +70,9 @@ AlceMagactCachedModelAbstractTest class >> regenerateCacheModel [
 		importLibraryReferences;
 		importAccessReferences.
 
-	magactCachedModel := importer import: self magact.
+	magactCachedModel := importer
+		                     import: self magact
+		                     symbolTableAt: 'egrc.symbol.ston'.
 	self writeModelIntoFile: magactCachedModel
 ]
 
