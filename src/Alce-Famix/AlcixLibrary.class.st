@@ -22,6 +22,11 @@ AlcixLibrary >> accept: aVisitor [
 
 ]
 
+{ #category : #adding }
+AlcixLibrary >> addGlobal: anAlcixAttribute [ 
+
+]
+
 { #category : #accessing }
 AlcixLibrary >> isBuiltIn [
 

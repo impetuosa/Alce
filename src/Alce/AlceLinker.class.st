@@ -8,7 +8,9 @@ Class {
 		'changed',
 		'maxTries',
 		'tries',
-		'promiscuous'
+		'promiscuous',
+		'symbolTable',
+		'lookUp'
 	],
 	#category : #'Alce-Linker'
 }
@@ -19,12 +21,38 @@ AlceLinker class >> link: anAlcixModel [
 	^ self link: anAlcixModel tries: self maxTries
 ]
 
+{ #category : #accessing }
+AlceLinker class >> link: anAlcixModel symbolTable: aSymbolTable [
+
+	^ self
+		  link: anAlcixModel
+		  tries: self maxTries
+		  symbolTable: aSymbolTable
+]
+
+{ #category : #accessing }
+AlceLinker class >> link: anAlcixModel symbolTableAt: aString [
+
+	self assert: aString asFileReference exists.
+	^ self
+		  link: anAlcixModel
+		  symbolTable: (JinNSSymbolTable loadFrom: aString)
+]
+
 { #category : #'as yet unclassified' }
 AlceLinker class >> link: anAlcixModel tries: tries [
 
 	| linker |
 	linker := self new.
 	linker link: anAlcixModel tries: tries.
+	^ linker
+]
+
+{ #category : #accessing }
+AlceLinker class >> link: anAlcixModel tries: tries symbolTable: aSymbolTable [
+	| linker |
+	linker := self new.
+	linker link: anAlcixModel tries: tries symbolTable: aSymbolTable.
 	^ linker
 ]
 
@@ -53,7 +81,16 @@ AlceLinker >> isFinished [
 ]
 
 { #category : #changes }
-AlceLinker >> link: aModel tries: anAmount [ 
+AlceLinker >> link: aModel tries: anAmount [
+
+	^ self link: aModel tries: anAmount lookUp: AlceLookUp
+]
+
+{ #category : #changes }
+AlceLinker >> link: aModel tries: anAmount lookUp: aLookupStrategy [
+ 
+	lookUp := aLookupStrategy.
+	
 	 maxTries := anAmount. 
 
 	" 
@@ -72,6 +109,21 @@ AlceLinker >> link: aModel tries: anAmount [
 
 
 
+]
+
+{ #category : #changes }
+AlceLinker >> link: aModel tries: anAmount symbolTable: aSymbolTable [
+
+	symbolTable := aSymbolTable.
+	^ self link: aModel tries: anAmount lookUp: [ 
+		  AlceSymbolTableLookUp new
+			  symbolTable: symbolTable;
+			  yourself ]
+]
+
+{ #category : #accessing }
+AlceLinker >> lookUp [ 
+	^ lookUp 
 ]
 
 { #category : #'lookup flavors' }
@@ -101,7 +153,7 @@ AlceLinker >> lookupFunctionClass [
 { #category : #'lookup flavors' }
 AlceLinker >> lookupFunctionOrSub: aMatch in: aNode [
 
-	^ AlceLookUp
+	^ self lookUp
 		  lookFor: self lookupFunctionClass 
 		  matching: aMatch
 		  from: aNode
@@ -109,12 +161,12 @@ AlceLinker >> lookupFunctionOrSub: aMatch in: aNode [
 
 { #category : #'lookup flavors' }
 AlceLinker >> lookupMethod: aMatch in: aNode [
-	^ AlceLookUp lookFor: self lookupForMethodClass  matching: aMatch from: aNode
+	^ self lookUp lookFor: self lookupForMethodClass  matching: aMatch from: aNode
 ]
 
 { #category : #'lookup flavors' }
 AlceLinker >> lookupType: aMatch in: aNode [
-	^ AlceLookUp lookFor: self lookupTypeClass matching: aMatch from: aNode
+	^ self lookUp value lookFor: self lookupTypeClass matching: aMatch from: aNode
 ]
 
 { #category : #'lookup flavors' }
@@ -130,7 +182,7 @@ AlceLinker >> lookupVariable: aMatch in: aNode [
 	| found |
 	aMatch isEmptyOrNil
 		ifTrue: [ ^ nil ].
-	^ AlceLookUp
+	^ self lookUp 
 		lookFor: self lookVariableClass 
 		matching: aMatch
 		from: aNode.

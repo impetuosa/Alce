@@ -41,7 +41,7 @@ AlceImporter >> import: aProjectPath symbolTableAt: aString [
 			symbolTable := symbolTableBuilder buildFor: project.
 			symbolTable saveAs: aString asFileReference.
 			project closeAndQuit ].
-	self import: aProjectPath
+	^ self import: aProjectPath
 ]
 
 { #category : #accessing }
