@@ -5,6 +5,12 @@ Class {
 }
 
 { #category : #'as yet unclassified' }
+AlceLookForTypesIn >> firstMatchingSymbol [
+
+	^ (symbols select: [ :s | s kind isType ]) first
+]
+
+{ #category : #'as yet unclassified' }
 AlceLookForTypesIn >> matchesFormNamed: aString [
 	^ match refersToFormNamed: aString
 ]

@@ -53,6 +53,13 @@ AlceAnchor >> elementKind [
 ]
 
 { #category : #enumerating }
+AlceAnchor >> elementNSKind [
+
+	self ensureWellformed.
+	^ JinNSKind perform: self elementKind asSymbol
+]
+
+{ #category : #enumerating }
 AlceAnchor >> elementName [
 
 	self ensureWellformed.
@@ -60,15 +67,49 @@ AlceAnchor >> elementName [
 ]
 
 { #category : #enumerating }
+AlceAnchor >> elementProject [
+
+	self ensureWellformed.
+	^ path at: 1
+]
+
+{ #category : #enumerating }
+AlceAnchor >> elements [
+]
+
+{ #category : #enumerating }
+AlceAnchor >> elementsNameKindPairs [
+
+	| limit |
+	limit := path segments indexOf: '@src'.
+	limit := limit = 0
+		         ifTrue: [ path size ]
+		         ifFalse: [ limit - 1 ].
+
+
+	^ (2 to: limit by: 2) collect: [ :a | 
+		{ 
+			(path at: a + 1).
+			JinNSKind perform: (path at: a) asSymbol  } ].
+		
+]
+
+{ #category : #enumerating }
 AlceAnchor >> ensureWellformed [
 
 	self assert:
-		({ 'modules'. 'forms'. 'reports' } includes: (path at: 2))
+		({ 'modules'. 'forms'. 'reports'. 'table'. 'query'. 'references' } 
+			 includes: (path at: 2))
 ]
 
 { #category : #arithmetic }
 AlceAnchor >> fullName [
 	^ path fullName
+]
+
+{ #category : #enumerating }
+AlceAnchor >> hasTwoElements [
+	^ path size = 9 
 ]
 
 { #category : #arithmetic }
@@ -80,6 +121,11 @@ AlceAnchor >> hash [
 AlceAnchor >> isMooseObject [
 
 	^ true
+]
+
+{ #category : #accessing }
+AlceAnchor >> path [
+	^ path
 ]
 
 { #category : #arithmetic }
@@ -114,6 +160,25 @@ AlceAnchor >> readEntityFrom: aProject andCollect: aFullBlockClosure [
 { #category : #resolving }
 AlceAnchor >> resolve: aProject [
 	self shouldBeImplemented
+]
+
+{ #category : #'as yet unclassified' }
+AlceAnchor >> secondElementKind [
+
+	^ path at: 4
+]
+
+{ #category : #'as yet unclassified' }
+AlceAnchor >> secondElementNSKind [
+
+	^ JinNSKind perform: self secondElementKind asSymbol
+]
+
+{ #category : #'as yet unclassified' }
+AlceAnchor >> secondElementName [
+
+	self ensureWellformed.
+	^ path at: 5
 ]
 
 { #category : #'as yet unclassified' }

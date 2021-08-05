@@ -8,6 +8,7 @@ Class {
 AlceLookForPromiscuousIn >> lookInto: aNode [
 
 	| entities |
+	self halt .
 	entities := aNode mooseModel select: [ :a | self matches: a name ].
 	entities size = 1 ifTrue: [ ^ self findings: entities first ].
 	super lookInto: aNode

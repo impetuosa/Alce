@@ -17,14 +17,18 @@ AlceDispatchingImporter >> filter: aBlock [
 
 { #category : #'instance creation' }
 AlceDispatchingImporter >> initialize [
+
 	super initialize.
 	state := Stack new.
-	filter := [ :a | true ]
+	filter := [ :a | true ].
 ]
 
 { #category : #'instance creation' }
 AlceDispatchingImporter >> instantiate: aClass [
-	^ model instantiate: aClass
+
+	| obj |
+	obj := model instantiate: aClass.
+	^ obj
 ]
 
 { #category : #accessing }

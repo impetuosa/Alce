@@ -86,6 +86,12 @@ AlcixModule >> me [
 	 self halt .
 ]
 
+{ #category : #accessing }
+AlcixModule >> parent [
+
+	^ container
+]
+
 { #category : #'as yet unclassified' }
 AlcixModule >> stringContent [
 

@@ -8,6 +8,14 @@ Class {
 }
 
 { #category : #visiting }
+AlceLookForVariablesIn >> firstMatchingSymbol [
+	| ms |
+	ms := (symbols select: [ :s | s kind isAttribute ]).
+	ms ifEmpty: [ ms := symbols ].
+	^  ms first
+]
+
+{ #category : #visiting }
 AlceLookForVariablesIn >> initialize [
 	super initialize.
 	onlyGlobals := false

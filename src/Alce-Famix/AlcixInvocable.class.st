@@ -191,6 +191,12 @@ AlcixInvocable >> parametersGroup [
 ]
 
 { #category : #accessing }
+AlcixInvocable >> parent [
+
+	^ userType
+]
+
+{ #category : #accessing }
 AlcixInvocable >> printOn: aStream [
 
 	aStream

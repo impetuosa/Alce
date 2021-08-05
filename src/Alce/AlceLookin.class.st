@@ -2,15 +2,55 @@ Class {
 	#name : #AlceLookIn,
 	#superclass : #AlceLook,
 	#instVars : [
-		'context'
+		'context',
+		'symbols'
 	],
 	#category : #'Alce-Linker'
 }
 
 { #category : #'as yet unclassified' }
+AlceLookIn class >> lookInto: anAlcixModule symbol: aCollection [
+
+	^ self new
+		  symbols: aCollection;
+		  lookInto: anAlcixModule
+]
+
+{ #category : #'as yet unclassified' }
 AlceLookIn >> lookInto: aNode [
-	context := aNode. 
-	^ aNode accept: self
+
+	| newContext |
+	context := aNode.
+	symbols ifNil: [ ^ aNode accept: self ].
+
+
+	((aNode isKindOf: AlcixFunction) and: [ 
+		 aNode selector = symbols first name ]) ifTrue: [ 
+		^ self findings:
+			  (aNode localVariables detect: [ :v | v name = aNode selector ]) ].
+
+	match := self firstMatchingSymbol.
+
+	[ context parent isNil ] whileFalse: [ context := context parent ].
+
+	match owner type = JinLibrary ifTrue: [ 
+		newContext := context references detect: [ :r | 
+			              r name = match owner name ] ].
+
+	match kind isParameter ifTrue: [ 
+		^ self findings:
+			  (aNode parameters detect: [ :p | p name = match name ]) ].
+
+	({ 
+		 JinModule.
+		 JinReport.
+		 JinForm.
+		 JinTable.
+		 JinQuery } includes: match owner type) ifTrue: [ 
+		newContext := context types detect: [ :r | 
+			              r name = match owner simpleName ] ].
+
+	newContext accept: self
 ]
 
 { #category : #testing }
@@ -22,6 +62,11 @@ AlceLookIn >> match: aNameReferenceNode with: anOtherString [
 { #category : #testing }
 AlceLookIn >> matches: aString [
 	^ self match: match with: aString
+]
+
+{ #category : #accessing }
+AlceLookIn >> symbols: aCollection [ 
+	symbols := aCollection
 ]
 
 { #category : #visiting }

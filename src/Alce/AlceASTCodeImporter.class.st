@@ -634,9 +634,11 @@ AlceASTCodeImporter >> visitRaiseEvent: aRaiseEvent [
 { #category : #'properties - variables' }
 AlceASTCodeImporter >> visitReDimVariable: aReDimVariable [
 
-self state top localVariables detect: [ :a | 
-		 a name = aReDimVariable variable name token value ] ifFound: [ : e | e redim:
-		(self nodeToString: aReDimVariable variable type)] ifNone: [  ]
+	self state top localVariables
+		detect: [ :a | a name = aReDimVariable variable name token value ]
+		ifFound: [ :e | 
+		e redim: (self nodeToString: aReDimVariable variable type) ]
+		ifNone: [  ]
 ]
 
 { #category : #'avoiding visit' }

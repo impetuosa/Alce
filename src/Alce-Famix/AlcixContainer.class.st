@@ -43,6 +43,12 @@ AlcixContainer >> name: anObject [
 ]
 
 { #category : #accessing }
+AlcixContainer >> parent [
+
+	^ container
+]
+
+{ #category : #accessing }
 AlcixContainer >> types [
 	"Relation named: #types type: #AlcixTType opposite: #container"
 

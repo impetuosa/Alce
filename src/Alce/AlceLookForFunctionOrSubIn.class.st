@@ -7,6 +7,12 @@ Class {
 	#category : #'Alce-Linker'
 }
 
+{ #category : #accessing }
+AlceLookForFunctionOrSubIn >> firstMatchingSymbol [
+
+	^ (symbols select: [ :s | s kind isInvocable ]) first
+]
+
 { #category : #visiting }
 AlceLookForFunctionOrSubIn >> initialize [ 
 	super initialize.

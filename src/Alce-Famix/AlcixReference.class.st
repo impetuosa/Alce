@@ -61,6 +61,11 @@ AlcixReference >> isAccessModule [
 	^ false 
 ]
 
+{ #category : #testing }
+AlcixReference >> isLibrary [ 
+	^ self isAccessModule not
+]
+
 { #category : #accessing }
 AlcixReference >> name [
 

@@ -153,8 +153,8 @@ AlceLinker >> lookupFunctionClass [
 { #category : #'lookup flavors' }
 AlceLinker >> lookupFunctionOrSub: aMatch in: aNode [
 
-	^ self lookUp
-		  lookFor: self lookupFunctionClass 
+	^ self lookUp value
+		  lookFor: self lookupFunctionClass
 		  matching: aMatch
 		  from: aNode
 ]
@@ -182,7 +182,7 @@ AlceLinker >> lookupVariable: aMatch in: aNode [
 	| found |
 	aMatch isEmptyOrNil
 		ifTrue: [ ^ nil ].
-	^ self lookUp 
+	^ self lookUp value
 		lookFor: self lookVariableClass 
 		matching: aMatch
 		from: aNode.
