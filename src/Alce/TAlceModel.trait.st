@@ -3,7 +3,7 @@ Trait {
 	#instVars : [
 		'anchorSolver'
 	],
-	#category : #'Alce-Famix-Model'
+	#category : #Alce
 }
 
 { #category : #'as yet unclassified' }

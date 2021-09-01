@@ -84,20 +84,20 @@ AlceAccessGenerator class >> prefix [
 { #category : #definition }
 AlceAccessGenerator >> defineClasses [
 	super defineClasses.
+	
 	access := builder newClassNamed: #Access.
 	accessRead := builder newClassNamed: #AccessRead.
 	accessWrite := builder newClassNamed: #AccessWrite.
 	accessible := builder newClassNamed: #Accessible.
 	accessEntity := builder newClassNamed: #AccessEntity.
 	accessModule := builder newClassNamed: #AccessModule.
-	alias := builder newClassNamed: 'Alias'. 
+	alias := builder newClassNamed: #Alias. 
 	attribute := builder newClassNamed: #Attribute.
 	attributeAccessor := builder newClassNamed: #AttributeAccessor.
 	argument := builder newClassNamed: #Argument.
 	
 	invocable := builder newClassNamed: #Invocable.
 	class := builder newClassNamed: #Class.
-	codeSegment := builder newClassNamed: #CodeSegment.
 	containerType := builder newClassNamed: #Container.
 	databaseType := builder newClassNamed: #DatabaseType.
 	databaseTypedEntity := builder newClassNamed: #DatabaseTypedEntity.
