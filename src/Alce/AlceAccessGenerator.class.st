@@ -8,7 +8,6 @@ Class {
 		'enum',
 		'enumValue',
 		'event',
-		'field',
 		'form',
 		'globalVariable',
 		'invocation',
@@ -28,31 +27,27 @@ Class {
 		'query',
 		'invocable',
 		'databaseType',
-		'guiClass',
 		'datasource',
 		'accessModule',
 		'argument',
 		'accessEntity',
 		'typedEntity',
-		'databaseTypedEntity',
-		'codeSegment',
 		'library',
 		'containerType',
 		'attributeAccessor',
 		'typed',
 		'type',
 		'userType',
-		'methodInvocation',
 		'variable',
 		'accessible',
 		'accessRead',
-		'accessWrite',
-		'referenceName',
-		'referenceTypeName',
-		'referenceVariableName',
-		'referenceInvocableName',
 		'alias',
-		'structure'
+		'expression',
+		'withAccesses',
+		'assignment',
+		'unknownElement',
+		'undefinedElement',
+		'accessProject'
 	],
 	#category : #'Alce-Generator'
 }
@@ -83,40 +78,41 @@ AlceAccessGenerator class >> prefix [
 
 { #category : #definition }
 AlceAccessGenerator >> defineClasses [
+
 	super defineClasses.
-	
+
 	access := builder newClassNamed: #Access.
 	accessRead := builder newClassNamed: #AccessRead.
-	accessWrite := builder newClassNamed: #AccessWrite.
+	assignment := builder newClassNamed: #Assignment.
+
+	withAccesses := builder newClassNamed: #WithAccesses.
+
 	accessible := builder newClassNamed: #Accessible.
 	accessEntity := builder newClassNamed: #AccessEntity.
 	accessModule := builder newClassNamed: #AccessModule.
-	alias := builder newClassNamed: #Alias. 
+	accessProject := builder newClassNamed: #AccessProject.
+	
+	
+	alias := builder newClassNamed: #Alias.
 	attribute := builder newClassNamed: #Attribute.
 	attributeAccessor := builder newClassNamed: #AttributeAccessor.
 	argument := builder newClassNamed: #Argument.
-	
+
 	invocable := builder newClassNamed: #Invocable.
 	class := builder newClassNamed: #Class.
 	containerType := builder newClassNamed: #Container.
 	databaseType := builder newClassNamed: #DatabaseType.
-	databaseTypedEntity := builder newClassNamed: #DatabaseTypedEntity.
+
 	datasource := builder newClassNamed: #DataSource.
-	
-	referenceName := builder newClassNamed: #ReferenceName.
-	referenceTypeName := builder newClassNamed: #TypeReference.
-	referenceVariableName := builder newClassNamed: #VariableReference.
-	referenceInvocableName := builder newClassNamed: #InvocableReference.
-		
+	expression := builder newClassNamed: #Expression.
 	enum := builder newClassNamed: #Enum.
 	enumValue := builder newClassNamed: #EnumValue.
 	event := builder newClassNamed: #Event.
-	field := builder newClassNamed: #Field.
+
 	form := builder newClassNamed: #Form.
 	globalVariable := builder newClassNamed: #GlobalVariable.
-	guiClass := builder newClassNamed: #GUIClass.
 	invocation := builder newClassNamed: #Invocation.
-	methodInvocation := builder newClassNamed: #MethodInvocation.
+
 	localVariable := builder newClassNamed: #LocalVariable.
 	function := builder newClassNamed: #Function.
 	externalFunction := builder newClassNamed: #ExternalFunction.
@@ -129,15 +125,15 @@ AlceAccessGenerator >> defineClasses [
 	reference := builder newClassNamed: #Reference.
 	report := builder newClassNamed: #Report.
 	subProcedure := builder newClassNamed: #SubProcedure.
-	structure := builder newClassNamed: #Structure.
+
 	externalSubProcedure := builder newClassNamed: #ExternalSubProcedure.
 	table := builder newClassNamed: #Table.
 	typedEntity := builder newClassNamed: #TypedEntity.
 	query := builder newClassNamed: #Query.
 	userType := builder newClassNamed: #UserType.
-	variable := builder newClassNamed: #Variable
-	
-
+	variable := builder newClassNamed: #Variable.
+	unknownElement := builder newClassNamed: #UnknownElement.
+	undefinedElement := builder newClassNamed: #UndefinedElement
 ]
 
 { #category : #definition }
@@ -145,40 +141,49 @@ AlceAccessGenerator >> defineHierarchy [
 
 	super defineHierarchy.
 	access --|> accessible.
-	accessRead --|> access.
-	accessWrite --|> access.
 
+	undefinedElement --|> accessible.
+	undefinedElement --|> type.
+	unknownElement --|> undefinedElement.
+
+
+	accessRead --|> access.
+	assignment --|> withAccesses.
+	
+	accessProject --|> accessEntity. 
+	
 	accessible --|> accessEntity.
 	accessModule --|> reference.
+	withAccesses --|> accessible.
+
+	argument --|> withAccesses.
+	invocable --|> withAccesses.
+	expression --|> withAccesses.
 
 	alias --|> typed.
 	alias --|> type.
-	alias  --|> accessible.
+	alias --|> accessible.
 	
 	attribute --|> variable.
-	argument --|> codeSegment.
-	invocable --|> accessEntity.
+
 	class --|> module.
-	codeSegment --|> accessEntity.
 	userType --|> type.
 	userType --|> accessible.
 	containerType --|> userType.
-	databaseType --|> type.
-	databaseType --|> accessEntity.
-	databaseTypedEntity --|> typedEntity.
-	datasource --|> containerType.
+	databaseType --|> primitiveType.
+
+	datasource --|> class.
 	enum --|> type.
 	enum --|> accessEntity.
 	enumValue --|> accessible.
 	event --|> invocable.
-	field --|> typedEntity.
-	form --|> guiClass.
+
+	form --|> class.
 	function --|> invocable.
 	function --|> typed.
 	globalVariable --|> variable.
-	guiClass --|> class.
-	invocation --|> accessible.
-	methodInvocation --|> invocation.
+	invocation --|> access.
+
 	localVariable --|> variable.
 	externalFunction --|> function.
 	macro --|> invocable.
@@ -190,13 +195,8 @@ AlceAccessGenerator >> defineHierarchy [
 	attributeAccessor --|> function.
 	raiseEvent --|> invocation.
 	reference --|> containerType.
-	report --|> guiClass.
+	report --|> class.
 
-	referenceName --|> accessEntity.
-	referenceTypeName --|> referenceName.
-	referenceVariableName --|> referenceName.
-	referenceInvocableName --|> referenceName.
-	structure --|> userType.
 
 	subProcedure --|> invocable.
 	typedEntity --|> accessible.
@@ -210,11 +210,13 @@ AlceAccessGenerator >> defineHierarchy [
 { #category : #definition }
 AlceAccessGenerator >> defineProperties [
 
-	access property: #isWriting type: #Boolean.
-	access property: #isReturn type: #Boolean.
-	accessWrite property: #isNewObject type: #Boolean.
-	referenceName property: #names type: #Object.
-	referenceName property: #isProcessedElement type: #Boolean.
+	
+	
+	
+	assignment withTesting .
+	assignment property: #isReturn type: #Boolean.
+	assignment property: #isNewObject type: #Boolean.
+
 
 	accessEntity property: #anchor type: #Object.
 	argument property: #value type: #Object.
@@ -222,7 +224,7 @@ AlceAccessGenerator >> defineProperties [
 	containerType property: #name type: #String.
 
 	enumValue property: #name type: #String.
-	enumValue property: #Value type: #Object.
+	enumValue property: #value type: #Object.
 
 	attribute property: #isConstant type: #Boolean.
 	attribute property: #visibility type: #String.
@@ -237,8 +239,6 @@ AlceAccessGenerator >> defineProperties [
 
 	library property: #isBuiltIn type: #Boolean.
 	invocable property: #selector type: #String.
-
-	methodInvocation property: #receiver type: #Object.
 
 	parameter property: #isOptional type: #Boolean.
 
@@ -257,44 +257,39 @@ AlceAccessGenerator >> defineProperties [
 
 { #category : #definition }
 AlceAccessGenerator >> defineRelations [
-	(access property: #rightElement)
-		*- (accessible property: #readingAccesses).
-	(accessWrite property: #leftElement)
-		*- (accessible property: #writingAccesses).
+
+	(access property: #candidates)
+	*-* (accessible property: #incomingAccesses).
+	access <>-* argument.
+
+	(accessProject property: #modules)
+	<>-* (accessModule property: #project).
 	(accessModule property: #references) <>-* reference.
+
+	(withAccesses property: #outgoingAccesses) <>-* access.
+
 	invocable <>-* parameter.
-	invocable <>-* access.
 	invocable <>-* localVariable.
-	
+	invocable <>-* assignment.
+
 	containerType <>-* type.
-	databaseTypedEntity - databaseType.
-	datasource <>-* field.
-	enum <>-* enumValue.
-	(invocable property: #outgoingInvocations)
-		<>-* (invocation property: #sender).
-	(invocable property: #incomingInvocations)
-		<>-* (invocation property: #candidate).
-	invocation <>-* argument.
+
 	(userType property: #members) <>-* attribute.
 	userType <>-* invocable.
-	
+
+	(class property: #superclass) <>-* (class property: #subclass).
+
 	module <>-* globalVariable.
 	attribute <>-* attributeAccessor.
 	query <>-* table.
-	
-	(access property: #rightElementName) - referenceVariableName.
-	(accessWrite property: #leftElementName) - referenceVariableName.
-	(invocation property: #selector) - referenceInvocableName.
-	(typed property: #typeName) - referenceTypeName.
-	
-		
-	
+
+
 	typed *- type
 ]
 
 { #category : #definition }
 AlceAccessGenerator >> defineTraits [
-	super defineClasses.
+	super defineTraits.
 	type := builder newTraitNamed: #TType.
 	typed := builder newTraitNamed: #TTyped.
 ]

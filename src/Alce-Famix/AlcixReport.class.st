@@ -1,13 +1,13 @@
 Class {
 	#name : #AlcixReport,
-	#superclass : #AlcixGUIClass,
+	#superclass : #AlcixClass,
 	#category : #'Alce-Famix-Entities'
 }
 
 { #category : #meta }
 AlcixReport class >> annotation [
 
-	<FMClass: #Report super: #AlcixGUIClass>
+	<FMClass: #Report super: #AlcixClass>
 	<package: #'Alce-Famix'>
 	<generated>
 	^self

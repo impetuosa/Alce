@@ -2,8 +2,7 @@ Class {
 	#name : #AlcixAccessible,
 	#superclass : #AlcixAccessEntity,
 	#instVars : [
-		'#readingAccesses => FMMany type: #AlcixAccess opposite: #rightElement',
-		'#writingAccesses => FMMany type: #AlcixAccessWrite opposite: #leftElement'
+		'#incomingAccesses => FMMany type: #AlcixAccess opposite: #candidates'
 	],
 	#category : #'Alce-Famix-Entities'
 }
@@ -24,45 +23,22 @@ AlcixAccessible >> accept: aVisitor [
 ]
 
 { #category : #adding }
-AlcixAccessible >> addReadingAccess: anObject [
+AlcixAccessible >> addIncomingAccess: anObject [
 	<generated>
-	^ self readingAccesses add: anObject
-]
-
-{ #category : #adding }
-AlcixAccessible >> addWritingAccess: anObject [
-	<generated>
-	^ self writingAccesses add: anObject
+	^ self incomingAccesses add: anObject
 ]
 
 { #category : #accessing }
-AlcixAccessible >> readingAccesses [
-	"Relation named: #readingAccesses type: #AlcixAccess opposite: #rightElement"
+AlcixAccessible >> incomingAccesses [
+	"Relation named: #incomingAccesses type: #AlcixAccess opposite: #candidates"
 
 	<generated>
-	<derived>
-	^ readingAccesses
+	^ incomingAccesses
 ]
 
 { #category : #accessing }
-AlcixAccessible >> readingAccesses: anObject [
+AlcixAccessible >> incomingAccesses: anObject [
 
 	<generated>
-	readingAccesses value: anObject
-]
-
-{ #category : #accessing }
-AlcixAccessible >> writingAccesses [
-	"Relation named: #writingAccesses type: #AlcixAccessWrite opposite: #leftElement"
-
-	<generated>
-	<derived>
-	^ writingAccesses
-]
-
-{ #category : #accessing }
-AlcixAccessible >> writingAccesses: anObject [
-
-	<generated>
-	writingAccesses value: anObject
+	incomingAccesses value: anObject
 ]

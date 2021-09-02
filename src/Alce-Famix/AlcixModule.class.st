@@ -2,10 +2,9 @@ Class {
 	#name : #AlcixModule,
 	#superclass : #AlcixContainer,
 	#instVars : [
-		'#globalVariables => FMMany type: #AlcixGlobalVariable opposite: #module',
-		'#astCannotLoad',
-		'#ast',
-		'#stringContent'
+		'#astCannotLoad => FMProperty',
+		'#ast => FMProperty',
+		'#globalVariables => FMMany type: #AlcixGlobalVariable opposite: #module'
 	],
 	#category : #'Alce-Famix-Entities'
 }
@@ -31,25 +30,32 @@ AlcixModule >> addGlobalVariable: anObject [
 	^ self globalVariables add: anObject
 ]
 
-{ #category : #navigation }
+{ #category : #accessing }
 AlcixModule >> ast [
 
-	^ ast ifNil: [ 
-		  ast := self mooseModel anchorSolver
-			         readEntity: self anchor
-			         andCollect: [ :jin | jin ast ] ]
+	<FMProperty: #ast type: #Object>
+	<generated>
+	^ ast
 ]
 
-{ #category : #testing }
+{ #category : #accessing }
+AlcixModule >> ast: anObject [
+	<generated>
+	ast := anObject
+]
+
+{ #category : #accessing }
 AlcixModule >> astCannotLoad [
-	 ^ astCannotLoad ifNil: [ false  ]
-	
+
+	<FMProperty: #astCannotLoad type: #Boolean>
+	<generated>
+	^ astCannotLoad
 ]
 
-{ #category : #testing }
-AlcixModule >> astCannotLoad: aValue [
-	 astCannotLoad := aValue 
-	
+{ #category : #accessing }
+AlcixModule >> astCannotLoad: anObject [
+	<generated>
+	astCannotLoad := anObject
 ]
 
 { #category : #accessing }
@@ -73,30 +79,4 @@ AlcixModule >> globalVariablesGroup [
 	<generated>
 	<navigation: 'GlobalVariables'>
 	^ MooseSpecializedGroup withAll: self globalVariables asSet
-]
-
-{ #category : #testing }
-AlcixModule >> isAstLoaded [
-
-	^ (astCannotLoad ifNil: [ astCannotLoad := false ]) not
-]
-
-{ #category : #testing }
-AlcixModule >> me [
-	 self halt .
-]
-
-{ #category : #accessing }
-AlcixModule >> parent [
-
-	^ container
-]
-
-{ #category : #'as yet unclassified' }
-AlcixModule >> stringContent [
-
-	^ stringContent ifNil: [ 
-		  stringContent := self mooseModel anchorSolver
-			                   readEntity: self anchor
-			                   andCollect: [ :jin | jin src ] ]
 ]

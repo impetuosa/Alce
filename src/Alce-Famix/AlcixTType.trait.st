@@ -24,13 +24,6 @@ AlcixTType >> addTyped: anObject [
 ]
 
 { #category : #accessing }
-AlcixTType >> color [
-
-	^ self colorIfAbsent: [ 
-		  container ifNil: [ super color ] ifNotNil: [ container color ] ]
-]
-
-{ #category : #accessing }
 AlcixTType >> container [
 	"Relation named: #container type: #AlcixContainer opposite: #types"
 
@@ -51,16 +44,6 @@ AlcixTType >> containerGroup [
 	<generated>
 	<navigation: 'Container'>
 	^ MooseSpecializedGroup with: self container
-]
-
-{ #category : #navigation }
-AlcixTType >> containerName [
- 	^ container ifNotNil: [ container name ] ifNil: [ 'None' ]
-]
-
-{ #category : #navigation }
-AlcixTType >> isType [ 
-	 ^ true 
 ]
 
 { #category : #accessing }

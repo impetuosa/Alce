@@ -2,8 +2,8 @@ Class {
 	#name : #AlcixAccessModule,
 	#superclass : #AlcixReference,
 	#instVars : [
-		'#references => FMMany type: #AlcixReference opposite: #accessModule',
-		'#secondary'
+		'#project => FMOne type: #AlcixAccessProject opposite: #modules',
+		'#references => FMMany type: #AlcixReference opposite: #accessModule'
 	],
 	#category : #'Alce-Famix-Entities'
 }
@@ -29,28 +29,27 @@ AlcixAccessModule >> addReference: anObject [
 	^ self references add: anObject
 ]
 
+{ #category : #accessing }
+AlcixAccessModule >> project [
+	"Relation named: #project type: #AlcixAccessProject opposite: #modules"
+
+	<generated>
+	<container>
+	^ project
+]
+
+{ #category : #accessing }
+AlcixAccessModule >> project: anObject [
+
+	<generated>
+	project := anObject
+]
+
 { #category : #navigation }
-AlcixAccessModule >> addSecondary: aRef [
-	secondary add: aRef. 
-]
-
-{ #category : #visiting }
-AlcixAccessModule >> allReferences [
-
-	^ secondary , references
-]
-
-{ #category : #navigation }
-AlcixAccessModule >> initialize [
-
-	super initialize.
-	secondary := OrderedCollection new
-]
-
-{ #category : #adding }
-AlcixAccessModule >> isAccessModule [
-
-	^ true
+AlcixAccessModule >> projectGroup [
+	<generated>
+	<navigation: 'Project'>
+	^ MooseSpecializedGroup with: self project
 ]
 
 { #category : #accessing }
@@ -74,10 +73,4 @@ AlcixAccessModule >> referencesGroup [
 	<generated>
 	<navigation: 'References'>
 	^ MooseSpecializedGroup withAll: self references asSet
-]
-
-{ #category : #adding }
-AlcixAccessModule >> registerReference: anObject [
-
-	^ secondary add: anObject
 ]

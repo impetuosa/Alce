@@ -218,9 +218,10 @@ AlceJinDAMLoader >> visitAccessRead: aJinDAMAccessRead [
 	self
 		push: refGather
 		during: [ aJinDAMAccessRead readReference accept: self ].
-
-	self halt.
-
+	
+	refGather references do: [ : a| 
+		a setUnderContextOf: self currentConstruct .
+	].
 	^ acc
 ]
 
@@ -228,40 +229,26 @@ AlceJinDAMLoader >> visitAccessRead: aJinDAMAccessRead [
 AlceJinDAMLoader >> visitAccessWrite: aJinDAMAccessWrite [
 
 	| acc refGather |
-	refGather := AlceReferenceGatherer new.
+	acc := self
+		       instantiate: AlceIXAccessWrite
+		       for: aJinDAMAccessWrite
+		       onCreation: [ :write | 
+			       refGather := AlceReferenceGatherer new.
 
-	self
-		push: refGather
-		during: [ self visitCollection: aJinDAMAccessWrite readReferences  ].
+			       self
+				       push: refGather
+				       during: [ aJinDAMAccessWrite writeReference accept: self ].
 
-	self halt.
-	refGather := AlceReferenceGatherer new.
+			       refGather references do: [ :a | a setUnderContextOf: write ].
+			       refGather := AlceReferenceGatherer new.
+			       self
+				       push: refGather
+				       during: [ 
+				       self visitCollection: aJinDAMAccessWrite readReferences ].
 
-	self
-		push: refGather
-		during: [ aJinDAMAccessWrite writeReference accept: self ].
-	self halt.
+			       refGather references do: [ :a | a setUnderContextOf: write ] ].
 
-	"	self assert: (aJinDAMAccessWrite writeReference isReference or:[ aJinDAMAccessWrite writeReference  readReference isReference]). 
-	self assert: aJinDAMAccessWrite readReferences isCollection. 
-	
-	acc := self instantiate: AlceIXAccess for:aJinDAMAccessWrite  onCreation: [ 
-				: access |
-		access isWrite: true. 
-		aJinDAMAccessWrite writeReference isReference ifTrue: [  
-			self scheduleSettingReference: aJinDAMAccessWrite writeReference into: access with: #variable:.	
-		] ifFalse: [
-			self scheduleSettingReference: aJinDAMAccessWrite writeReference readReference  into:  access with: #variable:. 
-		].
-	
-		(aJinDAMAccessWrite readReferences flatCollect: [ : a | a references  ]) do:  [  :r | 
-
-					self scheduleSettingReference: r into: access  with: #addReadingAccess:.
-		
-		
-		 ]
-	].
-	self currentConstruct addAccess: acc. "
+	self currentConstruct addAccess: acc.
 	^ acc
 ]
 

@@ -37,11 +37,6 @@ AlcixUserType >> addMember: anObject [
 	^ self members add: anObject
 ]
 
-{ #category : #converting }
-AlcixUserType >> asType [
-	^ self 
-]
-
 { #category : #accessing }
 AlcixUserType >> invocables [
 	"Relation named: #invocables type: #AlcixInvocable opposite: #userType"
@@ -65,11 +60,6 @@ AlcixUserType >> invocablesGroup [
 	^ MooseSpecializedGroup withAll: self invocables asSet
 ]
 
-{ #category : #adding }
-AlcixUserType >> isAlcixClass [
-	^ false
-]
-
 { #category : #accessing }
 AlcixUserType >> members [
 	"Relation named: #members type: #AlcixAttribute opposite: #userType"
@@ -91,37 +81,4 @@ AlcixUserType >> membersGroup [
 	<generated>
 	<navigation: 'Members'>
 	^ MooseSpecializedGroup withAll: self members asSet
-]
-
-{ #category : #navigation }
-AlcixUserType >> printOn: aStream [
-
-	aStream
-		nextPutAll: (self class name copyReplaceAll: 'Alcix' with: '');
-		nextPutAll: '(';
-		nextPutAll: name;
-		nextPutAll: ')'
-]
-
-{ #category : #generated }
-AlcixUserType >> type [
-	^ self 
-]
-
-{ #category : #accessing }
-AlcixUserType >> types [
-
-	^ {  }
-]
-
-{ #category : #accessing }
-AlcixUserType >> userType [
-	^ self 
-]
-
-{ #category : #accessing }
-AlcixUserType >> weight [
-
-	^ (members collect: [ :m | m weight ]) sum
-	  + (invocables collect: [ :m | m weight ]) sum
 ]

@@ -251,7 +251,8 @@ Alce2Generator >> defineHierarchy [
 	invocation --|> withArguments. 
 	
 
-
+	literal --|> #TAccessible.
+	
 	localVariable --|> namedEntity.
 	localVariable --|> #TLocalVariable.
 	localVariable --|> #TCanBeFinal.

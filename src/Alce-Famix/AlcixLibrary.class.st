@@ -22,11 +22,6 @@ AlcixLibrary >> accept: aVisitor [
 
 ]
 
-{ #category : #adding }
-AlcixLibrary >> addGlobal: anAlcixAttribute [ 
-
-]
-
 { #category : #accessing }
 AlcixLibrary >> isBuiltIn [
 
@@ -39,14 +34,4 @@ AlcixLibrary >> isBuiltIn [
 AlcixLibrary >> isBuiltIn: anObject [
 	<generated>
 	isBuiltIn := anObject
-]
-
-{ #category : #accessing }
-AlcixLibrary >> printOn: aStream [
-
-	aStream
-		nextPutAll: 'Library';
-		nextPutAll: '(';
-		nextPutAll: name;
-		nextPutAll: ')'
 ]

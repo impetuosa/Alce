@@ -2,8 +2,8 @@ Class {
 	#name : #AlcixReference,
 	#superclass : #AlcixContainer,
 	#instVars : [
-		'#path => FMProperty',
-		'#accessModule => FMOne type: #AlcixAccessModule opposite: #references'
+		'#accessModule => FMOne type: #AlcixAccessModule opposite: #references',
+		'#path => FMProperty'
 	],
 	#category : #'Alce-Famix-Entities'
 }
@@ -47,26 +47,6 @@ AlcixReference >> accessModuleGroup [
 ]
 
 { #category : #accessing }
-AlcixReference >> color [
-
-	^ self colorIfAbsent: [ 
-		  accessModule
-			  ifNil: [ super color ]
-			  ifNotNil: [ accessModule color ] ]
-]
-
-{ #category : #testing }
-AlcixReference >> isAccessModule [
-
-	^ false 
-]
-
-{ #category : #testing }
-AlcixReference >> isLibrary [ 
-	^ self isAccessModule not
-]
-
-{ #category : #accessing }
 AlcixReference >> name [
 
 	<FMProperty: #name type: #String>
@@ -92,10 +72,4 @@ AlcixReference >> path [
 AlcixReference >> path: anObject [
 	<generated>
 	path := anObject
-]
-
-{ #category : #accessing }
-AlcixReference >> shortName [
-
-	^ ('.' split: name) first
 ]

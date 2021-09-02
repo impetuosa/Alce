@@ -1,5 +1,5 @@
 Class {
-	#name : #AlcixPrimitiveType,
+	#name : #AlcixUndefinedElement,
 	#superclass : #AlcixAccessible,
 	#traits : 'AlcixTType',
 	#classTraits : 'AlcixTType classTrait',
@@ -7,16 +7,16 @@ Class {
 }
 
 { #category : #meta }
-AlcixPrimitiveType class >> annotation [
+AlcixUndefinedElement class >> annotation [
 
-	<FMClass: #PrimitiveType super: #AlcixAccessible>
+	<FMClass: #UndefinedElement super: #AlcixAccessible>
 	<package: #'Alce-Famix'>
 	<generated>
 	^self
 ]
 
 { #category : #visiting }
-AlcixPrimitiveType >> accept: aVisitor [
-	^ aVisitor visitPrimitiveType: self
+AlcixUndefinedElement >> accept: aVisitor [
+	^ aVisitor visitUndefinedElement: self
 
 ]

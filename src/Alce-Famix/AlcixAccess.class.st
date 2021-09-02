@@ -2,11 +2,9 @@ Class {
 	#name : #AlcixAccess,
 	#superclass : #AlcixAccessible,
 	#instVars : [
-		'#isWriting => FMProperty',
-		'#isReturn => FMProperty',
-		'#rightElement => FMOne type: #AlcixAccessible opposite: #readingAccesses',
-		'#invocable => FMOne type: #AlcixInvocable opposite: #accesses',
-		'#rightElementName => FMOne type: #AlcixVariableReference opposite: #access'
+		'#candidates => FMMany type: #AlcixAccessible opposite: #incomingAccesses',
+		'#arguments => FMMany type: #AlcixArgument opposite: #access',
+		'#withAccesses => FMOne type: #AlcixWithAccesses opposite: #outgoingAccesses'
 	],
 	#category : #'Alce-Famix-Entities'
 }
@@ -26,147 +24,76 @@ AlcixAccess >> accept: aVisitor [
 
 ]
 
-{ #category : #accessing }
-AlcixAccess >> color [
-
-	^ self colorIfAbsent: [ invocable color ]
+{ #category : #adding }
+AlcixAccess >> addArgument: anObject [
+	<generated>
+	^ self arguments add: anObject
 ]
 
-{ #category : #becoming }
-AlcixAccess >> expandMethodInvocation [
-
-	| n selector sender rightNewElement |
-	selector := rightElementName dropSelectorOutOfReceiver.
-	sender := invocable.
-	
-	rightNewElement := self mooseModel instantiate: AlcixAccessRead.
-	rightNewElement rightElement: rightElement.
-	rightNewElement rightElementName: rightElementName .
-	rightNewElement invocable: invocable. 
-	
-	n := self mooseModel instantiate: AlcixMethodInvocation.
-	rightElement := n.
-	rightElementName := nil.
-	n selector: selector.
-	n sender: sender.
-	n receiver: rightNewElement.
-	
-	
-	self mooseModel add: n.
-	^ n
+{ #category : #adding }
+AlcixAccess >> addCandidate: anObject [
+	<generated>
+	^ self candidates add: anObject
 ]
 
 { #category : #accessing }
-AlcixAccess >> invocable [
-	"Relation named: #invocable type: #AlcixInvocable opposite: #accesses"
+AlcixAccess >> arguments [
+	"Relation named: #arguments type: #AlcixArgument opposite: #access"
 
 	<generated>
-	<container>
-	^ invocable
+	<derived>
+	^ arguments
 ]
 
 { #category : #accessing }
-AlcixAccess >> invocable: anObject [
+AlcixAccess >> arguments: anObject [
 
 	<generated>
-	invocable := anObject
+	arguments value: anObject
 ]
 
 { #category : #navigation }
-AlcixAccess >> invocableGroup [
+AlcixAccess >> argumentsGroup [
 	<generated>
-	<navigation: 'Invocable'>
-	^ MooseSpecializedGroup with: self invocable
+	<navigation: 'Arguments'>
+	^ MooseSpecializedGroup withAll: self arguments asSet
 ]
 
 { #category : #accessing }
-AlcixAccess >> isReturn [
+AlcixAccess >> candidates [
+	"Relation named: #candidates type: #AlcixAccessible opposite: #incomingAccesses"
 
-	<FMProperty: #isReturn type: #Boolean>
 	<generated>
-	^ isReturn
+	<derived>
+	^ candidates
 ]
 
 { #category : #accessing }
-AlcixAccess >> isReturn: anObject [
+AlcixAccess >> candidates: anObject [
+
 	<generated>
-	isReturn := anObject
+	candidates value: anObject
 ]
 
 { #category : #accessing }
-AlcixAccess >> isWriting [
+AlcixAccess >> withAccesses [
+	"Relation named: #withAccesses type: #AlcixWithAccesses opposite: #outgoingAccesses"
 
-	<FMProperty: #isWriting type: #Boolean>
 	<generated>
-	^ isWriting
+	<container>
+	^ withAccesses
 ]
 
 { #category : #accessing }
-AlcixAccess >> isWriting: anObject [
-	<generated>
-	isWriting := anObject
-]
-
-{ #category : #accessing }
-AlcixAccess >> printOn: aStream [
-
-	rightElementName
-		ifNil: [ 
-			rightElement
-				ifNil: [ aStream nextPutAll: 'UninterpretedExpression' ]
-				ifNotNil: [ rightElement selector printOn: aStream ] ]
-		ifNotNil: [ rightElementName printOn: aStream ].
-	aStream nextPutAll:
-		(rightElement ifNotNil: [ '(solved)' ] ifNil: [ '(notsolved)' ])
-]
-
-{ #category : #accessing }
-AlcixAccess >> rightElement [
-	"Relation named: #rightElement type: #AlcixAccessible opposite: #readingAccesses"
+AlcixAccess >> withAccesses: anObject [
 
 	<generated>
-	^ rightElement
+	withAccesses := anObject
 ]
 
-{ #category : #accessing }
-AlcixAccess >> rightElement: anObject [
-
+{ #category : #navigation }
+AlcixAccess >> withAccessesGroup [
 	<generated>
-	rightElement := anObject
-]
-
-{ #category : #accessing }
-AlcixAccess >> rightElementName [
-	"Relation named: #rightElementName type: #AlcixVariableReference opposite: #access"
-
-	<generated>
-	^ rightElementName
-]
-
-{ #category : #accessing }
-AlcixAccess >> rightElementName: anObject [
-
-	<generated>
-	rightElementName := anObject
-]
-
-{ #category : #becoming }
-AlcixAccess >> setRightElement: anAccessible [
-
-	(anAccessible isKindOf: AlcixAccessible) ifTrue: [ 
-		^ rightElement := anAccessible ].
-	" So far we only understand this case as the transformation of this access to a method invocation. So the element should be a function / sub and the rightElementName must have at least 2 parts object.message. If not, we may have to do different. "
-	self assert: (anAccessible isKindOf: AlcixInvocable).
-	(anAccessible isKindOf: AlcixEvent) ifTrue: [ ^ self ].
-	rightElementName names size < 1 ifTrue: [ 
-		self error:
-			'un expected setting. we should be finding a message send' ].
-
-	self expandMethodInvocation setCandidate: anAccessible
-]
-
-{ #category : #'api - accessing' }
-AlcixAccess >> weight [
-
-	^ 2 
+	<navigation: 'WithAccesses'>
+	^ MooseSpecializedGroup with: self withAccesses
 ]

@@ -6,7 +6,7 @@ Class {
 		'anchors',
 		'model'
 	],
-	#category : #'Alce-Famix-Model'
+	#category : #Alce
 }
 
 { #category : #accessing }

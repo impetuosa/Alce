@@ -1,9 +1,9 @@
 Class {
 	#name : #AlcixArgument,
-	#superclass : #AlcixCodeSegment,
+	#superclass : #AlcixWithAccesses,
 	#instVars : [
 		'#value => FMProperty',
-		'#invocation => FMOne type: #AlcixInvocation opposite: #arguments'
+		'#access => FMOne type: #AlcixAccess opposite: #arguments'
 	],
 	#category : #'Alce-Famix-Entities'
 }
@@ -11,7 +11,7 @@ Class {
 { #category : #meta }
 AlcixArgument class >> annotation [
 
-	<FMClass: #Argument super: #AlcixCodeSegment>
+	<FMClass: #Argument super: #AlcixWithAccesses>
 	<package: #'Alce-Famix'>
 	<generated>
 	^self
@@ -24,34 +24,26 @@ AlcixArgument >> accept: aVisitor [
 ]
 
 { #category : #accessing }
-AlcixArgument >> invocation [
-	"Relation named: #invocation type: #AlcixInvocation opposite: #arguments"
+AlcixArgument >> access [
+	"Relation named: #access type: #AlcixAccess opposite: #arguments"
 
 	<generated>
 	<container>
-	^ invocation
+	^ access
 ]
 
 { #category : #accessing }
-AlcixArgument >> invocation: anObject [
+AlcixArgument >> access: anObject [
 
 	<generated>
-	invocation := anObject
+	access := anObject
 ]
 
 { #category : #navigation }
-AlcixArgument >> invocationGroup [
+AlcixArgument >> accessGroup [
 	<generated>
-	<navigation: 'Invocation'>
-	^ MooseSpecializedGroup with: self invocation
-]
-
-{ #category : #navigation }
-AlcixArgument >> printOn: aStream [
-
-	aStream nextPutAll: 'Arg('.
-	value printOn: aStream.
-	aStream nextPutAll: ')'
+	<navigation: 'Access'>
+	^ MooseSpecializedGroup with: self access
 ]
 
 { #category : #accessing }

@@ -1,7 +1,6 @@
 Trait {
 	#name : #AlcixTTyped,
 	#instVars : [
-		'#typeName => FMOne type: #AlcixTypeReference opposite: #typed',
 		'#type => FMOne type: #AlcixTType opposite: #typeds'
 	],
 	#category : #'Alce-Famix-Traits'
@@ -17,13 +16,6 @@ AlcixTTyped classSide >> annotation [
 ]
 
 { #category : #accessing }
-AlcixTTyped >> color [
-
-	^ self colorIfAbsent: [ 
-		  type ifNotNil: [ type color ] ifNil: [ super color ] ]
-]
-
-{ #category : #accessing }
 AlcixTTyped >> type [
 	"Relation named: #type type: #AlcixTType opposite: #typeds"
 
@@ -35,21 +27,5 @@ AlcixTTyped >> type [
 AlcixTTyped >> type: anObject [
 
 	<generated>
-	anObject isType ifFalse: [ ^ self halt ].
 	type := anObject
-]
-
-{ #category : #accessing }
-AlcixTTyped >> typeName [
-	"Relation named: #typeName type: #AlcixTypeReference opposite: #typed"
-
-	<generated>
-	^ typeName
-]
-
-{ #category : #accessing }
-AlcixTTyped >> typeName: anObject [
-
-	<generated>
-	typeName := anObject
 ]

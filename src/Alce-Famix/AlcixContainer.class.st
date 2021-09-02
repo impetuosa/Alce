@@ -43,12 +43,6 @@ AlcixContainer >> name: anObject [
 ]
 
 { #category : #accessing }
-AlcixContainer >> parent [
-
-	^ container
-]
-
-{ #category : #accessing }
 AlcixContainer >> types [
 	"Relation named: #types type: #AlcixTType opposite: #container"
 
@@ -69,10 +63,4 @@ AlcixContainer >> typesGroup [
 	<generated>
 	<navigation: 'Types'>
 	^ MooseSpecializedGroup withAll: self types asSet
-]
-
-{ #category : #accessing }
-AlcixContainer >> weight [
-
-	^ super weight + (types collect: [ :m | m weight ] )sum 
 ]

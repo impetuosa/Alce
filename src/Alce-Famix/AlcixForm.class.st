@@ -1,13 +1,13 @@
 Class {
 	#name : #AlcixForm,
-	#superclass : #AlcixGUIClass,
+	#superclass : #AlcixClass,
 	#category : #'Alce-Famix-Entities'
 }
 
 { #category : #meta }
 AlcixForm class >> annotation [
 
-	<FMClass: #Form super: #AlcixGUIClass>
+	<FMClass: #Form super: #AlcixClass>
 	<package: #'Alce-Famix'>
 	<generated>
 	^self

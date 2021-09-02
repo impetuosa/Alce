@@ -3,9 +3,6 @@ Class {
 	#superclass : #AlcixAccessEntity,
 	#traits : 'AlcixTType',
 	#classTraits : 'AlcixTType classTrait',
-	#instVars : [
-		'#enumValues => FMMany type: #AlcixEnumValue opposite: #enum'
-	],
 	#category : #'Alce-Famix-Entities'
 }
 
@@ -22,86 +19,4 @@ AlcixEnum class >> annotation [
 AlcixEnum >> accept: aVisitor [
 	^ aVisitor visitEnum: self
 
-]
-
-{ #category : #adding }
-AlcixEnum >> addEnumValue: anObject [
-	<generated>
-	^ self enumValues add: anObject
-]
-
-{ #category : #converting }
-AlcixEnum >> asType [
-
-	^ self
-]
-
-{ #category : #accessing }
-AlcixEnum >> enumValues [
-	"Relation named: #enumValues type: #AlcixEnumValue opposite: #enum"
-
-	<generated>
-	<derived>
-	^ enumValues
-]
-
-{ #category : #accessing }
-AlcixEnum >> enumValues: anObject [
-
-	<generated>
-	enumValues value: anObject
-]
-
-{ #category : #navigation }
-AlcixEnum >> enumValuesGroup [
-	<generated>
-	<navigation: 'EnumValues'>
-	^ MooseSpecializedGroup withAll: self enumValues asSet
-]
-
-{ #category : #accessing }
-AlcixEnum >> invocables [
-
-	^ {  }
-]
-
-{ #category : #testing }
-AlcixEnum >> isAstLoaded [
-	^ true
-]
-
-{ #category : #accessing }
-AlcixEnum >> members [
-
-	^ enumValues
-]
-
-{ #category : #accessing }
-AlcixEnum >> printOn: aStream [
-
-	aStream
-		nextPutAll: 'Enum';
-		nextPutAll: '(';
-		nextPutAll: name;
-		nextPutAll: '-#';
-		nextPutAll: enumValues size asString;
-		nextPutAll: ')'
-]
-
-{ #category : #generated }
-AlcixEnum >> type [
-
-	^ self
-]
-
-{ #category : #visiting }
-AlcixEnum >> types [
-
-	^ {  }
-]
-
-{ #category : #accessing }
-AlcixEnum >> weight [
-
-	^ enumValues size
 ]

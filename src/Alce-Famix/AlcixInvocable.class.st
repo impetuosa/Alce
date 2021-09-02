@@ -1,15 +1,13 @@
 Class {
 	#name : #AlcixInvocable,
-	#superclass : #AlcixAccessEntity,
+	#superclass : #AlcixWithAccesses,
 	#instVars : [
-		'#selector => FMProperty',
-		'#visibility => FMProperty',
-		'#parameters => FMMany type: #AlcixParameter opposite: #invocable',
-		'#accesses => FMMany type: #AlcixAccess opposite: #invocable',
+		'#assignments => FMMany type: #AlcixAssignment opposite: #invocable',
 		'#localVariables => FMMany type: #AlcixLocalVariable opposite: #invocable',
-		'#outgoingInvocations => FMMany type: #AlcixInvocation opposite: #sender',
-		'#incomingInvocations => FMMany type: #AlcixInvocation opposite: #candidate',
-		'#userType => FMOne type: #AlcixUserType opposite: #invocables'
+		'#parameters => FMMany type: #AlcixParameter opposite: #invocable',
+		'#selector => FMProperty',
+		'#userType => FMOne type: #AlcixUserType opposite: #invocables',
+		'#visibility => FMProperty'
 	],
 	#category : #'Alce-Famix-Entities'
 }
@@ -17,7 +15,7 @@ Class {
 { #category : #meta }
 AlcixInvocable class >> annotation [
 
-	<FMClass: #Invocable super: #AlcixAccessEntity>
+	<FMClass: #Invocable super: #AlcixWithAccesses>
 	<package: #'Alce-Famix'>
 	<generated>
 	^self
@@ -29,39 +27,10 @@ AlcixInvocable >> accept: aVisitor [
 
 ]
 
-{ #category : #accessing }
-AlcixInvocable >> accesses [
-	"Relation named: #accesses type: #AlcixAccess opposite: #invocable"
-
-	<generated>
-	<derived>
-	^ accesses
-]
-
-{ #category : #accessing }
-AlcixInvocable >> accesses: anObject [
-
-	<generated>
-	accesses value: anObject
-]
-
-{ #category : #navigation }
-AlcixInvocable >> accessesGroup [
-	<generated>
-	<navigation: 'Accesses'>
-	^ MooseSpecializedGroup withAll: self accesses asSet
-]
-
 { #category : #adding }
-AlcixInvocable >> addAccess: anObject [
+AlcixInvocable >> addAssignment: anObject [
 	<generated>
-	^ self accesses add: anObject
-]
-
-{ #category : #adding }
-AlcixInvocable >> addIncomingInvocation: anObject [
-	<generated>
-	^ self incomingInvocations add: anObject
+	^ self assignments add: anObject
 ]
 
 { #category : #adding }
@@ -71,49 +40,32 @@ AlcixInvocable >> addLocalVariable: anObject [
 ]
 
 { #category : #adding }
-AlcixInvocable >> addOutgoingInvocation: anObject [
-	<generated>
-	^ self outgoingInvocations add: anObject
-]
-
-{ #category : #adding }
 AlcixInvocable >> addParameter: anObject [
 	<generated>
 	^ self parameters add: anObject
 ]
 
-{ #category : #adding }
-AlcixInvocable >> color [
-
-	^ userType ifNil: [ Color transparent ] ifNotNil: [ userType color ]
-]
-
 { #category : #accessing }
-AlcixInvocable >> incomingInvocations [
-	"Relation named: #incomingInvocations type: #AlcixInvocation opposite: #candidate"
+AlcixInvocable >> assignments [
+	"Relation named: #assignments type: #AlcixAssignment opposite: #invocable"
 
 	<generated>
 	<derived>
-	^ incomingInvocations
+	^ assignments
 ]
 
 { #category : #accessing }
-AlcixInvocable >> incomingInvocations: anObject [
+AlcixInvocable >> assignments: anObject [
 
 	<generated>
-	incomingInvocations value: anObject
+	assignments value: anObject
 ]
 
 { #category : #navigation }
-AlcixInvocable >> incomingInvocationsGroup [
+AlcixInvocable >> assignmentsGroup [
 	<generated>
-	<navigation: 'IncomingInvocations'>
-	^ MooseSpecializedGroup withAll: self incomingInvocations asSet
-]
-
-{ #category : #testing }
-AlcixInvocable >> isMethod [
-	^ self userType isAlcixClass 
+	<navigation: 'Assignments'>
+	^ MooseSpecializedGroup withAll: self assignments asSet
 ]
 
 { #category : #accessing }
@@ -140,34 +92,6 @@ AlcixInvocable >> localVariablesGroup [
 ]
 
 { #category : #accessing }
-AlcixInvocable >> name [ 
-	 ^ selector 
-]
-
-{ #category : #accessing }
-AlcixInvocable >> outgoingInvocations [
-	"Relation named: #outgoingInvocations type: #AlcixInvocation opposite: #sender"
-
-	<generated>
-	<derived>
-	^ outgoingInvocations
-]
-
-{ #category : #accessing }
-AlcixInvocable >> outgoingInvocations: anObject [
-
-	<generated>
-	outgoingInvocations value: anObject
-]
-
-{ #category : #navigation }
-AlcixInvocable >> outgoingInvocationsGroup [
-	<generated>
-	<navigation: 'OutgoingInvocations'>
-	^ MooseSpecializedGroup withAll: self outgoingInvocations asSet
-]
-
-{ #category : #accessing }
 AlcixInvocable >> parameters [
 	"Relation named: #parameters type: #AlcixParameter opposite: #invocable"
 
@@ -188,25 +112,6 @@ AlcixInvocable >> parametersGroup [
 	<generated>
 	<navigation: 'Parameters'>
 	^ MooseSpecializedGroup withAll: self parameters asSet
-]
-
-{ #category : #accessing }
-AlcixInvocable >> parent [
-
-	^ userType
-]
-
-{ #category : #accessing }
-AlcixInvocable >> printOn: aStream [
-
-	aStream
-		nextPutAll: (self class name copyFrom: 6 to: self class name size);
-		space;
-		nextPutAll: selector;
-		nextPutAll: '(#';
-		nextPutAll:
-			(parameters ifNil: [ '0' ] ifNotNil: [ parameters size asString ]);
-		nextPutAll: ')'
 ]
 
 { #category : #accessing }
@@ -258,13 +163,4 @@ AlcixInvocable >> visibility [
 AlcixInvocable >> visibility: anObject [
 	<generated>
 	visibility := anObject
-]
-
-{ #category : #accessing }
-AlcixInvocable >> weight [
-
-	^ parameters size 
-	  + (outgoingInvocations collect: [ :a | a weight ]) sum
-	  + (localVariables collect: [ :a | a weight ]) sum
-	  + (accesses collect: [ :a | a weight ]) sum
 ]

@@ -37,12 +37,6 @@ AlcixVariable >> instantiatesObjectOnDefinition: anObject [
 	instantiatesObjectOnDefinition := anObject
 ]
 
-{ #category : #testing }
-AlcixVariable >> isAstLoaded [
-
-	^ true
-]
-
 { #category : #accessing }
 AlcixVariable >> redim [
 
