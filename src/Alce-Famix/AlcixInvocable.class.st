@@ -63,6 +63,11 @@ AlcixInvocable >> localVariablesGroup [
 ]
 
 { #category : #accessing }
+AlcixInvocable >> name [
+	^ selector
+]
+
+{ #category : #accessing }
 AlcixInvocable >> parameters [
 	"Relation named: #parameters type: #AlcixParameter opposite: #invocable"
 

@@ -132,7 +132,11 @@ AlceJinDAMPhase2Loader >> visitAttribute: aJinDAMAttribute [
 { #category : #visiting }
 AlceJinDAMPhase2Loader >> visitAttributeAccessor: aJinDAMAttributeAccessor [
 
-	^ self visitFunction: aJinDAMAttributeAccessor
+	self visitFunction: aJinDAMAttributeAccessor.
+	aJinDAMAttributeAccessor attribute ifNotNil: [ 
+		(loader instanceFor: aJinDAMAttributeAccessor attribute) 
+			addAttributeAccessor:
+			(loader instanceFor: aJinDAMAttributeAccessor) ]
 ]
 
 { #category : #visiting }

@@ -94,8 +94,10 @@ AlcixAssignment >> readElements [
 
 { #category : #accessing }
 AlcixAssignment >> readElements: anObject [
+
 	<generated>
-	readElements := anObject
+	readElements := anObject.
+	anObject do: [ :o | self addOutgoingAccess: o ]
 ]
 
 { #category : #accessing }
@@ -108,6 +110,8 @@ AlcixAssignment >> writeElement [
 
 { #category : #accessing }
 AlcixAssignment >> writeElement: anObject [
+
 	<generated>
-	writeElement := anObject
+	writeElement := anObject.
+	anObject do: [ :o | self addOutgoingAccess: o ]
 ]

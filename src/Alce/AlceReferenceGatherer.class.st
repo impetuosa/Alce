@@ -139,6 +139,7 @@ AlceReferenceGatherer >> visitAccessRead: aJinDAMAccessRead [
 
 	accesses ifNotEmpty: [ 
 		access := loader createAccess.
+		access anchor: aJinDAMAccessRead anchor. 
 		access candidates: accesses.
 		references add: access ].
 	refs addAll: references.
@@ -161,6 +162,7 @@ AlceReferenceGatherer >> visitAccessWrite: aJinDAMAccessWrite [
 		write := loader createAssignment.
 		write writeElement: (self adaptToAccess: leftRefs).
 		write readElements: (self adaptToAccess: rightRefs).
+		write anchor: aJinDAMAccessWrite anchor. 
 		references add: write ]
 ]
 

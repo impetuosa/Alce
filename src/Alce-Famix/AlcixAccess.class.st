@@ -76,6 +76,12 @@ AlcixAccess >> candidates: anObject [
 ]
 
 { #category : #accessing }
+AlcixAccess >> name [
+
+	^ 'Access(' , (candidates ifEmpty: [ '' ] ifNotEmpty: [ candidates first name ]) , ')'
+]
+
+{ #category : #accessing }
 AlcixAccess >> withAccesses [
 	"Relation named: #withAccesses type: #AlcixWithAccesses opposite: #outgoingAccesses"
 
@@ -88,6 +94,7 @@ AlcixAccess >> withAccesses [
 AlcixAccess >> withAccesses: anObject [
 
 	<generated>
+	anObject ifNil: [ self halt ].
 	withAccesses := anObject
 ]
 

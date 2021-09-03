@@ -18,3 +18,9 @@ AlcixUnknownElement >> accept: aVisitor [
 	^ aVisitor visitUnknownElement: self
 
 ]
+
+{ #category : #visiting }
+AlcixUnknownElement >> name [
+
+	^ 'UNKNOWN'
+]

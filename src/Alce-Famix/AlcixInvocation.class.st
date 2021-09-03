@@ -18,3 +18,9 @@ AlcixInvocation >> accept: aVisitor [
 	^ aVisitor visitInvocation: self
 
 ]
+
+{ #category : #visiting }
+AlcixInvocation >> name [
+
+	^ 'Invocation(' , (candidates ifEmpty: [ '' ] ifNotEmpty: [ candidates first name ]) , ')'
+]

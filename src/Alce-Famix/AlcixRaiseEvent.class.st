@@ -18,3 +18,9 @@ AlcixRaiseEvent >> accept: aVisitor [
 	^ aVisitor visitRaiseEvent: self
 
 ]
+
+{ #category : #visiting }
+AlcixRaiseEvent >> name [
+
+	^ 'Raise(' , (candidates ifEmpty: [ '' ] ifNotEmpty: [ candidates first name ]) , ')'
+]

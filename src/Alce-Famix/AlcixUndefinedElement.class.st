@@ -20,3 +20,9 @@ AlcixUndefinedElement >> accept: aVisitor [
 	^ aVisitor visitUndefinedElement: self
 
 ]
+
+{ #category : #accessing }
+AlcixUndefinedElement >> name [
+
+	^ 'UNDEFINED'
+]

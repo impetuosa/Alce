@@ -26,6 +26,11 @@ AlcixConstant >> accept: aVisitor [
 
 ]
 
+{ #category : #adding }
+AlcixConstant >> addAttributeAccessor: anAlcixAttributeAccessor [ 
+
+]
+
 { #category : #accessing }
 AlcixConstant >> name [
 
