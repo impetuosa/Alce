@@ -2,12 +2,11 @@ Class {
 	#name : #AlcixInvocable,
 	#superclass : #AlcixWithAccesses,
 	#instVars : [
-		'#assignments => FMMany type: #AlcixAssignment opposite: #invocable',
-		'#localVariables => FMMany type: #AlcixLocalVariable opposite: #invocable',
-		'#parameters => FMMany type: #AlcixParameter opposite: #invocable',
 		'#selector => FMProperty',
-		'#userType => FMOne type: #AlcixUserType opposite: #invocables',
-		'#visibility => FMProperty'
+		'#parameters => FMMany type: #AlcixParameter opposite: #invocable',
+		'#localVariables => FMMany type: #AlcixLocalVariable opposite: #invocable',
+		'#assignments => FMMany type: #AlcixAssignment opposite: #invocable',
+		'#userType => FMOne type: #AlcixUserType opposite: #invocables'
 	],
 	#category : #'Alce-Famix-Entities'
 }
@@ -149,18 +148,4 @@ AlcixInvocable >> userTypeGroup [
 	<generated>
 	<navigation: 'UserType'>
 	^ MooseSpecializedGroup with: self userType
-]
-
-{ #category : #accessing }
-AlcixInvocable >> visibility [
-
-	<FMProperty: #visibility type: #String>
-	<generated>
-	^ visibility
-]
-
-{ #category : #accessing }
-AlcixInvocable >> visibility: anObject [
-	<generated>
-	visibility := anObject
 ]

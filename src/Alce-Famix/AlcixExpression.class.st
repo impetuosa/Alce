@@ -18,3 +18,14 @@ AlcixExpression >> accept: aVisitor [
 	^ aVisitor visitExpression: self
 
 ]
+
+{ #category : #accessing }
+AlcixExpression >> arguments [
+
+	^ {  }
+]
+
+{ #category : #accessing }
+AlcixExpression >> candidates [
+	 ^ outgoingAccesses flatCollect: [ : o | o candidates ]
+]

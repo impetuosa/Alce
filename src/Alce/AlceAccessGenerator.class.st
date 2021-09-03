@@ -47,7 +47,10 @@ Class {
 		'assignment',
 		'unknownElement',
 		'undefinedElement',
-		'accessProject'
+		'accessProject',
+		'literal',
+		'constant',
+		'tableField'
 	],
 	#category : #'Alce-Generator'
 }
@@ -81,9 +84,13 @@ AlceAccessGenerator >> defineClasses [
 
 	super defineClasses.
 
+	literal := builder newClassNamed: #Literal.
+	tableField := builder newClassNamed: #TableField.
 	access := builder newClassNamed: #Access.
 	accessRead := builder newClassNamed: #AccessRead.
 	assignment := builder newClassNamed: #Assignment.
+
+	constant := builder newClassNamed: #Constant.
 
 	withAccesses := builder newClassNamed: #WithAccesses.
 
@@ -91,8 +98,8 @@ AlceAccessGenerator >> defineClasses [
 	accessEntity := builder newClassNamed: #AccessEntity.
 	accessModule := builder newClassNamed: #AccessModule.
 	accessProject := builder newClassNamed: #AccessProject.
-	
-	
+
+
 	alias := builder newClassNamed: #Alias.
 	attribute := builder newClassNamed: #Attribute.
 	attributeAccessor := builder newClassNamed: #AttributeAccessor.
@@ -141,7 +148,7 @@ AlceAccessGenerator >> defineHierarchy [
 
 	super defineHierarchy.
 	access --|> accessible.
-
+	literal --|> accessible. 
 	undefinedElement --|> accessible.
 	undefinedElement --|> type.
 	unknownElement --|> undefinedElement.
@@ -158,14 +165,17 @@ AlceAccessGenerator >> defineHierarchy [
 
 	argument --|> withAccesses.
 	invocable --|> withAccesses.
+
 	expression --|> withAccesses.
+	
 
 	alias --|> typed.
 	alias --|> type.
 	alias --|> accessible.
 	
 	attribute --|> variable.
-
+	tableField --|> attribute. 
+	
 	class --|> module.
 	userType --|> type.
 	userType --|> accessible.
@@ -174,7 +184,7 @@ AlceAccessGenerator >> defineHierarchy [
 
 	datasource --|> class.
 	enum --|> type.
-	enum --|> accessEntity.
+	enum --|> accessible.
 	enumValue --|> accessible.
 	event --|> invocable.
 
@@ -204,20 +214,24 @@ AlceAccessGenerator >> defineHierarchy [
 	externalSubProcedure --|> subProcedure.
 	table --|> datasource.
 	query --|> datasource.
-	variable --|> typedEntity
+	variable --|> typedEntity.
+	constant --|> typed.
+	constant --|> withAccesses. 
+
 ]
 
 { #category : #definition }
 AlceAccessGenerator >> defineProperties [
 
-	
-	
-	
-	assignment withTesting .
+	literal property: #value type: #Object.
+	literal property: #kind type: #String.
+
+	tableField property: #size type: #Number. 
+	assignment withTesting.
 	assignment property: #isReturn type: #Boolean.
 	assignment property: #isNewObject type: #Boolean.
-
-
+	access property: #name type: #String.
+	accessible property: #visibility type: #String.
 	accessEntity property: #anchor type: #Object.
 	argument property: #value type: #Object.
 
@@ -227,7 +241,7 @@ AlceAccessGenerator >> defineProperties [
 	enumValue property: #value type: #Object.
 
 	attribute property: #isConstant type: #Boolean.
-	attribute property: #visibility type: #String.
+
 	attributeAccessor property: #kind type: #String.
 
 	typedEntity property: #name type: #String.
@@ -247,8 +261,11 @@ AlceAccessGenerator >> defineProperties [
 	function property: #typeAnchor type: #Object.
 	externalFunction property: #alias type: #String.
 	externalFunction property: #libraryName type: #String.
+	externalSubProcedure property: #alias type: #String.
+	externalSubProcedure property: #libraryName type: #String.
 
-	invocable property: #visibility type: #String.
+
+
 	localVariable property: #isConstant type: #Boolean.
 	variable property: #redim type: #Boolean.
 	module property: #astCannotLoad type: #Boolean.
@@ -260,8 +277,9 @@ AlceAccessGenerator >> defineRelations [
 
 	(access property: #candidates)
 	*-* (accessible property: #incomingAccesses).
-	access <>-* argument.
-
+	(access property: #arguments) <>-* (argument property: #activation).
+	
+	
 	(accessProject property: #modules)
 	<>-* (accessModule property: #project).
 	(accessModule property: #references) <>-* reference.
@@ -277,13 +295,13 @@ AlceAccessGenerator >> defineRelations [
 	(userType property: #members) <>-* attribute.
 	userType <>-* invocable.
 
-	(class property: #superclass) <>-* (class property: #subclass).
+	(class property: #superclass) *-<> (class property: #subclass).
 
 	module <>-* globalVariable.
 	attribute <>-* attributeAccessor.
 	query <>-* table.
 
-
+	enum <>-* enumValue. 
 	typed *- type
 ]
 

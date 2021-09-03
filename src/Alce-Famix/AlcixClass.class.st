@@ -2,8 +2,8 @@ Class {
 	#name : #AlcixClass,
 	#superclass : #AlcixModule,
 	#instVars : [
-		'#superclass => FMMany type: #AlcixClass opposite: #subclass',
-		'#subclass => FMOne type: #AlcixClass opposite: #superclass'
+		'#subclass => FMMany type: #AlcixClass opposite: #superclass',
+		'#superclass => FMOne type: #AlcixClass opposite: #subclass'
 	],
 	#category : #'Alce-Famix-Entities'
 }
@@ -24,9 +24,9 @@ AlcixClass >> accept: aVisitor [
 ]
 
 { #category : #adding }
-AlcixClass >> addSuperclass: anObject [
+AlcixClass >> addSubclass: anObject [
 	<generated>
-	^ self superclass add: anObject
+	^ self subclass add: anObject
 ]
 
 { #category : #accessing }
@@ -34,7 +34,7 @@ AlcixClass >> subclass [
 	"Relation named: #subclass type: #AlcixClass opposite: #superclass"
 
 	<generated>
-	<container>
+	<derived>
 	^ subclass
 ]
 
@@ -42,14 +42,14 @@ AlcixClass >> subclass [
 AlcixClass >> subclass: anObject [
 
 	<generated>
-	subclass := anObject
+	subclass value: anObject
 ]
 
 { #category : #navigation }
 AlcixClass >> subclassGroup [
 	<generated>
 	<navigation: 'Subclass'>
-	^ MooseSpecializedGroup with: self subclass
+	^ MooseSpecializedGroup withAll: self subclass asSet
 ]
 
 { #category : #accessing }
@@ -57,7 +57,7 @@ AlcixClass >> superclass [
 	"Relation named: #superclass type: #AlcixClass opposite: #subclass"
 
 	<generated>
-	<derived>
+	<container>
 	^ superclass
 ]
 
@@ -65,12 +65,12 @@ AlcixClass >> superclass [
 AlcixClass >> superclass: anObject [
 
 	<generated>
-	superclass value: anObject
+	superclass := anObject
 ]
 
 { #category : #navigation }
 AlcixClass >> superclassGroup [
 	<generated>
 	<navigation: 'Superclass'>
-	^ MooseSpecializedGroup withAll: self superclass asSet
+	^ MooseSpecializedGroup with: self superclass
 ]

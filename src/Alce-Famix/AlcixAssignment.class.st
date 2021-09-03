@@ -25,11 +25,6 @@ AlcixAssignment >> accept: aVisitor [
 ]
 
 { #category : #accessing }
-AlcixAssignment >> addOutgoingAccess: anObject [
-	self error: 'user readElement / writeElement'
-]
-
-{ #category : #accessing }
 AlcixAssignment >> invocable [
 	"Relation named: #invocable type: #AlcixInvocable opposite: #assignments"
 
@@ -88,22 +83,6 @@ AlcixAssignment >> isReturn: anObject [
 ]
 
 { #category : #accessing }
-AlcixAssignment >> readElement [ 
-	^ outgoingAccesses at: 2 
-]
-
-{ #category : #accessing }
-AlcixAssignment >> readElement: aReadElement [  
-	^ outgoingAccesses at: 2 put: aReadElement 
-]
-
-{ #category : #accessing }
-AlcixAssignment >> writeElement [  
-	^ outgoingAccesses at: 1
-]
-
-{ #category : #accessing }
-AlcixAssignment >> writeElement: anElement [
-
-	^ outgoingAccesses at: 1 put: anElement
+AlcixAssignment >> readElement: aReadElement [
+	
 ]

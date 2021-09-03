@@ -3,7 +3,7 @@ Class {
 	#superclass : #AlcixWithAccesses,
 	#instVars : [
 		'#value => FMProperty',
-		'#access => FMOne type: #AlcixAccess opposite: #arguments'
+		'#activation => FMOne type: #AlcixAccess opposite: #arguments'
 	],
 	#category : #'Alce-Famix-Entities'
 }
@@ -24,26 +24,26 @@ AlcixArgument >> accept: aVisitor [
 ]
 
 { #category : #accessing }
-AlcixArgument >> access [
-	"Relation named: #access type: #AlcixAccess opposite: #arguments"
+AlcixArgument >> activation [
+	"Relation named: #activation type: #AlcixAccess opposite: #arguments"
 
 	<generated>
 	<container>
-	^ access
+	^ activation
 ]
 
 { #category : #accessing }
-AlcixArgument >> access: anObject [
+AlcixArgument >> activation: anObject [
 
 	<generated>
-	access := anObject
+	activation := anObject
 ]
 
 { #category : #navigation }
-AlcixArgument >> accessGroup [
+AlcixArgument >> activationGroup [
 	<generated>
-	<navigation: 'Access'>
-	^ MooseSpecializedGroup with: self access
+	<navigation: 'Activation'>
+	^ MooseSpecializedGroup with: self activation
 ]
 
 { #category : #accessing }

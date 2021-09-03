@@ -2,6 +2,7 @@ Class {
 	#name : #AlcixEnumValue,
 	#superclass : #AlcixAccessible,
 	#instVars : [
+		'#enum => FMOne type: #AlcixEnum opposite: #enumValues',
 		'#name => FMProperty',
 		'#value => FMProperty'
 	],
@@ -21,6 +22,29 @@ AlcixEnumValue class >> annotation [
 AlcixEnumValue >> accept: aVisitor [
 	^ aVisitor visitEnumValue: self
 
+]
+
+{ #category : #accessing }
+AlcixEnumValue >> enum [
+	"Relation named: #enum type: #AlcixEnum opposite: #enumValues"
+
+	<generated>
+	<container>
+	^ enum
+]
+
+{ #category : #accessing }
+AlcixEnumValue >> enum: anObject [
+
+	<generated>
+	enum := anObject
+]
+
+{ #category : #navigation }
+AlcixEnumValue >> enumGroup [
+	<generated>
+	<navigation: 'Enum'>
+	^ MooseSpecializedGroup with: self enum
 ]
 
 { #category : #accessing }

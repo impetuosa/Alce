@@ -2,6 +2,7 @@ Class {
 	#name : #AlcixAccessible,
 	#superclass : #AlcixAccessEntity,
 	#instVars : [
+		'#visibility => FMProperty',
 		'#incomingAccesses => FMMany type: #AlcixAccess opposite: #candidates'
 	],
 	#category : #'Alce-Famix-Entities'
@@ -41,4 +42,18 @@ AlcixAccessible >> incomingAccesses: anObject [
 
 	<generated>
 	incomingAccesses value: anObject
+]
+
+{ #category : #accessing }
+AlcixAccessible >> visibility [
+
+	<FMProperty: #visibility type: #String>
+	<generated>
+	^ visibility
+]
+
+{ #category : #accessing }
+AlcixAccessible >> visibility: anObject [
+	<generated>
+	visibility := anObject
 ]
