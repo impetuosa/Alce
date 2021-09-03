@@ -3,10 +3,63 @@ Class {
 	#superclass : #Object,
 	#instVars : [
 		'loader',
-		'project'
+		'project',
+		'referenceResolver'
 	],
 	#category : #'Alce-Generator'
 }
+
+{ #category : #'as yet unclassified' }
+AlceJinDAMPhase2Loader >> createAccess [
+	^ loader createAccess 
+]
+
+{ #category : #'as yet unclassified' }
+AlceJinDAMPhase2Loader >> createAssignment [
+
+	^ loader createAssignment
+]
+
+{ #category : #'as yet unclassified' }
+AlceJinDAMPhase2Loader >> getAccessesAssignmentsAndInvocations: aJinDAMFunction [
+
+	^ self referenceResolver resolveElements:
+		  (aJinDAMFunction accesses ifNil: [ {  } ])
+]
+
+{ #category : #'as yet unclassified' }
+AlceJinDAMPhase2Loader >> getTypeFromReference: aJinDAMTypeReference [
+
+	^ self referenceResolver resolveType: aJinDAMTypeReference.
+	
+]
+
+{ #category : #accessing }
+AlceJinDAMPhase2Loader >> instanceFor: aJinDAMPrimitiveType [
+
+	^ loader instanceFor: aJinDAMPrimitiveType
+]
+
+{ #category : #'as yet unclassified' }
+AlceJinDAMPhase2Loader >> instancesFor: aCollection [
+
+	^ loader instancesFor: aCollection
+]
+
+{ #category : #'instance creation' }
+AlceJinDAMPhase2Loader >> newInvocation [
+
+	^ loader newInvocation
+]
+
+{ #category : #'as yet unclassified' }
+AlceJinDAMPhase2Loader >> referenceResolver [
+
+	^ referenceResolver ifNil: [ 
+		  referenceResolver := AlceReferenceGatherer new
+			                       loader: self;
+			                       yourself ]
+]
 
 { #category : #running }
 AlceJinDAMPhase2Loader >> runOn: anAlceJinDAMTwoPhaseLoader [
@@ -14,8 +67,19 @@ AlceJinDAMPhase2Loader >> runOn: anAlceJinDAMTwoPhaseLoader [
 	loader := anAlceJinDAMTwoPhaseLoader.
 	project := loader alce instantiate: AlcixAccessProject.
 	loader register: project for: loader dam.
-	loader dam references do: [ :e | e accept: self ].
+	"loader dam references do: [ :e | e accept: self ]."
 	loader dam allButReferences do: [ :e | e accept: self ]
+]
+
+{ #category : #'as yet unclassified' }
+AlceJinDAMPhase2Loader >> undefinedType [
+
+	^ loader undefinedType
+]
+
+{ #category : #'as yet unclassified' }
+AlceJinDAMPhase2Loader >> unknownElement [
+	 ^ loader unknownElement
 ]
 
 { #category : #visiting }
@@ -39,58 +103,30 @@ AlceJinDAMPhase2Loader >> visitAccessModule: aJinDAMAccessModule [
 { #category : #visiting }
 AlceJinDAMPhase2Loader >> visitAccessRead: aJinDAMAccessRead [
 
-	| alcix |
-	alcix := loader instanceFor: aJinDAMAccessRead.
-	alcix candidates:
-		(loader instanceFor: aJinDAMAccessRead readReference) candidates.
-	(loader instanceFor: aJinDAMAccessRead readReference) arguments do: [ 
-		:a | a ifNotNil: [ :a2 | a2 activation: alcix ] ]
+	
 ]
 
 { #category : #visiting }
 AlceJinDAMPhase2Loader >> visitAccessWrite: aJinDAMAccessWrite [ 
-	| alcix out | 
-	alcix := loader instanceFor: aJinDAMAccessWrite .
-	alcix addOutgoingAccess: (loader instanceFor: aJinDAMAccessWrite writeReference).
-	out :=  (loader instancesFor: aJinDAMAccessWrite readReferences).
-	alcix outgoingAccesses addAll: (out select: [ : o | o isKindOf: AlcixAccess  ]).
 
 ]
 
 { #category : #visiting }
 AlceJinDAMPhase2Loader >> visitAlias: aJinDAMAlias [
 
-	| alcix |
-	alcix := loader instanceFor: aJinDAMAlias.
-
-	(aJinDAMAlias typeReference isNil or: [ 
-		 aJinDAMAlias typeReference isUnknownReference ]) ifTrue: [ ^ self ].
-
-	alcix type:
-		(loader instanceFor: aJinDAMAlias typeReference) candidates first
+	self visitTypedEntity: aJinDAMAlias
 ]
 
 { #category : #visiting }
-AlceJinDAMPhase2Loader >> visitArgument: aJinDAMArgument [ 
-	 |arg |
-	arg := loader instanceFor: aJinDAMArgument .
-	arg outgoingAccesses:( (loader instancesFor: aJinDAMArgument reads) select: [: a | a isKindOf: AlcixAccess ])
+AlceJinDAMPhase2Loader >> visitArgument: aJinDAMArgument [
+
+	self visitWithAccesses: aJinDAMArgument
 ]
 
 { #category : #visiting }
 AlceJinDAMPhase2Loader >> visitAttribute: aJinDAMAttribute [
 
-	| alcix |
-	alcix := loader instanceFor: aJinDAMAttribute.
-
-	aJinDAMAttribute typeReference ifNotNil: [ 
-		aJinDAMAttribute typeReference candidate ifNil: [ ^ self ].
-		aJinDAMAttribute typeReference candidate isType
-			ifFalse: [  ]
-			ifTrue: [ 
-				alcix type:
-					(loader instanceFor: aJinDAMAttribute typeReference) candidates
-						first ] ]
+	self visitTypedEntity: aJinDAMAttribute
 ]
 
 { #category : #visiting }
@@ -102,15 +138,23 @@ AlceJinDAMPhase2Loader >> visitAttributeAccessor: aJinDAMAttributeAccessor [
 { #category : #visiting }
 AlceJinDAMPhase2Loader >> visitClass: aJinDAMClass [
 
-	| alcix invocables attributes types |
+	| alcix attrs sc |
 	alcix := loader instanceFor: aJinDAMClass.
 	aJinDAMClass superClassReference ifNotNil: [ 
-		alcix superclass:
-			(loader instanceFor: aJinDAMClass superClassReference) candidates
-				first ].
+		sc := self getTypeFromReference: aJinDAMClass superClassReference.
+
+		sc := (sc isKindOf: AlcixAlias)
+			      ifTrue: [ 
+				      sc type ifNil: [ 
+					      aJinDAMClass superClassReference candidate accept: self ].
+				      sc type ]
+			      ifFalse: [ sc ].
+		alcix superclass: sc ].
 
 	alcix invocables: (loader instancesFor: aJinDAMClass invocables).
-	alcix members: (loader instancesFor: aJinDAMClass attributes).
+	attrs := loader instancesFor: aJinDAMClass attributes.
+	alcix members: (attrs select: [ :a | a isKindOf: AlcixAttribute ]).
+	alcix constants: (attrs reject: [ :a | a isKindOf: AlcixAttribute ]).
 	alcix types: (loader instancesFor: aJinDAMClass types).
 	^ alcix
 ]
@@ -124,6 +168,11 @@ AlceJinDAMPhase2Loader >> visitCollection: aCollection [
 AlceJinDAMPhase2Loader >> visitConstant: aJinDAMConstant [
 
 	self visitAttribute: aJinDAMConstant
+]
+
+{ #category : #visiting }
+AlceJinDAMPhase2Loader >> visitDBType: aJinDAMDBType [ 
+
 ]
 
 { #category : #visiting }
@@ -158,11 +207,10 @@ AlceJinDAMPhase2Loader >> visitExpressionReference: aJinDAMExpressionReference [
 ]
 
 { #category : #visiting }
-AlceJinDAMPhase2Loader >> visitExternalFunction: aJinDAMExternalFunction [ 
-	| alcix | 
-	alcix := loader instanceFor: aJinDAMExternalFunction.
-	alcix parameters: (loader instancesFor: aJinDAMExternalFunction parameters ).
-	alcix type: (loader instanceFor: aJinDAMExternalFunction typeReference) candidates first 
+AlceJinDAMPhase2Loader >> visitExternalFunction: aJinDAMExternalFunction [
+
+	self visitTypedEntity: aJinDAMExternalFunction.
+	self visitWithParameters: aJinDAMExternalFunction
 ]
 
 { #category : #visiting }
@@ -182,26 +230,10 @@ AlceJinDAMPhase2Loader >> visitForm: aJinDAMForm [
 { #category : #visiting }
 AlceJinDAMPhase2Loader >> visitFunction: aJinDAMFunction [
 
-	| alcix accesses |
-	alcix := loader instanceFor: aJinDAMFunction.
-
-	aJinDAMFunction typeReference ifNil: [  ] ifNotNil: [ 
-		aJinDAMFunction typeReference candidate ifNotNil: [ 
-			aJinDAMFunction typeReference candidate isType
-				ifFalse: [ self halt ]
-				ifTrue: [ 
-					alcix type:
-						(loader instanceFor: aJinDAMFunction typeReference) candidates
-							first ] ] ].
-	alcix parameters: (loader instancesFor: aJinDAMFunction parameters).
-	alcix localVariables:
-		((loader instancesFor: aJinDAMFunction localVariables) select: [ :a | 
-			 a isKindOf: AlcixLocalVariable ]).
-	accesses := loader instancesFor: aJinDAMFunction accesses.
-	alcix assignments:
-		(accesses select: [ :a | a isKindOf: AlcixAssignment ]).
-	alcix outgoingAccesses addAll:
-		(accesses reject: [ :a | a isKindOf: AlcixAssignment ])
+	self visitTypedEntity: aJinDAMFunction.
+	self visitWithParameters: aJinDAMFunction.
+	self visitWithLocalVariables: aJinDAMFunction.
+	self visitWithAccesses: aJinDAMFunction
 ]
 
 { #category : #visiting }
@@ -216,9 +248,9 @@ AlceJinDAMPhase2Loader >> visitLibrary: aJinDAMLibrary [
 
 { #category : #visiting }
 AlceJinDAMPhase2Loader >> visitLibraryReference: aJinDAMLibraryReference [ 
-	| alcix |
+	"| alcix |
 	alcix := loader instanceFor: aJinDAMLibraryReference  .
-	alcix addCandidate: (loader instanceFor: aJinDAMLibraryReference candidate)
+	alcix addCandidate: (loader instanceFor: aJinDAMLibraryReference candidate)"
 ]
 
 { #category : #visiting }
@@ -229,22 +261,12 @@ AlceJinDAMPhase2Loader >> visitLiteralReference: aJinDAMLiteralReference [
 { #category : #visiting }
 AlceJinDAMPhase2Loader >> visitLocalVariable: aJinDAMLocalVariable [
 
-	| alcix |
-	alcix := loader instanceFor: aJinDAMLocalVariable.
-
-	aJinDAMLocalVariable typeReference ifNil: [  ] ifNotNil: [ 
-		aJinDAMLocalVariable typeReference candidate ifNotNil: [ 
-			aJinDAMLocalVariable typeReference candidate isType
-				ifFalse: [ self halt ]
-				ifTrue: [ 
-					alcix type:
-						(loader instanceFor: aJinDAMLocalVariable typeReference)
-							candidates first ] ] ]
+	self visitTypedEntity: aJinDAMLocalVariable
 ]
 
 { #category : #visiting }
 AlceJinDAMPhase2Loader >> visitMemberReference: aJinDAMMemberReference [
-
+"
 	| alcix |
 	alcix := loader instanceFor: aJinDAMMemberReference.
 	alcix arguments:
@@ -256,39 +278,48 @@ AlceJinDAMPhase2Loader >> visitMemberReference: aJinDAMMemberReference [
 					(loader instancesFor: aJinDAMMemberReference candidate) ]
 			ifFalse: [ 
 				alcix addCandidate:
-					(loader instanceFor: aJinDAMMemberReference candidate) ] ]
+					(loader instanceFor: aJinDAMMemberReference candidate) ] ]"
 ]
 
 { #category : #visiting }
 AlceJinDAMPhase2Loader >> visitModule: aJinDAMModule [
 
-	^ self visitClass: aJinDAMModule
+	| alcix attrs  |
+	alcix := loader instanceFor: aJinDAMModule.
+	
+	alcix invocables: (loader instancesFor: aJinDAMModule invocables).
+	
+	attrs := (loader instancesFor: aJinDAMModule attributes). 
+	alcix members:( attrs select: [ :a | a isKindOf: AlcixAttribute  ]).
+	alcix constants: ( attrs reject: [ :a | a isKindOf: AlcixAttribute  ]).
+	alcix types: (loader instancesFor: aJinDAMModule types).
+	^ alcix
 ]
 
 { #category : #visiting }
 AlceJinDAMPhase2Loader >> visitMultipleTypeReference: aJinDAMMultipleTypeReference [
-
+"
 	| alcix |
 	alcix := loader instanceFor: aJinDAMMultipleTypeReference.
 	alcix candidates:
-		(loader instancesFor: aJinDAMMultipleTypeReference candidates)
+		(loader instancesFor: aJinDAMMultipleTypeReference candidates)"
 ]
 
 { #category : #visiting }
 AlceJinDAMPhase2Loader >> visitParameter: aJinDAMParameter [
 
-	| alcix |
-	alcix := loader instanceFor: aJinDAMParameter.
-	aJinDAMParameter typeReference ifNil: [ ^ self ].
-	aJinDAMParameter typeReference isUnknownReference ifFalse: [ 
-		alcix type:
-			(loader instanceFor: aJinDAMParameter typeReference) candidates
-				first ]
+	self visitTypedEntity: aJinDAMParameter
 ]
 
 { #category : #visiting }
 AlceJinDAMPhase2Loader >> visitPrimitiveType: aJinDAMPrimitiveType [ 
 
+]
+
+{ #category : #visiting }
+AlceJinDAMPhase2Loader >> visitQuery: aJinDAMQuery [
+
+	self visitTable: aJinDAMQuery
 ]
 
 { #category : #visiting }
@@ -306,18 +337,9 @@ AlceJinDAMPhase2Loader >> visitStructure: aJinDAMStructure [
 { #category : #visiting }
 AlceJinDAMPhase2Loader >> visitSubProcedure: aJinDAMSubProcedure [
 
-	| alcix accesses |
-	alcix := loader instanceFor: aJinDAMSubProcedure.
-	alcix parameters:
-		(loader instancesFor: aJinDAMSubProcedure parameters).
-	alcix localVariables:
-		((loader instancesFor: aJinDAMSubProcedure localVariables) select: [ 
-			 :a | a isKindOf: AlcixLocalVariable ]).
-	accesses := loader instancesFor: aJinDAMSubProcedure accesses.
-	alcix assignments:
-		(accesses select: [ :a | a isKindOf: AlcixAssignment ]).
-	alcix outgoingAccesses addAll:
-		(accesses reject: [ :a | a isKindOf: AlcixAssignment ])
+	self visitWithParameters: aJinDAMSubProcedure.
+	self visitWithLocalVariables: aJinDAMSubProcedure.
+	self visitWithAccesses: aJinDAMSubProcedure
 ]
 
 { #category : #visiting }
@@ -327,9 +349,15 @@ AlceJinDAMPhase2Loader >> visitTable: aJinDAMTable [
 ]
 
 { #category : #visiting }
+AlceJinDAMPhase2Loader >> visitTableField: aJinDAMTableField [
+
+	self visitTypedEntity: aJinDAMTableField
+]
+
+{ #category : #visiting }
 AlceJinDAMPhase2Loader >> visitTypeMemberReference: aJinDAMTypeMemberReference [
 
-	| alcix |
+	"| alcix |
 	alcix := loader instanceFor: aJinDAMTypeMemberReference.
 
 	aJinDAMTypeMemberReference candidate ifNotNil: [ 
@@ -338,16 +366,29 @@ AlceJinDAMPhase2Loader >> visitTypeMemberReference: aJinDAMTypeMemberReference [
 
 	alcix arguments:
 		(loader instancesFor: aJinDAMTypeMemberReference arguments).
-		
+		"
 ]
 
 { #category : #visiting }
 AlceJinDAMPhase2Loader >> visitTypeReference: aJinDAMTypeReference [
-
+"
 	| alcix |
 	alcix := loader instanceFor: aJinDAMTypeReference.
 	alcix addCandidate:
-		(loader instanceFor: aJinDAMTypeReference candidate)
+		(loader instanceFor: aJinDAMTypeReference candidate)"
+]
+
+{ #category : #visiting }
+AlceJinDAMPhase2Loader >> visitTypedEntity: aJinDAMAlias [
+
+	| alcix type |
+	alcix := loader instanceFor: aJinDAMAlias.
+
+
+	type := self getTypeFromReference: aJinDAMAlias typeReference.
+
+
+	alcix type: type
 ]
 
 { #category : #visiting }
@@ -356,4 +397,43 @@ AlceJinDAMPhase2Loader >> visitUserType: aJinDAMUserType [
 	| alcix |
 	alcix := loader instanceFor: aJinDAMUserType.
 	alcix members: (loader instancesFor: aJinDAMUserType attributes)
+]
+
+{ #category : #visiting }
+AlceJinDAMPhase2Loader >> visitWithAccesses: aJinDAMFunction [
+
+	| accessesAndAssignments alcix |
+	alcix := loader instanceFor: aJinDAMFunction.
+	accessesAndAssignments := self getAccessesAssignmentsAndInvocations:
+		                          aJinDAMFunction.
+	alcix outgoingAccesses:
+		(accessesAndAssignments reject: [ :a | a isKindOf: AlcixAssignment ]).
+
+	accessesAndAssignments := accessesAndAssignments select: [ :a | 
+		                          a isKindOf: AlcixAssignment ].
+	accessesAndAssignments ifNotEmpty: [ 
+		alcix assignments: accessesAndAssignments ].
+	alcix
+]
+
+{ #category : #visiting }
+AlceJinDAMPhase2Loader >> visitWithLocalVariables: aJinDAMFunction [
+
+	| alcix varsAndConsts |
+	alcix := loader instanceFor: aJinDAMFunction.
+	varsAndConsts := loader instancesFor: aJinDAMFunction localVariables.
+
+	alcix localVariables:
+		(varsAndConsts select: [ :a | a isKindOf: AlcixLocalVariable ]).
+	alcix constants:
+		(varsAndConsts reject: [ :a | a isKindOf: AlcixLocalVariable ])
+]
+
+{ #category : #visiting }
+AlceJinDAMPhase2Loader >> visitWithParameters: aJinDAMFunction [
+
+	| alcix parameters |
+	alcix := loader instanceFor: aJinDAMFunction.
+
+	alcix parameters: (loader instancesFor: aJinDAMFunction parameters)
 ]

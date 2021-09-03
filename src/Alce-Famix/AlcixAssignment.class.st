@@ -2,9 +2,11 @@ Class {
 	#name : #AlcixAssignment,
 	#superclass : #AlcixWithAccesses,
 	#instVars : [
-		'#isReturn => FMProperty',
 		'#isNewObject => FMProperty',
-		'#invocable => FMOne type: #AlcixInvocable opposite: #assignments'
+		'#isReturn => FMProperty',
+		'#owner => FMOne type: #AlcixWithAccesses opposite: #assignments',
+		'#readElements => FMProperty',
+		'#writeElement => FMProperty'
 	],
 	#category : #'Alce-Famix-Entities'
 }
@@ -22,29 +24,6 @@ AlcixAssignment class >> annotation [
 AlcixAssignment >> accept: aVisitor [
 	^ aVisitor visitAssignment: self
 
-]
-
-{ #category : #accessing }
-AlcixAssignment >> invocable [
-	"Relation named: #invocable type: #AlcixInvocable opposite: #assignments"
-
-	<generated>
-	<container>
-	^ invocable
-]
-
-{ #category : #accessing }
-AlcixAssignment >> invocable: anObject [
-
-	<generated>
-	invocable := anObject
-]
-
-{ #category : #navigation }
-AlcixAssignment >> invocableGroup [
-	<generated>
-	<navigation: 'Invocable'>
-	^ MooseSpecializedGroup with: self invocable
 ]
 
 { #category : #testing }
@@ -83,6 +62,52 @@ AlcixAssignment >> isReturn: anObject [
 ]
 
 { #category : #accessing }
-AlcixAssignment >> readElement: aReadElement [
-	
+AlcixAssignment >> owner [
+	"Relation named: #owner type: #AlcixWithAccesses opposite: #assignments"
+
+	<generated>
+	<container>
+	^ owner
+]
+
+{ #category : #accessing }
+AlcixAssignment >> owner: anObject [
+
+	<generated>
+	owner := anObject
+]
+
+{ #category : #navigation }
+AlcixAssignment >> ownerGroup [
+	<generated>
+	<navigation: 'Owner'>
+	^ MooseSpecializedGroup with: self owner
+]
+
+{ #category : #accessing }
+AlcixAssignment >> readElements [
+
+	<FMProperty: #readElements type: #Object>
+	<generated>
+	^ readElements
+]
+
+{ #category : #accessing }
+AlcixAssignment >> readElements: anObject [
+	<generated>
+	readElements := anObject
+]
+
+{ #category : #accessing }
+AlcixAssignment >> writeElement [
+
+	<FMProperty: #writeElement type: #Object>
+	<generated>
+	^ writeElement
+]
+
+{ #category : #accessing }
+AlcixAssignment >> writeElement: anObject [
+	<generated>
+	writeElement := anObject
 ]

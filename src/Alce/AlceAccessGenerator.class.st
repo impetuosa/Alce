@@ -50,7 +50,8 @@ Class {
 		'accessProject',
 		'literal',
 		'constant',
-		'tableField'
+		'tableField',
+		'withConstants'
 	],
 	#category : #'Alce-Generator'
 }
@@ -165,6 +166,7 @@ AlceAccessGenerator >> defineHierarchy [
 
 	argument --|> withAccesses.
 	invocable --|> withAccesses.
+	invocable --|> withConstants. 
 
 	expression --|> withAccesses.
 	
@@ -179,6 +181,7 @@ AlceAccessGenerator >> defineHierarchy [
 	class --|> module.
 	userType --|> type.
 	userType --|> accessible.
+	userType --|> withConstants. 
 	containerType --|> userType.
 	databaseType --|> primitiveType.
 
@@ -215,6 +218,7 @@ AlceAccessGenerator >> defineHierarchy [
 	table --|> datasource.
 	query --|> datasource.
 	variable --|> typedEntity.
+	
 	constant --|> typed.
 	constant --|> withAccesses. 
 
@@ -226,12 +230,18 @@ AlceAccessGenerator >> defineProperties [
 	literal property: #value type: #Object.
 	literal property: #kind type: #String.
 
-	tableField property: #size type: #Number. 
+	tableField property: #size type: #Number.
 	assignment withTesting.
 	assignment property: #isReturn type: #Boolean.
 	assignment property: #isNewObject type: #Boolean.
-	access property: #name type: #String.
+	
+	
+	assignment property: #readElements type: #Object.
+	assignment property: #writeElement type: #Object.
+	
 	accessible property: #visibility type: #String.
+	
+	
 	accessEntity property: #anchor type: #Object.
 	argument property: #value type: #Object.
 
@@ -239,8 +249,6 @@ AlceAccessGenerator >> defineProperties [
 
 	enumValue property: #name type: #String.
 	enumValue property: #value type: #Object.
-
-	attribute property: #isConstant type: #Boolean.
 
 	attributeAccessor property: #kind type: #String.
 
@@ -263,10 +271,10 @@ AlceAccessGenerator >> defineProperties [
 	externalFunction property: #libraryName type: #String.
 	externalSubProcedure property: #alias type: #String.
 	externalSubProcedure property: #libraryName type: #String.
+	
+	constant property: #value type: #Object.
+	constant property: #name type: #String.
 
-
-
-	localVariable property: #isConstant type: #Boolean.
 	variable property: #redim type: #Boolean.
 	module property: #astCannotLoad type: #Boolean.
 	module property: #ast type: #Object
@@ -278,17 +286,20 @@ AlceAccessGenerator >> defineRelations [
 	(access property: #candidates)
 	*-* (accessible property: #incomingAccesses).
 	(access property: #arguments) <>-* (argument property: #activation).
-	
-	
+
+
 	(accessProject property: #modules)
 	<>-* (accessModule property: #project).
 	(accessModule property: #references) <>-* reference.
 
 	(withAccesses property: #outgoingAccesses) <>-* access.
-
+	(withAccesses property: #assignments)
+	<>-* (assignment property: #owner).
 	invocable <>-* parameter.
 	invocable <>-* localVariable.
-	invocable <>-* assignment.
+
+
+	(withConstants property: #constants) <>-* (constant property: #owner).
 
 	containerType <>-* type.
 
@@ -301,7 +312,7 @@ AlceAccessGenerator >> defineRelations [
 	attribute <>-* attributeAccessor.
 	query <>-* table.
 
-	enum <>-* enumValue. 
+	enum <>-* enumValue.
 	typed *- type
 ]
 
@@ -310,4 +321,5 @@ AlceAccessGenerator >> defineTraits [
 	super defineTraits.
 	type := builder newTraitNamed: #TType.
 	typed := builder newTraitNamed: #TTyped.
+	withConstants := builder newTraitNamed: #TWithConstants. 
 ]

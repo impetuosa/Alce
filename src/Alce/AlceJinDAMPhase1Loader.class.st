@@ -44,18 +44,18 @@ AlceJinDAMPhase1Loader >> visitAccessModule: aJinDAMAccessModule [
 { #category : #visiting }
 AlceJinDAMPhase1Loader >> visitAccessRead: aJinDAMObject [
 
-	^ self instantiate: AlcixAccess for: aJinDAMObject with: [ :obj | ]
+	"^ self instantiate: AlcixAccess for: aJinDAMObject with: [ :obj | ]"
 ]
 
 { #category : #visiting }
 AlceJinDAMPhase1Loader >> visitAccessWrite: aJinDAMObject [
 
-	^ self
+	"^ self
 		  instantiate: AlcixAssignment
 		  for: aJinDAMObject
 		  with: [ :obj | 
 			  obj isReturn: aJinDAMObject isReturn.
-			  obj isNewObject: aJinDAMObject isNewObject ]
+			  obj isNewObject: aJinDAMObject isNewObject ]"
 ]
 
 { #category : #visiting }
@@ -105,11 +105,9 @@ AlceJinDAMPhase1Loader >> visitClass: aJinDAMObject [
 AlceJinDAMPhase1Loader >> visitConstant: aJinDAMObject [
 
 	^ self
-		  instantiate: AlcixAttribute
+		  instantiate: AlcixConstant
 		  for: aJinDAMObject
-		  with: [ :obj | 
-			  obj name: aJinDAMObject name.
-			  obj isConstant: true ]
+		  with: [ :obj | obj name: aJinDAMObject name ]
 ]
 
 { #category : #visiting }
@@ -150,10 +148,10 @@ AlceJinDAMPhase1Loader >> visitEvent: aJinDAMObject [
 { #category : #visiting }
 AlceJinDAMPhase1Loader >> visitExpressionReference: aJinDAMObject [
 
-	^ self
+	"^ self
 		  instantiate: AlcixExpression
 		  for: aJinDAMObject
-		  with: [ :obj |  ]
+		  with: [ :obj |  ]"
 ]
 
 { #category : #visiting }
@@ -218,10 +216,10 @@ AlceJinDAMPhase1Loader >> visitLibrary: aJinDAMObject [
 { #category : #visiting }
 AlceJinDAMPhase1Loader >> visitLibraryReference: aJinDAMObject [
 
-	^ self
+"	^ self
 		  instantiate: AlcixAccess
 		  for: aJinDAMObject
-		  with: [ :obj | obj name: aJinDAMObject name ]
+		  with: [ :obj | obj name: aJinDAMObject name ]"
 ]
 
 { #category : #visiting }
@@ -235,16 +233,16 @@ AlceJinDAMPhase1Loader >> visitLiteralReference: aJinDAMObject [
 { #category : #visiting }
 AlceJinDAMPhase1Loader >> visitLocalVariable: aJinDAMObject [
 
-	^ self instantiate: AlcixLocalVariable for: aJinDAMObject with: [ :obj |
-		obj name: aJinDAMObject name .
-		obj isConstant: aJinDAMObject isConstant. 
-		 ]
+	^ self
+		  instantiate: AlcixLocalVariable
+		  for: aJinDAMObject
+		  with: [ :obj | obj name: aJinDAMObject name ]
 ]
 
 { #category : #visiting }
 AlceJinDAMPhase1Loader >> visitMemberReference: aJinDAMObject [
 
-	^ self instantiate: AlcixAccess for: aJinDAMObject with: [ :obj | obj name: aJinDAMObject name ]
+	"^ self instantiate: AlcixAccess for: aJinDAMObject with: [ :obj | obj name: aJinDAMObject name ]"
 ]
 
 { #category : #visiting }
@@ -259,10 +257,10 @@ AlceJinDAMPhase1Loader >> visitModule: aJinDAMObject [
 { #category : #visiting }
 AlceJinDAMPhase1Loader >> visitMultipleTypeReference: aJinDAMObject [
 
-	^ self
+"	^ self
 		  instantiate: AlcixAccess
 		  for: aJinDAMObject
-		  with: [ :obj | obj name: aJinDAMObject name ]
+		  with: [ :obj | obj name: aJinDAMObject name ]"
 ]
 
 { #category : #visiting }
@@ -348,21 +346,21 @@ AlceJinDAMPhase1Loader >> visitTableField: aJinDAMObject [
 
 { #category : #visiting }
 AlceJinDAMPhase1Loader >> visitTypeMemberReference: aJinDAMObject [
-
+"
 	^ self instantiate: AlcixAccess for: aJinDAMObject with: [ :obj | 
 		  aJinDAMObject name isString ifTrue: [ 
-			  obj name: aJinDAMObject name ] ]
+			  obj name: aJinDAMObject name ] ]"
 ]
 
 { #category : #visiting }
 AlceJinDAMPhase1Loader >> visitTypeReference: aJinDAMObject [
 
-	^ self
+	"^ self
 		  instantiate: AlcixAccess 
 		  for: aJinDAMObject
 		  with: [ : obj | 
 			obj name: aJinDAMObject name 
-		]
+		]"
 ]
 
 { #category : #visiting }

@@ -14,6 +14,17 @@ AlceJinDAMTwoPhaseLoader >> alce [
 	^ alce
 ]
 
+{ #category : #'as yet unclassified' }
+AlceJinDAMTwoPhaseLoader >> createAccess [
+	 ^ alce instantiate: AlcixAccess 
+]
+
+{ #category : #'as yet unclassified' }
+AlceJinDAMTwoPhaseLoader >> createAssignment [
+
+	^ alce instantiate: AlcixAssignment
+]
+
 { #category : #accessing }
 AlceJinDAMTwoPhaseLoader >> dam [
 	^ dam
@@ -48,9 +59,27 @@ AlceJinDAMTwoPhaseLoader >> load: aDamModel into: anAlceModel [
 	^ anAlceModel
 ]
 
+{ #category : #'instance creation' }
+AlceJinDAMTwoPhaseLoader >> newInvocation [
+
+	^ alce instantiate: AlcixInvocation
+]
+
 { #category : #'as yet unclassified' }
 AlceJinDAMTwoPhaseLoader >> register: anAlcixAccessModule for: aJinDAMAccessModule [
 
 	self assert: (instances includesKey: aJinDAMAccessModule) not.
 	instances at: aJinDAMAccessModule put: anAlcixAccessModule
+]
+
+{ #category : #'as yet unclassified' }
+AlceJinDAMTwoPhaseLoader >> undefinedType [
+
+	^ alce instantiate: AlcixUndefinedElement
+]
+
+{ #category : #'as yet unclassified' }
+AlceJinDAMTwoPhaseLoader >> unknownElement [
+
+	^ alce instantiate: AlcixUnknownElement
 ]

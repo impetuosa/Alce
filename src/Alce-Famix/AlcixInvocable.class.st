@@ -1,11 +1,12 @@
 Class {
 	#name : #AlcixInvocable,
 	#superclass : #AlcixWithAccesses,
+	#traits : 'AlcixTWithConstants',
+	#classTraits : 'AlcixTWithConstants classTrait',
 	#instVars : [
-		'#selector => FMProperty',
-		'#parameters => FMMany type: #AlcixParameter opposite: #invocable',
 		'#localVariables => FMMany type: #AlcixLocalVariable opposite: #invocable',
-		'#assignments => FMMany type: #AlcixAssignment opposite: #invocable',
+		'#parameters => FMMany type: #AlcixParameter opposite: #invocable',
+		'#selector => FMProperty',
 		'#userType => FMOne type: #AlcixUserType opposite: #invocables'
 	],
 	#category : #'Alce-Famix-Entities'
@@ -27,12 +28,6 @@ AlcixInvocable >> accept: aVisitor [
 ]
 
 { #category : #adding }
-AlcixInvocable >> addAssignment: anObject [
-	<generated>
-	^ self assignments add: anObject
-]
-
-{ #category : #adding }
 AlcixInvocable >> addLocalVariable: anObject [
 	<generated>
 	^ self localVariables add: anObject
@@ -42,29 +37,6 @@ AlcixInvocable >> addLocalVariable: anObject [
 AlcixInvocable >> addParameter: anObject [
 	<generated>
 	^ self parameters add: anObject
-]
-
-{ #category : #accessing }
-AlcixInvocable >> assignments [
-	"Relation named: #assignments type: #AlcixAssignment opposite: #invocable"
-
-	<generated>
-	<derived>
-	^ assignments
-]
-
-{ #category : #accessing }
-AlcixInvocable >> assignments: anObject [
-
-	<generated>
-	assignments value: anObject
-]
-
-{ #category : #navigation }
-AlcixInvocable >> assignmentsGroup [
-	<generated>
-	<navigation: 'Assignments'>
-	^ MooseSpecializedGroup withAll: self assignments asSet
 ]
 
 { #category : #accessing }

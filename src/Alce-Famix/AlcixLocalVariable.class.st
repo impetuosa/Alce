@@ -2,7 +2,6 @@ Class {
 	#name : #AlcixLocalVariable,
 	#superclass : #AlcixVariable,
 	#instVars : [
-		'#isConstant => FMProperty',
 		'#invocable => FMOne type: #AlcixInvocable opposite: #localVariables'
 	],
 	#category : #'Alce-Famix-Entities'
@@ -44,18 +43,4 @@ AlcixLocalVariable >> invocableGroup [
 	<generated>
 	<navigation: 'Invocable'>
 	^ MooseSpecializedGroup with: self invocable
-]
-
-{ #category : #accessing }
-AlcixLocalVariable >> isConstant [
-
-	<FMProperty: #isConstant type: #Boolean>
-	<generated>
-	^ isConstant
-]
-
-{ #category : #accessing }
-AlcixLocalVariable >> isConstant: anObject [
-	<generated>
-	isConstant := anObject
 ]

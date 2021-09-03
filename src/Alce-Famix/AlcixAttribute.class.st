@@ -2,9 +2,8 @@ Class {
 	#name : #AlcixAttribute,
 	#superclass : #AlcixVariable,
 	#instVars : [
-		'#isConstant => FMProperty',
-		'#userType => FMOne type: #AlcixUserType opposite: #members',
-		'#attributeAccessors => FMMany type: #AlcixAttributeAccessor opposite: #attribute'
+		'#attributeAccessors => FMMany type: #AlcixAttributeAccessor opposite: #attribute',
+		'#userType => FMOne type: #AlcixUserType opposite: #members'
 	],
 	#category : #'Alce-Famix-Entities'
 }
@@ -51,20 +50,6 @@ AlcixAttribute >> attributeAccessorsGroup [
 	<generated>
 	<navigation: 'AttributeAccessors'>
 	^ MooseSpecializedGroup withAll: self attributeAccessors asSet
-]
-
-{ #category : #accessing }
-AlcixAttribute >> isConstant [
-
-	<FMProperty: #isConstant type: #Boolean>
-	<generated>
-	^ isConstant
-]
-
-{ #category : #accessing }
-AlcixAttribute >> isConstant: anObject [
-	<generated>
-	isConstant := anObject
 ]
 
 { #category : #accessing }

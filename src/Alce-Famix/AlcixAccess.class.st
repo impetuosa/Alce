@@ -2,9 +2,8 @@ Class {
 	#name : #AlcixAccess,
 	#superclass : #AlcixAccessible,
 	#instVars : [
-		'#name => FMProperty',
-		'#candidates => FMMany type: #AlcixAccessible opposite: #incomingAccesses',
 		'#arguments => FMMany type: #AlcixArgument opposite: #activation',
+		'#candidates => FMMany type: #AlcixAccessible opposite: #incomingAccesses',
 		'#withAccesses => FMOne type: #AlcixWithAccesses opposite: #outgoingAccesses'
 	],
 	#category : #'Alce-Famix-Entities'
@@ -74,20 +73,6 @@ AlcixAccess >> candidates: anObject [
 
 	<generated>
 	candidates value: anObject
-]
-
-{ #category : #accessing }
-AlcixAccess >> name [
-
-	<FMProperty: #name type: #String>
-	<generated>
-	^ name
-]
-
-{ #category : #accessing }
-AlcixAccess >> name: anObject [
-	<generated>
-	name := anObject
 ]
 
 { #category : #accessing }

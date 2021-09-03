@@ -2,6 +2,7 @@ Class {
 	#name : #AlcixWithAccesses,
 	#superclass : #AlcixAccessible,
 	#instVars : [
+		'#assignments => FMMany type: #AlcixAssignment opposite: #owner',
 		'#outgoingAccesses => FMMany type: #AlcixAccess opposite: #withAccesses'
 	],
 	#category : #'Alce-Famix-Entities'
@@ -23,9 +24,38 @@ AlcixWithAccesses >> accept: aVisitor [
 ]
 
 { #category : #adding }
+AlcixWithAccesses >> addAssignment: anObject [
+	<generated>
+	^ self assignments add: anObject
+]
+
+{ #category : #adding }
 AlcixWithAccesses >> addOutgoingAccess: anObject [
 	<generated>
 	^ self outgoingAccesses add: anObject
+]
+
+{ #category : #accessing }
+AlcixWithAccesses >> assignments [
+	"Relation named: #assignments type: #AlcixAssignment opposite: #owner"
+
+	<generated>
+	<derived>
+	^ assignments
+]
+
+{ #category : #accessing }
+AlcixWithAccesses >> assignments: anObject [
+
+	<generated>
+	assignments value: anObject
+]
+
+{ #category : #navigation }
+AlcixWithAccesses >> assignmentsGroup [
+	<generated>
+	<navigation: 'Assignments'>
+	^ MooseSpecializedGroup withAll: self assignments asSet
 ]
 
 { #category : #accessing }

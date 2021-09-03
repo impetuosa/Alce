@@ -1,11 +1,11 @@
 Class {
 	#name : #AlcixUserType,
 	#superclass : #AlcixAccessible,
-	#traits : 'AlcixTType',
-	#classTraits : 'AlcixTType classTrait',
+	#traits : 'AlcixTType + AlcixTWithConstants',
+	#classTraits : 'AlcixTType classTrait + AlcixTWithConstants classTrait',
 	#instVars : [
-		'#members => FMMany type: #AlcixAttribute opposite: #userType',
-		'#invocables => FMMany type: #AlcixInvocable opposite: #userType'
+		'#invocables => FMMany type: #AlcixInvocable opposite: #userType',
+		'#members => FMMany type: #AlcixAttribute opposite: #userType'
 	],
 	#category : #'Alce-Famix-Entities'
 }
