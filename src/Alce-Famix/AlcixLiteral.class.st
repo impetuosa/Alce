@@ -49,6 +49,12 @@ AlcixLiteral >> kind: anObject [
 ]
 
 { #category : #accessing }
+AlcixLiteral >> name [
+
+	^ 'Lit(' , value asString , ')'
+]
+
+{ #category : #accessing }
 AlcixLiteral >> value [
 
 	<FMProperty: #value type: #Object>

@@ -1,6 +1,12 @@
 Class {
 	#name : #AlcixEntity,
 	#superclass : #MooseEntity,
+	#instVars : [
+		'color'
+	],
+	#classInstVars : [
+		'color'
+	],
 	#category : #'Alce-Famix-Entities'
 }
 
@@ -14,10 +20,37 @@ AlcixEntity class >> annotation [
 ]
 
 { #category : #meta }
+AlcixEntity class >> entryName [
+
+	^ self name copyReplaceAll: 'Alcix' with: ''
+]
+
+{ #category : #meta }
 AlcixEntity class >> metamodel [
 
 	<generated>
 	^ AlcixModel metamodel
+]
+
+{ #category : #testing }
+AlcixEntity >> color [ 
+	^ color ifNil: [ Color transparent  ]
+]
+
+{ #category : #testing }
+AlcixEntity >> color: aColor [
+
+	color := aColor
+]
+
+{ #category : #testing }
+AlcixEntity >> entryName [
+	^ self name 
+]
+
+{ #category : #testing }
+AlcixEntity >> isAccessModule [
+	^ false 
 ]
 
 { #category : #testing }

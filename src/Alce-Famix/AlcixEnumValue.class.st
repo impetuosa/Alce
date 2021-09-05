@@ -61,6 +61,11 @@ AlcixEnumValue >> name: anObject [
 	name := anObject
 ]
 
+{ #category : #'as yet unclassified' }
+AlcixEnumValue >> threeWayCompareTo: anAlcixEnumValue [ 
+	^ name threeWayCompareTo: anAlcixEnumValue name 
+]
+
 { #category : #accessing }
 AlcixEnumValue >> value [
 

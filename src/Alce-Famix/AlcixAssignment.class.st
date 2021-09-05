@@ -101,6 +101,12 @@ AlcixAssignment >> readElements: anObject [
 ]
 
 { #category : #accessing }
+AlcixAssignment >> readElementsCandidates [
+
+	^ self readElements flatCollect: [ :a | a candidates  ]
+]
+
+{ #category : #accessing }
 AlcixAssignment >> writeElement [
 
 	<FMProperty: #writeElement type: #Object>
@@ -114,4 +120,10 @@ AlcixAssignment >> writeElement: anObject [
 	<generated>
 	writeElement := anObject.
 	anObject do: [ :o | self addOutgoingAccess: o ]
+]
+
+{ #category : #accessing }
+AlcixAssignment >> writeElementCandidates [
+
+	^ self writeElement flatCollect: [ :a | a candidates  ]
 ]

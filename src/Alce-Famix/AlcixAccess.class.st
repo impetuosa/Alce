@@ -60,6 +60,11 @@ AlcixAccess >> argumentsGroup [
 ]
 
 { #category : #accessing }
+AlcixAccess >> candidate [
+	^ self candidates first 
+]
+
+{ #category : #accessing }
 AlcixAccess >> candidates [
 	"Relation named: #candidates type: #AlcixAccessible opposite: #incomingAccesses"
 

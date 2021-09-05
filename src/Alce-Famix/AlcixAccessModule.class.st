@@ -29,6 +29,11 @@ AlcixAccessModule >> addReference: anObject [
 	^ self references add: anObject
 ]
 
+{ #category : #navigation }
+AlcixAccessModule >> isAccessModule [
+	^ true 
+]
+
 { #category : #accessing }
 AlcixAccessModule >> project [
 	"Relation named: #project type: #AlcixAccessProject opposite: #modules"

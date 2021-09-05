@@ -4,7 +4,8 @@ Class {
 	#instVars : [
 		'#astCannotLoad => FMProperty',
 		'#ast => FMProperty',
-		'#globalVariables => FMMany type: #AlcixGlobalVariable opposite: #module'
+		'#globalVariables => FMMany type: #AlcixGlobalVariable opposite: #module',
+		'#stringContent'
 	],
 	#category : #'Alce-Famix-Entities'
 }
@@ -35,7 +36,9 @@ AlcixModule >> ast [
 
 	<FMProperty: #ast type: #Object>
 	<generated>
-	^ ast
+	self astCannotLoad ifTrue: [ ^ ast ].
+
+	^ ast ifNil: [ ast := self obtainAst ]
 ]
 
 { #category : #accessing }
@@ -49,7 +52,7 @@ AlcixModule >> astCannotLoad [
 
 	<FMProperty: #astCannotLoad type: #Boolean>
 	<generated>
-	^ astCannotLoad
+	^ astCannotLoad ifNil: [ false  ]
 ]
 
 { #category : #accessing }
@@ -79,4 +82,43 @@ AlcixModule >> globalVariablesGroup [
 	<generated>
 	<navigation: 'GlobalVariables'>
 	^ MooseSpecializedGroup withAll: self globalVariables asSet
+]
+
+{ #category : #testing }
+AlcixModule >> isAstLoaded [
+
+	^ self astCannotLoad not
+]
+
+{ #category : #accessing }
+AlcixModule >> obtainAst [
+
+	| semaphore result process |
+	semaphore := Semaphore new.
+	process := [ 
+	           [ 
+	           result := (self class environment at: #VBParser) parse:
+		                     self stringContent ]
+		           on: Error
+		           do: [ :e | result := e ].
+	           semaphore signal ] forkAt:
+		           Processor userBackgroundPriority.
+	^ semaphore
+		  wait: 30 seconds
+		  onCompletion: [ 
+			  process terminate.
+			  result isError ifTrue: [ ^ result signal ].
+			  result ]
+		  onTimeout: [ 
+			  process terminate.
+			  TimedOut new signal: 'TO' ]
+]
+
+{ #category : #'as yet unclassified' }
+AlcixModule >> stringContent [
+
+	^ stringContent ifNil: [ 
+		  stringContent := mooseModel anchorSolver
+			                   readEntity: self anchor
+			                   andCollect: [ :e | e code content ] ]
 ]

@@ -52,3 +52,26 @@ AlcixEnum >> enumValuesGroup [
 	<navigation: 'EnumValues'>
 	^ MooseSpecializedGroup withAll: self enumValues asSet
 ]
+
+{ #category : #accessing }
+AlcixEnum >> invocables [
+
+	^ {  }
+]
+
+{ #category : #accessing }
+AlcixEnum >> members [
+	
+	^ {  }
+]
+
+{ #category : #'as yet unclassified' }
+AlcixEnum >> readingAccesses [
+	self shouldBeImplemented.
+]
+
+{ #category : #accessing }
+AlcixEnum >> types [
+
+	^ {  }
+]

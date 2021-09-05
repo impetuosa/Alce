@@ -50,9 +50,15 @@ AlceColoringPopularComposingColor >> popularEntry: source or: aColor [
 ]
 
 { #category : #visiting }
+AlceColoringPopularComposingColor >> visitAccess: anAlcixAccess [ 
+
+	anAlcixAccess candidate ifNotNil: [ :e | self askForAcceptTo: e]
+]
+
+{ #category : #visiting }
 AlceColoringPopularComposingColor >> visitAccessRead: anAlcixAccessRead [
 
-	anAlcixAccessRead rightElement ifNotNil: [ :e | self askForAcceptTo: e]
+	anAlcixAccessRead candidate ifNotNil: [ :e | self askForAcceptTo: e]
 ]
 
 { #category : #visiting }
@@ -71,6 +77,13 @@ AlceColoringPopularComposingColor >> visitAlias: anAlcixAlias [
 { #category : #visiting }
 AlceColoringPopularComposingColor >> visitArgument: anAlcixArgument [ 
 
+]
+
+{ #category : #visiting }
+AlceColoringPopularComposingColor >> visitAssignment: anAlcixAssignment [
+
+	anAlcixAssignment readElements do: [ :e | self askForAcceptTo: e ].
+	anAlcixAssignment writeElement do: [ :e | self askForAcceptTo: e ]
 ]
 
 { #category : #visiting }
@@ -94,6 +107,11 @@ AlceColoringPopularComposingColor >> visitClass: anAlcixClass [
 AlceColoringPopularComposingColor >> visitCollection: aCollection [
 
 	aCollection do: [ :a | self askForAcceptTo: a ]
+]
+
+{ #category : #visiting }
+AlceColoringPopularComposingColor >> visitConstant: anAlcixConstant [ 
+	self visitLocalVariable: anAlcixConstant 
 ]
 
 { #category : #visiting }
@@ -142,9 +160,9 @@ AlceColoringPopularComposingColor >> visitFunction: anAlcixAttributeAccessor [
 AlceColoringPopularComposingColor >> visitInvocable: anAlcixAttributeAccessor [
 
 	self visitCollection: anAlcixAttributeAccessor parameters.
-	self visitCollection: anAlcixAttributeAccessor accesses.
+	self visitCollection: anAlcixAttributeAccessor outgoingAccesses.
+	self visitCollection: anAlcixAttributeAccessor assignments. 
 	self visitCollection: anAlcixAttributeAccessor localVariables.
-	self visitCollection: anAlcixAttributeAccessor outgoingInvocations
 ]
 
 { #category : #visiting }
@@ -161,6 +179,11 @@ AlceColoringPopularComposingColor >> visitInvocation: anAlcixInvocation [
 AlceColoringPopularComposingColor >> visitLibrary: anAlcixLibrary [
 
 	self visitContainer: anAlcixLibrary
+]
+
+{ #category : #visiting }
+AlceColoringPopularComposingColor >> visitLiteral: anAlcixLiteral [ 
+
 ]
 
 { #category : #visiting }
@@ -207,6 +230,11 @@ AlceColoringPopularComposingColor >> visitStructure: anAlcixStructure [
 { #category : #visiting }
 AlceColoringPopularComposingColor >> visitSubProcedure: anAlcixAttributeAccessor [ 
 	 self visitInvocable: anAlcixAttributeAccessor
+]
+
+{ #category : #visiting }
+AlceColoringPopularComposingColor >> visitUnknownElement: anAlcixUnknownElement [ 
+
 ]
 
 { #category : #visiting }

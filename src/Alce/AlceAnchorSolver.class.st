@@ -33,10 +33,13 @@ AlceAnchorSolver >> model: anAlcixModel [
 { #category : #'as yet unclassified' }
 AlceAnchorSolver >> projectFor: aString [
 
-	^ projects at: aString asLowercase ifAbsentPut: [ 
-		  | reference |
+	| name |
+	name := ('.' split: aString) first.
+
+	^ projects at: name asLowercase ifAbsentPut: [ 
+		  | reference n |
 		  reference := model references detect: [ :r | 
-			               r name asLowercase = aString asLowercase ].
+			               r name asLowercase = name asLowercase ].
 		  self
 			  assert: reference isAccessModule
 			  description: 'Trying to open a non access project'.

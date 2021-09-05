@@ -47,6 +47,12 @@ AlcixArgument >> activationGroup [
 ]
 
 { #category : #accessing }
+AlcixArgument >> names [
+
+	^ 'Arg(' , value asString , ') '
+]
+
+{ #category : #accessing }
 AlcixArgument >> value [
 
 	<FMProperty: #value type: #Object>

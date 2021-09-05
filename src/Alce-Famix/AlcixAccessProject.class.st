@@ -50,3 +50,8 @@ AlcixAccessProject >> modulesGroup [
 	<navigation: 'Modules'>
 	^ MooseSpecializedGroup withAll: self modules asSet
 ]
+
+{ #category : #navigation }
+AlcixAccessProject >> name [ 
+	^ 'Project'
+]

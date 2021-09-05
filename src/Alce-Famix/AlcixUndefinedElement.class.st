@@ -22,6 +22,11 @@ AlcixUndefinedElement >> accept: aVisitor [
 ]
 
 { #category : #accessing }
+AlcixUndefinedElement >> candidate [
+	^ self 
+]
+
+{ #category : #accessing }
 AlcixUndefinedElement >> name [
 
 	^ 'UNDEFINED'
