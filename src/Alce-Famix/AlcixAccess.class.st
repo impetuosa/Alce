@@ -86,6 +86,12 @@ AlcixAccess >> name [
 	^ 'Access(' , (candidates ifEmpty: [ '' ] ifNotEmpty: [ candidates first name ]) , ')'
 ]
 
+{ #category : #'as yet unclassified' }
+AlcixAccess >> threeWayCompareTo: anAlcixInvocation [
+
+	^ self name threeWayCompareTo: anAlcixInvocation name
+]
+
 { #category : #accessing }
 AlcixAccess >> withAccesses [
 	"Relation named: #withAccesses type: #AlcixWithAccesses opposite: #outgoingAccesses"

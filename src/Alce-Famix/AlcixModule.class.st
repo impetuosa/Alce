@@ -36,7 +36,9 @@ AlcixModule >> ast [
 
 	<FMProperty: #ast type: #Object>
 	<generated>
-	^ ast
+	self astCannotLoad ifTrue: [ ^ ast ].
+
+	^ ast ifNil: [ ast := self obtainAst ]
 ]
 
 { #category : #accessing }
