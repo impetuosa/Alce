@@ -59,3 +59,8 @@ AlcixEntity >> isAssignment [
 	<generated>
 	^ false
 ]
+
+{ #category : #testing }
+AlcixEntity >> isUnknown [ 
+	 ^ false. 
+]

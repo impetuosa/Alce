@@ -37,3 +37,8 @@ AlcixTypedEntity >> name: anObject [
 	<generated>
 	name := anObject
 ]
+
+{ #category : #'as yet unclassified' }
+AlcixTypedEntity >> threeWayCompareTo: anAlcixAttributeAccessor [ 
+	^ name threeWayCompareTo: anAlcixAttributeAccessor name
+]

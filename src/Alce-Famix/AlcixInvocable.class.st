@@ -104,6 +104,11 @@ AlcixInvocable >> selector: anObject [
 	selector := anObject
 ]
 
+{ #category : #'as yet unclassified' }
+AlcixInvocable >> threeWayCompareTo: anAlcixAttributeAccessor [ 
+	^ self name threeWayCompareTo: anAlcixAttributeAccessor name
+]
+
 { #category : #accessing }
 AlcixInvocable >> userType [
 	"Relation named: #userType type: #AlcixUserType opposite: #invocables"

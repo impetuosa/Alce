@@ -120,5 +120,9 @@ AlcixModule >> stringContent [
 	^ stringContent ifNil: [ 
 		  stringContent := mooseModel anchorSolver
 			                   readEntity: self anchor
-			                   andCollect: [ :e | e code content ] ]
+			                   andCollect: [ :e | 
+				                   stringContent := e code.
+				                   stringContent isString
+					                   ifTrue: [ stringContent ]
+					                   ifFalse: [ stringContent content ] ] ]
 ]

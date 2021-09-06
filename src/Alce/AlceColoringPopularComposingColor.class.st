@@ -56,6 +56,11 @@ AlceColoringPopularComposingColor >> visitAccess: anAlcixAccess [
 ]
 
 { #category : #visiting }
+AlceColoringPopularComposingColor >> visitAccessModule: anAlcixAccessModule [ 
+
+]
+
+{ #category : #visiting }
 AlceColoringPopularComposingColor >> visitAccessRead: anAlcixAccessRead [
 
 	anAlcixAccessRead candidate ifNotNil: [ :e | self askForAcceptTo: e]
@@ -144,6 +149,12 @@ AlceColoringPopularComposingColor >> visitExternalFunction: anAlcixExternalFunct
 ]
 
 { #category : #visiting }
+AlceColoringPopularComposingColor >> visitExternalSubProcedure: anAlcixExternalSubProcedure [
+
+	self visitSubProcedure: anAlcixExternalSubProcedure
+]
+
+{ #category : #visiting }
 AlceColoringPopularComposingColor >> visitForm: anAlcixForm [
 
 	self visitClass: anAlcixForm
@@ -217,6 +228,12 @@ AlceColoringPopularComposingColor >> visitPrimitiveType: anAlcixPrimitiveType [
 ]
 
 { #category : #visiting }
+AlceColoringPopularComposingColor >> visitQuery: anAlcixQuery [
+
+	
+]
+
+{ #category : #visiting }
 AlceColoringPopularComposingColor >> visitReport: anAlcixReport [
 
 	self visitClass: anAlcixReport
@@ -230,6 +247,12 @@ AlceColoringPopularComposingColor >> visitStructure: anAlcixStructure [
 { #category : #visiting }
 AlceColoringPopularComposingColor >> visitSubProcedure: anAlcixAttributeAccessor [ 
 	 self visitInvocable: anAlcixAttributeAccessor
+]
+
+{ #category : #visiting }
+AlceColoringPopularComposingColor >> visitTable: anAlcixTable [
+
+	
 ]
 
 { #category : #visiting }

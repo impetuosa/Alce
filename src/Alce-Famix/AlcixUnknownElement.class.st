@@ -20,6 +20,11 @@ AlcixUnknownElement >> accept: aVisitor [
 ]
 
 { #category : #visiting }
+AlcixUnknownElement >> isUnknown [ 
+	 ^ true . 
+]
+
+{ #category : #visiting }
 AlcixUnknownElement >> name [
 
 	^ 'UNKNOWN'
