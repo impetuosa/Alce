@@ -6,6 +6,7 @@ Class {
 	#instVars : [
 		'#localVariables => FMMany type: #AlcixLocalVariable opposite: #invocable',
 		'#parameters => FMMany type: #AlcixParameter opposite: #invocable',
+		'#returns => FMMany type: #AlcixReturn opposite: #invocable',
 		'#selector => FMProperty',
 		'#userType => FMOne type: #AlcixUserType opposite: #invocables'
 	],
@@ -37,6 +38,12 @@ AlcixInvocable >> addLocalVariable: anObject [
 AlcixInvocable >> addParameter: anObject [
 	<generated>
 	^ self parameters add: anObject
+]
+
+{ #category : #adding }
+AlcixInvocable >> addReturn: anObject [
+	<generated>
+	^ self returns add: anObject
 ]
 
 { #category : #accessing }
@@ -88,6 +95,29 @@ AlcixInvocable >> parametersGroup [
 	<generated>
 	<navigation: 'Parameters'>
 	^ MooseSpecializedGroup withAll: self parameters asSet
+]
+
+{ #category : #accessing }
+AlcixInvocable >> returns [
+	"Relation named: #returns type: #AlcixReturn opposite: #invocable"
+
+	<generated>
+	<derived>
+	^ returns
+]
+
+{ #category : #accessing }
+AlcixInvocable >> returns: anObject [
+
+	<generated>
+	returns value: anObject
+]
+
+{ #category : #navigation }
+AlcixInvocable >> returnsGroup [
+	<generated>
+	<navigation: 'Returns'>
+	^ MooseSpecializedGroup withAll: self returns asSet
 ]
 
 { #category : #accessing }

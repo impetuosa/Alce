@@ -51,7 +51,8 @@ Class {
 		'literal',
 		'constant',
 		'tableField',
-		'withConstants'
+		'withConstants',
+		'return'
 	],
 	#category : #'Alce-Generator'
 }
@@ -135,6 +136,9 @@ AlceAccessGenerator >> defineClasses [
 	subProcedure := builder newClassNamed: #SubProcedure.
 
 	externalSubProcedure := builder newClassNamed: #ExternalSubProcedure.
+	
+	
+	return := builder newClassNamed: #Return. 
 	table := builder newClassNamed: #Table.
 	typedEntity := builder newClassNamed: #TypedEntity.
 	query := builder newClassNamed: #Query.
@@ -142,6 +146,8 @@ AlceAccessGenerator >> defineClasses [
 	variable := builder newClassNamed: #Variable.
 	unknownElement := builder newClassNamed: #UnknownElement.
 	undefinedElement := builder newClassNamed: #UndefinedElement
+	
+
 ]
 
 { #category : #definition }
@@ -169,7 +175,10 @@ AlceAccessGenerator >> defineHierarchy [
 	invocable --|> withConstants. 
 
 	expression --|> withAccesses.
-	
+
+
+	return --|> withAccesses. 
+		
 
 	alias --|> typed.
 	alias --|> type.
@@ -295,9 +304,10 @@ AlceAccessGenerator >> defineRelations [
 	(withAccesses property: #outgoingAccesses) <>-* access.
 	(withAccesses property: #assignments)
 	<>-* (assignment property: #owner).
+
 	invocable <>-* parameter.
 	invocable <>-* localVariable.
-
+	invocable <>-* return. 
 
 	(withConstants property: #constants) <>-* (constant property: #owner).
 

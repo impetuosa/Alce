@@ -24,3 +24,8 @@ AlcixInvocation >> name [
 
 	^ 'Invocation(' , (candidates ifEmpty: [ '' ] ifNotEmpty: [ candidates first name ]) , ')'
 ]
+
+{ #category : #accessing }
+AlcixInvocation >> userType [
+	^ withAccesses userType 
+]

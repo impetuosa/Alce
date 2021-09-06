@@ -53,6 +53,11 @@ AlcixArgument >> names [
 ]
 
 { #category : #accessing }
+AlcixArgument >> userType [
+	 ^ activation userType  
+]
+
+{ #category : #accessing }
 AlcixArgument >> value [
 
 	<FMProperty: #value type: #Object>

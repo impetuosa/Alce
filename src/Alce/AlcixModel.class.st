@@ -13,6 +13,11 @@ AlcixModel class >> annotation [
 	<generated>
 ]
 
+{ #category : #accessing }
+AlcixModel class >> entryName [
+	^ #Model
+]
+
 { #category : #'instance creation' }
 AlcixModel >> instantiate: aClass [
 

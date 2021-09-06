@@ -36,9 +36,7 @@ AlcixModule >> ast [
 
 	<FMProperty: #ast type: #Object>
 	<generated>
-	self astCannotLoad ifTrue: [ ^ ast ].
-
-	^ ast ifNil: [ ast := self obtainAst ]
+	^ ast
 ]
 
 { #category : #accessing }
@@ -52,7 +50,7 @@ AlcixModule >> astCannotLoad [
 
 	<FMProperty: #astCannotLoad type: #Boolean>
 	<generated>
-	^ astCannotLoad ifNil: [ false  ]
+	^ astCannotLoad ifNil: [ false ]
 ]
 
 { #category : #accessing }

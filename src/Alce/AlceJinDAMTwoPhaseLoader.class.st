@@ -25,6 +25,11 @@ AlceJinDAMTwoPhaseLoader >> createAssignment [
 	^ alce instantiate: AlcixAssignment
 ]
 
+{ #category : #'as yet unclassified' }
+AlceJinDAMTwoPhaseLoader >> createReturn [
+	^ alce instantiate: AlcixReturn .
+]
+
 { #category : #accessing }
 AlceJinDAMTwoPhaseLoader >> dam [
 	^ dam

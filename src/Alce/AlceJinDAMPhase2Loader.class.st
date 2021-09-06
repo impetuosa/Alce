@@ -21,6 +21,11 @@ AlceJinDAMPhase2Loader >> createAssignment [
 ]
 
 { #category : #'as yet unclassified' }
+AlceJinDAMPhase2Loader >> createReturn [
+	 ^ loader createReturn 
+]
+
+{ #category : #'as yet unclassified' }
 AlceJinDAMPhase2Loader >> getAccessesAssignmentsAndInvocations: aJinDAMFunction [
 
 	^ self referenceResolver resolveElements:
@@ -406,18 +411,19 @@ AlceJinDAMPhase2Loader >> visitUserType: aJinDAMUserType [
 { #category : #visiting }
 AlceJinDAMPhase2Loader >> visitWithAccesses: aJinDAMFunction [
 
-	| accessesAndAssignments alcix |
+	| all access assignments returns  alcix |
 	alcix := loader instanceFor: aJinDAMFunction.
-	accessesAndAssignments := self getAccessesAssignmentsAndInvocations:
-		                          aJinDAMFunction.
-	alcix outgoingAccesses:
-		(accessesAndAssignments reject: [ :a | a isKindOf: AlcixAssignment ]).
+	all := self getAccessesAssignmentsAndInvocations: aJinDAMFunction.
+	
+	access := (all select: [ :a | a isKindOf: AlcixAccess ]).
+	access ifNotEmpty: [ alcix outgoingAccesses: access. ].
+	
+	assignments := all select: [ :a | a isKindOf: AlcixAssignment ].
+	assignments ifNotEmpty: [ alcix assignments: assignments ].
+	
+	returns := all select: [ :a | a isKindOf: AlcixReturn ].
+	returns ifNotEmpty: [ alcix returns: returns ].
 
-	accessesAndAssignments := accessesAndAssignments select: [ :a | 
-		                          a isKindOf: AlcixAssignment ].
-	accessesAndAssignments ifNotEmpty: [ 
-		alcix assignments: accessesAndAssignments ].
-	alcix
 ]
 
 { #category : #visiting }
@@ -438,6 +444,5 @@ AlceJinDAMPhase2Loader >> visitWithParameters: aJinDAMFunction [
 
 	| alcix parameters |
 	alcix := loader instanceFor: aJinDAMFunction.
-
 	alcix parameters: (loader instancesFor: aJinDAMFunction parameters)
 ]

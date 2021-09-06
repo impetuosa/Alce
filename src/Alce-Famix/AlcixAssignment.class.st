@@ -94,16 +94,24 @@ AlcixAssignment >> readElements [
 
 { #category : #accessing }
 AlcixAssignment >> readElements: anObject [
-
 	<generated>
-	readElements := anObject.
-	anObject do: [ :o | self addOutgoingAccess: o ]
+	readElements := anObject
 ]
 
 { #category : #accessing }
 AlcixAssignment >> readElementsCandidates [
 
 	^ self readElements flatCollect: [ :a | a candidates  ]
+]
+
+{ #category : #accessing }
+AlcixAssignment >> selector [
+	 ^ owner selector 
+]
+
+{ #category : #accessing }
+AlcixAssignment >> userType [
+	 ^ owner userType 
 ]
 
 { #category : #accessing }
@@ -116,10 +124,8 @@ AlcixAssignment >> writeElement [
 
 { #category : #accessing }
 AlcixAssignment >> writeElement: anObject [
-
 	<generated>
-	writeElement := anObject.
-	anObject do: [ :o | self addOutgoingAccess: o ]
+	writeElement := anObject
 ]
 
 { #category : #accessing }

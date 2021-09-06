@@ -99,7 +99,6 @@ AlcixAccess >> withAccesses [
 AlcixAccess >> withAccesses: anObject [
 
 	<generated>
-	anObject ifNil: [ self halt ].
 	withAccesses := anObject
 ]
 
