@@ -33,17 +33,6 @@ AlcixEntity class >> metamodel [
 ]
 
 { #category : #testing }
-AlcixEntity >> color [ 
-	^ color ifNil: [ Color transparent  ]
-]
-
-{ #category : #testing }
-AlcixEntity >> color: aColor [
-
-	color := aColor
-]
-
-{ #category : #testing }
 AlcixEntity >> entryName [
 	^ self name 
 ]

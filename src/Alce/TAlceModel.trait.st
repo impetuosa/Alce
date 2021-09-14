@@ -1,7 +1,8 @@
 Trait {
 	#name : #TAlceModel,
 	#instVars : [
-		'anchorSolver'
+		'anchorSolver',
+		'tagCategories'
 	],
 	#category : #Alce
 }
@@ -77,4 +78,9 @@ TAlceModel >> reports [
 { #category : #'instance creation' }
 TAlceModel >> tables [
 	^ self select: [ :m | m class = AlcixTable ]
+]
+
+{ #category : #'instance creation' }
+TAlceModel >> tagCategories [
+ 		^ tagCategories ifNil: [ tagCategories := OrderedCollection new  ]
 ]
