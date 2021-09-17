@@ -9,9 +9,7 @@ Class {
 
 { #category : #accessing }
 AlceUseColorPropagation >> colorsFor: anEntity [
-
 	self askForAcceptTo: anEntity.
-
 
 	^ colors at: anEntity
 ]
@@ -26,7 +24,11 @@ AlceUseColorPropagation >> colorsFor: anAlcixClass collection: aFullBlockClosure
 
 { #category : #'as yet unclassified' }
 AlceUseColorPropagation >> verticalColor [
-	  ^ verticalColor ifNil: [ verticalColor := AlceVerticalColorPropagation new ] 
+
+	^ verticalColor ifNil: [ 
+		  verticalColor := AlceVerticalColorPropagation new.
+		  verticalColor selectingCategory: selectingCategory.
+		  verticalColor ]
 ]
 
 { #category : #visiting }
@@ -165,7 +167,6 @@ AlceUseColorPropagation >> visitForm: anAlcixClass [
 
 { #category : #visiting }
 AlceUseColorPropagation >> visitFunction: anAlcixSubProcedure [
-
 	self colorsFor: anAlcixSubProcedure collection: [ :col | 
 		col addAll: (self colorsForAll: anAlcixSubProcedure localVariables).
 		col addAll: (self colorsForAll: anAlcixSubProcedure constants).

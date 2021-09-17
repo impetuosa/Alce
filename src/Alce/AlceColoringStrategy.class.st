@@ -42,6 +42,12 @@ AlceColoringStrategy >> initialize [
 ]
 
 { #category : #'as yet unclassified' }
+AlceColoringStrategy >> selectingCategory: aSc [
+
+	selectingCategory := aSc
+]
+
+{ #category : #'as yet unclassified' }
 AlceColoringStrategy >> tagsFor: anAlcixPrimitiveType [
 
 	^ anAlcixPrimitiveType tags select: [ :t | 
