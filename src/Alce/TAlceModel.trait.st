@@ -61,6 +61,12 @@ TAlceModel >> modules [
 ]
 
 { #category : #'instance creation' }
+TAlceModel >> project [
+
+	^ self detect: [ :m | m class = AlcixAccessProject ]
+]
+
+{ #category : #'instance creation' }
 TAlceModel >> queries [
 	^ self select: [ :m | m class = AlcixQuery ]
 ]

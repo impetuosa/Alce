@@ -33,6 +33,33 @@ AlcixEntity class >> metamodel [
 ]
 
 { #category : #testing }
+AlcixEntity >> color [
+
+	^ self allTagAssociations
+		  ifEmpty: [ Color transparent ]
+		  ifNotEmpty: [ :a | a first tag color  ]
+]
+
+{ #category : #accessing }
+AlcixEntity >> color: aColor [
+
+	| t |
+	t := self allTagAssociations
+		     ifEmpty: [ 
+			     | assoc |
+			     aColor ifNil: [ ^ self ].
+			     assoc := mooseModel instantiate: FamixTagAssociation.
+			     assoc setEntityTo: self.
+			     assoc tag: (mooseModel instantiate: FamixTag).
+			     assoc tag name: 'Color'.
+			     assoc tag color: aColor ]
+		     ifNotEmpty: [ :assocs | 
+			     aColor ifNil: [ assocs first remove ] ifNotNil: [ 
+				     assocs first tag name: 'Color'.
+				     assocs first tag color: aColor ] ]
+]
+
+{ #category : #testing }
 AlcixEntity >> entryName [
 	^ self name 
 ]
