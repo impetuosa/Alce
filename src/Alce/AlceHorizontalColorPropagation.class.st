@@ -1,5 +1,5 @@
 Class {
-	#name : #AlceUseColorPropagation,
+	#name : #AlceHorizontalColorPropagation,
 	#superclass : #AlceColoringStrategy,
 	#instVars : [
 		'verticalColor'
@@ -8,22 +8,30 @@ Class {
 }
 
 { #category : #accessing }
-AlceUseColorPropagation >> colorsFor: anEntity [
+AlceHorizontalColorPropagation >> colorsFor: anEntity [
+
 	self askForAcceptTo: anEntity.
 
 	^ colors at: anEntity
 ]
 
 { #category : #'as yet unclassified' }
-AlceUseColorPropagation >> colorsFor: anAlcixClass collection: aFullBlockClosure [
+AlceHorizontalColorPropagation >> colorsFor: anAlcixClass collection: aFullBlockClosure [
 
 	colors at: anAlcixClass ifAbsent: [ 
 		colors at: anAlcixClass put: OrderedCollection new.
 		aFullBlockClosure value: (colors at: anAlcixClass) ]
 ]
 
+{ #category : #visiting }
+AlceHorizontalColorPropagation >> reset [
+
+	super reset 
+	verticalColor ifNotNil: [ verticalColor reset ]
+]
+
 { #category : #'as yet unclassified' }
-AlceUseColorPropagation >> verticalColor [
+AlceHorizontalColorPropagation >> verticalColor [
 
 	^ verticalColor ifNil: [ 
 		  verticalColor := AlceVerticalColorPropagation new.
@@ -32,7 +40,7 @@ AlceUseColorPropagation >> verticalColor [
 ]
 
 { #category : #visiting }
-AlceUseColorPropagation >> visitAccess: anAlcixAccess [
+AlceHorizontalColorPropagation >> visitAccess: anAlcixAccess [
 
 	self
 		colorsFor: anAlcixAccess
@@ -41,7 +49,7 @@ AlceUseColorPropagation >> visitAccess: anAlcixAccess [
 ]
 
 { #category : #visiting }
-AlceUseColorPropagation >> visitAccessModule: anAlcixAccessModule [
+AlceHorizontalColorPropagation >> visitAccessModule: anAlcixAccessModule [
 
 	self
 		colorsFor: anAlcixAccessModule
@@ -50,7 +58,7 @@ AlceUseColorPropagation >> visitAccessModule: anAlcixAccessModule [
 ]
 
 { #category : #visiting }
-AlceUseColorPropagation >> visitAccessProject: anAlcixAccessProject [
+AlceHorizontalColorPropagation >> visitAccessProject: anAlcixAccessProject [
 
 	^ self colorsFor: anAlcixAccessProject collection: [ :col | 
 		  col addAll: ((self tagsFor: anAlcixAccessProject) collect: #color).
@@ -58,7 +66,7 @@ AlceUseColorPropagation >> visitAccessProject: anAlcixAccessProject [
 ]
 
 { #category : #visiting }
-AlceUseColorPropagation >> visitAlias: anAlcixAlias [
+AlceHorizontalColorPropagation >> visitAlias: anAlcixAlias [
 
 	self colorsFor: anAlcixAlias collection: [ :col | 
 		col addAll: (self verticalColor colorsFor: anAlcixAlias type).
@@ -66,7 +74,7 @@ AlceUseColorPropagation >> visitAlias: anAlcixAlias [
 ]
 
 { #category : #visiting }
-AlceUseColorPropagation >> visitArgument: anAlcixArgument [
+AlceHorizontalColorPropagation >> visitArgument: anAlcixArgument [
 
 	self colorsFor: anAlcixArgument collection: [ :col | 
 		col addAll: ((self tagsFor: anAlcixArgument) collect: #color).
@@ -75,7 +83,7 @@ AlceUseColorPropagation >> visitArgument: anAlcixArgument [
 ]
 
 { #category : #visiting }
-AlceUseColorPropagation >> visitAssignment: anAlcixAssignment [
+AlceHorizontalColorPropagation >> visitAssignment: anAlcixAssignment [
 
 	self colorsFor: anAlcixAssignment collection: [ :col | 
 		col addAll: (self colorsForAll: anAlcixAssignment readElements).
@@ -83,19 +91,19 @@ AlceUseColorPropagation >> visitAssignment: anAlcixAssignment [
 ]
 
 { #category : #visiting }
-AlceUseColorPropagation >> visitAttribute: anAlcixAttribute [
+AlceHorizontalColorPropagation >> visitAttribute: anAlcixAttribute [
 
 	self visitTyped: anAlcixAttribute
 ]
 
 { #category : #visiting }
-AlceUseColorPropagation >> visitAttributeAccessor: anAlcixAttributeAccessor [
+AlceHorizontalColorPropagation >> visitAttributeAccessor: anAlcixAttributeAccessor [
 
 	^ self visitFunction: anAlcixAttributeAccessor
 ]
 
 { #category : #visiting }
-AlceUseColorPropagation >> visitClass: anAlcixClass [
+AlceHorizontalColorPropagation >> visitClass: anAlcixClass [
 
 	self colorsFor: anAlcixClass collection: [ :col | 
 		anAlcixClass superclass ifNotNil: [ :c | 
@@ -107,7 +115,7 @@ AlceUseColorPropagation >> visitClass: anAlcixClass [
 ]
 
 { #category : #visiting }
-AlceUseColorPropagation >> visitConstant: anAlcixConstant [
+AlceHorizontalColorPropagation >> visitConstant: anAlcixConstant [
 
 	self colorsFor: anAlcixConstant collection: [ :col | 
 		col addAll: (self verticalColor colorsFor: anAlcixConstant type).
@@ -115,7 +123,7 @@ AlceUseColorPropagation >> visitConstant: anAlcixConstant [
 ]
 
 { #category : #visiting }
-AlceUseColorPropagation >> visitEnum: anAlcixEnum [
+AlceHorizontalColorPropagation >> visitEnum: anAlcixEnum [
 
 	self
 		colorsFor: anAlcixEnum
@@ -124,14 +132,14 @@ AlceUseColorPropagation >> visitEnum: anAlcixEnum [
 ]
 
 { #category : #visiting }
-AlceUseColorPropagation >> visitEnumValue: anAlcixEnumValue [
+AlceHorizontalColorPropagation >> visitEnumValue: anAlcixEnumValue [
 
 	self colorsFor: anAlcixEnumValue collection: [ :col | 
 		col addAll: (self verticalColor colorsFor: anAlcixEnumValue enum) ]
 ]
 
 { #category : #visiting }
-AlceUseColorPropagation >> visitEvent: anAlcixEvent [
+AlceHorizontalColorPropagation >> visitEvent: anAlcixEvent [
 
 	self
 		colorsFor: anAlcixEvent
@@ -140,7 +148,7 @@ AlceUseColorPropagation >> visitEvent: anAlcixEvent [
 ]
 
 { #category : #visiting }
-AlceUseColorPropagation >> visitExternalFunction: anAlcixExternalFunction [
+AlceHorizontalColorPropagation >> visitExternalFunction: anAlcixExternalFunction [
 
 	self colorsFor: anAlcixExternalFunction collection: [ :col | 
 		col addAll: (self colorsForAll: anAlcixExternalFunction constants).
@@ -150,7 +158,7 @@ AlceUseColorPropagation >> visitExternalFunction: anAlcixExternalFunction [
 ]
 
 { #category : #visiting }
-AlceUseColorPropagation >> visitExternalSubProcedure: anAlcixExternalSubProcedure [
+AlceHorizontalColorPropagation >> visitExternalSubProcedure: anAlcixExternalSubProcedure [
 
 	self colorsFor: anAlcixExternalSubProcedure collection: [ :col | 
 		col addAll:
@@ -160,13 +168,13 @@ AlceUseColorPropagation >> visitExternalSubProcedure: anAlcixExternalSubProcedur
 ]
 
 { #category : #visiting }
-AlceUseColorPropagation >> visitForm: anAlcixClass [
+AlceHorizontalColorPropagation >> visitForm: anAlcixClass [
 
 	self visitClass: anAlcixClass
 ]
 
 { #category : #visiting }
-AlceUseColorPropagation >> visitFunction: anAlcixSubProcedure [
+AlceHorizontalColorPropagation >> visitFunction: anAlcixSubProcedure [
 	self colorsFor: anAlcixSubProcedure collection: [ :col | 
 		col addAll: (self colorsForAll: anAlcixSubProcedure localVariables).
 		col addAll: (self colorsForAll: anAlcixSubProcedure constants).
@@ -178,7 +186,7 @@ AlceUseColorPropagation >> visitFunction: anAlcixSubProcedure [
 ]
 
 { #category : #visiting }
-AlceUseColorPropagation >> visitInvocation: anAlcixInvocation [
+AlceHorizontalColorPropagation >> visitInvocation: anAlcixInvocation [
 
 	self colorsFor: anAlcixInvocation collection: [ :col | 
 		col addAll:
@@ -187,50 +195,62 @@ AlceUseColorPropagation >> visitInvocation: anAlcixInvocation [
 ]
 
 { #category : #visiting }
-AlceUseColorPropagation >> visitLibrary: anAlcixLibrary [
+AlceHorizontalColorPropagation >> visitLibrary: anAlcixLibrary [
 
 	self colorsFor: anAlcixLibrary collection: [ :col |  ]
 ]
 
 { #category : #visiting }
-AlceUseColorPropagation >> visitLiteral: anAlcixLiteral [
+AlceHorizontalColorPropagation >> visitLiteral: anAlcixLiteral [
 
 	self colorsFor: anAlcixLiteral collection: [ :col |  ]
 ]
 
 { #category : #visiting }
-AlceUseColorPropagation >> visitLocalVariable: anAlcixLocalVariable [
+AlceHorizontalColorPropagation >> visitLocalVariable: anAlcixLocalVariable [
 
 	^ self visitTyped: anAlcixLocalVariable
 ]
 
 { #category : #visiting }
-AlceUseColorPropagation >> visitModel: anAlcixModel [
+AlceHorizontalColorPropagation >> visitModel: anAlcixModel [
 
 	self askForAcceptTo: anAlcixModel project.
 	^ colors at: anAlcixModel project
 ]
 
 { #category : #visiting }
-AlceUseColorPropagation >> visitModule: anAlcixClass [
+AlceHorizontalColorPropagation >> visitModule: anAlcixClass [
 
 	self visitUserType: anAlcixClass
 ]
 
 { #category : #visiting }
-AlceUseColorPropagation >> visitParameter: anAlcixParameter [
+AlceHorizontalColorPropagation >> visitParameter: anAlcixParameter [
 
 	self visitTyped: anAlcixParameter
 ]
 
 { #category : #visiting }
-AlceUseColorPropagation >> visitReport: anAlcixClass [
+AlceHorizontalColorPropagation >> visitQuery: anAlcixQuery [
+
+	^ self visitTable: anAlcixQuery
+]
+
+{ #category : #visiting }
+AlceHorizontalColorPropagation >> visitReport: anAlcixClass [
 
 	self visitClass: anAlcixClass
 ]
 
 { #category : #visiting }
-AlceUseColorPropagation >> visitSubProcedure: anAlcixSubProcedure [
+AlceHorizontalColorPropagation >> visitReturn: anAlcixReturn [
+
+	self colorsFor: anAlcixReturn collection: [ :c |  ]
+]
+
+{ #category : #visiting }
+AlceHorizontalColorPropagation >> visitSubProcedure: anAlcixSubProcedure [
 
 	self colorsFor: anAlcixSubProcedure collection: [ :col | 
 		col addAll: (self colorsForAll: anAlcixSubProcedure localVariables).
@@ -242,20 +262,31 @@ AlceUseColorPropagation >> visitSubProcedure: anAlcixSubProcedure [
 ]
 
 { #category : #visiting }
-AlceUseColorPropagation >> visitTyped: anAlcixParameter [
+AlceHorizontalColorPropagation >> visitTable: anAlcixTable [ 
+	 ^ self visitClass: anAlcixTable 
+]
+
+{ #category : #visiting }
+AlceHorizontalColorPropagation >> visitTableField: anAlcixTableField [
+
+	^ self visitTyped: anAlcixTableField
+]
+
+{ #category : #visiting }
+AlceHorizontalColorPropagation >> visitTyped: anAlcixParameter [
 
 	self colorsFor: anAlcixParameter collection: [ :col | 
 		col addAll: (self verticalColor colorsFor: anAlcixParameter type) ]
 ]
 
 { #category : #visiting }
-AlceUseColorPropagation >> visitUnknownElement: anAlcixUnknownElement [
+AlceHorizontalColorPropagation >> visitUnknownElement: anAlcixUnknownElement [
 
 	self colorsFor: anAlcixUnknownElement collection: [ :col |  ]
 ]
 
 { #category : #visiting }
-AlceUseColorPropagation >> visitUserType: anAlcixClass [
+AlceHorizontalColorPropagation >> visitUserType: anAlcixClass [
 
 	self colorsFor: anAlcixClass collection: [ :col | 
 		col addAll: (self colorsForAll: anAlcixClass members).

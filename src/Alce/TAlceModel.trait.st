@@ -2,7 +2,7 @@ Trait {
 	#name : #TAlceModel,
 	#instVars : [
 		'anchorSolver',
-		'tagCategories'
+		'coloringStrategies'
 	],
 	#category : #Alce
 }
@@ -32,6 +32,13 @@ TAlceModel >> classes [
 ]
 
 { #category : #'instance creation' }
+TAlceModel >> coloringStrategies [
+
+	^ coloringStrategies ifNil: [ 
+		  coloringStrategies := OrderedCollection new ]
+]
+
+{ #category : #'instance creation' }
 TAlceModel >> firstClassCitizen [
 	^ self modules , self classes , self forms , self reports
 		, self tables , self queries, self classAliases
@@ -40,6 +47,12 @@ TAlceModel >> firstClassCitizen [
 { #category : #'instance creation' }
 TAlceModel >> forms [
 	^ self select: [ :m | m class = AlcixForm ]
+]
+
+{ #category : #'instance creation' }
+TAlceModel >> installColoringStrategy: aStrategy [
+
+	^ self coloringStrategies add: aStrategy
 ]
 
 { #category : #'instance creation' }
@@ -84,9 +97,4 @@ TAlceModel >> reports [
 { #category : #'instance creation' }
 TAlceModel >> tables [
 	^ self select: [ :m | m class = AlcixTable ]
-]
-
-{ #category : #'instance creation' }
-TAlceModel >> tagCategories [
- 		^ tagCategories ifNil: [ tagCategories := OrderedCollection new  ]
 ]

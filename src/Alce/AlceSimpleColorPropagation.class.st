@@ -111,6 +111,14 @@ AlceSimpleColorPropagation >> visitEnumValue: anAlcixEnumValue [
 		  or: [ self colorFor: anAlcixEnumValue enum ]
 ]
 
+{ #category : #'+' }
+AlceSimpleColorPropagation >> visitExternalFunction: anAlcixExternalFunction [
+
+	^ self
+		  colorTagFor: anAlcixExternalFunction
+		  or: [ self colorFor: anAlcixExternalFunction userType ]
+]
+
 { #category : #visiting }
 AlceSimpleColorPropagation >> visitForm: anAlcixForm [
 

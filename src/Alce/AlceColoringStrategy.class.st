@@ -12,8 +12,8 @@ Class {
 { #category : #'as yet unclassified' }
 AlceColoringStrategy >> askForAcceptTo: anAlcixAttribute [
 
-	(visited includes: anAlcixAttribute) ifFalse: [ 
-		visited add: anAlcixAttribute.
+	(visited includesKey: anAlcixAttribute) ifFalse: [ 
+		visited at: anAlcixAttribute put: true .
 		anAlcixAttribute accept: self ]
 ]
 
@@ -30,14 +30,22 @@ AlceColoringStrategy >> colorsFor: anEntity [
 { #category : #'as yet unclassified' }
 AlceColoringStrategy >> colorsForAll: aCollection [
 
-	^ aCollection flatCollect: [ :a | self colorsFor: a ]
+	^ aCollection flatCollect: [ :a | 
+		  self colorsFor: a ]
 ]
 
 { #category : #initialization }
 AlceColoringStrategy >> initialize [
 
 	super initialize.
-	visited := OrderedCollection new.
+	visited := Dictionary new.
+	colors := Dictionary new
+]
+
+{ #category : #'as yet unclassified' }
+AlceColoringStrategy >> reset [
+
+	visited := Dictionary new.
 	colors := Dictionary new
 ]
 

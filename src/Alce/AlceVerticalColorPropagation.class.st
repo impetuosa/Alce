@@ -56,6 +56,12 @@ AlceVerticalColorPropagation >> visitClass: anAlcixClass [
 ]
 
 { #category : #visiting }
+AlceVerticalColorPropagation >> visitDatabaseType: anAlcixDatabaseType [
+
+	^ self visitType: anAlcixDatabaseType
+]
+
+{ #category : #visiting }
 AlceVerticalColorPropagation >> visitEnum: anAlcixEnum [
 
 	^ self visitType: anAlcixEnum
