@@ -18,3 +18,15 @@ AlcixDataSource >> accept: aVisitor [
 	^ aVisitor visitDataSource: self
 
 ]
+
+{ #category : #visiting }
+AlcixDataSource >> ast [
+
+	^ ast
+]
+
+{ #category : #visiting }
+AlcixDataSource >> stringContent [
+
+	^ nil
+]

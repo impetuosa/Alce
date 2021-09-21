@@ -5,7 +5,7 @@ Class {
 		'#astCannotLoad => FMProperty',
 		'#ast => FMProperty',
 		'#globalVariables => FMMany type: #AlcixGlobalVariable opposite: #module',
-		'#stringContent'
+		'#stringContent => FMProperty'
 	],
 	#category : #'Alce-Famix-Entities'
 }
@@ -36,9 +36,10 @@ AlcixModule >> ast [
 
 	<FMProperty: #ast type: #Object>
 	<generated>
+	^ nil "
 	self astCannotLoad ifTrue: [ ^ ast ].
-
-	^ ast ifNil: [ ast := self obtainAst ]
+	
+	^ ast ifNil: [ ast := self obtainAst ]"
 ]
 
 { #category : #accessing }
@@ -114,15 +115,25 @@ AlcixModule >> obtainAst [
 			  TimedOut new signal: 'TO' ]
 ]
 
+{ #category : #accessing }
+AlcixModule >> strcontent [
+
+	^ stringContent
+]
+
 { #category : #'as yet unclassified' }
 AlcixModule >> stringContent [
 
-	^ stringContent ifNil: [ 
-		  stringContent := mooseModel anchorSolver
-			                   readEntity: self anchor
-			                   andCollect: [ :e | 
-				                   stringContent := e code.
-				                   stringContent isString
-					                   ifTrue: [ stringContent ]
-					                   ifFalse: [ stringContent content ] ] ]
+	<FMProperty: #stringContent type: #String>
+	<generated>
+	^ stringContent "ifNil: [ 
+		  self anchor ifNotNil: [ 
+			  stringContent := (mooseModel anchorSolver
+				                    readEntity: self anchor
+				                    andCollect: [ :e | 
+					                    stringContent := e code.
+					                    stringContent isString
+						                    ifTrue: [ stringContent ]
+						                    ifFalse: [ stringContent content ] ]) 
+				                   ifNil: [ '' ] ] ]"
 ]

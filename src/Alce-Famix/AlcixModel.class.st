@@ -3,8 +3,14 @@ Class {
 	#superclass : #MooseModel,
 	#traits : 'TAlceModel',
 	#classTraits : 'TAlceModel classTrait',
-	#category : #Alce
+	#category : #'Alce-Famix'
 }
+
+{ #category : #accessing }
+AlcixModel class >> allSubmetamodelsPackagesNames [
+	<generated>
+	^ #(#'Moose-Query' #'Famix-Traits' #'Alce-Famix' )
+]
 
 { #category : #meta }
 AlcixModel class >> annotation [

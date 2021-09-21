@@ -65,7 +65,7 @@ AlcixReference >> path [
 
 	<FMProperty: #path type: #String>
 	<generated>
-	^ path
+	^ path ifNil: [ '' ] ifNotNil: [ path fullName ]
 ]
 
 { #category : #accessing }

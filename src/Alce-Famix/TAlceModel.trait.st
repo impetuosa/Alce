@@ -4,7 +4,7 @@ Trait {
 		'anchorSolver',
 		'coloringStrategies'
 	],
-	#category : #Alce
+	#category : #'Alce-Famix-Traits'
 }
 
 { #category : #'as yet unclassified' }

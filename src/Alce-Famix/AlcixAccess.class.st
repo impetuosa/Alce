@@ -12,7 +12,7 @@ Class {
 { #category : #meta }
 AlcixAccess class >> annotation [
 
-	<FMClass: #Access super: #AlcixAccessible>
+	<FMClass: #AlcixAccess super: #AlcixAccessible>
 	<package: #'Alce-Famix'>
 	<generated>
 	^self

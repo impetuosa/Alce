@@ -9,7 +9,6 @@ Class {
 
 { #category : #accessing }
 AlceHorizontalColorPropagation >> colorsFor: anEntity [
-
 	self askForAcceptTo: anEntity.
 
 	^ colors at: anEntity
@@ -28,6 +27,14 @@ AlceHorizontalColorPropagation >> reset [
 
 	super reset 
 	verticalColor ifNotNil: [ verticalColor reset ]
+]
+
+{ #category : #'as yet unclassified' }
+AlceHorizontalColorPropagation >> selectingCategory: aSc [
+
+	super selectingCategory: aSc.
+
+	verticalColor ifNotNil: [ verticalColor selectingCategory: aSc ]
 ]
 
 { #category : #'as yet unclassified' }
