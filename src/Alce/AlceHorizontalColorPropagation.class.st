@@ -68,7 +68,7 @@ AlceHorizontalColorPropagation >> visitAccessModule: anAlcixAccessModule [
 AlceHorizontalColorPropagation >> visitAccessProject: anAlcixAccessProject [
 
 	^ self colorsFor: anAlcixAccessProject collection: [ :col | 
-		  col addAll: ((self tagsFor: anAlcixAccessProject) collect: #color).
+		  col addAll: ((self tagAssociationsFor: anAlcixAccessProject)).
 		  col addAll: (self colorsForAll: anAlcixAccessProject modules) ]
 ]
 
@@ -84,7 +84,7 @@ AlceHorizontalColorPropagation >> visitAlias: anAlcixAlias [
 AlceHorizontalColorPropagation >> visitArgument: anAlcixArgument [
 
 	self colorsFor: anAlcixArgument collection: [ :col | 
-		col addAll: ((self tagsFor: anAlcixArgument) collect: #color).
+		col addAll: (self tagAssociationsFor: anAlcixArgument).
 		col addAll: (self colorsForAll: anAlcixArgument assignments).
 		col addAll: (self colorsForAll: anAlcixArgument outgoingAccesses) ]
 ]

@@ -36,10 +36,9 @@ AlcixModule >> ast [
 
 	<FMProperty: #ast type: #Object>
 	<generated>
-	^ nil "
 	self astCannotLoad ifTrue: [ ^ ast ].
-	
-	^ ast ifNil: [ ast := self obtainAst ]"
+
+	^ ast ifNil: [ ast := self obtainAst ]
 ]
 
 { #category : #accessing }
@@ -126,7 +125,7 @@ AlcixModule >> stringContent [
 
 	<FMProperty: #stringContent type: #String>
 	<generated>
-	^ stringContent "ifNil: [ 
+	^ stringContent ifNil: [ 
 		  self anchor ifNotNil: [ 
 			  stringContent := (mooseModel anchorSolver
 				                    readEntity: self anchor
@@ -135,5 +134,5 @@ AlcixModule >> stringContent [
 					                    stringContent isString
 						                    ifTrue: [ stringContent ]
 						                    ifFalse: [ stringContent content ] ]) 
-				                   ifNil: [ '' ] ] ]"
+				                   ifNil: [ '' ] ] ]
 ]

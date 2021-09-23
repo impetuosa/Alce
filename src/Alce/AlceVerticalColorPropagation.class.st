@@ -12,24 +12,20 @@ AlceVerticalColorPropagation >> colorsFor: anAlcixClass collection: aFullBlockCl
 		aFullBlockClosure value: (colors at: anAlcixClass) ]
 ]
 
-{ #category : #'as yet unclassified' }
-AlceVerticalColorPropagation >> selectingCategory [
-
-	^ selectingCategory
-]
-
 { #category : #visiting }
 AlceVerticalColorPropagation >> visitAccessModule: anAlcixAccessModule [
 
-	self colorsFor: anAlcixAccessModule collection: [ :col | 
-		col addAll: ((self tagsFor: anAlcixAccessModule) collect: #color) ]
+	self
+		colorsFor: anAlcixAccessModule
+		collection: [ :col | 
+		col addAll: (self tagAssociationsFor: anAlcixAccessModule) ]
 ]
 
 { #category : #visiting }
 AlceVerticalColorPropagation >> visitAlias: anAlcixAlias [
 
 	self colorsFor: anAlcixAlias collection: [ :col | 
-		col addAll: ((self tagsFor: anAlcixAlias) collect: #color).
+		col addAll: (self tagAssociationsFor: anAlcixAlias).
 		col addAll: (self colorsFor: anAlcixAlias container).
 		col addAll: (self colorsFor: anAlcixAlias type) ]
 ]
@@ -51,7 +47,7 @@ AlceVerticalColorPropagation >> visitClass: anAlcixClass [
 	self colorsFor: anAlcixClass collection: [ :col | 
 		anAlcixClass superclass ifNotNil: [ :c | 
 			col addAll: (self colorsFor: c) ].
-		col addAll: ((self tagsFor: anAlcixClass) collect: #color).
+		col addAll: (self tagAssociationsFor: anAlcixClass).
 		col addAll: (self colorsFor: anAlcixClass container) ]
 ]
 
@@ -95,7 +91,7 @@ AlceVerticalColorPropagation >> visitForm: anAlcixReport [
 AlceVerticalColorPropagation >> visitFunction: anAlcixFunction [
 
 	self colorsFor: anAlcixFunction collection: [ :col | 
-		col addAll: ((self tagsFor: anAlcixFunction) collect: #color).
+		col addAll: (self tagAssociationsFor: anAlcixFunction).
 		col addAll: (self colorsFor: anAlcixFunction userType) ]
 ]
 
@@ -104,8 +100,7 @@ AlceVerticalColorPropagation >> visitLibrary: anAlcixLibrary [
 
 	self
 		colorsFor: anAlcixLibrary
-		collection: [ :col | 
-		col addAll: ((self tagsFor: anAlcixLibrary) collect: #color) ]
+		collection: [ :col | col addAll: (self tagAssociationsFor: anAlcixLibrary) ]
 ]
 
 { #category : #visiting }
@@ -141,7 +136,7 @@ AlceVerticalColorPropagation >> visitSubProcedure: anAlcixSubProcedure [
 AlceVerticalColorPropagation >> visitType: anAlcixPrimitiveType [
 
 	self colorsFor: anAlcixPrimitiveType collection: [ :col | 
-		col addAll: ((self tagsFor: anAlcixPrimitiveType) collect: #color).
+		col addAll: (self tagAssociationsFor: anAlcixPrimitiveType).
 		col addAll: (self colorsFor: anAlcixPrimitiveType container) ]
 ]
 

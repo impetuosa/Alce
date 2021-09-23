@@ -39,6 +39,46 @@ TAlceModel >> coloringStrategies [
 ]
 
 { #category : #'instance creation' }
+TAlceModel >> createArchitectureCategory [
+
+	| artifacts palette |
+	self allTagCategories
+		detect: [ :a | a name = 'Architecture' ]
+		ifFound: [ ^ self error: ' Already exists' ].
+
+	artifacts := self createTagCategoryNamed: 'Architecture'.
+
+	#( DataAccess UI Business Commun Communication ) do: [ :a | 
+		(self createTagNamed: a) addCategory: artifacts ].
+	palette := RSQualitativeColorPalette new set310 domain:
+		           artifacts markedTags.
+
+	artifacts markedTags do: [ :t | t color: (palette scale: t) ]
+]
+
+{ #category : #'instance creation' }
+TAlceModel >> createArtefactCategory [
+
+	| artifacts palette |
+	self allTagCategories
+		detect: [ :a | a name = 'Artefacts' ]
+		ifFound: [ ^ self error: ' Already exists' ].
+	artifacts := self createTagCategoryNamed: 'Artefacts'.
+
+	self entities
+		select: [ :a | a isKindOf: AlcixReference ]
+		thenCollect: [ :a | 
+			| tag |
+			a allTags ifEmpty: [ 
+				tag := self createTagNamed: a name.
+				tag addCategory: artifacts.
+				a tagWith: tag ] ] model allTags.
+	palette := RSQualitativeColorPalette new set310 domain: self allTags.
+
+	self allTags do: [ :a | a color: (palette scale: a) ]
+]
+
+{ #category : #'instance creation' }
 TAlceModel >> firstClassCitizen [
 	^ self modules , self classes , self forms , self reports
 		, self tables , self queries, self classAliases

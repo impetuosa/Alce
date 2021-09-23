@@ -11,7 +11,7 @@ Class {
 AlcePopularColorPropagation >> colorsFor: anEntity [
 
 	anEntity ifNil: [ ^ {  } ].
-
+	realStrategy ifNil: [ ^ {  } ].
 
 
 	^ colors

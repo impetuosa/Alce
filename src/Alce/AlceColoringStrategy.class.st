@@ -50,14 +50,23 @@ AlceColoringStrategy >> reset [
 ]
 
 { #category : #'as yet unclassified' }
+AlceColoringStrategy >> selectingCategory [
+
+	^ selectingCategory
+]
+
+{ #category : #'as yet unclassified' }
 AlceColoringStrategy >> selectingCategory: aSc [
 
 	selectingCategory := aSc
 ]
 
 { #category : #'as yet unclassified' }
-AlceColoringStrategy >> tagsFor: anAlcixPrimitiveType [
+AlceColoringStrategy >> tagAssociationsFor: anAlcixPrimitiveType [
 
-	^ anAlcixPrimitiveType tags select: [ :t | 
-		  t categories includes: self selectingCategory ]
+	| cl |
+	cl := anAlcixPrimitiveType tagAssociations select: [ :t | 
+		      t tag categories includes: self selectingCategory ].
+
+	^ cl
 ]
