@@ -2,5 +2,6 @@ Extension { #name : #MiAbstractBrowser }
 
 { #category : #'*Alce' }
 MiAbstractBrowser >> propagate [
-	buttonPropagate click
+
+	(MiPropagateCommand forSpecContext: self) execute
 ]
