@@ -35,3 +35,9 @@ AlcixLibrary >> isBuiltIn: anObject [
 	<generated>
 	isBuiltIn := anObject
 ]
+
+{ #category : #'as yet unclassified' }
+AlcixLibrary >> parentalModule [
+
+	^ self
+]

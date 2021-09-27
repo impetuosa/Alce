@@ -34,6 +34,11 @@ AlcixAccessModule >> isAccessModule [
 	^ true 
 ]
 
+{ #category : #'as yet unclassified' }
+AlcixAccessModule >> parentalModule [
+	^ self 
+]
+
 { #category : #accessing }
 AlcixAccessModule >> project [
 	"Relation named: #project type: #AlcixAccessProject opposite: #modules"
