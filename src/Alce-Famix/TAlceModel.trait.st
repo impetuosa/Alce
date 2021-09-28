@@ -48,7 +48,7 @@ TAlceModel >> createArchitectureCategory [
 
 	artifacts := self createTagCategoryNamed: 'Architecture'.
 
-	#( DataAccess UI Business Commun Communication ) do: [ :a | 
+	#( DataAccess UI Business Commun Communication Language 'COM Interoperability' 'Misc Libraries') do: [ :a | 
 		(self createTagNamed: a) addCategory: artifacts ].
 	palette := RSQualitativeColorPalette new set310 domain:
 		           artifacts markedTags.
@@ -60,10 +60,10 @@ TAlceModel >> createArchitectureCategory [
 TAlceModel >> createArtefactCategory [
 
 	| artifacts palette |
-	self allTagCategories
-		detect: [ :a | a name = 'Artefacts' ]
-		ifFound: [ ^ self error: ' Already exists' ].
-	artifacts := self createTagCategoryNamed: 'Artefacts'.
+	artifacts := self allTagCategories
+		             detect: [ :a | a name = 'Artefacts' ]
+		             ifNone: [ self createTagCategoryNamed: 'Artefacts' ].
+
 
 	self entities
 		select: [ :a | a isKindOf: AlcixReference ]
@@ -72,7 +72,7 @@ TAlceModel >> createArtefactCategory [
 			a allTags ifEmpty: [ 
 				tag := self createTagNamed: a name.
 				tag addCategory: artifacts.
-				a tagWith: tag ] ] model allTags.
+				a tagWith: tag ] ].
 	palette := RSQualitativeColorPalette new set310 domain: self allTags.
 
 	self allTags do: [ :a | a color: (palette scale: a) ]
