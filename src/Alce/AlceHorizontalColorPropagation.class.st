@@ -229,13 +229,23 @@ AlceHorizontalColorPropagation >> visitModel: anAlcixModel [
 { #category : #visiting }
 AlceHorizontalColorPropagation >> visitModule: anAlcixClass [
 
-	self visitUserType: anAlcixClass
+	self colorsFor: anAlcixClass collection: [ :col | 
+		col addAll: (self colorsForAll: anAlcixClass members).
+		col addAll: (self colorsForAll: anAlcixClass constants).
+		col addAll: (self colorsForAll: anAlcixClass invocables).
+		col addAll: (self colorsForAll: anAlcixClass globalVariables) ]
 ]
 
 { #category : #visiting }
 AlceHorizontalColorPropagation >> visitParameter: anAlcixParameter [
 
 	self visitTyped: anAlcixParameter
+]
+
+{ #category : #visiting }
+AlceHorizontalColorPropagation >> visitPrimitiveType: anAlcixPrimitiveType [
+
+	self colorsFor: anAlcixPrimitiveType collection: [ :col |  ]
 ]
 
 { #category : #visiting }
@@ -298,6 +308,5 @@ AlceHorizontalColorPropagation >> visitUserType: anAlcixClass [
 	self colorsFor: anAlcixClass collection: [ :col | 
 		col addAll: (self colorsForAll: anAlcixClass members).
 		col addAll: (self colorsForAll: anAlcixClass constants).
-		col addAll: (self colorsForAll: anAlcixClass invocables).
-		col addAll: (self colorsForAll: anAlcixClass globalVariables) ]
+		col addAll: (self colorsForAll: anAlcixClass invocables) ]
 ]
