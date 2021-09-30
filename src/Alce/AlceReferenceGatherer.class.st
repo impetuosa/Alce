@@ -163,7 +163,7 @@ AlceReferenceGatherer >> visitAccessWrite: aJinDAMAccessWrite [
 				write outgoingAccesses: (self adaptToAccess: rightRefs) ]
 			ifFalse: [ 
 				references := OrderedCollection new.
-				aJinDAMAccessWrite writeReference accept: self.
+				aJinDAMAccessWrite writeReference ifNotNil: [ :w| w accept: self].
 				leftRefs := references.
 				write := loader createAssignment.
 				write writeElement: (self adaptToAccess: leftRefs).
