@@ -7,17 +7,13 @@ Class {
 { #category : #baselines }
 BaselineOfAlce >> baseline: spec [
 	<baseline>
-	spec
-		baseline: 'PostgreSQLParser'
-		with: [ spec
-				repository: 'github://impetuosa/PostgreSQLParser/src';
-				loads: #dev].
+
 	spec
 		baseline: 'Jindao'
 		with: [ spec repository: 'github://impetuosa/Jindao' ].
 	spec
 		package: 'Alce'
-		with: [ spec requires: #(Jindao PostgreSQLParser) ].
+		with: [ spec requires: #(Jindao) ].
 		
 	spec
 		package: 'Alce-Famix'
