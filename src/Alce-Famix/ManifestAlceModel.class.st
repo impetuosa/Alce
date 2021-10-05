@@ -6,5 +6,5 @@ Class {
 
 { #category : #asserting }
 ManifestAlceModel class >> shouldBeIncludedByDefaultInMetamodelsWith: aCollectionOfPackages [
-	^ true
+	^ false
 ]

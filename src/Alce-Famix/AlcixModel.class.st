@@ -9,7 +9,7 @@ Class {
 { #category : #accessing }
 AlcixModel class >> allSubmetamodelsPackagesNames [
 	<generated>
-	^ #(#'Moose-Query' #'Famix-Traits' #'Alce-Famix' )
+	^ #( #'Alce-Famix' )
 ]
 
 { #category : #meta }

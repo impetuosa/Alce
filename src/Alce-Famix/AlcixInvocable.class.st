@@ -47,6 +47,12 @@ AlcixInvocable >> addReturn: anObject [
 ]
 
 { #category : #accessing }
+AlcixInvocable >> incomingInvocations [
+
+	^ incomingAccesses select: [ :a | a isKindOf: AlcixInvocation ]
+]
+
+{ #category : #accessing }
 AlcixInvocable >> localVariables [
 	"Relation named: #localVariables type: #AlcixLocalVariable opposite: #invocable"
 
@@ -72,6 +78,12 @@ AlcixInvocable >> localVariablesGroup [
 { #category : #accessing }
 AlcixInvocable >> name [
 	^ selector
+]
+
+{ #category : #accessing }
+AlcixInvocable >> outgoingInvocations [
+
+	^ outgoingAccesses select: [ :a | a isKindOf: AlcixInvocation ]
 ]
 
 { #category : #accessing }
