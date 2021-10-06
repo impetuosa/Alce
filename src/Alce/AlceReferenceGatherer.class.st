@@ -127,13 +127,19 @@ AlceReferenceGatherer >> visitAccessModule: aJinDAMAccessModule [
 AlceReferenceGatherer >> visitAccessRead: aJinDAMAccessRead [
 
 	| refs access accesses |
-	inWriteContext ifFalse: [ 
+	
 		refs := references.
-		references := OrderedCollection new ].
+		references := OrderedCollection new .
 
 	aJinDAMAccessRead readReference accept: self.
-	inWriteContext ifTrue: [ ^ self ].
+	
+	inWriteContext ifTrue: [ 
+		references do: [ : r | r anchor: aJinDAMAccessRead anchor ].
+		refs addAll: references.
+		references := refs.
+	^ self ].
 
+	references do: [ : r | r anchor: aJinDAMAccessRead anchor ].
 	accesses := references reject: [ :r | r isKindOf: AlcixAccess ].
 	references removeAll: accesses.
 
@@ -270,6 +276,7 @@ AlceReferenceGatherer >> visitInvocable: aJinDAMFunction [
 
 	| invocation |
 	invocation := loader newInvocation
+						  anchor: aJinDAMFunction anchor; 
 		              addCandidate: (loader instanceFor: aJinDAMFunction);
 		              yourself.
 	references add: invocation

@@ -39,6 +39,18 @@ TAlceModel >> coloringStrategies [
 ]
 
 { #category : #'instance creation' }
+TAlceModel >> coloringStrategyFor: aClass [
+
+	| inst |
+	^ self coloringStrategies
+		  detect: [ :a | a class = aClass ]
+		  ifNone: [ 
+			  inst := aClass new.
+			  self installColoringStrategy: inst.
+			  inst ]
+]
+
+{ #category : #'instance creation' }
 TAlceModel >> createArchitectureCategory [
 
 	| artifacts palette |

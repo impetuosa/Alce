@@ -43,6 +43,14 @@ AlceColoringStrategy >> initialize [
 ]
 
 { #category : #'as yet unclassified' }
+AlceColoringStrategy >> mostPopular [
+
+	^ AlcePopularColorPropagation new
+		  realStrategy: self;
+		  yourself
+]
+
+{ #category : #'as yet unclassified' }
 AlceColoringStrategy >> reset [
 
 	visited := Dictionary new.

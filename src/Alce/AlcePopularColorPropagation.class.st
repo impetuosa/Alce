@@ -7,6 +7,12 @@ Class {
 	#category : #'Alce-Coloring'
 }
 
+{ #category : #accessing }
+AlcePopularColorPropagation >> colorFor: anAlcixAttribute [
+
+	^ self colorsFor: anAlcixAttribute
+]
+
 { #category : #initialization }
 AlcePopularColorPropagation >> colorsFor: anEntity [
 
@@ -14,15 +20,37 @@ AlcePopularColorPropagation >> colorsFor: anEntity [
 	realStrategy ifNil: [ ^ {  } ].
 
 
-	^ colors
-		  at: anEntity
-		  ifAbsentPut: [ 
-		  self mostPopularOfAll: (realStrategy colorsFor: anEntity) ]
+	^ colors at: anEntity ifAbsentPut: [ 
+		  self
+			  mostPopularOfAll: (realStrategy colorsFor: anEntity)
+			  ifNone: [ Color transparent ] ]
+]
+
+{ #category : #initialization }
+AlcePopularColorPropagation >> mostPopular [
+
+	^ self
 ]
 
 { #category : #initialization }
 AlcePopularColorPropagation >> mostPopularOfAll: aCollection [
 
-	^ ((aCollection groupedBy: #yourself) associations sort:
-		   #size descending) first key
+	self mostPopularOfAll: aCollection ifNone: [  self error: 'Collection is empty' ]
+]
+
+{ #category : #initialization }
+AlcePopularColorPropagation >> mostPopularOfAll: aCollection ifNone: aBlock [
+
+	| tags |
+	tags := (aCollection groupedBy: #yourself) associations sort: [ :a :b | 
+		        a value size > b value size ].
+	^ tags
+		  ifEmpty: [ aBlock value ]
+		  ifNotEmpty: [ tags first key tag color ]
+]
+
+{ #category : #initialization }
+AlcePopularColorPropagation >> realStrategy: aStrategy [
+
+	realStrategy := aStrategy
 ]

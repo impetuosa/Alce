@@ -297,6 +297,12 @@ AlceHorizontalColorPropagation >> visitTyped: anAlcixParameter [
 ]
 
 { #category : #visiting }
+AlceHorizontalColorPropagation >> visitUndefinedElement: anAlcixUndefinedElement [
+
+	self colorsFor: anAlcixUndefinedElement collection: [ :col |  ]
+]
+
+{ #category : #visiting }
 AlceHorizontalColorPropagation >> visitUnknownElement: anAlcixUnknownElement [
 
 	self colorsFor: anAlcixUnknownElement collection: [ :col |  ]

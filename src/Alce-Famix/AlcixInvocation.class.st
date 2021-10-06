@@ -26,6 +26,13 @@ AlcixInvocation >> name [
 ]
 
 { #category : #accessing }
+AlcixInvocation >> selector [
+
+	self assert: candidates size = 1.
+	^ candidates first selector
+]
+
+{ #category : #accessing }
 AlcixInvocation >> userType [
 	^ withAccesses userType 
 ]
