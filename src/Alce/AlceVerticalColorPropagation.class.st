@@ -13,6 +13,12 @@ AlceVerticalColorPropagation >> colorsFor: anAlcixClass collection: aFullBlockCl
 ]
 
 { #category : #visiting }
+AlceVerticalColorPropagation >> visitAccess: anAlcixAlias [
+
+	self colorsFor: anAlcixAlias collection: [ :col |  ]
+]
+
+{ #category : #visiting }
 AlceVerticalColorPropagation >> visitAccessModule: anAlcixAccessModule [
 
 	self
@@ -36,6 +42,12 @@ AlceVerticalColorPropagation >> visitArgument: anAlcixArgument [
 ]
 
 { #category : #visiting }
+AlceVerticalColorPropagation >> visitAttribute: anAlcixAttribute [
+
+	self visitFunction: anAlcixAttribute
+]
+
+{ #category : #visiting }
 AlceVerticalColorPropagation >> visitAttributeAccessor: anAlcixAttributeAccessor [
 
 	^ self visitFunction: anAlcixAttributeAccessor
@@ -52,6 +64,13 @@ AlceVerticalColorPropagation >> visitClass: anAlcixClass [
 ]
 
 { #category : #visiting }
+AlceVerticalColorPropagation >> visitConstant: anAlcixConstant [
+	self colorsFor: anAlcixConstant collection: [ :col | 
+		col addAll: (self tagAssociationsFor: anAlcixConstant).
+		col addAll: (self colorsFor: anAlcixConstant owner ) ]
+]
+
+{ #category : #visiting }
 AlceVerticalColorPropagation >> visitDatabaseType: anAlcixDatabaseType [
 
 	^ self visitType: anAlcixDatabaseType
@@ -61,6 +80,14 @@ AlceVerticalColorPropagation >> visitDatabaseType: anAlcixDatabaseType [
 AlceVerticalColorPropagation >> visitEnum: anAlcixEnum [
 
 	^ self visitType: anAlcixEnum
+]
+
+{ #category : #visiting }
+AlceVerticalColorPropagation >> visitEnumValue: anAlcixEnumValue [ 
+
+	self colorsFor: anAlcixEnumValue collection: [ :col | 
+		col addAll: (self tagAssociationsFor: anAlcixEnumValue).
+		col addAll: (self colorsFor: anAlcixEnumValue enum) ]
 ]
 
 { #category : #visiting }
@@ -96,6 +123,12 @@ AlceVerticalColorPropagation >> visitFunction: anAlcixFunction [
 ]
 
 { #category : #visiting }
+AlceVerticalColorPropagation >> visitInvocation: anAlcixAlias [
+
+	self colorsFor: anAlcixAlias collection: [ :col |  ]
+]
+
+{ #category : #visiting }
 AlceVerticalColorPropagation >> visitLibrary: anAlcixLibrary [
 
 	self
@@ -115,9 +148,21 @@ AlceVerticalColorPropagation >> visitModule: anAlcixModule [
 ]
 
 { #category : #visiting }
+AlceVerticalColorPropagation >> visitParameter: anAlcixAlias [
+
+	self colorsFor: anAlcixAlias collection: [ :col |  ]
+]
+
+{ #category : #visiting }
 AlceVerticalColorPropagation >> visitPrimitiveType: anAlcixPrimitiveType [
 
 	self visitType: anAlcixPrimitiveType
+]
+
+{ #category : #visiting }
+AlceVerticalColorPropagation >> visitQuery: anAlcixReport [
+
+	^ self visitClass: anAlcixReport
 ]
 
 { #category : #visiting }
@@ -130,6 +175,12 @@ AlceVerticalColorPropagation >> visitReport: anAlcixReport [
 AlceVerticalColorPropagation >> visitSubProcedure: anAlcixSubProcedure [
 
 	^ self visitFunction: anAlcixSubProcedure
+]
+
+{ #category : #visiting }
+AlceVerticalColorPropagation >> visitTable: anAlcixReport [
+
+	^ self visitClass: anAlcixReport
 ]
 
 { #category : #visiting }
