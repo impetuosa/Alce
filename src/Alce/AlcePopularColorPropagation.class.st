@@ -42,8 +42,8 @@ AlcePopularColorPropagation >> mostPopularOfAll: aCollection [
 AlcePopularColorPropagation >> mostPopularOfAll: aCollection ifNone: aBlock [
 
 	| tags |
-	tags := (aCollection groupedBy: #yourself) associations sort:
-		        #size descending.
+	tags := (aCollection groupedBy: #yourself) associations sort: [ :a :b | 
+		        a value size > b value size ].
 	^ tags
 		  ifEmpty: [ aBlock value ]
 		  ifNotEmpty: [ tags first key tag color ]
