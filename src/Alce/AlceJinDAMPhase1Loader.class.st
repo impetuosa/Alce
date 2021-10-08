@@ -30,6 +30,12 @@ AlceJinDAMPhase1Loader >> runOn: anAlceJinDAMTwoPhaseLoader [
 	loader dam entities do: [ :e | e accept: self ]
 ]
 
+{ #category : #'as yet unclassified' }
+AlceJinDAMPhase1Loader >> visiInitializeProcess: aJinDAMInitializeProcess [
+
+	self visitSubProcedure: aJinDAMInitializeProcess
+]
+
 { #category : #visiting }
 AlceJinDAMPhase1Loader >> visitAccessModule: aJinDAMAccessModule [
 
@@ -73,11 +79,14 @@ AlceJinDAMPhase1Loader >> visitArgument: aJinDAMObject [
 { #category : #visiting }
 AlceJinDAMPhase1Loader >> visitAttribute: aJinDAMObject [
 
-	^ self instantiate: AlcixAttribute for: aJinDAMObject with: [ :obj | 
-		obj name: aJinDAMObject name. 	
-		obj instantiatesObjectOnDefinition: aJinDAMObject instantiatesObjectOnDefinition. 
-		obj visibility: aJinDAMObject visibility.
-	]
+	^ self
+		  instantiate: AlcixAttribute
+		  for: aJinDAMObject
+		  with: [ :obj | 
+			  obj name: aJinDAMObject name.
+			  obj instantiatesObjectOnDefinition:
+				  aJinDAMObject instantiatesObjectOnDefinition.
+			  obj visibility: aJinDAMObject visibility ]
 ]
 
 { #category : #visiting }
@@ -96,9 +105,16 @@ AlceJinDAMPhase1Loader >> visitAttributeAccessor: aJinDAMObject [
 AlceJinDAMPhase1Loader >> visitClass: aJinDAMObject [
 
 	^ self instantiate: AlcixClass for: aJinDAMObject with: [ :obj | 
+		  obj stringContent: aJinDAMObject src. 
 		  obj name: aJinDAMObject name.
 		  obj visibility: aJinDAMObject visibility.
 		  obj astCannotLoad: aJinDAMObject astCannotLoad ]
+]
+
+{ #category : #visiting }
+AlceJinDAMPhase1Loader >> visitCollection: aCollection [
+
+	aCollection do: [ :a | a accept: self ]
 ]
 
 { #category : #visiting }
@@ -147,7 +163,6 @@ AlceJinDAMPhase1Loader >> visitEvent: aJinDAMObject [
 
 { #category : #visiting }
 AlceJinDAMPhase1Loader >> visitExpressionReference: aJinDAMObject [
-
 	"^ self
 		  instantiate: AlcixExpression
 		  for: aJinDAMObject
@@ -185,14 +200,13 @@ AlceJinDAMPhase1Loader >> visitExternalSubProcedure: aJinDAMObject [
 ]
 
 { #category : #visiting }
-AlceJinDAMPhase1Loader >> visitForm:  aJinDAMObject [
+AlceJinDAMPhase1Loader >> visitForm: aJinDAMObject [
 
 	^ self instantiate: AlcixForm for: aJinDAMObject with: [ :obj | 
+		  obj stringContent: aJinDAMObject src.
 		  obj name: aJinDAMObject name.
 		  obj visibility: aJinDAMObject visibility.
 		  obj astCannotLoad: aJinDAMObject astCannotLoad ]
-	
-
 ]
 
 { #category : #visiting }
@@ -242,13 +256,15 @@ AlceJinDAMPhase1Loader >> visitLocalVariable: aJinDAMObject [
 { #category : #visiting }
 AlceJinDAMPhase1Loader >> visitMemberReference: aJinDAMObject [
 
-	"^ self instantiate: AlcixAccess for: aJinDAMObject with: [ :obj | obj name: aJinDAMObject name ]"
+	aJinDAMObject candidate ifNotNil: [ :c | "^ self instantiate: AlcixAccess for: aJinDAMObject with: [ :obj | obj name: aJinDAMObject name ]" 
+		c accept: self ]
 ]
 
 { #category : #visiting }
 AlceJinDAMPhase1Loader >> visitModule: aJinDAMObject [
 
 	^ self instantiate: AlcixModule for: aJinDAMObject with: [ :obj | 
+		 obj stringContent: aJinDAMObject src. 
 		  obj name: aJinDAMObject name.
 		  obj visibility: aJinDAMObject visibility.
 		  obj astCannotLoad: aJinDAMObject astCannotLoad ]
@@ -289,6 +305,7 @@ AlceJinDAMPhase1Loader >> visitPrimitiveType: aJinDAMObject [
 AlceJinDAMPhase1Loader >> visitQuery: aJinDAMObject [
 
 	^ self instantiate: AlcixQuery for: aJinDAMObject with: [ :obj | 
+		  obj stringContent: aJinDAMObject src.
 		  obj name: aJinDAMObject name.
 		  obj visibility: aJinDAMObject visibility.
 		  obj astCannotLoad: aJinDAMObject astCannotLoad ]
@@ -298,6 +315,7 @@ AlceJinDAMPhase1Loader >> visitQuery: aJinDAMObject [
 AlceJinDAMPhase1Loader >> visitReport: aJinDAMObject [
 
 	^ self instantiate: AlcixReport for: aJinDAMObject with: [ :obj | 
+		  obj stringContent: aJinDAMObject src.
 		  obj name: aJinDAMObject name.
 		  obj visibility: aJinDAMObject visibility.
 		  obj astCannotLoad: aJinDAMObject astCannotLoad ]
@@ -341,6 +359,11 @@ AlceJinDAMPhase1Loader >> visitTableField: aJinDAMObject [
 		obj size: aJinDAMObject size. 
 	]
 	
+
+]
+
+{ #category : #'+' }
+AlceJinDAMPhase1Loader >> visitTableRelation: aJinDAMTableRelation [ 
 
 ]
 

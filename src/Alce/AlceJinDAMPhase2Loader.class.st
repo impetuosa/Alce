@@ -87,6 +87,12 @@ AlceJinDAMPhase2Loader >> unknownElement [
 	 ^ loader unknownElement
 ]
 
+{ #category : #'as yet unclassified' }
+AlceJinDAMPhase2Loader >> visiInitializeProcess: aJinDAMInitializeProcess [
+
+	self visitSubProcedure: aJinDAMInitializeProcess
+]
+
 { #category : #visiting }
 AlceJinDAMPhase2Loader >> visitAccessModule: aJinDAMAccessModule [
 
@@ -361,6 +367,12 @@ AlceJinDAMPhase2Loader >> visitTable: aJinDAMTable [
 AlceJinDAMPhase2Loader >> visitTableField: aJinDAMTableField [
 
 	self visitTypedEntity: aJinDAMTableField
+]
+
+{ #category : #visiting }
+AlceJinDAMPhase2Loader >> visitTableRelation: aJinDAMTableRelation [
+
+	
 ]
 
 { #category : #visiting }

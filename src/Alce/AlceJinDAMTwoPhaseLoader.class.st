@@ -73,7 +73,7 @@ AlceJinDAMTwoPhaseLoader >> newInvocation [
 { #category : #'as yet unclassified' }
 AlceJinDAMTwoPhaseLoader >> register: anAlcixAccessModule for: aJinDAMAccessModule [
 
-	self assert: (instances includesKey: aJinDAMAccessModule) not.
+	(instances includesKey: aJinDAMAccessModule) ifTrue: [ ^ self ].
 	instances at: aJinDAMAccessModule put: anAlcixAccessModule
 ]
 

@@ -127,25 +127,24 @@ AlceReferenceGatherer >> visitAccessModule: aJinDAMAccessModule [
 AlceReferenceGatherer >> visitAccessRead: aJinDAMAccessRead [
 
 	| refs access accesses |
-	
-		refs := references.
-		references := OrderedCollection new .
+	refs := references.
+	references := OrderedCollection new.
 
 	aJinDAMAccessRead readReference accept: self.
-	
+
 	inWriteContext ifTrue: [ 
-		references do: [ : r | r anchor: aJinDAMAccessRead anchor ].
+		references do: [ :r | r anchor: aJinDAMAccessRead anchor ].
 		refs addAll: references.
 		references := refs.
-	^ self ].
+		^ self ].
 
-	references do: [ : r | r anchor: aJinDAMAccessRead anchor ].
+	references do: [ :r | r anchor: aJinDAMAccessRead anchor ].
 	accesses := references reject: [ :r | r isKindOf: AlcixAccess ].
 	references removeAll: accesses.
 
 	accesses ifNotEmpty: [ 
 		access := loader createAccess.
-		access anchor: aJinDAMAccessRead anchor. 
+		access anchor: aJinDAMAccessRead anchor.
 		access candidates: accesses.
 		references add: access ].
 	refs addAll: references.
@@ -359,6 +358,12 @@ AlceReferenceGatherer >> visitPrimitiveType: aJinDAMPrimitiveType [
 ]
 
 { #category : #visiting }
+AlceReferenceGatherer >> visitQuery: aJinDAMQuery [
+
+	self visitType: aJinDAMQuery
+]
+
+{ #category : #visiting }
 AlceReferenceGatherer >> visitReport: aJinDAMReport [
 
 	^ self visitClass: aJinDAMReport
@@ -368,6 +373,18 @@ AlceReferenceGatherer >> visitReport: aJinDAMReport [
 AlceReferenceGatherer >> visitSubProcedure: aJinDAMSubProcedure [
 
 	^ self visitInvocable: aJinDAMSubProcedure
+]
+
+{ #category : #visiting }
+AlceReferenceGatherer >> visitTable: aJinDAMTable [
+
+	self visitType: aJinDAMTable
+]
+
+{ #category : #visiting }
+AlceReferenceGatherer >> visitTableField: aJinDAMTableField [
+
+	self visitAccessibleElement: aJinDAMTableField
 ]
 
 { #category : #visiting }

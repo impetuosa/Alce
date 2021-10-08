@@ -136,3 +136,9 @@ AlcixModule >> stringContent [
 						                    ifFalse: [ stringContent content ] ]) 
 				                   ifNil: [ '' ] ] ]
 ]
+
+{ #category : #'as yet unclassified' }
+AlcixModule >> stringContent: aContent [
+
+	stringContent := aContent
+]

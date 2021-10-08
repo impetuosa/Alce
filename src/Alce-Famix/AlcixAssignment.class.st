@@ -110,6 +110,12 @@ AlcixAssignment >> selector [
 ]
 
 { #category : #accessing }
+AlcixAssignment >> threeWayCompareTo: anAlcixInvocation [
+
+	^ self printString threeWayCompareTo: anAlcixInvocation printString 
+]
+
+{ #category : #accessing }
 AlcixAssignment >> userType [
 	 ^ owner userType 
 ]
