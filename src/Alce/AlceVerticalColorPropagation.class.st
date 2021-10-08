@@ -42,6 +42,12 @@ AlceVerticalColorPropagation >> visitArgument: anAlcixArgument [
 ]
 
 { #category : #visiting }
+AlceVerticalColorPropagation >> visitAssignment: anAlcixAlias [
+
+	self colorsFor: anAlcixAlias collection: [ :col |  ]
+]
+
+{ #category : #visiting }
 AlceVerticalColorPropagation >> visitAttribute: anAlcixAttribute [
 
 	self visitFunction: anAlcixAttribute
