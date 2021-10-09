@@ -30,12 +30,6 @@ AlceJinDAMPhase1Loader >> runOn: anAlceJinDAMTwoPhaseLoader [
 	loader dam entities do: [ :e | e accept: self ]
 ]
 
-{ #category : #'as yet unclassified' }
-AlceJinDAMPhase1Loader >> visiInitializeProcess: aJinDAMInitializeProcess [
-
-	self visitSubProcedure: aJinDAMInitializeProcess
-]
-
 { #category : #visiting }
 AlceJinDAMPhase1Loader >> visitAccessModule: aJinDAMAccessModule [
 
@@ -216,6 +210,12 @@ AlceJinDAMPhase1Loader >> visitFunction: aJinDAMObject [
 		obj selector: aJinDAMObject selector. 
 		obj visibility: aJinDAMObject visibility. 
 		]
+]
+
+{ #category : #'as yet unclassified' }
+AlceJinDAMPhase1Loader >> visitInitializeProcess: aJinDAMInitializeProcess [
+
+	self visitSubProcedure: aJinDAMInitializeProcess
 ]
 
 { #category : #visiting }

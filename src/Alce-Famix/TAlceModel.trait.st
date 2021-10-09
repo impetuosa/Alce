@@ -54,13 +54,13 @@ TAlceModel >> coloringStrategyFor: aClass [
 TAlceModel >> createArchitectureCategory [
 
 	| artifacts palette |
-	self allTagCategories
-		detect: [ :a | a name = 'Architecture' ]
-		ifFound: [ ^ self error: ' Already exists' ].
+	artifacts := self allTagCategories
+		             detect: [ :a | a name = 'Architecture' ]
+		             ifNone: [ self createTagCategoryNamed: 'Architecture' ].
 
-	artifacts := self createTagCategoryNamed: 'Architecture'.
 
-	#( DataAccess UI Business Commun Communication Language 'COM Interoperability' 'Misc Libraries') do: [ :a | 
+	#( DataAccess UI Business Commun Communication Language 'COM Interoperability'
+	   'Misc Libraries' 'Reflection' ) do: [ :a | 
 		(self createTagNamed: a) addCategory: artifacts ].
 	palette := RSQualitativeColorPalette new set310 domain:
 		           artifacts markedTags.

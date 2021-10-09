@@ -77,6 +77,17 @@ AlcixEntity >> isAssignment [
 ]
 
 { #category : #testing }
+AlcixEntity >> isUndefined [
+	 ^ false. 
+]
+
+{ #category : #testing }
 AlcixEntity >> isUnknown [ 
 	 ^ false. 
+]
+
+{ #category : #testing }
+AlcixEntity >> isUnknownOrUndefined [
+
+	^ self isUnknown or: [ self isUndefined ]
 ]

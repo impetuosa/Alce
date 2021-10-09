@@ -19,11 +19,15 @@ AlcePopularColorPropagation >> colorsFor: anEntity [
 	anEntity ifNil: [ ^ {  } ].
 	realStrategy ifNil: [ ^ {  } ].
 
-
+	[ 
 	^ colors at: anEntity ifAbsentPut: [ 
 		  self
 			  mostPopularOfAll: (realStrategy colorsFor: anEntity)
-			  ifNone: [ Color transparent ] ]
+			  ifNone: [ Color transparent ] ] ]
+		on: Error
+		do: [ :e | 
+			realStrategy visited removeKey: anEntity.
+			self halt ]
 ]
 
 { #category : #initialization }

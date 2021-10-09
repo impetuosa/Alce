@@ -48,7 +48,7 @@ AlcixWithAccesses >> assignments [
 AlcixWithAccesses >> assignments: anObject [
 
 	<generated>
-	assignments value: anObject
+	assignments value: anObject.
 ]
 
 { #category : #navigation }

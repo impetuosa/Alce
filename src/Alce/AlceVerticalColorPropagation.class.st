@@ -178,6 +178,12 @@ AlceVerticalColorPropagation >> visitReport: anAlcixReport [
 ]
 
 { #category : #visiting }
+AlceVerticalColorPropagation >> visitReturn: anAlcixReturn [
+
+	self colorsFor: anAlcixReturn collection: [ :col |  ]
+]
+
+{ #category : #visiting }
 AlceVerticalColorPropagation >> visitSubProcedure: anAlcixSubProcedure [
 
 	^ self visitFunction: anAlcixSubProcedure
@@ -198,8 +204,11 @@ AlceVerticalColorPropagation >> visitType: anAlcixPrimitiveType [
 ]
 
 { #category : #visiting }
-AlceVerticalColorPropagation >> visitTyped: anAlcixLocalVariable [ 
-	self shouldBeImplemented.
+AlceVerticalColorPropagation >> visitTyped: anAlcixLocalVariable [
+
+	self colorsFor: anAlcixLocalVariable collection: [ :col | 
+		col addAll: (self tagAssociationsFor: anAlcixLocalVariable).
+		col addAll: (self colorsFor: anAlcixLocalVariable invocable) ]
 ]
 
 { #category : #visiting }
@@ -218,4 +227,10 @@ AlceVerticalColorPropagation >> visitUnknownElement: anAlcixUnknownElement [
 AlceVerticalColorPropagation >> visitUserType: anAlcixUserType [
 
 	^ self visitType: anAlcixUserType
+]
+
+{ #category : #accessing }
+AlceVerticalColorPropagation >> visited [
+
+	^ visited
 ]

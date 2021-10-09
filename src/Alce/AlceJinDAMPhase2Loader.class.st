@@ -87,12 +87,6 @@ AlceJinDAMPhase2Loader >> unknownElement [
 	 ^ loader unknownElement
 ]
 
-{ #category : #'as yet unclassified' }
-AlceJinDAMPhase2Loader >> visiInitializeProcess: aJinDAMInitializeProcess [
-
-	self visitSubProcedure: aJinDAMInitializeProcess
-]
-
 { #category : #visiting }
 AlceJinDAMPhase2Loader >> visitAccessModule: aJinDAMAccessModule [
 
@@ -249,6 +243,11 @@ AlceJinDAMPhase2Loader >> visitFunction: aJinDAMFunction [
 	self visitWithParameters: aJinDAMFunction.
 	self visitWithLocalVariables: aJinDAMFunction.
 	self visitWithAccesses: aJinDAMFunction
+]
+
+{ #category : #'as yet unclassified' }
+AlceJinDAMPhase2Loader >> visitInitializeProcess: aJinDAMInitializeProcess [
+	self visitSubProcedure: aJinDAMInitializeProcess
 ]
 
 { #category : #visiting }
@@ -431,7 +430,7 @@ AlceJinDAMPhase2Loader >> visitWithAccesses: aJinDAMFunction [
 	access ifNotEmpty: [ alcix outgoingAccesses: access. ].
 	
 	assignments := all select: [ :a | a isKindOf: AlcixAssignment ].
-	assignments ifNotEmpty: [ alcix assignments: assignments ].
+	assignments ifNotEmpty: [ alcix assignments: assignments. ].
 	
 	returns := all select: [ :a | a isKindOf: AlcixReturn ].
 	returns ifNotEmpty: [ alcix returns: returns ].

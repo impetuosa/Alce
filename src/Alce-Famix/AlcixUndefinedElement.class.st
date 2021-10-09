@@ -27,6 +27,11 @@ AlcixUndefinedElement >> candidate [
 ]
 
 { #category : #accessing }
+AlcixUndefinedElement >> isUndefined [
+	 ^ false. 
+]
+
+{ #category : #accessing }
 AlcixUndefinedElement >> name [
 
 	^ 'UNDEFINED'

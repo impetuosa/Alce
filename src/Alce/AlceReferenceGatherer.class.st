@@ -371,7 +371,7 @@ AlceReferenceGatherer >> visitReport: aJinDAMReport [
 
 { #category : #visiting }
 AlceReferenceGatherer >> visitSubProcedure: aJinDAMSubProcedure [
-
+aJinDAMSubProcedure selector = '__INITIALIZE_WIDGET_FROM_UI_CONFIGURATION' ifTrue: [ 1 halt ].
 	^ self visitInvocable: aJinDAMSubProcedure
 ]
 
