@@ -16,7 +16,7 @@ TAlceModel >> accept: aVisitor [
 TAlceModel >> anchorSolver [
 
 	^ anchorSolver ifNil: [ 
-		  anchorSolver := AlceAnchorSolver new.
+		  anchorSolver := JinAnchorSolver new.
 		  anchorSolver model: self.
 		  anchorSolver ]
 ]
