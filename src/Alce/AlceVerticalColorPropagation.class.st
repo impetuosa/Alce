@@ -4,14 +4,6 @@ Class {
 	#category : #'Alce-Coloring'
 }
 
-{ #category : #'as yet unclassified' }
-AlceVerticalColorPropagation >> colorsFor: anAlcixClass collection: aFullBlockClosure [
-
-	colors at: anAlcixClass ifAbsent: [ 
-		colors at: anAlcixClass put: OrderedCollection new.
-		aFullBlockClosure value: (colors at: anAlcixClass) ]
-]
-
 { #category : #visiting }
 AlceVerticalColorPropagation >> visitAccess: anAlcixAlias [
 
@@ -193,6 +185,12 @@ AlceVerticalColorPropagation >> visitSubProcedure: anAlcixSubProcedure [
 AlceVerticalColorPropagation >> visitTable: anAlcixReport [
 
 	^ self visitClass: anAlcixReport
+]
+
+{ #category : #visiting }
+AlceVerticalColorPropagation >> visitTableField: anAlcixAttribute [
+
+	self visitFunction: anAlcixAttribute
 ]
 
 { #category : #visiting }

@@ -7,21 +7,6 @@ Class {
 	#category : #'Alce-Coloring'
 }
 
-{ #category : #accessing }
-AlceHorizontalColorPropagation >> colorsFor: anEntity [
-	self askForAcceptTo: anEntity.
-
-	^ colors at: anEntity
-]
-
-{ #category : #'as yet unclassified' }
-AlceHorizontalColorPropagation >> colorsFor: anAlcixClass collection: aFullBlockClosure [
-
-	colors at: anAlcixClass ifAbsent: [ 
-		colors at: anAlcixClass put: OrderedCollection new.
-		aFullBlockClosure value: (colors at: anAlcixClass) ]
-]
-
 { #category : #visiting }
 AlceHorizontalColorPropagation >> reset [
 

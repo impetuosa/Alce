@@ -26,8 +26,9 @@ AlcePopularColorPropagation >> colorsFor: anEntity [
 			  ifNone: [ Color transparent ] ] ]
 		on: Error
 		do: [ :e | 
+			self haltOnce. 
 			realStrategy visited removeKey: anEntity.
-			self halt ]
+ ]
 ]
 
 { #category : #initialization }

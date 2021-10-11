@@ -24,7 +24,19 @@ AlceColoringStrategy >> colorsFor: anEntity [
 	self askForAcceptTo: anEntity.
 
 
-	^ colors at: anEntity
+	^ (colors at: anEntity) collect: [ :a | 
+		  AlceTagAssociationWrapDueTo new
+			  wrapped: a;
+			  dueTo: anEntity;
+			  yourself ]
+]
+
+{ #category : #'as yet unclassified' }
+AlceColoringStrategy >> colorsFor: anAlcixClass collection: aFullBlockClosure [
+
+	colors at: anAlcixClass ifAbsent: [ 
+		colors at: anAlcixClass put: OrderedCollection new.
+		aFullBlockClosure value: (colors at: anAlcixClass) ]
 ]
 
 { #category : #'as yet unclassified' }
