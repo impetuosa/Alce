@@ -301,3 +301,9 @@ AlceHorizontalColorPropagation >> visitUserType: anAlcixClass [
 		col addAll: (self colorsForAll: anAlcixClass constants).
 		col addAll: (self colorsForAll: anAlcixClass invocables) ]
 ]
+
+{ #category : #accessing }
+AlceHorizontalColorPropagation >> visited [
+
+	^ visited
+]

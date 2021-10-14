@@ -24,8 +24,25 @@ AlceTagAssociationWrapDueTo >> dueTo: anEntity [
 AlceTagAssociationWrapDueTo >> dueToChain [
 
 	^ (wrapped isKindOf: FamixTagAssociation)
-		  ifTrue: [ {  } ]
+		  ifTrue: [ {  dueTo } ]
 		  ifFalse: [ { dueTo } , wrapped dueToChain ]
+]
+
+{ #category : #'as yet unclassified' }
+AlceTagAssociationWrapDueTo >> dueToChainOnlyFst [
+
+	| chain five |
+	five := Array new: 6.
+
+	chain := self dueToChain.
+	five at: 1 put: chain first.
+	five at: 2 put: chain second.
+	five at: 3 put: chain third.
+	chain := chain reverse.
+	five at: 4 put: chain third.
+	five at: 5 put: chain second.
+	five at: 6 put: chain first.
+	^ five
 ]
 
 { #category : #accessing }
@@ -43,7 +60,7 @@ AlceTagAssociationWrapDueTo >> lastLeftDueTo [
 { #category : #'as yet unclassified' }
 AlceTagAssociationWrapDueTo >> penultimateDueTo [
 
-	^ self dueToChain reverse first
+	^ self dueToChain reverse second
 ]
 
 { #category : #accessing }
