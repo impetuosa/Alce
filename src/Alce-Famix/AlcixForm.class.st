@@ -18,3 +18,10 @@ AlcixForm >> accept: aVisitor [
 	^ aVisitor visitForm: self
 
 ]
+
+{ #category : #visiting }
+AlcixForm >> initializers [
+
+	^ self invocables select: [ :i | 
+		  i selector = '__INITIALIZE_WIDGET_FROM_UI_CONFIGURATION' ]
+]

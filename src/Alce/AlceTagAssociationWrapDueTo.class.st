@@ -9,6 +9,14 @@ Class {
 }
 
 { #category : #accessing }
+AlceTagAssociationWrapDueTo >> beforeLastLink [
+
+	^ (wrapped wrapped isKindOf: FamixTagAssociation)
+		  ifTrue: [ dueTo ]
+		  ifFalse: [ wrapped beforeLastLink ]
+]
+
+{ #category : #accessing }
 AlceTagAssociationWrapDueTo >> dueTo [
 
 	^ dueTo
@@ -52,9 +60,23 @@ AlceTagAssociationWrapDueTo >> entity [
 ]
 
 { #category : #accessing }
+AlceTagAssociationWrapDueTo >> firstLink [
+
+	^ dueTo
+]
+
+{ #category : #accessing }
 AlceTagAssociationWrapDueTo >> lastLeftDueTo [
 
 	^ self dueToChain second
+]
+
+{ #category : #accessing }
+AlceTagAssociationWrapDueTo >> lastLink [
+
+	^ (wrapped isKindOf: FamixTagAssociation)
+		  ifTrue: [ dueTo ]
+		  ifFalse: [ wrapped lastLink ]
 ]
 
 { #category : #'as yet unclassified' }
@@ -70,8 +92,20 @@ AlceTagAssociationWrapDueTo >> printOn: aStream [
 ]
 
 { #category : #accessing }
+AlceTagAssociationWrapDueTo >> secondLink [
+
+	^ wrapped dueTo
+]
+
+{ #category : #accessing }
 AlceTagAssociationWrapDueTo >> tag [
 	^ wrapped tag
+]
+
+{ #category : #'as yet unclassified' }
+AlceTagAssociationWrapDueTo >> thirdLink [
+
+	^ wrapped wrapped dueTo
 ]
 
 { #category : #accessing }

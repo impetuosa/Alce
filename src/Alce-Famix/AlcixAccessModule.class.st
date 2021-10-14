@@ -34,6 +34,11 @@ AlcixAccessModule >> isAccessModule [
 	^ true 
 ]
 
+{ #category : #testing }
+AlcixAccessModule >> isBuiltIn [
+	^ false
+]
+
 { #category : #'as yet unclassified' }
 AlcixAccessModule >> parentalModule [
 	^ self 

@@ -18,3 +18,10 @@ AlcixReport >> accept: aVisitor [
 	^ aVisitor visitReport: self
 
 ]
+
+{ #category : #visiting }
+AlcixReport >> initializers [
+
+	^ self invocables select: [ :i | 
+		  i selector = '__INITIALIZE_WIDGET_FROM_UI_CONFIGURATION' ]
+]
