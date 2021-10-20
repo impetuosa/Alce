@@ -54,7 +54,7 @@ AlcixArgument >> names [
 
 { #category : #accessing }
 AlcixArgument >> userType [
-	 ^ activation userType  
+	 ^ activation ifNil: [ nil ]  ifNotNil: [ activation userType  ]
 ]
 
 { #category : #accessing }

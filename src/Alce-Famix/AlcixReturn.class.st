@@ -44,3 +44,8 @@ AlcixReturn >> invocableGroup [
 	<navigation: 'Invocable'>
 	^ MooseSpecializedGroup with: self invocable
 ]
+
+{ #category : #accessing }
+AlcixReturn >> userType [
+	^ invocable type
+]

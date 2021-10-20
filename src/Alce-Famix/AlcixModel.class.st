@@ -3,6 +3,9 @@ Class {
 	#superclass : #MooseModel,
 	#traits : 'TAlceModel',
 	#classTraits : 'TAlceModel classTrait',
+	#instVars : [
+		'selectedColoringStrategy'
+	],
 	#category : #'Alce-Famix'
 }
 
@@ -31,4 +34,9 @@ AlcixModel >> instantiate: aClass [
 	element := aClass new.
 	self add: element.
 	^ element
+]
+
+{ #category : #'as yet unclassified' }
+AlcixModel >> selectedColoringStrategy [
+	^ selectedColoringStrategy ifNil: [ selectedColoringStrategy := coloringStrategies anyOne ]
 ]
