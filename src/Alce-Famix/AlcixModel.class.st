@@ -4,7 +4,8 @@ Class {
 	#traits : 'TAlceModel',
 	#classTraits : 'TAlceModel classTrait',
 	#instVars : [
-		'selectedColoringStrategy'
+		'selectedColoringStrategy',
+		'metrics'
 	],
 	#category : #'Alce-Famix'
 }
@@ -36,7 +37,19 @@ AlcixModel >> instantiate: aClass [
 	^ element
 ]
 
+{ #category : #'accessing - structure variables' }
+AlcixModel >> metrics [
+
+	^ metrics ifNil: [ 
+		  metrics := MTRAlceMetricsExtractor metricsFor: self ]
+]
+
 { #category : #'as yet unclassified' }
 AlcixModel >> selectedColoringStrategy [
 	^ selectedColoringStrategy ifNil: [ selectedColoringStrategy := coloringStrategies anyOne ]
+]
+
+{ #category : #accessing }
+AlcixModel >> selectedColoringStrategy: anAlceHorizontalColorPropagation [ 
+	selectedColoringStrategy := anAlceHorizontalColorPropagation
 ]
