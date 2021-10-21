@@ -82,3 +82,12 @@ AlcixUserType >> membersGroup [
 	<navigation: 'Members'>
 	^ MooseSpecializedGroup withAll: self members asSet
 ]
+
+{ #category : #accessing }
+AlcixUserType >> printOn: aStream [
+
+	aStream
+		nextPutAll: (self className copyFrom: 6 to: self className size);
+		nextPutAll: ':';
+		nextPutAll: name
+]
