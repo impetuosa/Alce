@@ -80,3 +80,13 @@ AlcixWithAccesses >> outgoingAccessesGroup [
 	<navigation: 'OutgoingAccesses'>
 	^ MooseSpecializedGroup withAll: self outgoingAccesses asSet
 ]
+
+{ #category : #'as yet unclassified' }
+AlcixWithAccesses >> outgoingInvocations [
+	^ outgoingAccesses select: [  : a | a isKindOf:  AlcixInvocation ]
+]
+
+{ #category : #'as yet unclassified' }
+AlcixWithAccesses >> outgoingReadAccesses [
+	^ outgoingAccesses select: [  : a | a class = AlcixAccess ]
+]

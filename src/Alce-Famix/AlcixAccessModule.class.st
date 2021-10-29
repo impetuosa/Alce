@@ -29,6 +29,12 @@ AlcixAccessModule >> addReference: anObject [
 	^ self references add: anObject
 ]
 
+{ #category : #accessing }
+AlcixAccessModule >> forms [
+
+	^ types select: [ :a | a isKindOf: AlcixForm ]
+]
+
 { #category : #navigation }
 AlcixAccessModule >> isAccessModule [
 	^ true 
@@ -37,6 +43,12 @@ AlcixAccessModule >> isAccessModule [
 { #category : #testing }
 AlcixAccessModule >> isBuiltIn [
 	^ false
+]
+
+{ #category : #'instance creation' }
+AlcixAccessModule >> modules [
+
+	^ self types select: [ :a | a class = AlcixModule ]
 ]
 
 { #category : #'as yet unclassified' }

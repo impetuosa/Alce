@@ -81,12 +81,6 @@ AlcixInvocable >> name [
 ]
 
 { #category : #accessing }
-AlcixInvocable >> outgoingInvocations [
-
-	^ outgoingAccesses select: [ :a | a isKindOf: AlcixInvocation ]
-]
-
-{ #category : #accessing }
 AlcixInvocable >> parameters [
 	"Relation named: #parameters type: #AlcixParameter opposite: #invocable"
 

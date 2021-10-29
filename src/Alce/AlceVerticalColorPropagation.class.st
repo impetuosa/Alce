@@ -135,6 +135,12 @@ AlceVerticalColorPropagation >> visitLibrary: anAlcixLibrary [
 ]
 
 { #category : #visiting }
+AlceVerticalColorPropagation >> visitLiteral: anAlcixLiteral [
+
+	self colorsFor: anAlcixLiteral collection: [ :c |  ]
+]
+
+{ #category : #visiting }
 AlceVerticalColorPropagation >> visitLocalVariable: anAlcixLocalVariable [ 
 	 ^ self visitTyped: anAlcixLocalVariable
 ]
