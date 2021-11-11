@@ -67,6 +67,11 @@ AlcixEnumValue >> threeWayCompareTo: anAlcixEnumValue [
 ]
 
 { #category : #accessing }
+AlcixEnumValue >> userType [
+	^ self enum
+]
+
+{ #category : #accessing }
 AlcixEnumValue >> value [
 
 	<FMProperty: #value type: #Object>

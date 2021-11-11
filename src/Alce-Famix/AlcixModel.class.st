@@ -5,7 +5,8 @@ Class {
 	#classTraits : 'TAlceModel classTrait',
 	#instVars : [
 		'selectedColoringStrategy',
-		'metrics'
+		'metrics',
+		'fylgja'
 	],
 	#category : #'Alce-Famix'
 }
