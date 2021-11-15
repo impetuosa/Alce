@@ -23,6 +23,12 @@ AlcixLiteral >> accept: aVisitor [
 
 ]
 
+{ #category : #visiting }
+AlcixLiteral >> acceptLanguageVisitor: aVisitor [
+	^ aVisitor visitMicrosoftAccessLiteral: self
+
+]
+
 { #category : #accessing }
 AlcixLiteral >> arguments [
 

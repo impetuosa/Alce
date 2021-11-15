@@ -18,3 +18,9 @@ AlcixSubProcedure >> accept: aVisitor [
 	^ aVisitor visitSubProcedure: self
 
 ]
+
+{ #category : #visiting }
+AlcixSubProcedure >> acceptLanguageVisitor: aVisitor [
+	^ aVisitor visitMicrosoftAccessSubProcedure: self
+
+]

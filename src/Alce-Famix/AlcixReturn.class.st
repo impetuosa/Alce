@@ -22,6 +22,12 @@ AlcixReturn >> accept: aVisitor [
 
 ]
 
+{ #category : #visiting }
+AlcixReturn >> acceptLanguageVisitor: aVisitor [
+	^ aVisitor visitMicrosoftAccessReturn: self
+
+]
+
 { #category : #accessing }
 AlcixReturn >> invocable [
 	"Relation named: #invocable type: #AlcixInvocable opposite: #returns"
@@ -48,4 +54,10 @@ AlcixReturn >> invocableGroup [
 { #category : #accessing }
 AlcixReturn >> userType [
 	^ invocable type
+]
+
+{ #category : #writing }
+AlcixReturn >> writeElement [
+
+	^ { invocable localVariables first }
 ]

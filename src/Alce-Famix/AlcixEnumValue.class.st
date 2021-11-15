@@ -24,6 +24,12 @@ AlcixEnumValue >> accept: aVisitor [
 
 ]
 
+{ #category : #visiting }
+AlcixEnumValue >> acceptLanguageVisitor: aVisitor [
+	^ aVisitor visitMicrosoftAccessEnumValue: self
+
+]
+
 { #category : #accessing }
 AlcixEnumValue >> enum [
 	"Relation named: #enum type: #AlcixEnum opposite: #enumValues"

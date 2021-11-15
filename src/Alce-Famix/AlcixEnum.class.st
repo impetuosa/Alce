@@ -24,6 +24,12 @@ AlcixEnum >> accept: aVisitor [
 
 ]
 
+{ #category : #visiting }
+AlcixEnum >> acceptLanguageVisitor: aVisitor [
+	^ aVisitor visitMicrosoftAccessEnum: self
+
+]
+
 { #category : #adding }
 AlcixEnum >> addEnumValue: anObject [
 	<generated>

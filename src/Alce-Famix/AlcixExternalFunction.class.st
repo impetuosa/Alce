@@ -23,6 +23,12 @@ AlcixExternalFunction >> accept: aVisitor [
 
 ]
 
+{ #category : #visiting }
+AlcixExternalFunction >> acceptLanguageVisitor: aVisitor [
+	^ aVisitor visitMicrosoftAccessExternalFunction: self
+
+]
+
 { #category : #accessing }
 AlcixExternalFunction >> alias [
 

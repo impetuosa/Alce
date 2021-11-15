@@ -23,6 +23,12 @@ AlcixVariable >> accept: aVisitor [
 
 ]
 
+{ #category : #visiting }
+AlcixVariable >> acceptLanguageVisitor: aVisitor [
+	^ aVisitor visitMicrosoftAccessVariable: self
+
+]
+
 { #category : #accessing }
 AlcixVariable >> instantiatesObjectOnDefinition [
 

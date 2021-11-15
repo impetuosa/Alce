@@ -20,6 +20,12 @@ AlcixDataSource >> accept: aVisitor [
 ]
 
 { #category : #visiting }
+AlcixDataSource >> acceptLanguageVisitor: aVisitor [
+	^ aVisitor visitMicrosoftAccessDataSource: self
+
+]
+
+{ #category : #visiting }
 AlcixDataSource >> ast [
 
 	^ ast

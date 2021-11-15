@@ -23,6 +23,12 @@ AlcixExternalSubProcedure >> accept: aVisitor [
 
 ]
 
+{ #category : #visiting }
+AlcixExternalSubProcedure >> acceptLanguageVisitor: aVisitor [
+	^ aVisitor visitMicrosoftAccessExternalSubProcedure: self
+
+]
+
 { #category : #accessing }
 AlcixExternalSubProcedure >> alias [
 

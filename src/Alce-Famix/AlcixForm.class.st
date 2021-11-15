@@ -20,6 +20,12 @@ AlcixForm >> accept: aVisitor [
 ]
 
 { #category : #visiting }
+AlcixForm >> acceptLanguageVisitor: aVisitor [
+	^ aVisitor visitMicrosoftAccessForm: self
+
+]
+
+{ #category : #visiting }
 AlcixForm >> initializers [
 
 	^ self invocables select: [ :i | 

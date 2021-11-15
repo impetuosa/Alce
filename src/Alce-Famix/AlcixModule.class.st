@@ -25,6 +25,12 @@ AlcixModule >> accept: aVisitor [
 
 ]
 
+{ #category : #visiting }
+AlcixModule >> acceptLanguageVisitor: aVisitor [
+	^ aVisitor visitMicrosoftAccessModule: self
+
+]
+
 { #category : #adding }
 AlcixModule >> addGlobalVariable: anObject [
 	<generated>

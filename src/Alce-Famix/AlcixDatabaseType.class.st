@@ -18,3 +18,9 @@ AlcixDatabaseType >> accept: aVisitor [
 	^ aVisitor visitDatabaseType: self
 
 ]
+
+{ #category : #visiting }
+AlcixDatabaseType >> acceptLanguageVisitor: aVisitor [
+	^ aVisitor visitMicrosoftAccessDatabaseType: self
+
+]

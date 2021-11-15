@@ -22,6 +22,12 @@ AlcixAccessProject >> accept: aVisitor [
 
 ]
 
+{ #category : #visiting }
+AlcixAccessProject >> acceptLanguageVisitor: aVisitor [
+	^ aVisitor visitMicrosoftAccessAccessProject: self
+
+]
+
 { #category : #adding }
 AlcixAccessProject >> addModule: anObject [
 	<generated>

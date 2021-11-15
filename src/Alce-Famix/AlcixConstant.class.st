@@ -26,6 +26,12 @@ AlcixConstant >> accept: aVisitor [
 
 ]
 
+{ #category : #visiting }
+AlcixConstant >> acceptLanguageVisitor: aVisitor [
+	^ aVisitor visitMicrosoftAccessConstant: self
+
+]
+
 { #category : #adding }
 AlcixConstant >> addAttributeAccessor: anAlcixAttributeAccessor [ 
 

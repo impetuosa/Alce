@@ -23,6 +23,12 @@ AlcixClass >> accept: aVisitor [
 
 ]
 
+{ #category : #visiting }
+AlcixClass >> acceptLanguageVisitor: aVisitor [
+	^ aVisitor visitMicrosoftAccessClass: self
+
+]
+
 { #category : #adding }
 AlcixClass >> addSubclass: anObject [
 	<generated>

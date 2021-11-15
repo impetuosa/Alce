@@ -23,10 +23,23 @@ AlcixAttribute >> accept: aVisitor [
 
 ]
 
+{ #category : #visiting }
+AlcixAttribute >> acceptLanguageVisitor: aVisitor [
+	^ aVisitor visitMicrosoftAccessAttribute: self
+
+]
+
 { #category : #adding }
 AlcixAttribute >> addAttributeAccessor: anObject [
 	<generated>
 	^ self attributeAccessors add: anObject
+]
+
+{ #category : #accessing }
+AlcixAttribute >> ast [
+
+	self assert: name = #Me. 
+	^ nil
 ]
 
 { #category : #accessing }

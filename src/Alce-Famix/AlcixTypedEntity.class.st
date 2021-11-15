@@ -24,6 +24,12 @@ AlcixTypedEntity >> accept: aVisitor [
 
 ]
 
+{ #category : #visiting }
+AlcixTypedEntity >> acceptLanguageVisitor: aVisitor [
+	^ aVisitor visitMicrosoftAccessTypedEntity: self
+
+]
+
 { #category : #accessing }
 AlcixTypedEntity >> name [
 

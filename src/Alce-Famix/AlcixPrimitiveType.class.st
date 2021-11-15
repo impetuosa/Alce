@@ -20,3 +20,9 @@ AlcixPrimitiveType >> accept: aVisitor [
 	^ aVisitor visitPrimitiveType: self
 
 ]
+
+{ #category : #visiting }
+AlcixPrimitiveType >> acceptLanguageVisitor: aVisitor [
+	^ aVisitor visitMicrosoftAccessPrimitiveType: self
+
+]

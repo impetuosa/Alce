@@ -18,3 +18,9 @@ AlcixEvent >> accept: aVisitor [
 	^ aVisitor visitEvent: self
 
 ]
+
+{ #category : #visiting }
+AlcixEvent >> acceptLanguageVisitor: aVisitor [
+	^ aVisitor visitMicrosoftAccessEvent: self
+
+]

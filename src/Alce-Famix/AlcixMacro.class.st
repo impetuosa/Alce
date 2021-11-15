@@ -18,3 +18,9 @@ AlcixMacro >> accept: aVisitor [
 	^ aVisitor visitMacro: self
 
 ]
+
+{ #category : #visiting }
+AlcixMacro >> acceptLanguageVisitor: aVisitor [
+	^ aVisitor visitMicrosoftAccessMacro: self
+
+]

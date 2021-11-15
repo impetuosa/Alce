@@ -22,6 +22,12 @@ AlcixQuery >> accept: aVisitor [
 
 ]
 
+{ #category : #visiting }
+AlcixQuery >> acceptLanguageVisitor: aVisitor [
+	^ aVisitor visitMicrosoftAccessQuery: self
+
+]
+
 { #category : #adding }
 AlcixQuery >> addTable: anObject [
 	<generated>

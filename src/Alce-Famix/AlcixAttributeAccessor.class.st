@@ -23,6 +23,12 @@ AlcixAttributeAccessor >> accept: aVisitor [
 
 ]
 
+{ #category : #visiting }
+AlcixAttributeAccessor >> acceptLanguageVisitor: aVisitor [
+	^ aVisitor visitMicrosoftAccessAttributeAccessor: self
+
+]
+
 { #category : #accessing }
 AlcixAttributeAccessor >> attribute [
 	"Relation named: #attribute type: #AlcixAttribute opposite: #attributeAccessors"

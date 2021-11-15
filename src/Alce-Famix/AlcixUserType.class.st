@@ -25,6 +25,12 @@ AlcixUserType >> accept: aVisitor [
 
 ]
 
+{ #category : #visiting }
+AlcixUserType >> acceptLanguageVisitor: aVisitor [
+	^ aVisitor visitMicrosoftAccessUserType: self
+
+]
+
 { #category : #adding }
 AlcixUserType >> addInvocable: anObject [
 	<generated>
