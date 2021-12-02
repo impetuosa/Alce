@@ -34,7 +34,7 @@ AlcixUndefinedElement >> candidate [
 
 { #category : #accessing }
 AlcixUndefinedElement >> isUndefined [
-	 ^ false. 
+	 ^ true. 
 ]
 
 { #category : #accessing }

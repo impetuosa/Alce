@@ -32,6 +32,12 @@ AlcixEntity class >> metamodel [
 	^ AlcixModel metamodel
 ]
 
+{ #category : #visiting }
+AlcixEntity >> acceptVisitor: aMOAlceModelReader [
+
+	^ self accept: aMOAlceModelReader
+]
+
 { #category : #testing }
 AlcixEntity >> color [
 
