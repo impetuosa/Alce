@@ -96,6 +96,19 @@ AlceJinDAMPhase1Loader >> visitAttributeAccessor: aJinDAMObject [
 ]
 
 { #category : #visiting }
+AlceJinDAMPhase1Loader >> visitBinaryOperation: aJinDAMBinaryOperation [
+
+	" nothing to do "
+
+	
+]
+
+{ #category : #visiting }
+AlceJinDAMPhase1Loader >> visitBlock: aJinDAMBlock [ 
+	 " moose does not use this "
+]
+
+{ #category : #visiting }
 AlceJinDAMPhase1Loader >> visitClass: aJinDAMObject [
 
 	^ self instantiate: AlcixClass for: aJinDAMObject with: [ :obj | 
@@ -156,6 +169,11 @@ AlceJinDAMPhase1Loader >> visitEvent: aJinDAMObject [
 ]
 
 { #category : #visiting }
+AlceJinDAMPhase1Loader >> visitExit: aJinDAMExit [ 
+ " nothing "
+]
+
+{ #category : #visiting }
 AlceJinDAMPhase1Loader >> visitExpressionReference: aJinDAMObject [
 	"^ self
 		  instantiate: AlcixExpression
@@ -194,6 +212,12 @@ AlceJinDAMPhase1Loader >> visitExternalSubProcedure: aJinDAMObject [
 ]
 
 { #category : #visiting }
+AlceJinDAMPhase1Loader >> visitForNext: aJinDAMForNext [
+
+	
+]
+
+{ #category : #visiting }
 AlceJinDAMPhase1Loader >> visitForm: aJinDAMObject [
 
 	^ self instantiate: AlcixForm for: aJinDAMObject with: [ :obj | 
@@ -212,10 +236,25 @@ AlceJinDAMPhase1Loader >> visitFunction: aJinDAMObject [
 		]
 ]
 
+{ #category : #visiting }
+AlceJinDAMPhase1Loader >> visitGoTo: aJinDAMGoTo [ 
+	 " nothing to do "
+]
+
+{ #category : #visiting }
+AlceJinDAMPhase1Loader >> visitIf: aJinDAMIf [ 
+	" nothing to do in moose at this level "
+]
+
 { #category : #'as yet unclassified' }
 AlceJinDAMPhase1Loader >> visitInitializeProcess: aJinDAMInitializeProcess [
 
 	self visitSubProcedure: aJinDAMInitializeProcess
+]
+
+{ #category : #visiting }
+AlceJinDAMPhase1Loader >> visitLabelReference: aJinDAMLabelReference [ 
+	 " nothing to do"
 ]
 
 { #category : #visiting }
@@ -280,6 +319,21 @@ AlceJinDAMPhase1Loader >> visitMultipleTypeReference: aJinDAMObject [
 ]
 
 { #category : #visiting }
+AlceJinDAMPhase1Loader >> visitNewExpression: aJinDAMNewExpression [ 
+
+]
+
+{ #category : #visiting }
+AlceJinDAMPhase1Loader >> visitOnError: aJinDAMOnError [ 
+	 " nothing to do "
+]
+
+{ #category : #visiting }
+AlceJinDAMPhase1Loader >> visitOnErrorResumeNext: aJinDAMOnErrorResumeNext [ 
+	
+]
+
+{ #category : #visiting }
 AlceJinDAMPhase1Loader >> visitParameter: aJinDAMObject [
 
 	^ self
@@ -288,6 +342,11 @@ AlceJinDAMPhase1Loader >> visitParameter: aJinDAMObject [
 		  with: [ :obj | 
 			  obj name: aJinDAMObject name.
 			  obj isOptional: aJinDAMObject isOptional ]
+]
+
+{ #category : #visiting }
+AlceJinDAMPhase1Loader >> visitParenthesis: aJinDAMParentesis [ 
+	
 ]
 
 { #category : #visiting }
@@ -319,6 +378,22 @@ AlceJinDAMPhase1Loader >> visitReport: aJinDAMObject [
 		  obj name: aJinDAMObject name.
 		  obj visibility: aJinDAMObject visibility.
 		  obj astCannotLoad: aJinDAMObject astCannotLoad ]
+]
+
+{ #category : #visiting }
+AlceJinDAMPhase1Loader >> visitResumeEmpty: aJinDAMResumeEmpty [ 
+	 
+]
+
+{ #category : #enumerating }
+AlceJinDAMPhase1Loader >> visitSelect: aJinDAMSelect [ 
+
+]
+
+{ #category : #visiting }
+AlceJinDAMPhase1Loader >> visitSelectCase: aJinDAMCase [
+
+	
 ]
 
 { #category : #visiting }
@@ -387,9 +462,28 @@ AlceJinDAMPhase1Loader >> visitTypeReference: aJinDAMObject [
 ]
 
 { #category : #visiting }
+AlceJinDAMPhase1Loader >> visitUnaryOperation: aJinDAMUnaryOperation [
+
+	" nothing to do here "
+
+	
+]
+
+{ #category : #visiting }
 AlceJinDAMPhase1Loader >> visitUserType: aJinDAMObject [
 
 	^ self instantiate: AlcixUserType for: aJinDAMObject with: [ :obj | 
 		  obj name: aJinDAMObject name.
 		  obj visibility: aJinDAMObject visibility ]
+]
+
+{ #category : #visiting }
+AlceJinDAMPhase1Loader >> visitWhile: aJinDAMWhile [ 
+	
+]
+
+{ #category : #visiting }
+AlceJinDAMPhase1Loader >> visitWith: aJinDAMWith [
+
+	
 ]
