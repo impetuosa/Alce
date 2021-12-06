@@ -21,6 +21,12 @@ AlcixUndefinedElement >> accept: aVisitor [
 
 ]
 
+{ #category : #visiting }
+AlcixUndefinedElement >> acceptLanguageVisitor: aVisitor [
+	^ aVisitor visitMicrosoftAccessUndefinedElement: self
+
+]
+
 { #category : #accessing }
 AlcixUndefinedElement >> candidate [
 	^ self 
@@ -28,7 +34,7 @@ AlcixUndefinedElement >> candidate [
 
 { #category : #accessing }
 AlcixUndefinedElement >> isUndefined [
-	 ^ false. 
+	 ^ true. 
 ]
 
 { #category : #accessing }

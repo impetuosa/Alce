@@ -23,6 +23,12 @@ AlcixParameter >> accept: aVisitor [
 
 ]
 
+{ #category : #visiting }
+AlcixParameter >> acceptLanguageVisitor: aVisitor [
+	^ aVisitor visitMicrosoftAccessParameter: self
+
+]
+
 { #category : #accessing }
 AlcixParameter >> invocable [
 	"Relation named: #invocable type: #AlcixInvocable opposite: #parameters"

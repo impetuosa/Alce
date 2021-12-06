@@ -23,6 +23,12 @@ AlcixReference >> accept: aVisitor [
 
 ]
 
+{ #category : #visiting }
+AlcixReference >> acceptLanguageVisitor: aVisitor [
+	^ aVisitor visitMicrosoftAccessReference: self
+
+]
+
 { #category : #accessing }
 AlcixReference >> accessModule [
 	"Relation named: #accessModule type: #AlcixAccessModule opposite: #references"

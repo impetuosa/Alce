@@ -20,6 +20,12 @@ AlcixReport >> accept: aVisitor [
 ]
 
 { #category : #visiting }
+AlcixReport >> acceptLanguageVisitor: aVisitor [
+	^ aVisitor visitMicrosoftAccessReport: self
+
+]
+
+{ #category : #visiting }
 AlcixReport >> initializers [
 
 	^ self invocables select: [ :i | 

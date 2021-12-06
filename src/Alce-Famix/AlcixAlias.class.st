@@ -20,3 +20,9 @@ AlcixAlias >> accept: aVisitor [
 	^ aVisitor visitAlias: self
 
 ]
+
+{ #category : #visiting }
+AlcixAlias >> acceptLanguageVisitor: aVisitor [
+	^ aVisitor visitMicrosoftAccessAlias: self
+
+]

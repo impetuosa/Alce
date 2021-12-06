@@ -5,7 +5,9 @@ Class {
 	#classTraits : 'TAlceModel classTrait',
 	#instVars : [
 		'selectedColoringStrategy',
-		'metrics'
+		'metrics',
+		'fylgja',
+		'anchor'
 	],
 	#category : #'Alce-Famix'
 }
@@ -26,6 +28,20 @@ AlcixModel class >> annotation [
 { #category : #accessing }
 AlcixModel class >> entryName [
 	^ #Model
+]
+
+{ #category : #accessing }
+AlcixModel >> anchor [
+
+	^ anchor ifNil: [ anchor := JinAnchor on: #/ ]
+]
+
+{ #category : #'as yet unclassified' }
+AlcixModel >> derivative [
+
+	^ MOModelDerivative new
+		  model: self;
+		  yourself
 ]
 
 { #category : #'instance creation' }

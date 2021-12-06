@@ -22,6 +22,12 @@ AlcixLocalVariable >> accept: aVisitor [
 
 ]
 
+{ #category : #visiting }
+AlcixLocalVariable >> acceptLanguageVisitor: aVisitor [
+	^ aVisitor visitMicrosoftAccessLocalVariable: self
+
+]
+
 { #category : #accessing }
 AlcixLocalVariable >> invocable [
 	"Relation named: #invocable type: #AlcixInvocable opposite: #localVariables"

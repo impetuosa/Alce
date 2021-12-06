@@ -24,6 +24,12 @@ AlcixFunction >> accept: aVisitor [
 
 ]
 
+{ #category : #visiting }
+AlcixFunction >> acceptLanguageVisitor: aVisitor [
+	^ aVisitor visitMicrosoftAccessFunction: self
+
+]
+
 { #category : #accessing }
 AlcixFunction >> typeAnchor [
 

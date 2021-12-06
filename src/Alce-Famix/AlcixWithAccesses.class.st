@@ -23,6 +23,12 @@ AlcixWithAccesses >> accept: aVisitor [
 
 ]
 
+{ #category : #visiting }
+AlcixWithAccesses >> acceptLanguageVisitor: aVisitor [
+	^ aVisitor visitMicrosoftAccessWithAccesses: self
+
+]
+
 { #category : #adding }
 AlcixWithAccesses >> addAssignment: anObject [
 	<generated>

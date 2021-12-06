@@ -20,6 +20,12 @@ AlcixInvocation >> accept: aVisitor [
 ]
 
 { #category : #visiting }
+AlcixInvocation >> acceptLanguageVisitor: aVisitor [
+	^ aVisitor visitMicrosoftAccessInvocation: self
+
+]
+
+{ #category : #visiting }
 AlcixInvocation >> name [
 
 	^ 'Invocation(' , (candidates ifEmpty: [ '' ] ifNotEmpty: [ candidates first name ]) , ')'

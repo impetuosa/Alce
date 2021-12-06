@@ -22,6 +22,12 @@ AlcixLibrary >> accept: aVisitor [
 
 ]
 
+{ #category : #visiting }
+AlcixLibrary >> acceptLanguageVisitor: aVisitor [
+	^ aVisitor visitMicrosoftAccessLibrary: self
+
+]
+
 { #category : #accessing }
 AlcixLibrary >> isBuiltIn [
 

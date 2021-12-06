@@ -25,6 +25,12 @@ AlcixUserType >> accept: aVisitor [
 
 ]
 
+{ #category : #visiting }
+AlcixUserType >> acceptLanguageVisitor: aVisitor [
+	^ aVisitor visitMicrosoftAccessUserType: self
+
+]
+
 { #category : #adding }
 AlcixUserType >> addInvocable: anObject [
 	<generated>
@@ -90,4 +96,9 @@ AlcixUserType >> printOn: aStream [
 		nextPutAll: (self className copyFrom: 6 to: self className size);
 		nextPutAll: ':';
 		nextPutAll: name
+]
+
+{ #category : #accessing }
+AlcixUserType >> userType [
+	^ self
 ]
