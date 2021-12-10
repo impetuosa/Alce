@@ -14,7 +14,7 @@ AlceColoringStrategy >> askForAcceptTo: anAlcixAttribute [
 
 	(visited includesKey: anAlcixAttribute) ifFalse: [ 
 		visited at: anAlcixAttribute put: true .
-		anAlcixAttribute accept: self ]
+		[anAlcixAttribute accept: self] on: Error do: [ colors at: anAlcixAttribute put: OrderedCollection new ] ]
 ]
 
 { #category : #initialization }
