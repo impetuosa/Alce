@@ -29,6 +29,18 @@ AlcixAccessModule >> addReference: anObject [
 	^ self references add: anObject
 ]
 
+{ #category : #accessing }
+AlcixAccessModule >> classModules [
+
+	^ types select: [ :a | a class = AlcixClass ]
+]
+
+{ #category : #accessing }
+AlcixAccessModule >> forms [
+
+	^ types select: [ :a | a class = AlcixForm ]
+]
+
 { #category : #navigation }
 AlcixAccessModule >> isAccessModule [
 	^ true 
@@ -37,6 +49,12 @@ AlcixAccessModule >> isAccessModule [
 { #category : #testing }
 AlcixAccessModule >> isBuiltIn [
 	^ false
+]
+
+{ #category : #'instance creation' }
+AlcixAccessModule >> modules [
+
+	^ types select: [ :a | a class = AlcixModule ]
 ]
 
 { #category : #'as yet unclassified' }
@@ -88,4 +106,10 @@ AlcixAccessModule >> referencesGroup [
 	<generated>
 	<navigation: 'References'>
 	^ MooseSpecializedGroup withAll: self references asSet
+]
+
+{ #category : #'instance creation' }
+AlcixAccessModule >> reports [
+
+	^ types select: [ :a | a class = AlcixReport ]
 ]
