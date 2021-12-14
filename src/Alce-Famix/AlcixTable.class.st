@@ -22,6 +22,12 @@ AlcixTable >> accept: aVisitor [
 
 ]
 
+{ #category : #visiting }
+AlcixTable >> acceptLanguageVisitor: aVisitor [
+	^ aVisitor visitMicrosoftAccessTable: self
+
+]
+
 { #category : #accessing }
 AlcixTable >> query [
 	"Relation named: #query type: #AlcixQuery opposite: #tables"

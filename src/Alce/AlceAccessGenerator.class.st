@@ -67,6 +67,15 @@ AlceAccessGenerator class >> generate [
 					('accept: aVisitor
 	^ aVisitor visit{1}: self
 ' format: {(c name copyReplaceAll: 'Alcix' with: '')})
+				classified: 'visiting' ].
+			
+	AlcixEntity allSubclasses
+		do: [ :c | 
+			c
+				compile:
+					('acceptLanguageVisitor: aVisitor
+	^ aVisitor visitMicrosoftAccess{1}: self
+' format: {(c name copyReplaceAll: 'Alcix' with: '')})
 				classified: 'visiting' ]
 ]
 

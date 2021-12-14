@@ -22,6 +22,12 @@ AlcixTableField >> accept: aVisitor [
 
 ]
 
+{ #category : #visiting }
+AlcixTableField >> acceptLanguageVisitor: aVisitor [
+	^ aVisitor visitMicrosoftAccessTableField: self
+
+]
+
 { #category : #accessing }
 AlcixTableField >> size [
 

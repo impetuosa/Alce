@@ -23,6 +23,12 @@ AlcixArgument >> accept: aVisitor [
 
 ]
 
+{ #category : #visiting }
+AlcixArgument >> acceptLanguageVisitor: aVisitor [
+	^ aVisitor visitMicrosoftAccessArgument: self
+
+]
+
 { #category : #accessing }
 AlcixArgument >> activation [
 	"Relation named: #activation type: #AlcixAccess opposite: #arguments"

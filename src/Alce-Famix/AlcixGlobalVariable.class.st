@@ -22,6 +22,12 @@ AlcixGlobalVariable >> accept: aVisitor [
 
 ]
 
+{ #category : #visiting }
+AlcixGlobalVariable >> acceptLanguageVisitor: aVisitor [
+	^ aVisitor visitMicrosoftAccessGlobalVariable: self
+
+]
+
 { #category : #accessing }
 AlcixGlobalVariable >> module [
 	"Relation named: #module type: #AlcixModule opposite: #globalVariables"

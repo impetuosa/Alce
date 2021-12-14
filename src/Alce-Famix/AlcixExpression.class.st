@@ -19,6 +19,12 @@ AlcixExpression >> accept: aVisitor [
 
 ]
 
+{ #category : #visiting }
+AlcixExpression >> acceptLanguageVisitor: aVisitor [
+	^ aVisitor visitMicrosoftAccessExpression: self
+
+]
+
 { #category : #accessing }
 AlcixExpression >> arguments [
 

@@ -26,6 +26,12 @@ AlcixAssignment >> accept: aVisitor [
 
 ]
 
+{ #category : #visiting }
+AlcixAssignment >> acceptLanguageVisitor: aVisitor [
+	^ aVisitor visitMicrosoftAccessAssignment: self
+
+]
+
 { #category : #testing }
 AlcixAssignment >> isAssignment [
 

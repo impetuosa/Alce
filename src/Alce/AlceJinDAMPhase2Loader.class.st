@@ -145,6 +145,16 @@ AlceJinDAMPhase2Loader >> visitAttributeAccessor: aJinDAMAttributeAccessor [
 ]
 
 { #category : #visiting }
+AlceJinDAMPhase2Loader >> visitBinaryOperation: aJinDAMBinaryOperation [ 
+
+]
+
+{ #category : #visiting }
+AlceJinDAMPhase2Loader >> visitBlock: aJinDAMBlock [ 
+
+]
+
+{ #category : #visiting }
 AlceJinDAMPhase2Loader >> visitClass: aJinDAMClass [
 
 	| alcix attrs sc |
@@ -205,6 +215,12 @@ AlceJinDAMPhase2Loader >> visitEvent: aJinDAMEvent [
 ]
 
 { #category : #visiting }
+AlceJinDAMPhase2Loader >> visitExit: aJinDAMExit [
+
+	
+]
+
+{ #category : #visiting }
 AlceJinDAMPhase2Loader >> visitExpressionReference: aJinDAMExpressionReference [
 
 	| alcix |
@@ -231,6 +247,11 @@ AlceJinDAMPhase2Loader >> visitExternalSubProcedure: aJinDAMExternalSubProcedure
 ]
 
 { #category : #visiting }
+AlceJinDAMPhase2Loader >> visitForNext: aJinDAMForNext [ 
+
+]
+
+{ #category : #visiting }
 AlceJinDAMPhase2Loader >> visitForm: aJinDAMForm [
 
 	^ self visitClass: aJinDAMForm
@@ -243,6 +264,16 @@ AlceJinDAMPhase2Loader >> visitFunction: aJinDAMFunction [
 	self visitWithParameters: aJinDAMFunction.
 	self visitWithLocalVariables: aJinDAMFunction.
 	self visitWithAccesses: aJinDAMFunction
+]
+
+{ #category : #visiting }
+AlceJinDAMPhase2Loader >> visitGoTo: aJinDAMGoTo [ 
+
+]
+
+{ #category : #visiting }
+AlceJinDAMPhase2Loader >> visitIf: aJinDAMIf [ 
+
 ]
 
 { #category : #'as yet unclassified' }
@@ -320,9 +351,31 @@ AlceJinDAMPhase2Loader >> visitMultipleTypeReference: aJinDAMMultipleTypeReferen
 ]
 
 { #category : #visiting }
+AlceJinDAMPhase2Loader >> visitNewExpression: aJinDAMNewExpression [ 
+
+]
+
+{ #category : #visiting }
+AlceJinDAMPhase2Loader >> visitOnError: aJinDAMOnError [
+
+	
+]
+
+{ #category : #visiting }
+AlceJinDAMPhase2Loader >> visitOnErrorResumeNext: aJinDAMOnErrorResumeNext [
+
+	
+]
+
+{ #category : #visiting }
 AlceJinDAMPhase2Loader >> visitParameter: aJinDAMParameter [
 
 	self visitTypedEntity: aJinDAMParameter
+]
+
+{ #category : #visiting }
+AlceJinDAMPhase2Loader >> visitParenthesis: aJinDAMParentesis [ 
+
 ]
 
 { #category : #visiting }
@@ -340,6 +393,19 @@ AlceJinDAMPhase2Loader >> visitQuery: aJinDAMQuery [
 AlceJinDAMPhase2Loader >> visitReport: aJinDAMReport [
 
 	^ self visitClass: aJinDAMReport
+]
+
+{ #category : #visiting }
+AlceJinDAMPhase2Loader >> visitResumeEmpty: aJinDAMResumeEmpty [ 
+
+]
+
+{ #category : #enumerating }
+AlceJinDAMPhase2Loader >> visitSelect: aJinDAMSelect [ 
+]
+
+{ #category : #visiting }
+AlceJinDAMPhase2Loader >> visitSelectCase: aJinDAMCase [ 
 ]
 
 { #category : #visiting }
@@ -412,11 +478,26 @@ AlceJinDAMPhase2Loader >> visitTypedEntity: aJinDAMAlias [
 ]
 
 { #category : #visiting }
+AlceJinDAMPhase2Loader >> visitUnaryOperation: aJinDAMUnaryOperation [ 
+
+]
+
+{ #category : #visiting }
 AlceJinDAMPhase2Loader >> visitUserType: aJinDAMUserType [
 
 	| alcix |
 	alcix := loader instanceFor: aJinDAMUserType.
 	alcix members: (loader instancesFor: aJinDAMUserType attributes)
+]
+
+{ #category : #visiting }
+AlceJinDAMPhase2Loader >> visitWhile: aJinDAMWhile [ 
+
+]
+
+{ #category : #visiting }
+AlceJinDAMPhase2Loader >> visitWith: aJinDAMWith [ 
+
 ]
 
 { #category : #visiting }

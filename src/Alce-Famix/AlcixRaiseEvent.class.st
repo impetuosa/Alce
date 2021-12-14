@@ -20,6 +20,12 @@ AlcixRaiseEvent >> accept: aVisitor [
 ]
 
 { #category : #visiting }
+AlcixRaiseEvent >> acceptLanguageVisitor: aVisitor [
+	^ aVisitor visitMicrosoftAccessRaiseEvent: self
+
+]
+
+{ #category : #visiting }
 AlcixRaiseEvent >> name [
 
 	^ 'Raise(' , (candidates ifEmpty: [ '' ] ifNotEmpty: [ candidates first name ]) , ')'

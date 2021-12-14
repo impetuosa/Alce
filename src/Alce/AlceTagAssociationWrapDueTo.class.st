@@ -79,6 +79,11 @@ AlceTagAssociationWrapDueTo >> lastLink [
 		  ifFalse: [ wrapped lastLink ]
 ]
 
+{ #category : #accessing }
+AlceTagAssociationWrapDueTo >> name [
+	^ self tag name 
+]
+
 { #category : #'as yet unclassified' }
 AlceTagAssociationWrapDueTo >> penultimateDueTo [
 

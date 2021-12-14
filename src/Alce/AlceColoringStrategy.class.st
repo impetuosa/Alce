@@ -64,7 +64,7 @@ AlceColoringStrategy >> mostPopular [
 
 { #category : #'as yet unclassified' }
 AlceColoringStrategy >> reset [
-
+	
 	visited := Dictionary new.
 	colors := Dictionary new
 ]

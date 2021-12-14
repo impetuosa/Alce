@@ -22,6 +22,12 @@ AlcixContainer >> accept: aVisitor [
 
 ]
 
+{ #category : #visiting }
+AlcixContainer >> acceptLanguageVisitor: aVisitor [
+	^ aVisitor visitMicrosoftAccessContainer: self
+
+]
+
 { #category : #adding }
 AlcixContainer >> addType: anObject [
 	<generated>

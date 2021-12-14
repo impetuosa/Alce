@@ -29,8 +29,9 @@ AlceVerticalColorPropagation >> visitAlias: anAlcixAlias [
 ]
 
 { #category : #visiting }
-AlceVerticalColorPropagation >> visitArgument: anAlcixArgument [ 
-	self shouldBeImplemented.
+AlceVerticalColorPropagation >> visitArgument: anAlcixArgument [
+
+	self colorsFor: anAlcixArgument collection: [ :col |  ]
 ]
 
 { #category : #visiting }
@@ -132,6 +133,12 @@ AlceVerticalColorPropagation >> visitLibrary: anAlcixLibrary [
 	self
 		colorsFor: anAlcixLibrary
 		collection: [ :col | col addAll: (self tagAssociationsFor: anAlcixLibrary) ]
+]
+
+{ #category : #visiting }
+AlceVerticalColorPropagation >> visitLiteral: anAlcixLiteral [
+
+	self colorsFor: anAlcixLiteral collection: [ :c |  ]
 ]
 
 { #category : #visiting }

@@ -20,6 +20,12 @@ AlcixUnknownElement >> accept: aVisitor [
 ]
 
 { #category : #visiting }
+AlcixUnknownElement >> acceptLanguageVisitor: aVisitor [
+	^ aVisitor visitMicrosoftAccessUnknownElement: self
+
+]
+
+{ #category : #visiting }
 AlcixUnknownElement >> isUnknown [ 
 	 ^ true . 
 ]

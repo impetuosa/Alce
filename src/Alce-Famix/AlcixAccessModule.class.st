@@ -23,6 +23,12 @@ AlcixAccessModule >> accept: aVisitor [
 
 ]
 
+{ #category : #visiting }
+AlcixAccessModule >> acceptLanguageVisitor: aVisitor [
+	^ aVisitor visitMicrosoftAccessAccessModule: self
+
+]
+
 { #category : #adding }
 AlcixAccessModule >> addReference: anObject [
 	<generated>

@@ -28,6 +28,12 @@ AlcixInvocable >> accept: aVisitor [
 
 ]
 
+{ #category : #visiting }
+AlcixInvocable >> acceptLanguageVisitor: aVisitor [
+	^ aVisitor visitMicrosoftAccessInvocable: self
+
+]
+
 { #category : #adding }
 AlcixInvocable >> addLocalVariable: anObject [
 	<generated>
@@ -44,6 +50,14 @@ AlcixInvocable >> addParameter: anObject [
 AlcixInvocable >> addReturn: anObject [
 	<generated>
 	^ self returns add: anObject
+]
+
+{ #category : #accessing }
+AlcixInvocable >> ast [
+
+	^ userType ast children detect: [ :d | 
+		  (d respondsTo: #selector) and: [ 
+			  d selector token value = selector ] ]
 ]
 
 { #category : #accessing }
@@ -78,12 +92,6 @@ AlcixInvocable >> localVariablesGroup [
 { #category : #accessing }
 AlcixInvocable >> name [
 	^ selector
-]
-
-{ #category : #accessing }
-AlcixInvocable >> outgoingInvocations [
-
-	^ outgoingAccesses select: [ :a | a isKindOf: AlcixInvocation ]
 ]
 
 { #category : #accessing }
