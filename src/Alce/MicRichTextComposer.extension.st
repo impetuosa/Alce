@@ -1,7 +1,7 @@
-Extension { #name : #PRRichTextComposer }
+Extension { #name : #MicRichTextComposer }
 
 { #category : #'*Alce' }
-PRRichTextComposer >> visitColorFormat: aPRColorFormat [
+MicRichTextComposer >> visitColorFormat: aPRColorFormat [
 
 	canvas
 		includeAttributes: aPRColorFormat attributes
