@@ -98,6 +98,12 @@ AlcixUserType >> printOn: aStream [
 		nextPutAll: name
 ]
 
+{ #category : #generated }
+AlcixUserType >> type [
+
+	^ self
+]
+
 { #category : #accessing }
 AlcixUserType >> userType [
 	^ self

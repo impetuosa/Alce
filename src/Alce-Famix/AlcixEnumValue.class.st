@@ -72,6 +72,12 @@ AlcixEnumValue >> threeWayCompareTo: anAlcixEnumValue [
 	^ name threeWayCompareTo: anAlcixEnumValue name 
 ]
 
+{ #category : #generated }
+AlcixEnumValue >> type [
+
+	^ enum
+]
+
 { #category : #accessing }
 AlcixEnumValue >> userType [
 	^ self enum

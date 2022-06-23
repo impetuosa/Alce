@@ -50,3 +50,8 @@ AlcixLocalVariable >> invocableGroup [
 	<navigation: 'Invocable'>
 	^ MooseSpecializedGroup with: self invocable
 ]
+
+{ #category : #testing }
+AlcixLocalVariable >> isLocalVariable [
+	 ^ true
+]

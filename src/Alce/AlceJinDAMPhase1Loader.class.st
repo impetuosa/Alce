@@ -121,7 +121,7 @@ AlceJinDAMPhase1Loader >> visitClass: aJinDAMObject [
 { #category : #visiting }
 AlceJinDAMPhase1Loader >> visitCollection: aCollection [
 
-	aCollection do: [ :a | a accept: self ]
+	^ aCollection collect: [ :a | a accept: self ]
 ]
 
 { #category : #visiting }

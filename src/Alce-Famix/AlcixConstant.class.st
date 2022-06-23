@@ -75,6 +75,12 @@ AlcixConstant >> ownerGroup [
 ]
 
 { #category : #accessing }
+AlcixConstant >> userType [
+
+	^ owner
+]
+
+{ #category : #accessing }
 AlcixConstant >> value [
 
 	<FMProperty: #value type: #Object>

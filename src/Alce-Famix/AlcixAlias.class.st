@@ -26,3 +26,9 @@ AlcixAlias >> acceptLanguageVisitor: aVisitor [
 	^ aVisitor visitMicrosoftAccessAlias: self
 
 ]
+
+{ #category : #accessing }
+AlcixAlias >> userType [
+
+	^ type
+]

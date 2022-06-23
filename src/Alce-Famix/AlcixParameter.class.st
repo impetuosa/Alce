@@ -65,3 +65,8 @@ AlcixParameter >> isOptional: anObject [
 	<generated>
 	isOptional := anObject
 ]
+
+{ #category : #testing }
+AlcixParameter >> isParameter [
+	 ^ true 
+]

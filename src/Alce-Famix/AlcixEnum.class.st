@@ -76,8 +76,19 @@ AlcixEnum >> readingAccesses [
 	self shouldBeImplemented.
 ]
 
+{ #category : #adding }
+AlcixEnum >> type [
+	 ^ self 
+]
+
 { #category : #accessing }
 AlcixEnum >> types [
 
 	^ {  }
+]
+
+{ #category : #accessing }
+AlcixEnum >> userType [
+
+	^ self
 ]
