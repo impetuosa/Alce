@@ -212,6 +212,11 @@ AlceJinDAMPhase1Loader >> visitExternalSubProcedure: aJinDAMObject [
 ]
 
 { #category : #visiting }
+AlceJinDAMPhase1Loader >> visitForEach: aJinDAMForEach [ 
+
+]
+
+{ #category : #visiting }
 AlceJinDAMPhase1Loader >> visitForNext: aJinDAMForNext [
 
 	
@@ -237,6 +242,11 @@ AlceJinDAMPhase1Loader >> visitFunction: aJinDAMObject [
 ]
 
 { #category : #visiting }
+AlceJinDAMPhase1Loader >> visitGoSub: aJinDAMGoSub [ 
+
+]
+
+{ #category : #visiting }
 AlceJinDAMPhase1Loader >> visitGoTo: aJinDAMGoTo [ 
 	 " nothing to do "
 ]
@@ -250,6 +260,11 @@ AlceJinDAMPhase1Loader >> visitIf: aJinDAMIf [
 AlceJinDAMPhase1Loader >> visitInitializeProcess: aJinDAMInitializeProcess [
 
 	self visitSubProcedure: aJinDAMInitializeProcess
+]
+
+{ #category : #visiting }
+AlceJinDAMPhase1Loader >> visitLabel: aJinDAMLabel [ 
+
 ]
 
 { #category : #visiting }
@@ -381,8 +396,18 @@ AlceJinDAMPhase1Loader >> visitReport: aJinDAMObject [
 ]
 
 { #category : #visiting }
+AlceJinDAMPhase1Loader >> visitResume: aJinDAMResume [ 
+
+]
+
+{ #category : #visiting }
 AlceJinDAMPhase1Loader >> visitResumeEmpty: aJinDAMResumeEmpty [ 
 	 
+]
+
+{ #category : #'.' }
+AlceJinDAMPhase1Loader >> visitReturnEmpty: aJinDAMReturnEmpty [ 
+
 ]
 
 { #category : #enumerating }
