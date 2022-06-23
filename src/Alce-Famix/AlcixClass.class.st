@@ -80,3 +80,9 @@ AlcixClass >> superclassGroup [
 	<navigation: 'Superclass'>
 	^ MooseSpecializedGroup with: self superclass
 ]
+
+{ #category : #generated }
+AlcixClass >> type [
+
+	^ self
+]

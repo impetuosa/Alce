@@ -83,6 +83,17 @@ AlcixEntity >> isAssignment [
 ]
 
 { #category : #testing }
+AlcixEntity >> isLocalVariable [
+	 ^ false 
+]
+
+{ #category : #testing }
+AlcixEntity >> isParameter [
+
+	^ false
+]
+
+{ #category : #testing }
 AlcixEntity >> isUndefined [
 	 ^ false. 
 ]

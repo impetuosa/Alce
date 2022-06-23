@@ -53,7 +53,7 @@ AlceHorizontalColorPropagation >> visitAccessModule: anAlcixAccessModule [
 AlceHorizontalColorPropagation >> visitAccessProject: anAlcixAccessProject [
 
 	^ self colorsFor: anAlcixAccessProject collection: [ :col | 
-		  col addAll: ((self tagAssociationsFor: anAlcixAccessProject)).
+"		  col addAll: ((self tagAssociationsFor: anAlcixAccessProject))."
 		  col addAll: (self colorsForAll: anAlcixAccessProject modules) ]
 ]
 
@@ -62,15 +62,15 @@ AlceHorizontalColorPropagation >> visitAlias: anAlcixAlias [
 
 	self colorsFor: anAlcixAlias collection: [ :col | 
 		col addAll: (self verticalColor colorsFor: anAlcixAlias type).
-		col addAll: (self verticalColor colorsFor: anAlcixAlias) ]
+"		col addAll: (self verticalColor colorsFor: anAlcixAlias)" ]
 ]
 
 { #category : #visiting }
 AlceHorizontalColorPropagation >> visitArgument: anAlcixArgument [
 
 	self colorsFor: anAlcixArgument collection: [ :col | 
-		col addAll: (self tagAssociationsFor: anAlcixArgument).
-		col addAll: (self colorsForAll: anAlcixArgument assignments).
+"		col addAll: (self tagAssociationsFor: anAlcixArgument).
+		col addAll: (self colorsForAll: anAlcixArgument assignments)."
 		col addAll: (self colorsForAll: anAlcixArgument outgoingAccesses) ]
 ]
 
@@ -78,8 +78,8 @@ AlceHorizontalColorPropagation >> visitArgument: anAlcixArgument [
 AlceHorizontalColorPropagation >> visitAssignment: anAlcixAssignment [
 
 	self colorsFor: anAlcixAssignment collection: [ :col | 
-		col addAll: (self colorsForAll: anAlcixAssignment readElements).
-		col addAll: (self colorsForAll: anAlcixAssignment writeElement) ]
+"		col addAll: (self colorsForAll: anAlcixAssignment readElements)."
+"		col addAll: (self colorsForAll: anAlcixAssignment writeElement)" ]
 ]
 
 { #category : #visiting }
@@ -98,12 +98,12 @@ AlceHorizontalColorPropagation >> visitAttributeAccessor: anAlcixAttributeAccess
 AlceHorizontalColorPropagation >> visitClass: anAlcixClass [
 
 	self colorsFor: anAlcixClass collection: [ :col | 
-		anAlcixClass superclass ifNotNil: [ :c | 
-			col addAll: (self colorsFor: anAlcixClass superclass) ].
-		col addAll: (self colorsForAll: anAlcixClass members).
-		col addAll: (self colorsForAll: anAlcixClass constants).
+"		anAlcixClass superclass ifNotNil: [ :c | 
+			col addAll: (self colorsFor: anAlcixClass superclass) ]."
+"		col addAll: (self colorsForAll: anAlcixClass members).
+		col addAll: (self colorsForAll: anAlcixClass constants)."
 		col addAll: (self colorsForAll: anAlcixClass invocables).
-		col addAll: (self colorsForAll: anAlcixClass globalVariables) ]
+"		col addAll: (self colorsForAll: anAlcixClass globalVariables)" ]
 ]
 
 { #category : #visiting }
@@ -111,7 +111,7 @@ AlceHorizontalColorPropagation >> visitConstant: anAlcixConstant [
 
 	self colorsFor: anAlcixConstant collection: [ :col | 
 		col addAll: (self verticalColor colorsFor: anAlcixConstant type).
-		col addAll: (self verticalColor colorsFor: anAlcixConstant value) ]
+"		col addAll: (self verticalColor colorsFor: anAlcixConstant value)" ]
 ]
 
 { #category : #visiting }
@@ -143,8 +143,8 @@ AlceHorizontalColorPropagation >> visitEvent: anAlcixEvent [
 AlceHorizontalColorPropagation >> visitExternalFunction: anAlcixExternalFunction [
 
 	self colorsFor: anAlcixExternalFunction collection: [ :col | 
-		col addAll: (self colorsForAll: anAlcixExternalFunction constants).
-		col addAll: (self colorsForAll: anAlcixExternalFunction parameters).
+"		col addAll: (self colorsForAll: anAlcixExternalFunction constants).
+		col addAll: (self colorsForAll: anAlcixExternalFunction parameters)."
 		col addAll:
 			(self verticalColor colorsFor: anAlcixExternalFunction type) ]
 ]
@@ -153,10 +153,10 @@ AlceHorizontalColorPropagation >> visitExternalFunction: anAlcixExternalFunction
 AlceHorizontalColorPropagation >> visitExternalSubProcedure: anAlcixExternalSubProcedure [
 
 	self colorsFor: anAlcixExternalSubProcedure collection: [ :col | 
-		col addAll:
+		"col addAll:
 			(self colorsForAll: anAlcixExternalSubProcedure constants).
 		col addAll:
-			(self colorsForAll: anAlcixExternalSubProcedure parameters) ]
+			(self colorsForAll: anAlcixExternalSubProcedure parameters)" ]
 ]
 
 { #category : #visiting }
@@ -168,10 +168,10 @@ AlceHorizontalColorPropagation >> visitForm: anAlcixClass [
 { #category : #visiting }
 AlceHorizontalColorPropagation >> visitFunction: anAlcixSubProcedure [
 	self colorsFor: anAlcixSubProcedure collection: [ :col | 
-		col addAll: (self colorsForAll: anAlcixSubProcedure localVariables).
+	"	col addAll: (self colorsForAll: anAlcixSubProcedure localVariables).
 		col addAll: (self colorsForAll: anAlcixSubProcedure constants).
 		col addAll: (self colorsForAll: anAlcixSubProcedure parameters).
-		col addAll: (self colorsForAll: anAlcixSubProcedure assignments).
+		col addAll: (self colorsForAll: anAlcixSubProcedure assignments)."
 		col addAll:
 			(self colorsForAll: anAlcixSubProcedure outgoingAccesses).
 		col addAll: (self verticalColor colorsFor: anAlcixSubProcedure type) ]
@@ -183,7 +183,7 @@ AlceHorizontalColorPropagation >> visitInvocation: anAlcixInvocation [
 	self colorsFor: anAlcixInvocation collection: [ :col | 
 		col addAll:
 			(self verticalColor colorsForAll: anAlcixInvocation candidates).
-		col addAll: (self colorsForAll: anAlcixInvocation arguments) ]
+"		col addAll: (self colorsForAll: anAlcixInvocation arguments)" ]
 ]
 
 { #category : #visiting }
@@ -215,10 +215,10 @@ AlceHorizontalColorPropagation >> visitModel: anAlcixModel [
 AlceHorizontalColorPropagation >> visitModule: anAlcixClass [
 
 	self colorsFor: anAlcixClass collection: [ :col | 
-		col addAll: (self colorsForAll: anAlcixClass members).
+	"	col addAll: (self colorsForAll: anAlcixClass members).
 		col addAll: (self colorsForAll: anAlcixClass constants).
-		col addAll: (self colorsForAll: anAlcixClass invocables).
-		col addAll: (self colorsForAll: anAlcixClass globalVariables) ]
+	"	col addAll: (self colorsForAll: anAlcixClass invocables).
+"		col addAll: (self colorsForAll: anAlcixClass globalVariables)" ]
 ]
 
 { #category : #visiting }
@@ -255,10 +255,10 @@ AlceHorizontalColorPropagation >> visitReturn: anAlcixReturn [
 AlceHorizontalColorPropagation >> visitSubProcedure: anAlcixSubProcedure [
 
 	self colorsFor: anAlcixSubProcedure collection: [ :col | 
-		col addAll: (self colorsForAll: anAlcixSubProcedure localVariables).
+"		col addAll: (self colorsForAll: anAlcixSubProcedure localVariables).
 		col addAll: (self colorsForAll: anAlcixSubProcedure constants).
 		col addAll: (self colorsForAll: anAlcixSubProcedure parameters).
-		col addAll: (self colorsForAll: anAlcixSubProcedure assignments).
+		col addAll: (self colorsForAll: anAlcixSubProcedure assignments)."
 		col addAll:
 			(self colorsForAll: anAlcixSubProcedure outgoingAccesses) ]
 ]
@@ -297,8 +297,8 @@ AlceHorizontalColorPropagation >> visitUnknownElement: anAlcixUnknownElement [
 AlceHorizontalColorPropagation >> visitUserType: anAlcixClass [
 
 	self colorsFor: anAlcixClass collection: [ :col | 
-		col addAll: (self colorsForAll: anAlcixClass members).
-		col addAll: (self colorsForAll: anAlcixClass constants).
+"		col addAll: (self colorsForAll: anAlcixClass members).
+		col addAll: (self colorsForAll: anAlcixClass constants)."
 		col addAll: (self colorsForAll: anAlcixClass invocables) ]
 ]
 

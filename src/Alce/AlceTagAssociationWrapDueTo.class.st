@@ -32,24 +32,24 @@ AlceTagAssociationWrapDueTo >> dueTo: anEntity [
 AlceTagAssociationWrapDueTo >> dueToChain [
 
 	^ (wrapped isKindOf: FamixTagAssociation)
-		  ifTrue: [ {  dueTo } ]
+		  ifTrue: [ { dueTo } ]
 		  ifFalse: [ { dueTo } , wrapped dueToChain ]
 ]
 
 { #category : #'as yet unclassified' }
 AlceTagAssociationWrapDueTo >> dueToChainOnlyFst [
 
-	| chain five |
+	| inn five |
 	five := Array new: 6.
 
-	chain := self dueToChain.
-	five at: 1 put: chain first.
-	five at: 2 put: chain second.
-	five at: 3 put: chain third.
-	chain := chain reverse.
-	five at: 4 put: chain third.
-	five at: 5 put: chain second.
-	five at: 6 put: chain first.
+	inn := self dueToChain.
+	five at: 1 put: inn first.
+	five at: 2 put: inn second.
+	five at: 3 put: inn third.
+	inn := inn reverse.
+	five at: 4 put: inn third.
+	five at: 5 put: inn second.
+	five at: 6 put: inn first.
 	^ five
 ]
 
@@ -87,7 +87,10 @@ AlceTagAssociationWrapDueTo >> name [
 { #category : #'as yet unclassified' }
 AlceTagAssociationWrapDueTo >> penultimateDueTo [
 
-	^ self dueToChain reverse second
+	| dt |
+	dt := self dueToChain.
+	dt size >= 2 ifTrue: [ dt reverse second ].
+	^ dueTo
 ]
 
 { #category : #accessing }
