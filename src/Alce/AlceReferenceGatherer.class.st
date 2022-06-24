@@ -346,6 +346,12 @@ AlceReferenceGatherer >> visitMultipleTypeReference: aJinDAMMultipleTypeReferenc
 ]
 
 { #category : #visiting }
+AlceReferenceGatherer >> visitNewExpression: aJinDAMNewExpression [
+
+	^ aJinDAMNewExpression typeReference accept: self
+]
+
+{ #category : #visiting }
 AlceReferenceGatherer >> visitParameter: aJinDAMParameter [
 
 	references add: (loader instanceFor: aJinDAMParameter)
@@ -398,8 +404,8 @@ AlceReferenceGatherer >> visitTypeMemberReference: aJinDAMTypeMemberReference [
 
 	aJinDAMTypeMemberReference candidate ifNotNil: [ 
 		aJinDAMTypeMemberReference candidate accept: self ].
-	self assert: aJinDAMTypeMemberReference argument isNotNil.
-	aJinDAMTypeMemberReference argument reads first readReference 
+	self assert: aJinDAMTypeMemberReference arguments isNotNil.
+	aJinDAMTypeMemberReference arguments first reads first readReference 
 		accept: self
 ]
 

@@ -143,6 +143,11 @@ AlceJinDAMPhase1Loader >> visitDBType: aJinDAMObject [
 ]
 
 { #category : #visiting }
+AlceJinDAMPhase1Loader >> visitDoUntil: aJinDAMDoUntil [ 
+
+]
+
+{ #category : #visiting }
 AlceJinDAMPhase1Loader >> visitEnum: aJinDAMObject [
 
 	^ self instantiate: AlcixEnum for: aJinDAMObject with: [ :obj | 
@@ -349,6 +354,11 @@ AlceJinDAMPhase1Loader >> visitOnErrorResumeNext: aJinDAMOnErrorResumeNext [
 ]
 
 { #category : #visiting }
+AlceJinDAMPhase1Loader >> visitOpenClause: aJinDAMFileOpenClause [ 
+
+]
+
+{ #category : #visiting }
 AlceJinDAMPhase1Loader >> visitParameter: aJinDAMObject [
 
 	^ self
@@ -383,6 +393,11 @@ AlceJinDAMPhase1Loader >> visitQuery: aJinDAMObject [
 		  obj name: aJinDAMObject name.
 		  obj visibility: aJinDAMObject visibility.
 		  obj astCannotLoad: aJinDAMObject astCannotLoad ]
+]
+
+{ #category : #visiting }
+AlceJinDAMPhase1Loader >> visitRenameFile: aJinDAMRenameFile [ 
+
 ]
 
 { #category : #visiting }

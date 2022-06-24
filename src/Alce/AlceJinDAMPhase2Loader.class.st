@@ -195,6 +195,11 @@ AlceJinDAMPhase2Loader >> visitDBType: aJinDAMDBType [
 ]
 
 { #category : #visiting }
+AlceJinDAMPhase2Loader >> visitDoUntil: aJinDAMDoUntil [ 
+
+]
+
+{ #category : #visiting }
 AlceJinDAMPhase2Loader >> visitEnum: aJinDAMEnum [ 
 	| alcix |
 	alcix := loader instanceFor: aJinDAMEnum .
@@ -247,6 +252,11 @@ AlceJinDAMPhase2Loader >> visitExternalSubProcedure: aJinDAMExternalSubProcedure
 ]
 
 { #category : #visiting }
+AlceJinDAMPhase2Loader >> visitForEach: aJinDAMForEach [ 
+
+]
+
+{ #category : #visiting }
 AlceJinDAMPhase2Loader >> visitForNext: aJinDAMForNext [ 
 
 ]
@@ -267,6 +277,11 @@ AlceJinDAMPhase2Loader >> visitFunction: aJinDAMFunction [
 ]
 
 { #category : #visiting }
+AlceJinDAMPhase2Loader >> visitGoSub: aJinDAMGoSub [ 
+
+]
+
+{ #category : #visiting }
 AlceJinDAMPhase2Loader >> visitGoTo: aJinDAMGoTo [ 
 
 ]
@@ -279,6 +294,11 @@ AlceJinDAMPhase2Loader >> visitIf: aJinDAMIf [
 { #category : #'as yet unclassified' }
 AlceJinDAMPhase2Loader >> visitInitializeProcess: aJinDAMInitializeProcess [
 	self visitSubProcedure: aJinDAMInitializeProcess
+]
+
+{ #category : #visiting }
+AlceJinDAMPhase2Loader >> visitLabel: aJinDAMLabel [ 
+
 ]
 
 { #category : #visiting }
@@ -368,6 +388,11 @@ AlceJinDAMPhase2Loader >> visitOnErrorResumeNext: aJinDAMOnErrorResumeNext [
 ]
 
 { #category : #visiting }
+AlceJinDAMPhase2Loader >> visitOpenClause: aJinDAMFileOpenClause [ 
+
+]
+
+{ #category : #visiting }
 AlceJinDAMPhase2Loader >> visitParameter: aJinDAMParameter [
 
 	self visitTypedEntity: aJinDAMParameter
@@ -390,13 +415,28 @@ AlceJinDAMPhase2Loader >> visitQuery: aJinDAMQuery [
 ]
 
 { #category : #visiting }
+AlceJinDAMPhase2Loader >> visitRenameFile: aJinDAMRenameFile [ 
+
+]
+
+{ #category : #visiting }
 AlceJinDAMPhase2Loader >> visitReport: aJinDAMReport [
 
 	^ self visitClass: aJinDAMReport
 ]
 
 { #category : #visiting }
+AlceJinDAMPhase2Loader >> visitResume: aJinDAMResume [ 
+
+]
+
+{ #category : #visiting }
 AlceJinDAMPhase2Loader >> visitResumeEmpty: aJinDAMResumeEmpty [ 
+
+]
+
+{ #category : #visiting }
+AlceJinDAMPhase2Loader >> visitReturnEmpty: aJinDAMReturnEmpty [ 
 
 ]
 
