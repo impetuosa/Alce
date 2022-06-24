@@ -98,6 +98,12 @@ AlcixUserType >> printOn: aStream [
 		nextPutAll: name
 ]
 
+{ #category : #'as yet unclassified' }
+AlcixUserType >> topContainer [
+
+	^ container topContainer
+]
+
 { #category : #generated }
 AlcixUserType >> type [
 

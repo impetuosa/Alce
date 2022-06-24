@@ -76,6 +76,12 @@ AlcixEnum >> readingAccesses [
 	self shouldBeImplemented.
 ]
 
+{ #category : #navigation }
+AlcixEnum >> topContainer [
+
+	^ container topContainer
+]
+
 { #category : #adding }
 AlcixEnum >> type [
 	 ^ self 

@@ -94,6 +94,12 @@ AlcixEntity >> isParameter [
 ]
 
 { #category : #testing }
+AlcixEntity >> isType [
+
+	^ false
+]
+
+{ #category : #testing }
 AlcixEntity >> isUndefined [
 	 ^ false. 
 ]

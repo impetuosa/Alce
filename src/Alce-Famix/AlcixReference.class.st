@@ -79,3 +79,9 @@ AlcixReference >> path: anObject [
 	<generated>
 	path := anObject
 ]
+
+{ #category : #navigation }
+AlcixReference >> topContainer [
+
+	^ self
+]

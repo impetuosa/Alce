@@ -47,6 +47,11 @@ AlcixTType >> containerGroup [
 ]
 
 { #category : #accessing }
+AlcixTType >> isType [ 
+	 ^ true 
+]
+
+{ #category : #accessing }
 AlcixTType >> name [
 
 	<FMProperty: #name type: #String>
