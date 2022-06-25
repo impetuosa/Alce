@@ -65,7 +65,8 @@ AlceReferenceGatherer >> resolve: aJinDAMTypeReference ifNil: aBlock [
 		ifNotNil: [ aJinDAMTypeReference accept: self ].
 	references size = 1 ifTrue: [ ^ references first ].
 
-	self halt
+	self halt.
+	^ nil
 ]
 
 { #category : #'as yet unclassified' }
@@ -287,8 +288,9 @@ AlceReferenceGatherer >> visitLibrary: aJinDAMLibrary [
 ]
 
 { #category : #visiting }
-AlceReferenceGatherer >> visitLibraryReference: aJinDAMLibraryReference [ 
-	aJinDAMLibraryReference candidate accept: self 
+AlceReferenceGatherer >> visitLibraryReference: aJinDAMLibraryReference [
+
+	aJinDAMLibraryReference candidate ifNotNil: [ :c | c accept: self ]
 ]
 
 { #category : #visiting }
