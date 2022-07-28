@@ -64,8 +64,6 @@ AlceReferenceGatherer >> resolve: aJinDAMTypeReference ifNil: aBlock [
 		ifNil: [ aBlock value ]
 		ifNotNil: [ aJinDAMTypeReference accept: self ].
 	references size = 1 ifTrue: [ ^ references first ].
-
-	self halt.
 	^ nil
 ]
 
