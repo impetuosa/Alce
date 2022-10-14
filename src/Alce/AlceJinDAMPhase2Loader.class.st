@@ -200,6 +200,12 @@ AlceJinDAMPhase2Loader >> visitDoUntil: aJinDAMDoUntil [
 ]
 
 { #category : #visiting }
+AlceJinDAMPhase2Loader >> visitDoWhile: aJinDAMDoWhile [
+
+	self visitWhile: aJinDAMDoWhile
+]
+
+{ #category : #visiting }
 AlceJinDAMPhase2Loader >> visitEnum: aJinDAMEnum [ 
 	| alcix |
 	alcix := loader instanceFor: aJinDAMEnum .
@@ -252,6 +258,16 @@ AlceJinDAMPhase2Loader >> visitExternalSubProcedure: aJinDAMExternalSubProcedure
 ]
 
 { #category : #visiting }
+AlceJinDAMPhase2Loader >> visitFileLineInput: aJinDAMFileLineInput [ 
+
+]
+
+{ #category : #visiting }
+AlceJinDAMPhase2Loader >> visitFilePrintInto: aJinDAMFilePrintIntoClause [ 
+
+]
+
+{ #category : #visiting }
 AlceJinDAMPhase2Loader >> visitForEach: aJinDAMForEach [ 
 
 ]
@@ -288,6 +304,11 @@ AlceJinDAMPhase2Loader >> visitGoTo: aJinDAMGoTo [
 
 { #category : #visiting }
 AlceJinDAMPhase2Loader >> visitIf: aJinDAMIf [ 
+
+]
+
+{ #category : #visiting }
+AlceJinDAMPhase2Loader >> visitInfinityLoop: aJinDAMInfinityLoop [ 
 
 ]
 
