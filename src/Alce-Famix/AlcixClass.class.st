@@ -71,7 +71,8 @@ AlcixClass >> superclass [
 AlcixClass >> superclass: anObject [
 
 	<generated>
-	superclass := anObject
+	(anObject isKindOf: AlcixUnknownElement) ifFalse: [ 
+		superclass := anObject ]
 ]
 
 { #category : #navigation }
