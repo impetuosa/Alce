@@ -71,6 +71,8 @@ AlcixClass >> superclass [
 AlcixClass >> superclass: anObject [
 
 	<generated>
+	((anObject isKindOf: AlcixAccess) and: [ 
+		 anObject candidate isUnknownOrUndefined ]) ifTrue: [ ^ self ].
 	(anObject isKindOf: AlcixUnknownElement) ifFalse: [ 
 		superclass := anObject ]
 ]

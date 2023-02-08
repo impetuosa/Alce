@@ -27,5 +27,8 @@ AlcixTTyped >> type [
 AlcixTTyped >> type: anObject [
 
 	<generated>
+	anObject isType ifFalse: [ 
+		(anObject isKindOf: AlcixEnumValue) ifTrue: [ ^ self ].
+		^ self halt ].
 	type := anObject
 ]

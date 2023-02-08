@@ -148,6 +148,11 @@ AlceJinDAMPhase1Loader >> visitDoUntil: aJinDAMDoUntil [
 ]
 
 { #category : #visiting }
+AlceJinDAMPhase1Loader >> visitDoWhile: aJinDAMDoWhile [ 
+
+]
+
+{ #category : #visiting }
 AlceJinDAMPhase1Loader >> visitEnum: aJinDAMObject [
 
 	^ self instantiate: AlcixEnum for: aJinDAMObject with: [ :obj | 
@@ -217,6 +222,16 @@ AlceJinDAMPhase1Loader >> visitExternalSubProcedure: aJinDAMObject [
 ]
 
 { #category : #visiting }
+AlceJinDAMPhase1Loader >> visitFileLineInput: aJinDAMFileLineInput [ 
+
+]
+
+{ #category : #visiting }
+AlceJinDAMPhase1Loader >> visitFilePrintInto: aJinDAMFilePrintIntoClause [ 
+
+]
+
+{ #category : #visiting }
 AlceJinDAMPhase1Loader >> visitForEach: aJinDAMForEach [ 
 
 ]
@@ -259,6 +274,11 @@ AlceJinDAMPhase1Loader >> visitGoTo: aJinDAMGoTo [
 { #category : #visiting }
 AlceJinDAMPhase1Loader >> visitIf: aJinDAMIf [ 
 	" nothing to do in moose at this level "
+]
+
+{ #category : #visiting }
+AlceJinDAMPhase1Loader >> visitInfinityLoop: aJinDAMInfinityLoop [ 
+
 ]
 
 { #category : #'as yet unclassified' }

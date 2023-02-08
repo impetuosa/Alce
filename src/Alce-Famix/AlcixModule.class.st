@@ -110,7 +110,7 @@ AlcixModule >> obtainAst [
 	           semaphore signal ] forkAt:
 		           Processor userBackgroundPriority.
 	^ semaphore
-		  wait: 30 seconds
+		  wait: 320 seconds
 		  onCompletion: [ 
 			  process terminate.
 			  result isError ifTrue: [ ^ result signal ].
