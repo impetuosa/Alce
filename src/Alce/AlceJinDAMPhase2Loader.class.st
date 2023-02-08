@@ -200,8 +200,9 @@ AlceJinDAMPhase2Loader >> visitDoUntil: aJinDAMDoUntil [
 ]
 
 { #category : #visiting }
-AlceJinDAMPhase2Loader >> visitDoWhile: aJinDAMDoWhile [ 
+AlceJinDAMPhase2Loader >> visitDoWhile: aJinDAMDoWhile [
 
+	self visitWhile: aJinDAMDoWhile
 ]
 
 { #category : #visiting }

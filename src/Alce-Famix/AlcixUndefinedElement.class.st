@@ -42,3 +42,9 @@ AlcixUndefinedElement >> name [
 
 	^ 'UNDEFINED'
 ]
+
+{ #category : #navigation }
+AlcixUndefinedElement >> topContainer [
+
+	^ self
+]

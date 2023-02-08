@@ -148,8 +148,9 @@ AlceJinDAMPhase1Loader >> visitDoUntil: aJinDAMDoUntil [
 ]
 
 { #category : #visiting }
-AlceJinDAMPhase1Loader >> visitDoWhile: aJinDAMDoWhile [ 
+AlceJinDAMPhase1Loader >> visitDoWhile: aJinDAMDoWhile [
 
+	^ self visitWhile: aJinDAMDoWhile
 ]
 
 { #category : #visiting }
@@ -278,7 +279,7 @@ AlceJinDAMPhase1Loader >> visitIf: aJinDAMIf [
 
 { #category : #visiting }
 AlceJinDAMPhase1Loader >> visitInfinityLoop: aJinDAMInfinityLoop [ 
-
+	
 ]
 
 { #category : #'as yet unclassified' }
