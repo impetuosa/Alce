@@ -3,7 +3,7 @@
 Alce is a Famix-Meta model describing Microsoft Access.
 As microsoft access is not the same kind of language represneted with Famix, I choosed to not use the traits in the Famix generator.
 The most interesting feature of this model, beyond the UI tools, available in the project 
-[https://gitlab.forge.berger-levrault.com/bl-drit/bl.drit.experiments/software.engineering/microsoft-access-migration/Alcides](https://gitlab.forge.berger-levrault.com/bl-drit/bl.drit.experiments/software.engineering/microsoft-access-migration/Alcides), 
+[https://github.com/impetuosa/Alcides]([https://github.com/impetuosa/Alcides]), 
 is the feature of tagging.
 
 
@@ -40,7 +40,7 @@ loadMetacello
 
 	<load>
 	  Metacello new
-    	repository: 'gitlab://gitlab.forge.berger-levrault.com:bl-drit/bl.drit.experiments/software.engineering/microsoft-access-migration/Alce/src';
+    	repository: 'github://impetuosa/Alce/src';
     	baseline: 'Alce';
     	onWarningLog;
     	load
@@ -57,7 +57,7 @@ loadAddBaseline
 	spec
 		baseline: 'Alce'
 		with: [ 
-		spec repository: 'gitlab://gitlab.forge.berger-levrault.com:bl-drit/bl.drit.experiments/software.engineering/microsoft-access-migration/Alce/src' ]
+		spec repository: 'github://impetuosa/Alce/src' ]
 ```
 
 
