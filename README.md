@@ -37,9 +37,7 @@ on the relation between definitions and usage, we call this algorithm the usage 
 ### Installing Alce
 ```smalltalk
 loadMetacello
-
-	<load>
-	  Metacello new
+    Metacello new
     	repository: 'github://impetuosa/Alce/src';
     	baseline: 'Alce';
     	onWarningLog;
@@ -51,8 +49,6 @@ loadMetacello
 ### Adding Alce to your dependencies 
 ```smalltalk
 loadAddBaseline
-
-	<load>
 	| spec |
 	spec
 		baseline: 'Alce'
