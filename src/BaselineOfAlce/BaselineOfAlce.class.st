@@ -10,7 +10,7 @@ BaselineOfAlce >> baseline: spec [
 
 	spec
 		baseline: 'Jindao'
-		with: [ spec repository: 'gitlab://gitlab.forge.berger-levrault.com:bl-drit/bl.drit.experiments/software.engineering/microsoft-access-migration/Jindao' ].
+		with: [ spec repository: 'github://impetuosa/Jindao' ].
 	spec
 		package: 'Alce'
 		with: [ spec requires: #(Jindao) ].
